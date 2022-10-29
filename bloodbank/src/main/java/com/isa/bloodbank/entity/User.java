@@ -41,4 +41,10 @@ public class User extends BaseEntity {
 	@Column
 	@Enumerated(EnumType.STRING)
 	BloodType bloodType;
+	@Column
+	String password;
+	@Column
+	boolean firstLogged;
+	
+
 }
