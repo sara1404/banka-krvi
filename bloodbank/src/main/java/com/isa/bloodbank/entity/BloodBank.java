@@ -4,8 +4,11 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -13,7 +16,8 @@ import javax.persistence.Entity;
 public class BloodBank extends BaseEntity {
     @Column
     String name;
-    @Column
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
     @Column
     String description;

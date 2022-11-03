@@ -10,6 +10,6 @@ import javax.persistence.Entity;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class AppointmentInfo {
+public class AppointmentInfo extends BaseEntity {
 
 }
