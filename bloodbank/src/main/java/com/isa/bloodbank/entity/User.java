@@ -1,6 +1,7 @@
 package com.isa.bloodbank.entity;
 
 import com.isa.bloodbank.entity.enums.BloodType;
+import com.isa.bloodbank.entity.enums.UserType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,11 +41,14 @@ public class User extends BaseEntity {
 
 	@Column
 	@Enumerated(EnumType.STRING)
+	UserType userType;
+
+	@Column
+	@Enumerated(EnumType.STRING)
 	BloodType bloodType;
 	@Column
 	String password;
 	@Column
 	boolean firstLogged;
-	
 
 }
