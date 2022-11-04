@@ -3,6 +3,8 @@ package com.isa.bloodbank.controller;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.UserService;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +25,28 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/{id}/")
-	public ResponseEntity<User> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
 	@PatchMapping("/update/")
-	private ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
+	private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
 		return ResponseEntity.ok(userService.update(user));
 	}
 
 	@PostMapping("/new/")
-	private ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+	private ResponseEntity<User> createUser(@Valid @RequestBody final User user) {
 		return ResponseEntity.ok(userService.create(user));
 	}
 
 	@DeleteMapping("/delete/{id}/")
-	private ResponseEntity deleteUser(@PathVariable("id") Long id) {
+	private ResponseEntity deleteUser(@PathVariable("id") final Long id) {
 		userService.delete(id);
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/bloodBankId/{id}/")
+	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findByBloodBankId(id));
 	}
 }

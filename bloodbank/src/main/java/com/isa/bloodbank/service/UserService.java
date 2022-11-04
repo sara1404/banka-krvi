@@ -19,24 +19,28 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User findById(Long id) {
+	public User findById(final Long id) {
 		return userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
 	}
 
-	public User create(User user) {
+	public User create(final User user) {
 		return userRepository.save(user);
 	}
 
-	public User update(User user) {
+	public User update(final User user) {
 		findById(user.getId());
 		return userRepository.save(user);
 	}
 
-	public void delete(Long userId) {
+	public void delete(final Long userId) {
 		userRepository.deleteById(userId);
 	}
 
-	public List<User> findByBloodType(BloodType bloodType){
+	public List<User> findByBloodType(final BloodType bloodType) {
 		return userRepository.findUsersByBloodType(bloodType);
+	}
+
+	public List<User> findByBloodBankId(final Long id) {
+		return userRepository.findByBloodBankId(id);
 	}
 }

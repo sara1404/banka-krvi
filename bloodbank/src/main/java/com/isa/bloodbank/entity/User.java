@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -50,5 +52,8 @@ public class User extends BaseEntity {
 	String password;
 	@Column
 	boolean firstLogged;
+	@ManyToOne()
+	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
+	BloodBank bloodBank;
 
 }

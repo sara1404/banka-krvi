@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findUsersByBloodType(BloodType bloodType);
+
+	List<User> findByBloodBankId(Long bloodBankId);
 }

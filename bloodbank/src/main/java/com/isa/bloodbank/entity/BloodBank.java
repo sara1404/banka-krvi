@@ -17,9 +17,6 @@ public class BloodBank extends BaseEntity {
 	@Column
 	String name;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "administrator_id", referencedColumnName = "id")
-	User administrator;
-	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	Address address;
 	@Column

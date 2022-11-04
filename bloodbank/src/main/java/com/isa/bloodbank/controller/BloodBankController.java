@@ -24,12 +24,7 @@ public class BloodBankController {
 	public ResponseEntity<BloodBank> findById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(bloodBankService.findById(id));
 	}
-
-	@GetMapping("/administratorId/{id}/")
-	public ResponseEntity<BloodBank> findByAdministratorId(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(bloodBankService.findByAdministratorId(id));
-	}
-
+	
 	@PatchMapping("/update/")
 	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBank bloodBank) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBank));
