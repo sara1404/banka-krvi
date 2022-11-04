@@ -21,8 +21,13 @@ public class BloodBankService {
 	public BloodBank findById(final Long id) {
 		return bloodBankRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
 	}
-	
+
 	public BloodBank findByAdministratorId(final Long id) {
 		return bloodBankRepository.findByAdministratorId(id);
+	}
+
+	public BloodBank update(final BloodBank bloodBank) {
+		findById(bloodBank.getId());
+		return bloodBankRepository.save(bloodBank);
 	}
 }
