@@ -45,8 +45,9 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 
-	@GetMapping("/bloodBankId/{id}/")
-	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findByBloodBankId(id));
+	@GetMapping("/bloodBankId/{bloodBankId}/{administratorId}/")
+	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("bloodBankId") final Long bloodBankId,
+		@PathVariable("administratorId") final Long administratorId) {
+		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
 	}
 }
