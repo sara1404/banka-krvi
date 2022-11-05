@@ -13,33 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
 	@Autowired
 	private UserRepository userRepository;
-
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
-
-	public User findById(final Long id) {
-		return userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
-	}
-
-	public User create(final User user) {
-		return userRepository.save(user);
-	}
-
-	public User update(final User user) {
-		findById(user.getId());
-		return userRepository.save(user);
-	}
-
-	public void delete(final Long userId) {
-		userRepository.deleteById(userId);
-	}
-
-	public List<User> findByBloodType(final BloodType bloodType) {
-		return userRepository.findUsersByBloodType(bloodType);
-	}
 
 	public List<User> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
