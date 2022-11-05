@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
+<<<<<<< HEAD
 	@Autowired
 	private UserService userService;
 	@GetMapping("/bloodBankId/{bloodBankId}/{administratorId}/")
@@ -29,4 +30,6 @@ public class UserController {
 		@PathVariable("administratorId") final Long administratorId) {
 		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
 	}
+=======
+>>>>>>> 45c715f (Cleanup project)
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+<<<<<<< HEAD
 
 	@Autowired
 	private UserRepository userRepository;
@@ -26,4 +27,7 @@ public class UserService {
 		}
 		return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
 	}
+=======
+
+>>>>>>> 45c715f (Cleanup project)
 }
