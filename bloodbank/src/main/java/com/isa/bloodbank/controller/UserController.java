@@ -19,27 +19,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	@Autowired
-	private UserService userService;
 
-	@GetMapping("/{id}/")
-	public ResponseEntity<User> findById(@PathVariable("id") Long id) {
-		return ResponseEntity.ok(userService.findById(id));
-	}
-
-	@PatchMapping("/update/")
-	private ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
-		return ResponseEntity.ok(userService.update(user));
-	}
-
-	@PostMapping("/new/")
-	private ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-		return ResponseEntity.ok(userService.create(user));
-	}
-
-	@DeleteMapping("/delete/{id}/")
-	private ResponseEntity deleteUser(@PathVariable("id") Long id) {
-		userService.delete(id);
-		return ResponseEntity.ok().build();
-	}
 }
