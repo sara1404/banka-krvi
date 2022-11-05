@@ -33,9 +33,9 @@ public class BloodBankController {
 		return ResponseEntity.ok(bloodBankService.findAll());
 	}
 
-	@GetMapping("/search")
-	public ResponseEntity<List<BloodBank>> search(@RequestParam String name, @RequestParam String city) {
-		return ResponseEntity.ok(bloodBankService.search(name.trim(), city.trim()));
+	@GetMapping("/searchAndFilter")
+	public ResponseEntity<List<BloodBank>> searchAndFilter(@RequestParam String name, @RequestParam String city, @RequestParam double averageGrade) {
+		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade));
 	}
 
 }

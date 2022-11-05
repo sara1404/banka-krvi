@@ -34,40 +34,27 @@ public class BloodBankService {
 		return bloodBankRepository.save(bloodBank);
 	}
 
-	public List<BloodBank> search(final String name, final String city) {
-		if (!name.equals("") && !city.equals("")) return searchByNameAndCity(name, city);
-		else if (!name.equals("")) return searchByName(name);
-		else if (!city.equals("")) return searchByCity(city);
+	public List<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade) {
+		List<BloodBank> bloodBanks = search(name, city);
+		if (averageGrade != 0) return filter(bloodBanks, averageGrade);
+		else return bloodBanks;
+	}
+
+	private List<BloodBank> search(final String name, final String city){
+		if (!name.equals("") && !city.equals("")) return bloodBankRepository.findAllByNameContainingAndAddressId_CityContaining(name, city);
+		else if (!name.equals("")) return bloodBankRepository.findByNameContaining(name);
+		else if (!city.equals("")) return bloodBankRepository.findAllByAddressId_CityContaining(city);
 		else return bloodBankRepository.findAll();
 	}
 
-	private List<BloodBank> searchByNameAndCity(final String name, final String city){
-		final List<BloodBank> bloodBanks = new ArrayList<BloodBank>();
-		for (final BloodBank bloodBank : bloodBankRepository.findAll()) {
-			if (bloodBank.getName().toLowerCase().startsWith(name.toLowerCase()) && bloodBank.getAddress().getCity().toLowerCase().startsWith(city.toLowerCase())) {
-				bloodBanks.add(bloodBank);
+	private List<BloodBank> filter(List<BloodBank> bloodBanks, final double averageGrade){
+		final List<BloodBank> filteredBloodBanks = new ArrayList<BloodBank>();
+		for (final BloodBank bloodBank : bloodBanks){
+			if (bloodBank.getAverageGrade() >= averageGrade){
+				filteredBloodBanks.add(bloodBank);
 			}
 		}
-		return bloodBanks;
-	}
-	private List<BloodBank> searchByName(final String name){
-		final List<BloodBank> bloodBanks = new ArrayList<BloodBank>();
-		for (final BloodBank bloodBank : bloodBankRepository.findAll()) {
-			if (bloodBank.getName().toLowerCase().startsWith(name.toLowerCase())) {
-				bloodBanks.add(bloodBank);
-			}
-		}
-		return bloodBanks;
-	}
-
-	private List<BloodBank> searchByCity(final String city){
-		final List<BloodBank> bloodBanks = new ArrayList<BloodBank>();
-		for (final BloodBank bloodBank : bloodBankRepository.findAll()) {
-			if (bloodBank.getAddress().getCity().toLowerCase().startsWith(city.toLowerCase())) {
-				bloodBanks.add(bloodBank);
-			}
-		}
-		return bloodBanks;
+		return filteredBloodBanks;
 	}
 
 }
