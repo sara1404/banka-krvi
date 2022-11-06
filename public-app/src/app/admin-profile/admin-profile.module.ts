@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { BloodbankInfoComponent } from './bloodbank-info/bloodbank-info.component';
 import { OtherAdminsComponent } from './other-admins/other-admins.component';
+import { AdminInfoComponent } from './admin-info/admin-info.component';
 
 
 
@@ -14,7 +15,8 @@ import { OtherAdminsComponent } from './other-admins/other-admins.component';
   declarations: [
     AdminProfileComponent,
     BloodbankInfoComponent,
-    OtherAdminsComponent
+    OtherAdminsComponent,
+    AdminInfoComponent
   ],
   imports: [
     CommonModule,
