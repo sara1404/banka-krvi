@@ -1,0 +1,24 @@
+<div>
+    <app-search-blood-banks (bloodBanks)="onSearch($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)"></app-search-blood-banks>
+    <app-filter-blood-banks (bloodBanks)="onSearch($event)" [name]="name" [city]="city"></app-filter-blood-banks>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Street</th>
+            <th>Number</th>
+            <th>City</th>
+            <th>Zipcode</th>
+            <th>Country</th>
+            <th>Average grade</th>
+        </tr>
+        <tr *ngFor = "let bloodBank of bloodBanks">
+            <td>{{bloodBank.name}}</td>
+            <td>{{bloodBank.address.street}}</td>
+            <td>{{bloodBank.address.number}}</td>
+            <td>{{bloodBank.address.city}}</td>
+            <td>{{bloodBank.address.zipcode}}</td>
+            <td>{{bloodBank.address.country}}</td>
+            <td>{{bloodBank.averageGrade}}</td>
+        </tr>
+    </table>
+</div>
