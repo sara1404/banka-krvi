@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
-import {
-  MatFormField,
-  MatFormFieldModule,
-  MatLabel,
-} from '@angular/material/form-field';
-import { MatOption, MatOptionModule } from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 import { DisplayBloodBanksComponent } from './blood-banks-display.component';
 import { SearchBloodBanksComponent } from './search-blood-banks/search-blood-banks.component';
@@ -21,10 +18,11 @@ import { FilterBloodBanksComponent } from './filter-blood-banks/filter-blood-ban
   ],
   imports: [
     CommonModule,
-    MatSelectModule,
     MatFormFieldModule,
-    MatOptionModule,
     MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatSelectModule
   ], 
   exports: [DisplayBloodBanksComponent],
 })

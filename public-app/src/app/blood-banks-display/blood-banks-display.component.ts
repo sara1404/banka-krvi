@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IBloodBank } from '../model/BloodBank';
 import { BloodBankService } from '../service/blood-bank-service.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class DisplayBloodBanksComponent {
     private bloodBankService: BloodBankService,
   ) {}
 
-  bloodBanks: IBloodBank[] = [];
+  bloodBanks = new MatTableDataSource<IBloodBank>();
+  displayedColumns: string[] = ["name", "street", "number", "city", "zipcode", "country", "averageGrade"]
   name: string = ""
   city: string = ""
 
@@ -20,11 +22,11 @@ export class DisplayBloodBanksComponent {
     /*this.bloodBankService
       .getBloodBanks()
       .subscribe((data) => (this.bloodBanks = data));*/
-      this.bloodBanks = this.bloodBankService.getBloodBanks();
+      this.bloodBanks.data = this.bloodBankService.getBloodBanks();
   }
 
   onSearch(eventData: IBloodBank[]) {
-    this.bloodBanks = eventData;   
+    this.bloodBanks.data = eventData;   
   }
 
   saveSearchName(eventData: string){
