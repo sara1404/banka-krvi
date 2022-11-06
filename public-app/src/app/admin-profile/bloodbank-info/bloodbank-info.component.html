@@ -1,0 +1,43 @@
+<form>
+    <h1 class="title">Informacije o centru</h1>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>Naziv centra</mat-label>
+        <input matInput [disabled]="isDisabled">
+    </mat-form-field>
+    <div class="address">
+        <mat-label class="field">Adresa</mat-label>
+        <br/>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Ulica</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Broj</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Grad</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Poštanski broj</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Geografska širina</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Geografska dužina</mat-label>
+            <input matInput [disabled]="isDisabled">
+        </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>Opis</mat-label>
+        <input matInput [disabled]="isDisabled">
+    </mat-form-field>
+</form>
+<div class="example-button-row">
+    <button mat-raised-button (click)="editClick()">Izmeni</button>
+    <button mat-raised-button (click)="okClick()">Potvrdi</button>
+</div>
