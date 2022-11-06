@@ -26,7 +26,6 @@ import { BloodBankDisplayModule } from './blood-banks-display/blood-bank-display
     MaterialModule,
     HttpClientModule,
     RouterModule,
-    NgbModule,
     BrowserAnimationsModule,
     BloodBankDisplayModule,
   ],

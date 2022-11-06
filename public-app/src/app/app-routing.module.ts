@@ -8,7 +8,6 @@ const routes: Routes = [
   {path: 'register/admin', component: RegisterAdminComponent},
   {path: 'users', component: UsersComponent},
   {path: 'bloodBanks', component: DisplayBloodBanksComponent}
-
 ];
 
 @NgModule({
