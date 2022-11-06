@@ -1,18 +1,24 @@
 <form (submit)="searchBloodBanks(name.value, city.value, $event)">
-  <input
-  class="inputText"
-  matInput
-  placeholder="Name"
-  #name
-  />
-  <input
-  class="inputText"
-  matInput
-  placeholder="City"
-  #city
-  />
-  <input
-  type="submit"
-  value="Search"
-/>
+  <div class="fields">
+  <mat-form-field>
+    <input
+    class="inputText"
+    matInput
+    placeholder="Name"
+    #name
+    /> 
+    </mat-form-field>
+    <mat-form-field>
+    <input
+    class="inputText"
+    matInput
+    placeholder="City"
+    #city
+    />
+  </mat-form-field>
+    <input class="searchButton"
+    type="submit"
+    value="Search"
+    />
+</div>
 </form>

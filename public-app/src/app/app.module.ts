@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { BloodBankDisplayModule } from './blood-banks-display/blood-bank-display.module';
 
 @NgModule({
@@ -19,7 +18,7 @@ import { BloodBankDisplayModule } from './blood-banks-display/blood-bank-display
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-    BloodBankDisplayModule
+    BloodBankDisplayModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

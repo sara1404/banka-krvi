@@ -1,6 +1,15 @@
 form{
   position: absolute;
   left: 35%;
-  top: 5%;
+  top: 1%;
 }
 
+.fields{
+  display: flex;
+}
+
+.searchButton{
+  height: 35px;
+  margin: 5px;
+  cursor: pointer;
+}
