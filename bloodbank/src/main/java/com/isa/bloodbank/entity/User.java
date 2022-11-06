@@ -33,10 +33,10 @@ public class User extends BaseEntity {
 	@Size(max = 30, message = "Last name cannot be longer than 30 characters!")
 	String lastName;
 
-	@Column
+	@Column(unique = true)
 	Long jmbg;
 
-	@Column
+	@Column(unique = true)
 	@NotBlank(message = "Email cannot be blank!")
 	@Email(message = "Email not of correct format!")
 	String email;

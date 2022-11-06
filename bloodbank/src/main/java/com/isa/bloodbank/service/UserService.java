@@ -1,8 +1,7 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.entity.User;
-import com.isa.bloodbank.entity.enums.BloodType;
-import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.entity.enums.UserType;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-<<<<<<< HEAD
 
 	@Autowired
 	private UserRepository userRepository;
@@ -27,7 +25,13 @@ public class UserService {
 		}
 		return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
 	}
-=======
 
->>>>>>> 45c715f (Cleanup project)
+	public User registerCenterAdmin(final User centerAdmin) {
+		return userRepository.save(centerAdmin);
+	}
+
+	public List<User> search(final String name, final String lastName) {
+		final List<User> users = userRepository.getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType.REGISTERED, name, lastName);
+		return users;
+	}
 }

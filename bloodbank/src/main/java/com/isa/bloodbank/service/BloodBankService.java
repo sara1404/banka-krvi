@@ -1,7 +1,6 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.entity.BloodBank;
-import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.repository.BloodBankRepository;
 
@@ -35,26 +34,38 @@ public class BloodBankService {
 	}
 
 	public List<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade) {
-		List<BloodBank> bloodBanks = search(name, city);
-		if (averageGrade != 0) return filter(bloodBanks, averageGrade);
-		else return bloodBanks;
+		final List<BloodBank> bloodBanks = search(name, city);
+		if (averageGrade != 0) {
+			return filter(bloodBanks, averageGrade);
+		} else {
+			return bloodBanks;
+		}
 	}
 
-	private List<BloodBank> search(final String name, final String city){
-		if (!name.equals("") && !city.equals("")) return bloodBankRepository.findAllByNameContainingAndAddressId_CityContaining(name, city);
-		else if (!name.equals("")) return bloodBankRepository.findByNameContaining(name);
-		else if (!city.equals("")) return bloodBankRepository.findAllByAddressId_CityContaining(city);
-		else return bloodBankRepository.findAll();
+	private List<BloodBank> search(final String name, final String city) {
+		if (!name.equals("") && !city.equals("")) {
+			return bloodBankRepository.findAllByNameContainingAndAddressId_CityContaining(name, city);
+		} else if (!name.equals("")) {
+			return bloodBankRepository.findByNameContaining(name);
+		} else if (!city.equals("")) {
+			return bloodBankRepository.findAllByAddressId_CityContaining(city);
+		} else {
+			return bloodBankRepository.findAll();
+		}
 	}
 
-	private List<BloodBank> filter(List<BloodBank> bloodBanks, final double averageGrade){
+	private List<BloodBank> filter(final List<BloodBank> bloodBanks, final double averageGrade) {
 		final List<BloodBank> filteredBloodBanks = new ArrayList<BloodBank>();
-		for (final BloodBank bloodBank : bloodBanks){
-			if (bloodBank.getAverageGrade() >= averageGrade){
+		for (final BloodBank bloodBank : bloodBanks) {
+			if (bloodBank.getAverageGrade() >= averageGrade) {
 				filteredBloodBanks.add(bloodBank);
 			}
 		}
 		return filteredBloodBanks;
+	}
+
+	public BloodBank registerBloodBank(final BloodBank bloodBank) {
+		return bloodBankRepository.save(bloodBank);
 	}
 
 }
