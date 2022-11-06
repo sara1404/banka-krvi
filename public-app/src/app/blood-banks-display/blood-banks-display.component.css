@@ -1,12 +1,9 @@
 .table {
     width: 90%;
     position: absolute;
-    top: 15%;
-    left: 5%;
+    top: 25%;
+    left: 25%;
+    width: 1050px;
 }
 
-th {
-    height: 30px;
-    background-color: cadetblue;
-    color: white;
-}
+
