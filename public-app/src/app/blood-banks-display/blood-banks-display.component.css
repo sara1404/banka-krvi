@@ -1,0 +1,12 @@
+table {
+    width: 90%;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
+
+th {
+    height: 30px;
+    background-color: cadetblue;
+    color: white;
+}

@@ -1,0 +1,18 @@
+<form (submit)="searchBloodBanks(name.value, city.value, $event)">
+  <input
+  class="inputText"
+  matInput
+  placeholder="Name"
+  #name
+  />
+  <input
+  class="inputText"
+  matInput
+  placeholder="City"
+  #city
+  />
+  <input
+  type="submit"
+  value="Search"
+/>
+</form>
