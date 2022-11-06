@@ -15,7 +15,6 @@ export class SearchBloodBanksComponent implements OnInit {
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
   @Output() name = new EventEmitter<string>();
   @Output() city = new EventEmitter<string>();
-
   ngOnInit(): void {}
 
   searchBloodBanks(name: string, city: string, e: Event){

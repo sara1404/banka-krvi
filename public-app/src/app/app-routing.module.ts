@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DisplayBloodBanksComponent } from './blood-banks-display/blood-banks-display.component';
 import { RegisterAdminComponent } from './views/register-admin/register-admin.component';
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { UsersComponent } from './views/users/users.component';
+import { DisplayBloodBanksComponent } from './blood-banks-display/blood-banks-display.component';
 
 const routes: Routes = [
   {

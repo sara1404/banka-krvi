@@ -15,7 +15,6 @@ export class FilterBloodBanksComponent implements OnInit {
   @Input() name = "";
   @Input() city = "";
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
-
   ngOnInit(): void {}
 
   filterBloodBanks(e: any){
