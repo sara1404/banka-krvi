@@ -38,7 +38,7 @@
         <mat-option value="{{bloodbank.name}}" *ngFor="let bloodbank of bloodbanks">{{bloodbank.name}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <input type="submit" value="REGISTER" class="form-field submit-btn">
+    <input (click)="registerAdmin()" type="submit" value="REGISTER" class="form-field submit-btn">
   </form>
 </div>
 

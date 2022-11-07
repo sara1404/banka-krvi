@@ -16,4 +16,8 @@ export class RegisterAdminComponent implements OnInit {
     this.bloodbanks = this.bloodbankService.getBloodBanks()
   }
 
+  registerAdmin(){
+    
+  }
+
 }
