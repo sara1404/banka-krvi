@@ -1,6 +1,6 @@
 <div class="mainContent">
-<app-search-blood-banks (bloodBanks)="onSearch($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)"></app-search-blood-banks>
-<app-filter-blood-banks (bloodBanks)="onSearch($event)" [name]="name" [city]="city"></app-filter-blood-banks>
+<app-search-blood-banks (bloodBanks)="onSearch($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)" [averageGrade]="averageGrade"></app-search-blood-banks>
+<app-filter-blood-banks (bloodBanks)="onSearch($event)" (averageGrade)="saveAverageGrade($event)" [name]="name" [city]="city"></app-filter-blood-banks>
 <div class="table">
 <mat-table #table [dataSource]="bloodBanks">
     <ng-container matColumnDef="name">

@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-root',
   templateUrl: './blood-banks-display.component.html',
-  styleUrls: ['./blood-banks-display.component.css']
+  styleUrls: ['./blood-banks-display.component.scss']
 })
 export class DisplayBloodBanksComponent {
   constructor(
@@ -17,6 +17,7 @@ export class DisplayBloodBanksComponent {
   displayedColumns: string[] = ["name", "street", "number", "city", "zipcode", "country", "averageGrade"]
   name: string = ""
   city: string = ""
+  averageGrade: number = 0
 
   ngOnInit(): void {
     this.bloodBankService
@@ -33,5 +34,9 @@ export class DisplayBloodBanksComponent {
   }
   saveSearchCity(eventData: string){
     this.city = eventData;
+  }
+
+  saveAverageGrade(eventData: number){
+    this.averageGrade = eventData;
   }
 }

@@ -12,6 +12,7 @@ export class SearchBloodBanksComponent implements OnInit {
     private bloodBankService: BloodBankService,
   ) {}
 
+  @Input() averageGrade = 0;
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
   @Output() name = new EventEmitter<string>();
   @Output() city = new EventEmitter<string>();
@@ -19,7 +20,7 @@ export class SearchBloodBanksComponent implements OnInit {
 
   searchBloodBanks(name: string, city: string, e: Event){
     e.preventDefault();
-    this.bloodBanks.emit(this.bloodBankService.searchFilterBloodBanks(name, city, 0));
+    this.bloodBankService.searchFilterBloodBanks(name, city, this.averageGrade).subscribe((data) => this.bloodBanks.emit(data));
     this.name.emit(name);
     this.city.emit(city);
   }

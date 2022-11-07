@@ -4,25 +4,15 @@ import { RegisterAdminComponent } from './views/register-admin/register-admin.co
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { UsersComponent } from './views/users/users.component';
 import { DisplayBloodBanksComponent } from './views/blood-banks-display/blood-banks-display.component';
+import { UserProfileComponent } from './views/user-profile/user-profile.component';
 
 const routes: Routes = [
-  {
-    path: 'bloodBanks',
-    component: DisplayBloodBanksComponent,
-  },
-  {
-    path: 'register/admin',
-    component: RegisterAdminComponent
-  },
-  {
-    path: 'register/bloodbank',
-    component: RegisterBloodbankComponent
-  },
-  {
-    path: 'users',
-    component: UsersComponent
-  }
-]
+  {path: 'register/admin', component: RegisterAdminComponent},
+  {path: 'register/bloodbank', component: RegisterBloodbankComponent},
+  {path: 'users', component: UsersComponent},
+  {path: 'bloodBanks', component: DisplayBloodBanksComponent},
+  {path: 'userProfile', component: UserProfileComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
