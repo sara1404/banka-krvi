@@ -34,4 +34,8 @@ public class UserService {
 		final List<User> users = userRepository.getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType.REGISTERED, name, lastName);
 		return users;
 	}
+
+	public List<User> getAll(){
+		return userRepository.findAll();
+	}
 }

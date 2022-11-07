@@ -37,5 +37,10 @@ public class UserController {
 	public ResponseEntity<List<User>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
 		return ResponseEntity.ok(userService.search(name, lastName));
 	}
+
+	@GetMapping("/users")
+	public ResponseEntity<List<User>> getAll(){
+		return ResponseEntity.ok(userService.getAll());
+	}
 }
 
