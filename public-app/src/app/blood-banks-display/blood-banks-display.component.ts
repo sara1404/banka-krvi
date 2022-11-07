@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IBloodBank } from '../model/BloodBank';
-import { BloodBankService } from '../service/blood-bank-service.service';
+import { BloodBankService } from '../services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -26,7 +26,7 @@ export class DisplayBloodBanksComponent {
   }
 
   onSearch(eventData: IBloodBank[]) {
-    this.bloodBanks.data = eventData;   
+    this.bloodBanks.data = eventData;
   }
 
   saveSearchName(eventData: string){

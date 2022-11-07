@@ -1,3 +1,5 @@
+import { IBloodBank } from "./BloodBank";
+
 export interface IUser{
   firstName: string,
   lastName: string,
