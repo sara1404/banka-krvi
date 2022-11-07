@@ -1,8 +1,37 @@
-<div>
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Search</mat-label>
-      <textarea matInput placeholder="Name,Surname"></textarea>
-    </mat-form-field>
-  </form>
+<form>
+  <h1 class="title">Personal informations</h1>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Name</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.firstName}}"
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Surname</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.lastName}}"
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>JMBG</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.jmbg}}"
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Blood type</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.bloodType}}"
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+    <mat-label>email</mat-label>
+    <input matInput [disabled]="true"
+    value="{{user.email}}"
+    >
+</mat-form-field>
+</form>
+<div class="example-button-row">
+  <button mat-raised-button (click)="editClick()">Edit</button>
+  <button mat-raised-button (click)="okClick()">Save</button>
 </div>
