@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IBloodBank } from '../model/BloodBank';
-import { BloodBankService } from '../services/blood-bank.service';
+import { IBloodBank } from '../../model/Bloodbank'
+import { BloodBankService } from '../../services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -19,10 +19,9 @@ export class DisplayBloodBanksComponent {
   city: string = ""
 
   ngOnInit(): void {
-    /*this.bloodBankService
+    this.bloodBankService
       .getBloodBanks()
-      .subscribe((data) => (this.bloodBanks = data));*/
-      this.bloodBanks.data = this.bloodBankService.getBloodBanks();
+      .subscribe((data) => (this.bloodBanks.data = data));
   }
 
   onSearch(eventData: IBloodBank[]) {

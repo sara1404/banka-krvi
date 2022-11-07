@@ -11,7 +11,7 @@ import { RegisterAdminComponent } from './views/register-admin/register-admin.co
 import { UsersComponent } from './views/users/users.component';
 import { MaterialModule } from './material/material.module';
 
-import { BloodBankDisplayModule } from './blood-banks-display/blood-bank-display.module';
+import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
 
 @NgModule({
   declarations: [
