@@ -8,6 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import { BloodbankInfoComponent } from './bloodbank-info/bloodbank-info.component';
 import { OtherAdminsComponent } from './other-admins/other-admins.component';
 import { AdminInfoComponent } from './admin-info/admin-info.component';
+import { FreeAppointmentsComponent } from './free-appointments/free-appointments.component';
 
 
 
@@ -16,7 +17,8 @@ import { AdminInfoComponent } from './admin-info/admin-info.component';
     AdminProfileComponent,
     BloodbankInfoComponent,
     OtherAdminsComponent,
-    AdminInfoComponent
+    AdminInfoComponent,
+    FreeAppointmentsComponent
   ],
   imports: [
     CommonModule,

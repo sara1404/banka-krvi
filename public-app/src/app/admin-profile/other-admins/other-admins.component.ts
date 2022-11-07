@@ -9,6 +9,7 @@ export class OtherAdminsComponent implements OnInit {
 
   constructor() { }
 
+  displayedColumns: string[] = ["name", "surname", "email"]
   ngOnInit(): void {
   }
 

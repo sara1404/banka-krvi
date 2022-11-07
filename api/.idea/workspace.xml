@@ -44,7 +44,7 @@
     &quot;last_opened_file_path&quot;: &quot;D:/normalno/FTN/godina_4/zimski/isa-projekat-1/banka-krvi/api&quot;
   }
 }</component>
-  <component name="RunManager" selected="Maven.Maven">
+  <component name="RunManager">
     <configuration name="Maven" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
