@@ -12,6 +12,7 @@ import { UsersComponent } from './views/users/users.component';
 import { MaterialModule } from './material/material.module';
 
 import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
+import { UserProfileModule } from './views/user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-d
     RouterModule,
     BrowserAnimationsModule,
     BloodBankDisplayModule,
+    UserProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

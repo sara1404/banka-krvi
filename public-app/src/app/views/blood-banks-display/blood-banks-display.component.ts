@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-root',
   templateUrl: './blood-banks-display.component.html',
-  styleUrls: ['./blood-banks-display.component.css']
+  styleUrls: ['./blood-banks-display.component.scss']
 })
 export class DisplayBloodBanksComponent {
   constructor(
