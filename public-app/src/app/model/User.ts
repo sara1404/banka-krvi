@@ -8,3 +8,4 @@ export interface IUser{
   bloodType: string,
   bloodBank: IBloodBank
 }
+
