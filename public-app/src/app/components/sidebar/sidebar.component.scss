@@ -1,0 +1,23 @@
+.sidebar-wrapper{
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  width: 300PX;
+  background-color: #dc3545;
+  height: 100%;
+
+  .sidebar-option{
+    font-size: .9rem;
+    padding: 1rem;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .sidebar-option:hover{
+    background-color: black;
+    border-radius: 1em;
+  }
+}
