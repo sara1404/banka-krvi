@@ -1,4 +1,17 @@
-<h1>Ostali administratori</h1>
-<table mat-table class="mat-elevation-z8">
-    
-</table>
+<h1>Other administrators</h1>
+<div class="table">
+    <mat-table #table >
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item">imena</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef>Surname</mat-header-cell>
+            <mat-cell *matCellDef="let item">prezimena</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>email</mat-header-cell>
+            <mat-cell *matCellDef="let item">email</mat-cell>
+        </ng-container>
+      </mat-table>
+    </div>

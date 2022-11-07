@@ -1,11 +1,11 @@
 <form>
-    <h1 class="title">Lične informacije</h1>
+    <h1 class="title">Personal informations</h1>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Naziv centra</mat-label>
+        <mat-label>Name</mat-label>
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Prezime</mat-label>
+        <mat-label>Surname</mat-label>
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
@@ -17,15 +17,15 @@
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Šifra</mat-label>
+        <mat-label>Password</mat-label>
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Krvna grupa</mat-label>
+        <mat-label>Blood type</mat-label>
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
 </form>
 <div class="example-button-row">
-    <button mat-raised-button (click)="editClick()">Izmeni</button>
-    <button mat-raised-button (click)="okClick()">Potvrdi</button>
+    <button mat-raised-button (click)="editClick()">Edit</button>
+    <button mat-raised-button (click)="okClick()">Save</button>
 </div>

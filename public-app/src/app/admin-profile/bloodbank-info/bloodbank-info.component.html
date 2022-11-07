@@ -1,34 +1,34 @@
 <form>
-    <h1 class="title">Informacije o centru</h1>
+    <h1 class="title">Informations about center</h1>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Naziv centra</mat-label>
+        <mat-label>Name of center</mat-label>
         <input matInput [disabled]="isDisabled">
     </mat-form-field>
     <div class="address">
-        <mat-label class="field">Adresa</mat-label>
+        <mat-label class="field">Address</mat-label>
         <br/>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Ulica</mat-label>
+            <mat-label>Street</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Broj</mat-label>
+            <mat-label>Number</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Grad</mat-label>
+            <mat-label>City</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Poštanski broj</mat-label>
+            <mat-label>Zip code</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Geografska širina</mat-label>
+            <mat-label>Longitude</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
         <mat-form-field appearance="fill" class="field">
-            <mat-label>Geografska dužina</mat-label>
+            <mat-label>Latitude</mat-label>
             <input matInput [disabled]="isDisabled">
         </mat-form-field>
     </div>
@@ -38,6 +38,6 @@
     </mat-form-field>
 </form>
 <div class="example-button-row">
-    <button mat-raised-button (click)="editClick()">Izmeni</button>
-    <button mat-raised-button (click)="okClick()">Potvrdi</button>
+    <button mat-raised-button (click)="editClick()">Edit</button>
+    <button mat-raised-button (click)="okClick()">Save</button>
 </div>
