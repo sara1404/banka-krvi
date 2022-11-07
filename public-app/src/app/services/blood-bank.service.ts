@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IBloodBank } from '../model/BloodBank';
+import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
 
 @Injectable({
