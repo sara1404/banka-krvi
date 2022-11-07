@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBloodBank } from 'src/app/model/BloodBank';
+import { IBloodBank } from 'src/app/model/BloodBankk';
 import { BloodBankService } from 'src/app/services/blood-bank.service';
 
 @Component({

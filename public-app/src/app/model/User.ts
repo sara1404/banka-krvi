@@ -1,4 +1,4 @@
-import { IBloodBank } from "./BloodBank";
+import { IBloodBank } from "./BloodBankk";
 
 export interface IUser{
   firstName: string,

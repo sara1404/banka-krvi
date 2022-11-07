@@ -1,4 +1,4 @@
-import { IBloodBank } from './../../model/BloodBank';
+import { IBloodBank } from './../../model/BloodBankk';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BloodBankService } from '../../services/blood-bank.service';
 
