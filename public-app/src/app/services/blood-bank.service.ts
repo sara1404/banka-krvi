@@ -10,13 +10,13 @@ export class BloodBankService {
   constructor(private http: HttpClient) {}
   bloodBanks: IBloodBank[] = []
 
-  getBloodBanks() {
-    this.bloodBanks.push({name: "lala", address: {street: "Rumenacka", number: 1, city: "Beograd", zipcode: 11111, country:"Srbija", longitude: 0, latitude: 0}, description: "lalalal", averageGrade:4});
-    this.bloodBanks.push({name: "lala", address: {street: "Rumenacka", number: 1, city: "Beograd", zipcode: 11111, country:"Srbija", longitude: 0, latitude: 0}, description: "lalalal", averageGrade:4});
-    return this.bloodBanks;
-    /*return this.http.get<IBloodBank[]>(
+  getBloodBanks() : Observable<IBloodBank[]> {
+    //this.bloodBanks.push({name: "lala", address: {street: "Rumenacka", number: 1, city: "Beograd", zipcode: 11111, country:"Srbija", longitude: 0, latitude: 0}, description: "lalalal", averageGrade:4});
+    //this.bloodBanks.push({name: "lala", address: {street: "Rumenacka", number: 1, city: "Beograd", zipcode: 11111, country:"Srbija", longitude: 0, latitude: 0}, description: "lalalal", averageGrade:4});
+    //return this.bloodBanks;
+    return this.http.get<IBloodBank[]>(
       `localhost:8080/bloodbank/findAll`
-    );*/
+    );
   }
 
   searchFilterBloodBanks(name: string, city: string, averageGrade: number) : IBloodBank[] {

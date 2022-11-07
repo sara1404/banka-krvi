@@ -1,5 +1,7 @@
+com\isa\bloodbank\exception\BaseException.class
 com\isa\bloodbank\entity\AppointmentInfo.class
 com\isa\bloodbank\service\BloodBankService.class
+com\isa\bloodbank\exception\StandardErrorResponse.class
 com\isa\bloodbank\entity\Address.class
 com\isa\bloodbank\controller\UserController.class
 com\isa\bloodbank\entity\enums\BloodType.class
@@ -15,3 +17,4 @@ com\isa\bloodbank\repository\BloodBankRepository.class
 com\isa\bloodbank\entity\BloodBank.class
 com\isa\bloodbank\BloodbankApplication.class
 com\isa\bloodbank\entity\BloodSupply.class
+com\isa\bloodbank\exception\GlobalErrorHandler.class

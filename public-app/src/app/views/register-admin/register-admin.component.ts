@@ -13,7 +13,7 @@ export class RegisterAdminComponent implements OnInit {
   constructor(private bloodbankService: BloodBankService) { }
 
   ngOnInit(): void {
-    this.bloodbanks = this.bloodbankService.getBloodBanks()
+    this.bloodbankService.getBloodBanks().subscribe((data) => this.bloodbanks = data);
   }
 
   registerAdmin(){
