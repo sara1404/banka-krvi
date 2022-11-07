@@ -11,7 +11,6 @@ import { RegisterAdminComponent } from './views/register-admin/register-admin.co
 import { BloodBankDisplayModule } from './blood-banks-display/blood-bank-display.module';
 import { UsersModule } from './views/users/users.module';
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
-import { UsersComponent } from './views/users/users.component';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { MaterialModule } from './material/material.module';
     AppComponent,
     RegisterAdminComponent,
     RegisterBloodbankComponent,
-    UsersComponent,
   ],
   imports: [
     BrowserModule,
