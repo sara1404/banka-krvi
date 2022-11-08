@@ -2,30 +2,30 @@
     <h1 class="title">Personal informations</h1>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Name</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.firstName}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.firstName}}" #firstName>
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Surname</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.lastName}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.lastName}}" #lastName>
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>JMBG</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.jmbg}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.jmbg}}" pattern="^[0-9]+\.[0-9][0-9]$" #jmbg>
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>email</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.email}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.email}}" #email>
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Password</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.password}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.password}}" #password>
     </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Blood type</mat-label>
-        <input matInput [disabled]="isDisabled" value="{{this.user.bloodType}}">
+        <input matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
     </mat-form-field>
 </form>
 <div class="example-button-row">
     <button mat-raised-button (click)="editClick()">Edit</button>
-    <button mat-raised-button (click)="okClick()">Save</button>
+    <button mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, email.value, password.value, bloodType.value)">Save</button>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IBloodBank } from '../model/BloodBank';
+import { AdminInfoService } from '../service/admin-info.service';
 
 @Component({
   selector: 'app-bloodbank-info',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BloodbankInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminInfoService: AdminInfoService) { }
 
   public isDisabled: boolean = true;
+  public bloodBank: IBloodBank;
   ngOnInit(): void {
+    this.adminInfoService.getBloodBank().subscribe(data=>{this.bloodBank = data;});
   }
 
   editClick()

@@ -21,8 +21,26 @@ export class AdminInfoComponent implements OnInit {
   {
     this.isDisabled = false;
   }
-  okClick()
+  okClick(
+    firstName: string,
+    lastName: string,
+    jmbg: string,
+    email: string,
+    password: string,
+    bloodType: string
+  )
   {
+    const updatedProfile: IUser = {
+      id: this.user.id,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      bloodType: bloodType,
+      bloodBank:this.user.bloodBank,
+      jmbg: Number(jmbg)
+    };
+    this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;
   }
 

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +23,10 @@ public class BloodBankController {
 	@Autowired
 	private BloodBankService bloodBankService;
 
-	@GetMapping("/{id}/")
-	public ResponseEntity<BloodBank> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(bloodBankService.findById(id));
+	@GetMapping(/*"/{id}/"*/"/administrator/")
+	public ResponseEntity<BloodBank> findForAdministrator(/*@PathVariable("id") final Long id*/) {
+		final Long bloodBankId = (long) 5; //zakucano
+		return ResponseEntity.ok(bloodBankService.findById(bloodBankId));
 	}
 
 	@PatchMapping("/update/")

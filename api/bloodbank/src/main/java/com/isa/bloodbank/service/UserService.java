@@ -39,4 +39,9 @@ public class UserService {
 	public User findById(final Long id) {
 		return userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
 	}
+
+	public User update(final User user) {
+		findById(user.getId());
+		return userRepository.save(user);
+	}
 }
