@@ -22,9 +22,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/bloodBankId/{bloodBankId}/{administratorId}/")
-	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("bloodBankId") final Long bloodBankId,
-		@PathVariable("administratorId") final Long administratorId) {
+	@GetMapping("/bloodBankId/{bloodBankId}/")
+	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("bloodBankId") final Long bloodBankId
+	) {
+		final Long administratorId = (long) (3);
 		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
 	}
 
@@ -36,6 +37,11 @@ public class UserController {
 	@GetMapping("/search")
 	public ResponseEntity<List<User>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
 		return ResponseEntity.ok(userService.search(name, lastName));
+	}
+
+	@GetMapping("/{id}/")
+	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findById(id));
 	}
 }
 

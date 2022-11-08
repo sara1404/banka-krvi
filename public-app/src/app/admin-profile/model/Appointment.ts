@@ -1,4 +1,4 @@
-import { IUser } from "./user"
+import { IUser } from "./User"
 export interface IAppointment{
     bloodBankId: number,
     startTime: Date,

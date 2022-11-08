@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IUser } from '../model/User';
+import { AdminInfoService } from '../service/admin-info.service';
 
 @Component({
   selector: 'app-admin-info',
@@ -7,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminInfoService: AdminInfoService) { }
 
+  user: IUser;
   public isDisabled: boolean = true;
   ngOnInit(): void {
+    this.adminInfoService.getUser(3).subscribe(data=>{this.user = data;});
   }
   editClick()
   {

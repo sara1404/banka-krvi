@@ -9,6 +9,7 @@ import { BloodbankInfoComponent } from './bloodbank-info/bloodbank-info.componen
 import { OtherAdminsComponent } from './other-admins/other-admins.component';
 import { AdminInfoComponent } from './admin-info/admin-info.component';
 import { FreeAppointmentsComponent } from './free-appointments/free-appointments.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
@@ -25,7 +26,8 @@ import { FreeAppointmentsComponent } from './free-appointments/free-appointments
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ]
 })
 export class AdminProfileModule { }

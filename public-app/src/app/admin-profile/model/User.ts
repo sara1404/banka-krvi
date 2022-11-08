@@ -5,6 +5,7 @@ export interface IUser{
     lastName: string,
     jmbg: number,
     email: string,
+    password: string,
     bloodType: string,
     bloodBank: IBloodBank
 }
