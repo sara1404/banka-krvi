@@ -14,10 +14,7 @@ export class FreeAppointmentsComponent implements OnInit {
   displayedColumns: string[] = ["start", "end"]
   availableAppointments: IAppointment[];
   ngOnInit(): void {
-    console.log('udje')
     this.adminInfoService.getAvailableAppointments().subscribe(data=>this.availableAppointments=data);
-    console.log(this.availableAppointments.length)
-    console.log('udje')
   }
 
 }

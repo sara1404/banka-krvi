@@ -1,14 +1,17 @@
 form{
     width: 500px;
     padding: 10px;
+    color: black;
 }
 
 .field{
     margin: 5px;
+    color: black;
 }
 .main-field{
     margin: 5px;
     width: 82%;
+    color: black;
 }
 
 .title{
@@ -48,3 +51,9 @@ section {
     justify-content: center;
     width: 120px;
   }
+mat-label{
+  color: black;
+}
+.input{
+  color: black;
+}
