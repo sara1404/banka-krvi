@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAppointment } from '../model/Appointment';
 import { IBloodBank } from '../model/BloodBank';
+import { IBloodSupply } from '../model/BloodSupply';
 import { IUser } from '../model/User';
 
 @Injectable({
@@ -38,4 +39,9 @@ export class AdminInfoService {
   getAvailableAppointments():Observable<IAppointment[]>{
     return this.http.get<IAppointment[]>('http://localhost:8080/appointment/available/');
   };
+
+  getBloodSupplies():Observable<IBloodSupply[]>{
+    //popravi da ne bude 5!!!
+    return this.http.get<IBloodSupply[]>('http://localhost:8080/bloodsupply/bloodbank/5/');
+  }
 }

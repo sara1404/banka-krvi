@@ -43,11 +43,11 @@
             <mat-label>Average grade</mat-label>
             <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.averageGrade}}" #averageGrade>
         </mat-form-field>
-        <div class="example-button-row">
-            <button mat-raised-button (click)="editClick()">Edit</button>
-            <button mat-raised-button (click)="okClick(name.value, street.value, number.value, city.value, zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
-        </div>
     </form>
+    <div class="example-button-row">
+        <button mat-raised-button (click)="editClick()">Edit</button>
+        <button mat-raised-button (click)="okClick(name.value, street.value, number.value, city.value, zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
+    </div>
 </div>
 
 

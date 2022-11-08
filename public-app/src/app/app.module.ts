@@ -13,6 +13,7 @@ import { RegisterAdminComponent } from './views/register-admin/register-admin.co
 import { UsersModule } from './views/users/users.module';
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { MaterialModule } from './material/material.module';
+import { BloodSuppliesComponent } from './admin-profile/blood-supplies/blood-supplies.component';
 
 import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
 import { UserProfileModule } from './views/user-profile/user-profile.module';
@@ -22,6 +23,7 @@ import { UserProfileModule } from './views/user-profile/user-profile.module';
     AppComponent,
     RegisterAdminComponent,
     RegisterBloodbankComponent,
+    BloodSuppliesComponent
   ],
   imports: [
     BrowserModule,

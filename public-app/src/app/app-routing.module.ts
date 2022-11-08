@@ -13,6 +13,7 @@ import { AdminInfoComponent } from './admin-profile/admin-info/admin-info.compon
 import { BloodbankInfoComponent } from './admin-profile/bloodbank-info/bloodbank-info.component';
 import { OtherAdminsComponent } from './admin-profile/other-admins/other-admins.component';
 import { FreeAppointmentsComponent } from './admin-profile/free-appointments/free-appointments.component';
+import { BloodSuppliesComponent } from './admin-profile/blood-supplies/blood-supplies.component';
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminInfoComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'bloodBanks', component: DisplayBloodBanksComponent},
   {path: 'userProfile', component: UserProfileComponent},
   {path: 'other/admins', component:OtherAdminsComponent},
-  {path: 'free/appointments', component:FreeAppointmentsComponent}
+  {path: 'free/appointments', component:FreeAppointmentsComponent},
+  {path: 'bloodsupplies', component:BloodSuppliesComponent}
 ];
 
 @NgModule({
