@@ -2,6 +2,7 @@ import { IBloodBank } from "./BloodBank"
 
 export interface IUser{
     id: number,
+    userType: string,
     firstName: string,
     lastName: string,
     jmbg: number,

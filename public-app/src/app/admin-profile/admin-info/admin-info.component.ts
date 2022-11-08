@@ -32,6 +32,7 @@ export class AdminInfoComponent implements OnInit {
   {
     const updatedProfile: IUser = {
       id: this.user.id,
+      userType: this.user.userType,
       firstName: firstName,
       lastName: lastName,
       email: email,

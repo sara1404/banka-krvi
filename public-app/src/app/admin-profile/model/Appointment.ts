@@ -5,4 +5,5 @@ export interface IAppointment{
     endTime: Date,
     medicalStaff: IUser[],
     available: boolean
+    appointmentInfo: string
 }
