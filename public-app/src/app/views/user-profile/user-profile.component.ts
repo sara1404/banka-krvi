@@ -18,7 +18,9 @@ export class UserProfileComponent implements OnInit {
     this.user = this.userService.getRegisteredUserProfile();
   }
 
-  okClick(){
+  okClick(firstName: string, lastName: string, jbmgString: string, bloodType: string, email: string){
+    var jmbg = parseInt(jbmgString);
+    this.userService.updateUserProfile({id: this.user.id, firstName: firstName, lastName: lastName, jmbg: jmbg, email: email, bloodType: bloodType, bloodBank: this.user.bloodBank}).subscribe((data) => this.user = data);
     this.isDisabled = true;
   }
 

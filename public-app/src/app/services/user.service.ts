@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '../model/User';
@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  user : IUser = {firstName: "ana", lastName: "vulin", jmbg: 123, bloodBank: null, bloodType: "A", email : "llalal"};
+  user : IUser = {id: 1,firstName: "ana", lastName: "vulin", jmbg: 123, bloodBank: null, bloodType: "A", email : "llalal"};
   getUsers(): Observable<IUser[]>{
     return this.http.get<IUser[]>(`http://localhost:8080/user/users`)
   }
@@ -18,5 +18,10 @@ export class UserService {
   getRegisteredUserProfile() : IUser{
     return this.user; 
     //return this.http.get<IUser>('');
+  }
+
+  updateUserProfile(user: IUser) : Observable<IUser> {
+    var headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.patch<IUser>(`http://localhost:8080/user/update`, JSON.stringify(user), {headers : headers});
   }
 }
