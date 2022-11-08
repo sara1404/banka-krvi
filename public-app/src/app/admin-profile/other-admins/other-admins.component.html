@@ -1,17 +1,17 @@
 <h1>Other administrators</h1>
 <div class="table">
-  <mat-table #table >
+  <mat-table #table [dataSource]="otherAdmins">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let item">imena</mat-cell>
+      <mat-cell *matCellDef="let item">{{item.firstName}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="surname">
         <mat-header-cell *matHeaderCellDef>Surname</mat-header-cell>
-        <mat-cell *matCellDef="let item">prezimena</mat-cell>
+        <mat-cell *matCellDef="let item">{{item.lastName}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef>email</mat-header-cell>
-        <mat-cell *matCellDef="let item">email</mat-cell>
+        <mat-cell *matCellDef="let item">{{item.email}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

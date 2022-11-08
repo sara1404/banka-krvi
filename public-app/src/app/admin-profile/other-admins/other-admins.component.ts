@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from '../model/User';
+import { AdminInfoService } from '../service/admin-info.service';
 
 @Component({
   selector: 'app-other-admins',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherAdminsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminInfoService: AdminInfoService) { }
 
   displayedColumns: string[] = ["name", "surname", "email"]
+  public otherAdmins: IUser[];
   ngOnInit(): void {
+    this.adminInfoService.getOtherAdministrators().subscribe(data=>{this.otherAdmins = data;});
   }
 
 }

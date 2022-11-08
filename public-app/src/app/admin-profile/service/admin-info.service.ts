@@ -25,4 +25,9 @@ export class AdminInfoService {
   getBloodBank():Observable<IBloodBank>{
     return this.http.get<IBloodBank>('http://localhost:8080/bloodbank/administrator/');
   }
+
+  getOtherAdministrators(): Observable<IUser[]>{
+    //zakucano na 5 jer ce se preuzimati iz logovanog korisnika
+    return this.http.get<IUser[]>('http://localhost:8080/user/bloodBankId/')
+  }
 }

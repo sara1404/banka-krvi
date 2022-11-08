@@ -25,10 +25,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/bloodBankId/{bloodBankId}/")
-	public ResponseEntity<List<User>> findByAdministratorId(@PathVariable("bloodBankId") final Long bloodBankId
-	) {
+	@GetMapping("/bloodBankId/") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
+	public ResponseEntity<List<User>> findByAdministratorId() {
 		final Long administratorId = (long) (3);
+		final Long bloodBankId = (long) 5;
 		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
 	}
 
