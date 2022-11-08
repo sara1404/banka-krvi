@@ -14,6 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	User save(User administrator);
 
-	List<User> getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType type, String firstName, String lastName);
+	List<User> getUsersByFirstNameContainsAndLastNameContains(String firstName, String lastName);
 
 }
