@@ -16,5 +16,6 @@ com\isa\bloodbank\repository\UserRepository.class
 com\isa\bloodbank\repository\BloodBankRepository.class
 com\isa\bloodbank\entity\BloodBank.class
 com\isa\bloodbank\BloodbankApplication.class
+com\isa\bloodbank\BloodbankApplication$1.class
 com\isa\bloodbank\entity\BloodSupply.class
 com\isa\bloodbank\exception\GlobalErrorHandler.class
