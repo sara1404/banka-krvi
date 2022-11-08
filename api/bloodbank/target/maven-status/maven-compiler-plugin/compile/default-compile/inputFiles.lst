@@ -1,17 +1,26 @@
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Appointment.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodBank.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\UserType.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\UserController.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodBankRepository.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\BloodbankApplication.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Address.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\UserNotFoundException.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodSupply.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\BloodType.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BaseEntity.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\UserService.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\AppointmentInfo.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodBankService.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\User.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BaseEntity.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\GlobalErrorHandler.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Appointment.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\BaseException.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodBank.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\BloodbankApplication.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\AppointmentInfo.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Address.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodSupply.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\User.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodBankRepository.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodSupplyController.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\StandardErrorResponse.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodBankService.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodSupplyRepository.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\UserNotFoundException.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\BloodType.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\AppointmentRepository.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodSupplyService.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\UserType.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\AppointmentService.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\UserService.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AppointmentController.java
+D:\normalno\FTN\godina_4\zimski\isa-projekat-1\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\UserController.java

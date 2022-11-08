@@ -8,4 +8,11 @@ html, body {
   width: 100%;
   height: 100%;
   display: flex;
+
+  .sidebar{
+    width: 30%;
+  }
+  .outlet{
+    width: 70%;
+  }
 }

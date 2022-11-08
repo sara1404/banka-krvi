@@ -5,12 +5,18 @@ import { AdminProfileComponent } from './admin-profile/admin-profile/admin-profi
 
 
 import { RegisterAdminComponent } from './views/register-admin/register-admin.component';
+import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { UsersComponent } from './views/users/users.component';
+import { DisplayBloodBanksComponent } from './views/blood-banks-display/blood-banks-display.component';
+import { UserProfileComponent } from './views/user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminProfileComponent},
   {path: 'register/admin', component: RegisterAdminComponent},
-  {path: 'users', component: UsersComponent}
+  {path: 'register/bloodbank', component: RegisterBloodbankComponent},
+  {path: 'users', component: UsersComponent},
+  {path: 'bloodBanks', component: DisplayBloodBanksComponent},
+  {path: 'userProfile', component: UserProfileComponent}
 ];
 
 @NgModule({

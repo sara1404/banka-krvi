@@ -53,5 +53,10 @@ public class UserController {
 	private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
 		return ResponseEntity.ok(userService.update(user));
 	}
+
+	@GetMapping("/users")
+	public ResponseEntity<List<User>> getAll() {
+		return ResponseEntity.ok(userService.getAll());
+	}
 }
 

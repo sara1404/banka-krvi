@@ -44,4 +44,9 @@ public class UserService {
 		findById(user.getId());
 		return userRepository.save(user);
 	}
+
+	public List<User> getAll() {
+		return userRepository.findAll();
+
+	}
 }
