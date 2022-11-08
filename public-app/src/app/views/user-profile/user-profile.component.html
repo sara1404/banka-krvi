@@ -4,34 +4,40 @@
       <mat-label>Name</mat-label>
       <input matInput [disabled]="isDisabled"
       value="{{user.firstName}}"
+      #name
       >
   </mat-form-field>
   <mat-form-field appearance="fill" class="main-field">
       <mat-label>Surname</mat-label>
       <input matInput [disabled]="isDisabled"
       value="{{user.lastName}}"
+      #surname
       >
   </mat-form-field>
   <mat-form-field appearance="fill" class="main-field">
       <mat-label>JMBG</mat-label>
       <input matInput [disabled]="isDisabled"
       value="{{user.jmbg}}"
+      #jmbg
       >
   </mat-form-field>
   <mat-form-field appearance="fill" class="main-field">
       <mat-label>Blood type</mat-label>
       <input matInput [disabled]="isDisabled"
       value="{{user.bloodType}}"
+      #bloodType
       >
   </mat-form-field>
   <mat-form-field appearance="fill" class="main-field">
     <mat-label>email</mat-label>
     <input matInput [disabled]="true"
     value="{{user.email}}"
+    #email
     >
 </mat-form-field>
 </form>
 <div class="example-button-row">
-  <button mat-raised-button (click)="editClick()">Edit</button>
-  <button mat-raised-button (click)="okClick()">Save</button>
+    <button mat-raised-button (click)="editClick()">Edit</button>
+    <button mat-raised-button (click)="okClick(name.value, surname.value, jmbg.value, bloodType.value, email.value)">Save</button>
 </div>
+

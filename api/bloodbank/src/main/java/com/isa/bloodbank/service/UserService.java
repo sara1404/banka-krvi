@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.UserType;
+import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -37,5 +38,14 @@ public class UserService {
 
 	public List<User> getAll(){
 		return userRepository.findAll();
+	}
+
+	public User findById(Long id) {
+		return userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
+	}
+
+	public User update(User user) {
+		findById(user.getId());
+		return userRepository.save(user);
 	}
 }
