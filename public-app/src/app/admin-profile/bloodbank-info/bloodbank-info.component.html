@@ -1,51 +1,53 @@
-<form>
-    <h1 class="title">Informations about center</h1>
-    <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Name of center</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.name}}" #name>
-    </mat-form-field>
-    <div class="address">
-        <mat-label class="field">Address</mat-label>
-        <br/>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Street</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.street}}" #street>
+<div>
+    <form>
+        <h1 class="title">Informations about center</h1>
+        <mat-form-field appearance="fill" class="main-field">
+            <mat-label>Name of center</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.name}}" #name>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Number</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.number}}" #number>
+        <div class="address">
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Street</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.street}}" #street>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Number</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.number}}" #number>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>City</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.city}}" #city>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Zip code</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.zipcode}}" #zipcode>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Country</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.country}}" #country>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Longitude</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.longitude}}" #longitude>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Latitude</mat-label>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.latitude}}" #latitude>
+            </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill" class="main-field">
+            <mat-label>Desription</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.description}}" #description>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>City</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.city}}" #city>
+        <mat-form-field appearance="fill" class="main-field">
+            <mat-label>Average grade</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.averageGrade}}" #averageGrade>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Zip code</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.zipcode}}" #zipcode>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Country</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.country}}" #country>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Longitude</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.longitude}}" #longitude>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="field">
-            <mat-label>Latitude</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.latitude}}" #latitude>
-        </mat-form-field>
-    </div>
-    <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Desription</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.description}}" #description>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Average grade</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.averageGrade}}" #averageGrade>
-    </mat-form-field>
-</form>
-<div class="example-button-row">
-    <button mat-raised-button (click)="editClick()">Edit</button>
-    <button mat-raised-button (click)="okClick(name.value, street.value, number.value, city.value, zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="editClick()">Edit</button>
+            <button mat-raised-button (click)="okClick(name.value, street.value, number.value, city.value, zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
+        </div>
+    </form>
 </div>
+
+

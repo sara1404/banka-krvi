@@ -9,14 +9,21 @@ import { RegisterBloodbankComponent } from './views/register-bloodbank/register-
 import { UsersComponent } from './views/users/users.component';
 import { DisplayBloodBanksComponent } from './views/blood-banks-display/blood-banks-display.component';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
+import { AdminInfoComponent } from './admin-profile/admin-info/admin-info.component';
+import { BloodbankInfoComponent } from './admin-profile/bloodbank-info/bloodbank-info.component';
+import { OtherAdminsComponent } from './admin-profile/other-admins/other-admins.component';
+import { FreeAppointmentsComponent } from './admin-profile/free-appointments/free-appointments.component';
 
 const routes: Routes = [
-  {path: 'admin/profile', component:AdminProfileComponent},
+  {path: 'admin/profile', component:AdminInfoComponent},
+  {path: 'bloodbank/info', component:BloodbankInfoComponent},
   {path: 'register/admin', component: RegisterAdminComponent},
   {path: 'register/bloodbank', component: RegisterBloodbankComponent},
   {path: 'users', component: UsersComponent},
   {path: 'bloodBanks', component: DisplayBloodBanksComponent},
-  {path: 'userProfile', component: UserProfileComponent}
+  {path: 'userProfile', component: UserProfileComponent},
+  {path: 'other/admins', component:OtherAdminsComponent},
+  {path: 'free/appointments', component:FreeAppointmentsComponent}
 ];
 
 @NgModule({
