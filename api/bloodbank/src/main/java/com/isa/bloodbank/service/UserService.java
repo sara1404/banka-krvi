@@ -32,7 +32,7 @@ public class UserService {
 	}
 
 	public List<User> search(final String name, final String lastName) {
-		final List<User> users = userRepository.getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType.REGISTERED, name, lastName);
+		final List<User> users = userRepository.getUsersByFirstNameContainsAndLastNameContains(name, lastName);
 		return users;
 	}
 

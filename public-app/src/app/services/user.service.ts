@@ -16,7 +16,7 @@ export class UserService {
   }
 
   getRegisteredUserProfile() : IUser{
-    return this.user; 
+    return this.user;
     //return this.http.get<IUser>('');
   }
 
@@ -24,4 +24,12 @@ export class UserService {
     var headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.put<IUser>(`http://localhost:8080/user/update/`, JSON.stringify(user), {headers : headers});
   }
+  search(value:string): Observable<IUser[]>{
+    let firstName = value.split(',')[0]?.trim() === undefined ? "" : value.split(',')[0]?.trim()
+    let lastName = value.split(',')[1]?.trim() === undefined ? "" : value.split(',')[1]?.trim()
+    let users = this.http.get<IUser[]>(`http://localhost:8080/user/search?name=${firstName}&surname=${lastName}`)
+    console.log(firstName, lastName)
+    return users
+  }
+
 }
