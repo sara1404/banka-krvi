@@ -36,6 +36,7 @@ export class BloodbankInfoComponent implements OnInit {
   )
   {
     const updatedAddress: IAddress={
+      id: this.bloodBank.address.id,
       street: street,
       number: Number(number),
       city: city,
