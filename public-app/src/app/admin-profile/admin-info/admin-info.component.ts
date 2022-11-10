@@ -14,7 +14,8 @@ export class AdminInfoComponent implements OnInit {
   constructor(private adminInfoService: AdminInfoService) { }
 
   user: IUser;
-  public bloodTypes: string[] = ['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 'O_POSITIVE', 'O_NEGATIVE'];
+  public bloodTypes: string[] = ['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 
+  'O_POSITIVE', 'O_NEGATIVE'];
 
   public isDisabled: boolean = true;
   complete: boolean = true;

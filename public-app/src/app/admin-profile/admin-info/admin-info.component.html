@@ -40,7 +40,8 @@
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
     </mat-form-field>
     <div class="error" *ngIf="!okBloodType">
-        Possible blood types: A_POSITIVE, A_NEGATIVE, B_POSITIVE, B_NEGATIVE, AB_POSITIVE, AB_NEGATIVE, 0_POSITIVE, 0_NEGATIVE
+        Possible blood types: A_POSITIVE, A_NEGATIVE, B_POSITIVE, B_NEGATIVE, AB_POSITIVE, AB_NEGATIVE, 0_POSITIVE, 
+        0_NEGATIVE
     </div>
     <div class="error" *ngIf="!complete">
         You must fill all fields
@@ -48,5 +49,6 @@
 </form>
 <div class="example-button-row">
         <button mat-raised-button (click)="editClick()">Edit</button>
-        <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, email.value, password.value, bloodType.value)">Save</button>
+        <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, 
+        email.value, password.value, bloodType.value)">Save</button>
 </div>
