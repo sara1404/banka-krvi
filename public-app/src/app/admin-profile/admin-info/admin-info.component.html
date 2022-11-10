@@ -2,30 +2,51 @@
     <h1 class="title">Personal informations</h1>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Name</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.firstName}}" #firstName>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.firstName}}" #firstName>
     </mat-form-field>
+    <div class="error" *ngIf="!okName">
+        Name must start with uppercase
+    </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Surname</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.lastName}}" #lastName>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.lastName}}" #lastName>
     </mat-form-field>
+    <div class="error" *ngIf="!okSurname">
+        Surname must start with uppercase
+    </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>JMBG</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.jmbg}}" pattern="^[0-9]+\.[0-9][0-9]$" #jmbg>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.jmbg}}" #jmbg>
     </mat-form-field>
+    <div class="error" *ngIf="!okJMBG">
+        You must enter correct jmbg format
+    </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>email</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.email}}" #email>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.email}}" #email>
     </mat-form-field>
+    <div class="error" *ngIf="!okEmail">
+        You must enter valid email
+    </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Password</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.password}}" #password>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.password}}" #password>
     </mat-form-field>
+    <div class="error" *ngIf="!okPassword">
+        Password must be 6 characters long
+    </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Blood type</mat-label>
-        <input class="input" matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
     </mat-form-field>
+    <div class="error" *ngIf="!okBloodType">
+        Possible blood types: A_POSITIVE, A_NEGATIVE, B_POSITIVE, B_NEGATIVE, AB_POSITIVE, AB_NEGATIVE, 0_POSITIVE, 0_NEGATIVE
+    </div>
+    <div class="error" *ngIf="!complete">
+        You must fill all fields
+    </div>
 </form>
 <div class="example-button-row">
-    <button mat-raised-button (click)="editClick()">Edit</button>
-    <button mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, email.value, password.value, bloodType.value)">Save</button>
+        <button mat-raised-button (click)="editClick()">Edit</button>
+        <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, email.value, password.value, bloodType.value)">Save</button>
 </div>

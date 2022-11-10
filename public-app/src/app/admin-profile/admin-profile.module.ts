@@ -10,6 +10,7 @@ import { OtherAdminsComponent } from './other-admins/other-admins.component';
 import { AdminInfoComponent } from './admin-info/admin-info.component';
 import { FreeAppointmentsComponent } from './free-appointments/free-appointments.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -27,7 +28,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ]
 })
 export class AdminProfileModule { }
