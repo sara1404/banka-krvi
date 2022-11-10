@@ -32,4 +32,8 @@ export class UserService {
     return users
   }
 
+  registerAdmin(user: any) : Observable<IUser>{
+    return this.http.post<IUser>(`http://localhost:8080/user/register/admin`, user)
+  }
+
 }

@@ -1,5 +1,7 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.RegisterUserDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.UserService;
 
@@ -35,12 +37,12 @@ public class UserController {
     }
 
     @PostMapping("/register/admin")
-    public ResponseEntity<User> registerCenterAdmin(@RequestBody final User centerAdmin) {
+    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
         return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<User>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
+    public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
         return ResponseEntity.ok(userService.search(name, lastName));
     }
 
