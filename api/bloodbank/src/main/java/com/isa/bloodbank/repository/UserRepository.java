@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	List<User> getUsersByFirstNameContainsAndLastNameContains(String firstName, String lastName);
 
+	List<User> getUsersByUserTypeAndBloodBankIsNull(UserType type);
+
 }

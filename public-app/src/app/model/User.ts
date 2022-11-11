@@ -7,6 +7,6 @@ export interface IUser{
   jmbg: number,
   email: string,
   bloodType: string,
-  bloodBank: IBloodBank
+  bloodBank: IBloodBank,
 }
 

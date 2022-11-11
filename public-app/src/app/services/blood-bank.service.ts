@@ -23,4 +23,8 @@ export class BloodBankService {
       );
   }
 
+  registerBloodbank(bloodbank: any){
+    return this.http.post<IBloodBank>(`http://localhost:8080/bloodbank/register`, bloodbank)
+  }
+
 }

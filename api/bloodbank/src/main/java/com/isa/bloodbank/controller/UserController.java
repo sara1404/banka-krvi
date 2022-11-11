@@ -38,6 +38,7 @@ public class UserController {
 
     @PostMapping("/register/admin")
     public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
+        System.out.println(centerAdmin + "e");
         return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
     }
 
@@ -57,7 +58,12 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAll() {
+    public ResponseEntity<List<UserDto>> getAll() {
         return ResponseEntity.ok(userService.getAll());
+    }
+
+    @GetMapping("/center-admins")
+    public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
+        return ResponseEntity.ok(userService.getAvailableCenterAdmins());
     }
 }

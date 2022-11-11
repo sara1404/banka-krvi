@@ -34,9 +34,13 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Bloodbank</mat-label>
-      <mat-select formControlName="bloodBank">
+      <mat-select formControlName="bloodBankName">
         <mat-option value="{{bloodbank.name}}" *ngFor="let bloodbank of bloodbanks">{{bloodbank.name}}</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput required>
     </mat-form-field>
     <input (click)="registerAdmin()" type="submit" value="REGISTER" class="form-field submit-btn">
   </form>
