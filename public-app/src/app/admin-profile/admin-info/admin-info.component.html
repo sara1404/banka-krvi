@@ -35,9 +35,26 @@
     <div class="error" *ngIf="!okPassword">
         Password must be 6 characters long
     </div>
+    <!--
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Blood type</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
+    </mat-form-field>
+    -->
+    <mat-form-field class="option" appearance="fill" class="main-field">
+        <mat-label>Blood type</mat-label>
+        <mat-select class="option" floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
+          <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
+          <mat-option value="A_NEGATIVE">A_NEGATIVE</mat-option>
+          <mat-option value="B_POSITIVE">B_POSITIVE</mat-option>
+          <mat-option value="B_NEGATIVE">B_NEGATIVE</mat-option>
+          <mat-option value="AB_POSITIVE">AB_POSITIVE</mat-option>
+          <mat-option value="AB_NEGATIVE">AB_NEGATIVE</mat-option>
+          <mat-option value="0_POSITIVE">0_POSITIVE</mat-option>
+          <mat-option value="0_NEGATIVE">0_NEGATIVE</mat-option>
+          <mat-option value="HH_POSITIVE">HH_POSITIVE</mat-option>
+          <mat-option value="HH_NEGATIVE">HH_NEGATIVE</mat-option>
+        </mat-select>
     </mat-form-field>
     <div class="error" *ngIf="!okBloodType">
         Possible blood types: A_POSITIVE, A_NEGATIVE, B_POSITIVE, B_NEGATIVE, AB_POSITIVE, AB_NEGATIVE, 0_POSITIVE, 
