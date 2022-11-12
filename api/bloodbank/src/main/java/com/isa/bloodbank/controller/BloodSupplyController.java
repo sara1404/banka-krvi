@@ -18,7 +18,7 @@ public class BloodSupplyController {
 	@Autowired
 	private BloodSupplyService bloodSupplyService;
 
-	@GetMapping("/bloodbank/{bloodBankId}/")
+	@GetMapping("/bloodbank/{bloodBankId}")
 	public ResponseEntity<List<BloodSupply>> findById(@PathVariable("bloodBankId") final Long bloodBankId) {
 		return ResponseEntity.ok(bloodSupplyService.findByBloodBankId(bloodBankId));
 	}

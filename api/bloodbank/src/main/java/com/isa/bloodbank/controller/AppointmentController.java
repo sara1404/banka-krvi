@@ -17,7 +17,7 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-	@GetMapping("/available/") //{bloodBankId}/, @PathVariable("bloodBankId") final Long bloodBankId
+	@GetMapping("/available") //{bloodBankId}/, @PathVariable("bloodBankId") final Long bloodBankId
 	public ResponseEntity<List<Appointment>> findById() {
 		final Long bloodBankId = (long) 5;
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(bloodBankId));

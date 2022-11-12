@@ -41,9 +41,9 @@
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.bloodType}}" #bloodType>
     </mat-form-field>
     -->
-    <mat-form-field class="option" appearance="fill" class="main-field">
+    <mat-form-field appearance="fill" class="main-field">
         <mat-label>Blood type</mat-label>
-        <mat-select class="option" floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
+        <mat-select floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
           <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
           <mat-option value="A_NEGATIVE">A_NEGATIVE</mat-option>
           <mat-option value="B_POSITIVE">B_POSITIVE</mat-option>

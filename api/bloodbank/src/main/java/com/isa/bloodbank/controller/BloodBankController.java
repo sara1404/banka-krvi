@@ -25,13 +25,13 @@ public class BloodBankController {
 	@Autowired
 	private BloodBankService bloodBankService;
 
-	@GetMapping(/*"/{id}/"*/"/administrator/")
+	@GetMapping(/*"/{id}/"*/"/administrator")
 	public ResponseEntity<BloodBank> findForAdministrator(/*@PathVariable("id") final Long id*/) {
 		final Long bloodBankId = (long) 5; //zakucano
 		return ResponseEntity.ok(bloodBankService.findById(bloodBankId));
 	}
 
-	@PutMapping("/update/")
+	@PutMapping("/update")
 	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBank bloodBank) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBank));
 	}
