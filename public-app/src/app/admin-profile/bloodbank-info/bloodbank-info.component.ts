@@ -17,6 +17,7 @@ export class BloodbankInfoComponent implements OnInit {
   public isDisabled: boolean = true;
   complete: boolean = true;
   showSave: boolean = false;
+  showEdit: boolean = true;
   okName: boolean = true;
   okStreet: boolean = true;
   okNumber: boolean = true;
@@ -101,6 +102,7 @@ export class BloodbankInfoComponent implements OnInit {
   {
     this.isDisabled = false;
     this.showSave = true;
+    this.showEdit = false;
   }
   okClick(
     name: string,
@@ -137,6 +139,8 @@ export class BloodbankInfoComponent implements OnInit {
     }
     this.adminInfoService.editBloodBank(updatedBloodBank).subscribe(data=>{this.bloodBank = data;});
     this.isDisabled = true;
+    this.showEdit = true;
+    this.showSave = false;
   }
 
 }

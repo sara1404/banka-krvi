@@ -20,6 +20,7 @@ export class AdminInfoComponent implements OnInit {
   public isDisabled: boolean = true;
   complete: boolean = true;
   showSave: boolean = false;
+  showEdit: boolean = true;
   public okName: boolean = true;
   public okSurname: boolean = true;
   public okEmail: boolean = true;
@@ -83,6 +84,7 @@ export class AdminInfoComponent implements OnInit {
   {
     this.isDisabled = false;
     this.showSave = true;
+    this.showEdit = false;
   }
   okClick(
     firstName: string,
@@ -109,6 +111,8 @@ export class AdminInfoComponent implements OnInit {
     };
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;
+    this.showSave = false;
+    this.showEdit = true;
   }
 
 }

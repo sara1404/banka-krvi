@@ -72,7 +72,7 @@
         </div>
     </form>
     <div class="example-button-row">
-        <button mat-raised-button (click)="editClick()">Edit</button>
+        <button mat-raised-button *ngIf="showEdit" (click)="editClick()">Edit</button>
         <button mat-raised-button *ngIf="showSave" (click)="okClick(name.value, street.value, number.value, city.value, 
         zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
     </div>
