@@ -48,13 +48,13 @@ public class UserController {
     }
 
     @GetMapping("/loggedInUser/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
+    public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(userService.findById(id));
     }
 
     @PutMapping("/update/")
-    private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
-        return ResponseEntity.ok(userService.update(user));
+    private ResponseEntity<User> updateUser(@Valid @RequestBody final UserDto userDto) {
+        return ResponseEntity.ok(userService.update(userDto));
     }
 
     @GetMapping("/users")

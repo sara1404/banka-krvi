@@ -19,8 +19,8 @@ public class BloodBankService {
 	@Autowired
 	private BloodBankMapper bloodBankMapper;
 
-	public List<BloodBank> findAll() {
-		return bloodBankRepository.findAll();
+	public List<BloodBankDto> findAll() {
+		return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBankRepository.findAll());
 	}
 
 	public BloodBank findById(final Long id) {
@@ -37,12 +37,12 @@ public class BloodBankService {
 		return bloodBankRepository.save(bloodBank);
 	}
 
-	public List<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade) {
+	public List<BloodBankDto> searchAndFilter(final String name, final String city, final double averageGrade) {
 		final List<BloodBank> bloodBanks = search(name, city);
 		if (averageGrade != 0) {
-			return filter(bloodBanks, averageGrade);
+			return bloodBankMapper.bloodBanksToBloodBankDtos(filter(bloodBanks, averageGrade));
 		} else {
-			return bloodBanks;
+			return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBanks);
 		}
 	}
 

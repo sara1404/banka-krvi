@@ -28,12 +28,12 @@ public class BloodBankController {
 		return ResponseEntity.ok(bloodBankService.update(bloodBank));
 	}
 	@GetMapping("/findAll")
-	public ResponseEntity<List<BloodBank>> findAll() {
+	public ResponseEntity<List<BloodBankDto>> findAll() {
 		return ResponseEntity.ok(bloodBankService.findAll());
 	}
 
 	@GetMapping("/searchAndFilter")
-	public ResponseEntity<List<BloodBank>> searchAndFilter(@RequestParam final String name, @RequestParam final String city,
+	public ResponseEntity<List<BloodBankDto>> searchAndFilter(@RequestParam final String name, @RequestParam final String city,
 		@RequestParam final double averageGrade) {
 		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade));
 	}

@@ -50,11 +50,12 @@ public class UserService {
 		return userMapper.usersToUserDtos(userRepository.findAll());
 	}
 
-	public User findById(Long id) {
-		return userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
+	public UserDto findById(Long id) {
+		return userMapper.userToUserDto(userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 
-	public User update(User user) {
+	public User update(UserDto userDto) {
+		User user = userMapper.userDtoToUser(userDto);
 		findById(user.getId());
 		return userRepository.save(user);
 	}
