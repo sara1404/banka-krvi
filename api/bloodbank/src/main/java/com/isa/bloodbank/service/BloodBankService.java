@@ -1,7 +1,9 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.repository.BloodBankRepository;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class BloodBankService {
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private BloodBankMapper bloodBankMapper;
 
 	public List<BloodBank> findAll() {
 		return bloodBankRepository.findAll();
@@ -64,8 +68,8 @@ public class BloodBankService {
 		return filteredBloodBanks;
 	}
 
-	public BloodBank registerBloodBank(final BloodBank bloodBank) {
-		return bloodBankRepository.save(bloodBank);
+	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
+		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));
 	}
 
 }

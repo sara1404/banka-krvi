@@ -4,30 +4,52 @@
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Name</mat-label>
       <input matInput required formControlName="name">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter name
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Description</mat-label>
       <input matInput required formControlName="description">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter description
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Ulica</mat-label>
       <input matInput required formControlName="street">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter street
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Broj</mat-label>
       <input matInput required formControlName="number">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter street number
+      </mat-error>
+
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Grad</mat-label>
       <input matInput required formControlName="city">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter city
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Postanski broj</mat-label>
       <input matInput required formControlName="zipcode">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter zipcode
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Drzava</mat-label>
       <input matInput required formControlName="country">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter country
+      </mat-error>
     </mat-form-field>
     <input (click)="registerBloodbank()" type="submit" value="REGISTER" class="form-field submit-btn">
   </form>

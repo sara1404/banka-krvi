@@ -12,9 +12,10 @@ import { UsersModule } from './views/users/users.module';
 import { MaterialModule } from './material/material.module';
 import { RegisterAdminModule } from './views/register-admin/register-admin.module';
 import { RegisterBloodbankModule } from './views/register-bloodbank/register-bloodbank.module';
-
 import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
 import { UserProfileModule } from './views/user-profile/user-profile.module';
+
+import {ToastrModule} from "ngx-toastr"
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import { UserProfileModule } from './views/user-profile/user-profile.module';
     UsersModule,
     UserProfileModule,
     RegisterAdminModule,
-    RegisterBloodbankModule
+    RegisterBloodbankModule,
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right"
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

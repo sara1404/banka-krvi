@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.service.BloodBankService;
 
@@ -38,7 +39,7 @@ public class BloodBankController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<BloodBank> register(@RequestBody final BloodBank bloodBank) {
+	public ResponseEntity<BloodBankDto> register(@RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
 	}
 
