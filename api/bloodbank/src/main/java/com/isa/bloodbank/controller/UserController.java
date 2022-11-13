@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok(userService.search(name, lastName));
     }
 
-    @GetMapping("/{id}/")
+    @GetMapping("/loggedInUser/{id}")
     public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(userService.findById(id));
     }
@@ -58,4 +58,5 @@ public class UserController {
     public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.ok(userService.getAll());
     }
+
 }

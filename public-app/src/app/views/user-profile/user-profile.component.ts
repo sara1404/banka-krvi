@@ -14,8 +14,7 @@ export class UserProfileComponent implements OnInit {
   public isDisabled : boolean = true;
   public user : IUser
   ngOnInit(): void {
-    //this.userService.getRegisteredUserProfile().subscribe((data) => (this.user = data));
-    this.user = this.userService.getRegisteredUserProfile();
+    this.userService.getLoggedInUserProfile().subscribe((data) => (this.user = data));
   }
 
   okClick(firstName: string, lastName: string, jbmgString: string, bloodType: string, email: string){
