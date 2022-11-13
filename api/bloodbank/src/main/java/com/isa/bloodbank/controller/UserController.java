@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok(userService.search(name, lastName));
     }
 
-    @GetMapping("/{id}/")
+    @GetMapping("/loggedInUser/{id}")
     public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(userService.findById(id));
     }
