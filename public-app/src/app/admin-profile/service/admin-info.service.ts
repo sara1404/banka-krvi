@@ -42,6 +42,6 @@ export class AdminInfoService {
 
   getBloodSupplies():Observable<IBloodSupply[]>{
     //popravi da ne bude 5!!!
-    return this.http.get<IBloodSupply[]>('http://localhost:8080/bloodsupply/bloodbank/5');
+    return this.http.get<IBloodSupply[]>('http://localhost:8080/bloodsupply/bloodbank');
   }
 }

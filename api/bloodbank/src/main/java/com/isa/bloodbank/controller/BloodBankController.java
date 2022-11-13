@@ -1,7 +1,9 @@
 package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.entity.BloodBank;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.BloodBankService;
+import com.isa.bloodbank.service.UserService;
 
 import java.util.List;
 
@@ -24,11 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BloodBankController {
 	@Autowired
 	private BloodBankService bloodBankService;
+	@Autowired
+	private UserService userService;
 
 	@GetMapping(/*"/{id}/"*/"/administrator")
 	public ResponseEntity<BloodBank> findForAdministrator(/*@PathVariable("id") final Long id*/) {
-		final Long bloodBankId = (long) 5; //zakucano
-		return ResponseEntity.ok(bloodBankService.findById(bloodBankId));
+		final Long administratorId = (long) (3);
+		User user = userService.findById(administratorId);
+		return ResponseEntity.ok(bloodBankService.findById(user.getBloodBank().getId()));
 	}
 
 	@PutMapping("/update")
