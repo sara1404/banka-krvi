@@ -1,5 +1,7 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.RegisterUserDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.UserService;
 
@@ -24,25 +26,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@GetMapping("/bloodBankId") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
-	public ResponseEntity<List<User>> findByAdministratorId() {
-		final Long administratorId = (long) (3);
-		final Long bloodBankId = (long) 5;
-		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
-	}
+    @GetMapping("/bloodBankId") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
+    public ResponseEntity<List<User>> findByAdministratorId() {
+        final Long administratorId = (long) (3);
+        final Long bloodBankId = (long) 5;
+        return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
+    }
 
-	@PostMapping("/register/admin")
-	public ResponseEntity<User> registerCenterAdmin(@RequestBody final User centerAdmin) {
-		return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
-	}
+    @PostMapping("/register/admin")
+    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
+        System.out.println(centerAdmin + "e");
+        return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
+    }
 
-	@GetMapping("/search")
-	public ResponseEntity<List<User>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
-		return ResponseEntity.ok(userService.search(name, lastName));
-	}
+    @GetMapping("/search")
+    public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
+        return ResponseEntity.ok(userService.search(name, lastName));
+    }
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
@@ -54,9 +58,14 @@ public class UserController {
 		return ResponseEntity.ok(userService.update(user));
 	}
 
-	@GetMapping("/users")
-	public ResponseEntity<List<User>> getAll() {
-		return ResponseEntity.ok(userService.getAll());
-	}
-}
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDto>> getAll() {
+        return ResponseEntity.ok(userService.getAll());
+    }
 
+
+    @GetMapping("/center-admins")
+    public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
+        return ResponseEntity.ok(userService.getAvailableCenterAdmins());
+    }
+}

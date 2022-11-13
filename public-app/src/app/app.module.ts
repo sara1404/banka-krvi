@@ -11,9 +11,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
 import { RegisterAdminComponent } from './views/register-admin/register-admin.component';
 import { UsersModule } from './views/users/users.module';
-import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { MaterialModule } from './material/material.module';
 import { BloodSuppliesComponent } from './admin-profile/blood-supplies/blood-supplies.component';
+import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
+
+
+import { RegisterAdminModule } from './views/register-admin/register-admin.module';
+import { RegisterBloodbankModule } from './views/register-bloodbank/register-bloodbank.module';
 
 import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
 import { UserProfileModule } from './views/user-profile/user-profile.module';
@@ -21,8 +25,6 @@ import { UserProfileModule } from './views/user-profile/user-profile.module';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterAdminComponent,
-    RegisterBloodbankComponent,
     BloodSuppliesComponent
   ],
   imports: [
@@ -38,7 +40,9 @@ import { UserProfileModule } from './views/user-profile/user-profile.module';
     ComponentsModule,
     MaterialModule,
     UsersModule,
-    UserProfileModule
+    UserProfileModule,
+    RegisterAdminModule,
+    RegisterBloodbankModule
   ],
   providers: [],
   bootstrap: [AppComponent]
