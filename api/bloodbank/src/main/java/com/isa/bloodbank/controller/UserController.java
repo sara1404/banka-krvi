@@ -62,8 +62,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll());
     }
 
+<<<<<<< HEAD
     @GetMapping("/center-admins")
     public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
         return ResponseEntity.ok(userService.getAvailableCenterAdmins());
     }
+=======
+>>>>>>> e5b721df7f5926bc2e3cefbeaf05bf009d1949dc
 }
