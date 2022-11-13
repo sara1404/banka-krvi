@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IAdministrator } from '../model/Administrator';
+import { IFreeAppointment } from '../model/FreeAppointment';
 import { IAppointment } from '../model/Appointment';
 import { IBloodBank } from '../model/BloodBank';
 import { IBloodSupply } from '../model/BloodSupply';
@@ -31,13 +33,13 @@ export class AdminInfoService {
     return this.http.put<IBloodBank>('http://localhost:8080/bloodbank/update', bloodBank);
   }
 
-  getOtherAdministrators(): Observable<IUser[]>{
+  getOtherAdministrators(): Observable<IAdministrator[]>{
     //zakucano na 5 jer ce se preuzimati iz logovanog korisnika
-    return this.http.get<IUser[]>('http://localhost:8080/user/bloodBankId')
+    return this.http.get<IAdministrator[]>('http://localhost:8080/user/bloodBankId')
   }
 
-  getAvailableAppointments():Observable<IAppointment[]>{
-    return this.http.get<IAppointment[]>('http://localhost:8080/appointment/available');
+  getAvailableAppointments():Observable<IFreeAppointment[]>{
+    return this.http.get<IFreeAppointment[]>('http://localhost:8080/appointment/available');
   };
 
   getBloodSupplies():Observable<IBloodSupply[]>{

@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AdministratorDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -30,9 +31,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/bloodBankId") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
-    public ResponseEntity<List<User>> findByAdministratorId() {
+    public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
         final Long administratorId = (long) (3);
-        final Long bloodBankId = (long) 5;
+        Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
         return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
     }
 

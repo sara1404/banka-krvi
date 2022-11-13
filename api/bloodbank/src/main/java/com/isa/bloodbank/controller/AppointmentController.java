@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.AppointmentService;
@@ -22,7 +23,7 @@ public class AppointmentController {
 	private UserService userService;
 
 	@GetMapping("/available") //{bloodBankId}/, @PathVariable("bloodBankId") final Long bloodBankId
-	public ResponseEntity<List<Appointment>> findById() {
+	public ResponseEntity<List<FreeAppointmentDto>> findById() {
 		final Long administratorId = (long) (3);
 		User user = userService.findById(administratorId);
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(user.getBloodBank().getId()));

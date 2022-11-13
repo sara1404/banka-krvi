@@ -1,5 +1,6 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.AdministratorDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -25,14 +26,15 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public List<User> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
+	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
 		for (final User user : userRepository.findByBloodBankId(bloodBankId)) {
 			if (user.getId() != administratorId) {
 				bloodBanks.add(user);
 			}
 		}
-		return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
+		return userMapper.usersToAdministratorDtos(bloodBanks);
+		//return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
 	}
 
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {

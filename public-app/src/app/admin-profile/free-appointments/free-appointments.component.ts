@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAppointment } from '../model/Appointment';
+import { IFreeAppointment } from '../model/FreeAppointment';
 import { AdminInfoService } from '../service/admin-info.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class FreeAppointmentsComponent implements OnInit {
   constructor(private adminInfoService: AdminInfoService) { }
 
   displayedColumns: string[] = ["start", "end"]
-  availableAppointments: IAppointment[];
+  availableAppointments: IFreeAppointment[];
   ngOnInit(): void {
     this.adminInfoService.getAvailableAppointments().subscribe(data=>this.availableAppointments=data);
   }

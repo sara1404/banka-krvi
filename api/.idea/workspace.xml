@@ -100,15 +100,6 @@
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java</url>
-          <line>16</line>
-          <properties class="com.isa.bloodbank.repository.UserRepository" method="getUsersByUserTypeAndFirstNameContainsAndLastNameContains">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
