@@ -23,29 +23,36 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService, private toastService: ToastService) { }
 
-  public isDisabled : boolean = true;
-  public user : IUser = {firstName:'', lastName: '', jmbg : 0, email: '', bloodType: '', bloodBank: null, id: 0};
   userProfileForm = new FormGroup({
-    firstName : new FormControl({value : this.user.firstName, disabled: true}, [Validators.required]),
-    lastName: new FormControl({value : this.user.lastName, disabled: true}, [Validators.required]),
-    jmbg: new FormControl({value : this.user.jmbg, disabled: true}, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-    bloodType: new FormControl({value : this.user.bloodType, disabled: true}, [Validators.required]),
-    email: new FormControl({value: this.user.email, disabled: true}, [Validators.required, Validators.email]),
+    id : new FormControl({}),
+    firstName : new FormControl({value : null, disabled: true}, [Validators.required]),
+    lastName: new FormControl({value : null, disabled: true}, [Validators.required]),
+    jmbg: new FormControl({value : null, disabled: true}, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(13), Validators.maxLength(13)]),
+    bloodType: new FormControl({value : null, disabled: true}, [Validators.required]),
+    email: new FormControl({value: null, disabled: true}, [Validators.required, Validators.email]),
+    bloodBank : new FormControl({}),
   })
 
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    this.userService.getLoggedInUserProfile().subscribe((data) => (this.user = data));
+    this.userService.getLoggedInUserProfile().subscribe((data) => {
+      this.userProfileForm.patchValue({
+          id : data.id,
+          firstName : data.firstName,
+          lastName : data.lastName,
+          jmbg : data.jmbg,
+          bloodType : data.bloodType,
+          email : data.email,
+          bloodBank : data.bloodBank 
+      })
+    });
   }
 
-  saveClick(e : Event, firstName: string, lastName: string, jbmgString: string, bloodType: string, email: string){
+  saveClick(e : Event){
     e.preventDefault();
-    var jmbg = parseInt(jbmgString);
-    this.user = {id: this.user.id, firstName: firstName, lastName: lastName, jmbg: jmbg, email: email, bloodType: bloodType, bloodBank: this.user.bloodBank};
-    this.userService.updateUserProfile(this.user).subscribe({
+    this.userService.updateUserProfile(this.userProfileForm.getRawValue()).subscribe({
       next: (res) => {
-        this.user = res;
         this.toastService.showSuccess("Successfuly updated")
       },
       error: (e) => {
