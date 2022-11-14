@@ -3,6 +3,7 @@ com\isa\bloodbank\mapping\UserMapperImpl.class
 com\isa\bloodbank\controller\UserController.class
 com\isa\bloodbank\entity\enums\BloodType.class
 com\isa\bloodbank\entity\Appointment.class
+com\isa\bloodbank\entity\enums\Gender.class
 com\isa\bloodbank\entity\enums\UserType.class
 com\isa\bloodbank\service\UserService.class
 com\isa\bloodbank\controller\AuthController.class
