@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get<IUser>('http://localhost:8080/user/loggedInUser/' + 1);
   }
 
-  updateUserProfile(user: IUser) : Observable<IUser> {
+  updateUserProfile(user: any) : Observable<IUser> {
     var headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.put<IUser>(`http://localhost:8080/user/update/`, JSON.stringify(user), {headers : headers});
   }
