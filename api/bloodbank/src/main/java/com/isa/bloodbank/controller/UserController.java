@@ -30,7 +30,7 @@ public class UserController {
 
 	@PostMapping("/register/admin")
 	public ResponseEntity<User> registerCenterAdmin(@RequestBody final User centerAdmin) {
-		return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
+		return ResponseEntity.ok(userService.registerUser(centerAdmin));
 	}
 
 	@GetMapping("/search")
@@ -39,7 +39,7 @@ public class UserController {
 	}
 
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> getAll(){
+	public ResponseEntity<List<User>> getAll() {
 		return ResponseEntity.ok(userService.getAll());
 	}
 }

@@ -52,7 +52,17 @@ public class User extends BaseEntity {
 	String password;
 	@Column
 	boolean firstLogged;
-	@ManyToOne()
+
+	@Column
+	String phoneNumber;
+	@Column
+	String gender;
+	@Column
+	String workplaceName;
+	@Column
+	String jobTitle;
+
+	@ManyToOne
 	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
 	BloodBank bloodBank;
 
