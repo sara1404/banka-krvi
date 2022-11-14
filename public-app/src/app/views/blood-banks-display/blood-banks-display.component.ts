@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IBloodBank } from '../../model/BloodBankk';
 import { BloodBankService } from '../../services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './blood-banks-display.component.html',
   styleUrls: ['./blood-banks-display.component.scss']
 })
-export class DisplayBloodBanksComponent {
+export class DisplayBloodBanksComponent implements OnInit {
   constructor(
     private bloodBankService: BloodBankService,
   ) {}

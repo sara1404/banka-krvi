@@ -4,10 +4,8 @@
   <mat-form-field appearance="fill" class="form-field">
       <mat-label>First Name</mat-label>
       <input matInput formControlName="firstName"
-      value="{{user.firstName}}"
       required
       [errorStateMatcher]="matcher"
-      #name
       >
       <mat-error *ngIf="!userProfileForm.hasError('required')">
         Please enter first name
@@ -16,9 +14,7 @@
   <mat-form-field appearance="fill" class="form-field">
       <mat-label>Last name</mat-label>
       <input matInput formControlName="lastName"
-      value="{{user.lastName}}"
       required
-      #surname
       [errorStateMatcher]="matcher"
       >
       <mat-error *ngIf="!userProfileForm.hasError('required')">
@@ -28,9 +24,9 @@
   <mat-form-field appearance="fill" class="form-field">
       <mat-label>JMBG</mat-label>
       <input matInput formControlName="jmbg"
-      value="{{user.jmbg}}"
       required
       #jmbg
+      [errorStateMatcher]="matcher"
       >
       <mat-error *ngIf="!userProfileForm.hasError('required')">
         Please enter valid jmbg
@@ -38,7 +34,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill" class="form-field">
       <mat-label>Blood type</mat-label>
-      <mat-select floatLabel="never" value="{{user.bloodType}}" #bloodType formControlName="bloodType">
+      <mat-select floatLabel="never" formControlName="bloodType">
         <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
         <mat-option value="A_NEGATIVE">A_NEGATIVE</mat-option>
         <mat-option value="B_POSITIVE">B_POSITIVE</mat-option>
@@ -54,13 +50,11 @@
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>email</mat-label>
     <input matInput formControlName="email"
-    value="{{user.email}}"
-    #email
     >
 </mat-form-field>
 <div class="buttons">
 <input type="button" mat-raised-button (click)="editClick()" value="Edit" class="form-field edit-button">
-<input (click)="saveClick($event, name.value, surname.value, jmbg.value, bloodType.value, email.value)" type="submit" value="Save" class="form-field submit-btn">
+<input (click)="saveClick($event)" type="submit" value="Save" class="form-field submit-btn" [disabled]="!userProfileForm.valid">
 </div>
 </form>
 </div>
