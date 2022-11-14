@@ -6,12 +6,14 @@ C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Appointment.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\GlobalErrorHandler.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\UserMapper.java
+C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\UserDto.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodBankService.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodBank.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\BloodType.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\BloodbankApplication.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AuthController.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
+C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\BloodBankDto.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\config\SecurityConfig.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodBankRepository.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\LoginDto.java
@@ -20,6 +22,7 @@ C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\BaseException.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\UserController.java
+C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\BloodBankMapper.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\RegisterUserDto.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BaseEntity.java
 C:\Users\rruzi\Desktop\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\User.java

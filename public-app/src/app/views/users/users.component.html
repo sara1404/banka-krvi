@@ -1,11 +1,11 @@
-<div>
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
+<div class="wrapper">
+  <form class="form">
+    <mat-form-field class="search" appearance="fill">
       <mat-label>Search</mat-label>
-      <textarea matInput placeholder="Name,Surname"></textarea>
+      <input matInput placeholder="Name,Surname" (keydown.enter)="search($event)">
     </mat-form-field>
   </form>
   <div class="users-wrapper">
-    <app-user></app-user>
+    <app-user *ngFor="let user of users" [user]="user"></app-user>
   </div>
 </div>

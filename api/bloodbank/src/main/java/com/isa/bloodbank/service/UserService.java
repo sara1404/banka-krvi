@@ -1,7 +1,12 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.RegisterUserDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.UserType;
+import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mapping.UserMapper;
+import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -20,6 +25,10 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private UserMapper userMapper;
 
 	public List<User> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
@@ -30,7 +39,6 @@ public class UserService implements UserDetailsService {
 		}
 		return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
 	}
-
 	public boolean checkIfEmailAlreadyInUse(final String email) {
 		return userRepository.findByEmail(email) != null;
 	}
@@ -38,14 +46,37 @@ public class UserService implements UserDetailsService {
 	public User registerUser(final User user) {
 		return userRepository.save(user);
 	}
+	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
+		centerAdmin.setUserType(UserType.ADMIN_CENTER);
+		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
+		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
+	}
 
-	public List<User> search(final String name, final String lastName) {
-		final List<User> users = userRepository.getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType.REGISTERED, name, lastName);
-		return users;
+	public List<UserDto> search(final String name, final String lastName) {
+		final List<User> users = userRepository.getUsersByFirstNameContainsAndLastNameContains(name, lastName);
+		return userMapper.usersToUserDtos(users);
 	}
 
 	public List<User> getAll() {
 		return userRepository.findAll();
+	}
+
+	public List<UserDto> getAllDto(){
+		return userMapper.usersToUserDtos(userRepository.findAll());
+	}
+
+	public UserDto findById(Long id) {
+		return userMapper.userToUserDto(userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
+	}
+
+	public User update(UserDto userDto) {
+		User user = userMapper.userDtoToUser(userDto);
+		findById(user.getId());
+		return userRepository.save(user);
+	}
+
+	public List<UserDto> getAvailableCenterAdmins(){
+		return userMapper.usersToUserDtos(userRepository.getUsersByUserTypeAndBloodBankIsNull(UserType.ADMIN_CENTER));
 	}
 
 	public User findByEmail(String email){

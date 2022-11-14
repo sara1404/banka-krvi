@@ -6,12 +6,16 @@ com\isa\bloodbank\entity\Appointment.class
 com\isa\bloodbank\entity\enums\UserType.class
 com\isa\bloodbank\service\UserService.class
 com\isa\bloodbank\controller\AuthController.class
+com\isa\bloodbank\dto\BloodBankDto.class
 com\isa\bloodbank\controller\BloodBankController.class
 com\isa\bloodbank\dto\RegisterUserDto.class
 com\isa\bloodbank\repository\BloodBankRepository.class
 com\isa\bloodbank\dto\LoginDto.class
+com\isa\bloodbank\mapping\BloodBankMapper.class
 com\isa\bloodbank\mapping\UserMapper.class
+com\isa\bloodbank\mapping\BloodBankMapperImpl.class
 com\isa\bloodbank\exception\GlobalErrorHandler.class
+com\isa\bloodbank\dto\UserDto.class
 com\isa\bloodbank\entity\AppointmentInfo.class
 com\isa\bloodbank\service\BloodBankService.class
 com\isa\bloodbank\exception\StandardErrorResponse.class

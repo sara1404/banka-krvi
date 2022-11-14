@@ -1,7 +1,9 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.repository.BloodBankRepository;
 
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Service;
 public class BloodBankService {
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private BloodBankMapper bloodBankMapper;
 
-	public List<BloodBank> findAll() {
-		return bloodBankRepository.findAll();
+	public List<BloodBankDto> findAll() {
+		return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBankRepository.findAll());
 	}
 
 	public BloodBank findById(final Long id) {
@@ -33,12 +37,12 @@ public class BloodBankService {
 		return bloodBankRepository.save(bloodBank);
 	}
 
-	public List<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade) {
+	public List<BloodBankDto> searchAndFilter(final String name, final String city, final double averageGrade) {
 		final List<BloodBank> bloodBanks = search(name, city);
 		if (averageGrade != 0) {
-			return filter(bloodBanks, averageGrade);
+			return bloodBankMapper.bloodBanksToBloodBankDtos(filter(bloodBanks, averageGrade));
 		} else {
-			return bloodBanks;
+			return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBanks);
 		}
 	}
 
@@ -64,8 +68,8 @@ public class BloodBankService {
 		return filteredBloodBanks;
 	}
 
-	public BloodBank registerBloodBank(final BloodBank bloodBank) {
-		return bloodBankRepository.save(bloodBank);
+	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
+		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));
 	}
 
 }
