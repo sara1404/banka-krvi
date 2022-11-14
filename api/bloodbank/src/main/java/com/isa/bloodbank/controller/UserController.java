@@ -52,7 +52,8 @@ public class UserController {
     }
 
     @PutMapping("/update/")
-    private ResponseEntity<User> updateUser(@Valid @RequestBody final UserDto userDto) {
+    private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
+        System.out.println(userDto);
         return ResponseEntity.ok(userService.update(userDto));
     }
 
