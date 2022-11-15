@@ -79,6 +79,11 @@ public class UserService implements UserDetailsService {
 		findById(user.getId());
 		return userRepository.save(user);
 	}
+
+	public User updateUser(User user) {
+		findById(user.getId());
+		return userRepository.save(user);
+	}
 	public List<UserDto> getAvailableCenterAdmins(){
 		return userMapper.usersToUserDtos(userRepository.getUsersByUserTypeAndBloodBankIsNull(UserType.ADMIN_CENTER));
 	}

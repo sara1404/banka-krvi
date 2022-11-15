@@ -54,10 +54,10 @@ public class UserController {
 		return ResponseEntity.ok(userService.findUserById(id));
 	}
 
-	//@PutMapping("/update")
-	//private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
-		//return ResponseEntity.ok(userService.update(user));
-	//}
+	@PutMapping("/update")
+	private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
+		return ResponseEntity.ok(userService.updateUser(user));
+	}
 
     @GetMapping("/loggedInUser/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {

@@ -17,6 +17,7 @@ export class AdminInfoComponent implements OnInit {
   user: IUser;
   public bloodTypes: string[] = ['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 
   'O_POSITIVE', 'O_NEGATIVE'];
+  gender: number = 0;
 
   public isDisabled: boolean = true;
   complete: boolean = true;
@@ -36,6 +37,7 @@ export class AdminInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminInfoService.getUser(3).subscribe(data=>{this.user = data;});
+    this.gender = this.user.gender;
   }
 
   validate(
@@ -143,13 +145,18 @@ export class AdminInfoComponent implements OnInit {
       phoneNumber: Number(phoneNumber),
       address: updatedAddress,
       workplaceName: workplaceName,
-      jobTitle: jobTitle
+      jobTitle: jobTitle,
+      gender: this.gender
     };
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;
     this.showSave = false;
     this.showEdit = true;
   }
+
+  onGenderChange(entry): void {
+    this.gender = entry;
+}
 
 }
 

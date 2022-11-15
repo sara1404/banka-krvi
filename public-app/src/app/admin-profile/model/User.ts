@@ -14,5 +14,6 @@ export interface IUser{
     phoneNumber: number,
     address: IAddress,
     jobTitle: string,
-    workplaceName: string
+    workplaceName: string,
+    gender: number
 }
