@@ -22,7 +22,7 @@ export class AdminInfoService {
 
   editUser(user: IUser)
   {
-    return this.http.put<IUser>('http://localhost:8080/user/update', user);
+    return this.http.put<IUser>('http://localhost:8080/user/update/', user);
   }
   
   getBloodBank():Observable<IBloodBank>{
