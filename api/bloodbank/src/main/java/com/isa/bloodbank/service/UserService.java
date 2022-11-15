@@ -101,4 +101,6 @@ public class UserService implements UserDetailsService {
 		UserDetails userDetails = org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).authorities(user.getUserType().toString()).build();
 		return userDetails;
 	}
+
+	//public boolean ChangePassword()
 }

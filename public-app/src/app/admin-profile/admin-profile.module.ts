@@ -11,6 +11,7 @@ import { AdminInfoComponent } from './admin-info/admin-info.component';
 import { FreeAppointmentsComponent } from './free-appointments/free-appointments.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -20,7 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
     BloodbankInfoComponent,
     OtherAdminsComponent,
     AdminInfoComponent,
-    FreeAppointmentsComponent
+    FreeAppointmentsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
