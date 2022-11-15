@@ -26,7 +26,7 @@ public class BloodSupplyController {
 	@GetMapping("/bloodbank") ///{bloodBankId} @PathVariable("bloodBankId") final Long bloodBankId
 	public ResponseEntity<List<BloodSupplyDto>> findById() {
 		final Long administratorId = (long) (3);
-		User user = userService.findById(administratorId);
+		User user = userService.findUserById(administratorId);
 		return ResponseEntity.ok(bloodSupplyService.findByBloodBankId(user.getBloodBank().getId()));
 	}
 

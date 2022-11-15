@@ -1,3 +1,4 @@
+import { IAddress } from "./Address";
 import { IBloodBank } from "./BloodBankk";
 
 export interface IUser{
@@ -8,5 +9,10 @@ export interface IUser{
   email: string,
   bloodType: string,
   bloodBank: IBloodBank,
+  phoneNumber: string,
+  gender: string,
+  workplaceName: string,
+  jobTitle: string,
+  address: IAddress
 }
 

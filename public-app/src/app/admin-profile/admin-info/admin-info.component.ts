@@ -27,6 +27,11 @@ export class AdminInfoComponent implements OnInit {
   public okJMBG: boolean = true;
   public okPassword: boolean = true;
   public okBloodType: boolean = true;
+  okStreet: boolean = true;
+  okNumber: boolean = true;
+  okCity: boolean = true;
+  okZipcode: boolean = true;
+  okCountry: boolean = true;
 
   ngOnInit(): void {
     this.adminInfoService.getUser(3).subscribe(data=>{this.user = data;});
@@ -38,9 +43,15 @@ export class AdminInfoComponent implements OnInit {
     jmbg: string,
     email: string,
     password: string,
-    bloodType: string):
+    bloodType: string,
+    street: string,
+    number: string,
+    city: string,
+    zipcode: string,
+    country: string):
     boolean{
-    if(firstName == "" || lastName =="" || email=="" || password =="" || bloodType == "" || jmbg==""){
+    if(firstName == "" || lastName =="" || email=="" || password =="" || bloodType == "" || jmbg==""
+    || street=="" || number=="" ||city=="" || zipcode == "" || country == ""){
       this.complete = false;
     }else{
       this.complete = true;
@@ -92,10 +103,16 @@ export class AdminInfoComponent implements OnInit {
     jmbg: string,
     email: string,
     password: string,
-    bloodType: string
+    bloodType: string,
+    phoneNumber: string,
+    street: string,
+    number: string,
+    city: string,
+    zipcode: string,
+    country: string
   )
   {
-    if(!this.validate(firstName, lastName, jmbg, email, password, bloodType)){
+    if(!this.validate(firstName, lastName, jmbg, email, password, bloodType, street, number, city, zipcode, country)){
       return;
     }
     const updatedProfile: IUser = {
@@ -107,7 +124,9 @@ export class AdminInfoComponent implements OnInit {
       password: password,
       bloodType: bloodType,
       bloodBank:this.user.bloodBank,
-      jmbg: Number(jmbg)
+      jmbg: Number(jmbg),
+      phoneNumber: Number(phoneNumber),
+      address: this.user.address
     };
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;

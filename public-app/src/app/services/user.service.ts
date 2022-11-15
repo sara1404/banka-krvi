@@ -10,17 +10,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  user : IUser = {id: 1,firstName: "ana", lastName: "vulin", jmbg: 123, bloodBank: null, bloodType: "A_POSITIVE", email : "vulinana@gmail.com"};
   getUsers(): Observable<IUser[]>{
     return this.http.get<IUser[]>(`http://localhost:8080/user/users`)
   }
 
-  getRegisteredUserProfile() : IUser{
-    return this.user;
-    //return this.http.get<IUser>('');
+  getLoggedInUserProfile() : Observable<IUser> {
+    return this.http.get<IUser>('http://localhost:8080/user/loggedInUser/' + 1);
   }
 
-  updateUserProfile(user: IUser) : Observable<IUser> {
+  updateUserProfile(user: any) : Observable<IUser> {
     var headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.put<IUser>(`http://localhost:8080/user/update/`, JSON.stringify(user), {headers : headers});
   }

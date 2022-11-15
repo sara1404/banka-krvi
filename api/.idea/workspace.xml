@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="" />
+    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/BloodBankDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/BloodBankMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/services/toast.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/RegisterUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/components.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/material/material.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/material/material.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/model/BloodBankk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/model/BloodBankk.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/model/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/model/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/services/blood-bank.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/services/blood-bank.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/blood-banks-display.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/blood-banks-display.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/search-blood-banks/search-blood-banks.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/search-blood-banks/search-blood-banks.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/styles.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,12 +63,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -38,24 +102,85 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/normalno/FTN/godina_4/zimski/isa-projekat-2/banka-krvi/api&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
-  }
-}</component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bloodbank" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunManager" selected="Application.BloodbankApplication">
+    <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
       <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Maven" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="compile" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/bloodbank" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="BloodbankApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="bloodbank" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.isa.bloodbank.BloodbankApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.BloodbankApplication" />
+      <item itemvalue="Maven.Maven" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BloodbankApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -71,6 +196,7 @@
       <workItem from="1667238889617" duration="1376000" />
       <workItem from="1667675844291" duration="4852000" />
       <workItem from="1667731233021" duration="9350000" />
+      <workItem from="1667747812958" duration="5495000" />
     </task>
     <servers />
   </component>
@@ -87,20 +213,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java</url>
-          <line>30</line>
-          <properties class="com.isa.bloodbank.service.BloodBankService" method="update">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

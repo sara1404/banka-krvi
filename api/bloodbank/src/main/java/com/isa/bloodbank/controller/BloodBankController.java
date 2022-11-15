@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.BloodBankService;
@@ -32,7 +33,7 @@ public class BloodBankController {
 	@GetMapping(/*"/{id}/"*/"/administrator")
 	public ResponseEntity<BloodBank> findForAdministrator(/*@PathVariable("id") final Long id*/) {
 		final Long administratorId = (long) (3);
-		User user = userService.findById(administratorId);
+		User user = userService.findUserById(administratorId);
 		return ResponseEntity.ok(bloodBankService.findById(user.getBloodBank().getId()));
 	}
 
@@ -42,18 +43,18 @@ public class BloodBankController {
 	}
 
 	@GetMapping("/findAll")
-	public ResponseEntity<List<BloodBank>> findAll() {
+	public ResponseEntity<List<BloodBankDto>> findAll() {
 		return ResponseEntity.ok(bloodBankService.findAll());
 	}
 
 	@GetMapping("/searchAndFilter")
-	public ResponseEntity<List<BloodBank>> searchAndFilter(@RequestParam final String name, @RequestParam final String city,
+	public ResponseEntity<List<BloodBankDto>> searchAndFilter(@RequestParam final String name, @RequestParam final String city,
 		@RequestParam final double averageGrade) {
 		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade));
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<BloodBank> register(@RequestBody final BloodBank bloodBank) {
+	public ResponseEntity<BloodBankDto> register(@RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
 	}
 

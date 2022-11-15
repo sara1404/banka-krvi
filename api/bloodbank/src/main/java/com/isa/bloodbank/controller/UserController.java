@@ -36,7 +36,6 @@ public class UserController {
         Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
         return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
     }
-
     @PostMapping("/register/admin")
     public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
         System.out.println(centerAdmin + "e");
@@ -49,19 +48,32 @@ public class UserController {
     }
 
 
+
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findById(id));
+	public ResponseEntity<User> findUserById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findUserById(id));
 	}
 
-	@PutMapping("/update")
-	private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
-		return ResponseEntity.ok(userService.update(user));
-	}
+	//@PutMapping("/update")
+	//private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
+		//return ResponseEntity.ok(userService.update(user));
+	//}
+
+    @GetMapping("/loggedInUser/{id}")
+    public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
+        return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @PutMapping("/update/")
+    private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
+        System.out.println(userDto);
+        return ResponseEntity.ok(userService.update(userDto));
+    }
+
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAll() {
-        return ResponseEntity.ok(userService.getAll());
+        return ResponseEntity.ok(userService.getAllDto());
     }
 
 
@@ -69,4 +81,5 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
         return ResponseEntity.ok(userService.getAvailableCenterAdmins());
     }
+
 }

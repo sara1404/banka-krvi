@@ -1,4 +1,5 @@
 com\isa\bloodbank\exception\BaseException.class
+<<<<<<< HEAD
 com\isa\bloodbank\service\BloodSupplyService.class
 com\isa\bloodbank\repository\AppointmentRepository.class
 com\isa\bloodbank\controller\AppointmentController.class
@@ -13,6 +14,26 @@ com\isa\bloodbank\repository\BloodBankRepository.class
 com\isa\bloodbank\controller\BloodSupplyController.class
 com\isa\bloodbank\exception\GlobalErrorHandler.class
 com\isa\bloodbank\repository\BloodSupplyRepository.class
+=======
+com\isa\bloodbank\mapping\UserMapperImpl.class
+com\isa\bloodbank\controller\UserController.class
+com\isa\bloodbank\entity\enums\BloodType.class
+com\isa\bloodbank\entity\Appointment.class
+com\isa\bloodbank\entity\enums\Gender.class
+com\isa\bloodbank\entity\enums\UserType.class
+com\isa\bloodbank\service\UserService.class
+com\isa\bloodbank\controller\AuthController.class
+com\isa\bloodbank\dto\BloodBankDto.class
+com\isa\bloodbank\controller\BloodBankController.class
+com\isa\bloodbank\dto\RegisterUserDto.class
+com\isa\bloodbank\repository\BloodBankRepository.class
+com\isa\bloodbank\dto\LoginDto.class
+com\isa\bloodbank\mapping\BloodBankMapper.class
+com\isa\bloodbank\mapping\UserMapper.class
+com\isa\bloodbank\mapping\BloodBankMapperImpl.class
+com\isa\bloodbank\exception\GlobalErrorHandler.class
+com\isa\bloodbank\dto\UserDto.class
+>>>>>>> develop
 com\isa\bloodbank\entity\AppointmentInfo.class
 com\isa\bloodbank\service\BloodBankService.class
 com\isa\bloodbank\exception\StandardErrorResponse.class
@@ -24,4 +45,8 @@ com\isa\bloodbank\repository\UserRepository.class
 com\isa\bloodbank\entity\BloodBank.class
 com\isa\bloodbank\BloodbankApplication.class
 com\isa\bloodbank\BloodbankApplication$1.class
+<<<<<<< HEAD
+=======
+com\isa\bloodbank\config\SecurityConfig.class
+>>>>>>> develop
 com\isa\bloodbank\entity\BloodSupply.class

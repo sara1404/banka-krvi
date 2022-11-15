@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByBloodBankId(Long bloodBankId);
 
+	User findByEmail(String email);
+
 	User save(User administrator);
 
 	List<User> getUsersByUserTypeAndFirstNameContainsAndLastNameContains(UserType type, String firstName, String lastName);

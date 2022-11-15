@@ -24,3 +24,4 @@ public interface UserMapper{
 	List<AdministratorDto> usersToAdministratorDtos(List<User> users);
 	List<User> administratorDtosToUsers(List<AdministratorDto> users);
 }
+

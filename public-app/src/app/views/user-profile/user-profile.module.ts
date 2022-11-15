@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { UserProfileComponent } from './user-profile.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,9 @@ import { UserProfileComponent } from './user-profile.component';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserProfileModule { }

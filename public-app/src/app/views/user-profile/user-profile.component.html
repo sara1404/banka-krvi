@@ -1,29 +1,121 @@
-<form>
+<div class="form-wrapper">
+<form class="user-profile-form" [formGroup]="userProfileForm">
   <h1 class="title">Personal informations</h1>
-  <mat-form-field appearance="fill" class="main-field">
-      <mat-label>Name</mat-label>
-      <input matInput [disabled]="isDisabled"
-      value="{{user.firstName}}"
-      #name
+  <mat-form-field appearance="fill" class="form-field">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName"
+      required
+      [errorStateMatcher]="matcher"
       >
+      <mat-error *ngIf="!userProfileForm.hasError('required')">
+        Please enter first name
+      </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="main-field">
-      <mat-label>Surname</mat-label>
-      <input matInput [disabled]="isDisabled"
-      value="{{user.lastName}}"
-      #surname
+  <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName"
+      required
+      [errorStateMatcher]="matcher"
       >
+      <mat-error *ngIf="!userProfileForm.hasError('required')">
+        Please enter last name
+      </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="main-field">
+  <mat-form-field appearance="fill" class="form-field">
       <mat-label>JMBG</mat-label>
-      <input matInput [disabled]="isDisabled"
-      value="{{user.jmbg}}"
-      #jmbg
+      <input matInput formControlName="jmbg"
+      required
+      [errorStateMatcher]="matcher"
       >
+      <mat-error *ngIf="!userProfileForm.hasError('required')">
+        Please enter valid jmbg
+      </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="main-field">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber"
+    required
+    [errorStateMatcher]="matcher"
+    >
+    <mat-error *ngIf="!userProfileForm.hasError('required')">
+      Please enter valid phone number
+    </mat-error>
+</mat-form-field>
+<div formGroupName="address" class="address">
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Street</mat-label>
+  <input matInput formControlName="street"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter street
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Number</mat-label>
+  <input matInput formControlName="number"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter number
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>City</mat-label>
+  <input matInput formControlName="city"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter city
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Zipcode</mat-label>
+  <input matInput formControlName="zipcode"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter zipcode
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Country</mat-label>
+  <input matInput formControlName="country"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter country
+  </mat-error>
+</mat-form-field>
+</div>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Job title</mat-label>
+  <input matInput formControlName="jobTitle"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Please enter job title
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Workplace</mat-label>
+  <input matInput formControlName="workplaceName"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Please enter work place
+  </mat-error>
+</mat-form-field>
+  <mat-form-field appearance="fill" class="form-field">
       <mat-label>Blood type</mat-label>
-      <mat-select floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
+      <mat-select floatLabel="never" formControlName="bloodType">
         <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
         <mat-option value="A_NEGATIVE">A_NEGATIVE</mat-option>
         <mat-option value="B_POSITIVE">B_POSITIVE</mat-option>
@@ -36,16 +128,25 @@
         <mat-option value="HH_NEGATIVE">HH_NEGATIVE</mat-option>
       </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="main-field">
+  <mat-form-field appearance="fill" class="form-field">
     <mat-label>email</mat-label>
-    <input matInput [disabled]="true"
-    value="{{user.email}}"
-    #email
+    <input matInput formControlName="email"
     >
 </mat-form-field>
+<div class="gender">
+  <label class="male">
+    <input type="radio" value="MALE" formControlName="gender">
+      <span>MALE</span>
+  </label>
+  <label class="female">
+    <input type="radio" value="FEMALE" formControlName="gender">
+      <span>FEMALE</span>
+  </label>
+</div>
+<div class="buttons">
+<input type="button" mat-raised-button (click)="editClick()" value="Edit" class="form-field edit-button">
+<input (click)="saveClick($event)" type="submit" value="Save" class="form-field submit-btn" [disabled]="!userProfileForm.valid">
+</div>
 </form>
-<div class="example-button-row">
-    <button mat-raised-button (click)="editClick()">Edit</button>
-    <button mat-raised-button (click)="okClick(name.value, surname.value, jmbg.value, bloodType.value, email.value)">Save</button>
 </div>
 
