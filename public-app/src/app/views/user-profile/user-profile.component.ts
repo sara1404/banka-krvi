@@ -28,6 +28,20 @@ export class UserProfileComponent implements OnInit {
     firstName : new FormControl({value : null, disabled: true}, [Validators.required]),
     lastName: new FormControl({value : null, disabled: true}, [Validators.required]),
     jmbg: new FormControl({value : null, disabled: true}, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(13), Validators.maxLength(13)]),
+    phoneNumber: new FormControl({value: null, disabled: true}, [Validators.required, Validators.pattern("^[0-9]{10}$")]),
+    gender: new FormControl({value: null, disabled: true}, [Validators.required]),
+    jobTitle: new FormControl({value: null, disabled: true}, [Validators.required]),
+    workplaceName: new FormControl({value: null, disabled: true}),
+    address: new FormGroup({
+      id: new FormControl({}),
+      street : new FormControl({value : null, disabled: true}, [Validators.required]),
+      number : new FormControl({value : null, disabled : true}, [Validators.required]),
+      city : new FormControl({value : null, disabled : true}, [Validators.required]),
+      zipcode : new FormControl({value : null, disabled : true}, [Validators.required]),
+      country : new FormControl({value : null, disabled : true}, [Validators.required]),
+      longitude: new FormControl({}),
+      latitude: new FormControl({})
+    }),
     bloodType: new FormControl({value : null, disabled: true}, [Validators.required]),
     email: new FormControl({value: null, disabled: true}, [Validators.required, Validators.email]),
     bloodBank : new FormControl({}),
@@ -36,17 +50,9 @@ export class UserProfileComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    this.userService.getLoggedInUserProfile().subscribe((data) => {
-      this.userProfileForm.patchValue({
-          id : data.id,
-          firstName : data.firstName,
-          lastName : data.lastName,
-          jmbg : data.jmbg,
-          bloodType : data.bloodType,
-          email : data.email,
-          bloodBank : data.bloodBank 
-      })
-    });
+    this.userService.getLoggedInUserProfile().subscribe((data) => 
+      this.userProfileForm.patchValue(data)
+    );
   }
 
   saveClick(e : Event){
@@ -64,6 +70,11 @@ export class UserProfileComponent implements OnInit {
     this.userProfileForm.controls['lastName'].disable();
     this.userProfileForm.controls['jmbg'].disable();
     this.userProfileForm.controls['bloodType'].disable();
+    this.userProfileForm.controls['phoneNumber'].disable();
+    this.userProfileForm.controls['jobTitle'].disable();
+    this.userProfileForm.controls['workplaceName'].disable();
+    this.userProfileForm.controls['gender'].disable();
+    this.userProfileForm.controls['address'].disable();
   }
 
   editClick(){
@@ -71,6 +82,11 @@ export class UserProfileComponent implements OnInit {
     this.userProfileForm.controls['lastName'].enable();
     this.userProfileForm.controls['jmbg'].enable();
     this.userProfileForm.controls['bloodType'].enable();
+    this.userProfileForm.controls['phoneNumber'].enable();
+    this.userProfileForm.controls['jobTitle'].enable();
+    this.userProfileForm.controls['workplaceName'].enable();
+    this.userProfileForm.controls['gender'].enable();
+    this.userProfileForm.controls['address'].enable();
   }
 
 }

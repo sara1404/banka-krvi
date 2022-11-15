@@ -25,13 +25,94 @@
       <mat-label>JMBG</mat-label>
       <input matInput formControlName="jmbg"
       required
-      #jmbg
       [errorStateMatcher]="matcher"
       >
       <mat-error *ngIf="!userProfileForm.hasError('required')">
         Please enter valid jmbg
       </mat-error>
   </mat-form-field>
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber"
+    required
+    [errorStateMatcher]="matcher"
+    >
+    <mat-error *ngIf="!userProfileForm.hasError('required')">
+      Please enter valid phone number
+    </mat-error>
+</mat-form-field>
+<div formGroupName="address" class="address">
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Street</mat-label>
+  <input matInput formControlName="street"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter street
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Number</mat-label>
+  <input matInput formControlName="number"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter number
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>City</mat-label>
+  <input matInput formControlName="city"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter city
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Zipcode</mat-label>
+  <input matInput formControlName="zipcode"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter zipcode
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="address-field">
+  <mat-label>Country</mat-label>
+  <input matInput formControlName="country"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Enter country
+  </mat-error>
+</mat-form-field>
+</div>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Job title</mat-label>
+  <input matInput formControlName="jobTitle"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Please enter job title
+  </mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Workplace</mat-label>
+  <input matInput formControlName="workplaceName"
+  required
+  [errorStateMatcher]="matcher"
+  >
+  <mat-error *ngIf="!userProfileForm.hasError('required')">
+    Please enter work place
+  </mat-error>
+</mat-form-field>
   <mat-form-field appearance="fill" class="form-field">
       <mat-label>Blood type</mat-label>
       <mat-select floatLabel="never" formControlName="bloodType">
@@ -52,6 +133,16 @@
     <input matInput formControlName="email"
     >
 </mat-form-field>
+<div class="gender">
+  <label class="male">
+    <input type="radio" value="MALE" formControlName="gender">
+      <span>MALE</span>
+  </label>
+  <label class="female">
+    <input type="radio" value="FEMALE" formControlName="gender">
+      <span>FEMALE</span>
+  </label>
+</div>
 <div class="buttons">
 <input type="button" mat-raised-button (click)="editClick()" value="Edit" class="form-field edit-button">
 <input (click)="saveClick($event)" type="submit" value="Save" class="form-field submit-btn" [disabled]="!userProfileForm.valid">

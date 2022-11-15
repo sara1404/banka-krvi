@@ -48,11 +48,11 @@ public class BloodBankService {
 
 	private List<BloodBank> search(final String name, final String city) {
 		if (!name.equals("") && !city.equals("")) {
-			return bloodBankRepository.findAllByNameContainingAndAddressId_CityContaining(name, city);
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(name, city);
 		} else if (!name.equals("")) {
-			return bloodBankRepository.findByNameContaining(name);
+			return bloodBankRepository.findByNameContainingIgnoreCase(name);
 		} else if (!city.equals("")) {
-			return bloodBankRepository.findAllByAddressId_CityContaining(city);
+			return bloodBankRepository.findByAddressId_CityContainingIgnoreCase(city);
 		} else {
 			return bloodBankRepository.findAll();
 		}

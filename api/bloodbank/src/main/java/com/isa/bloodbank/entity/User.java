@@ -1,6 +1,7 @@
 package com.isa.bloodbank.entity;
 
 import com.isa.bloodbank.entity.enums.BloodType;
+import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -58,7 +60,7 @@ public class User extends BaseEntity {
 	@Column
 	String phoneNumber;
 	@Column
-	String gender;
+	Gender gender;
 	@Column
 	String workplaceName;
 	@Column

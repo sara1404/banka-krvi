@@ -19,13 +19,26 @@
   
       .title{
         justify-content: center;
-        margin-bottom: 2em;
+        margin-top: 170px;
+        margin-bottom: 20px;
         font-size: 1.6rem;
         user-select: none;
       }
 
+      .genders{
+        display: flex;
+      }
+
+      .male{
+        margin-right: 10px;
+      }
+
+      .female{
+        margin-left: 10px;
+      }
       .buttons{
         display: flex;
+        margin-top: 10px;
       }
   
       .submit-btn{
@@ -57,5 +70,15 @@
       .edit-button:hover{
         background-color: rgb(3, 116, 3);
       }
+
+      .address{
+        width: 80%;
+        display: flex;
+      }
+
+      .address-field {
+        width: 100px;
+      }
+
     }
   }

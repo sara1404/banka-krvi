@@ -12,6 +12,7 @@ export interface IUser{
   bloodType: string,
   bloodBank: IBloodBank,
   phoneNumber: string,
-  gender: string
+  gender: string,
+  workplaceName: string,
+  jobTitle: string
 }
-
