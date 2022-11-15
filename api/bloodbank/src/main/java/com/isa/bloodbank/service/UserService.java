@@ -40,7 +40,6 @@ public class UserService implements UserDetailsService {
 			}
 		}
 		return userMapper.usersToAdministratorDtos(bloodBanks);
-		//return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
 	}
 	public boolean checkIfEmailAlreadyInUse(final String email) {
 		return userRepository.findByEmail(email) != null;
@@ -77,11 +76,6 @@ public class UserService implements UserDetailsService {
 	}
 	public User update(UserDto userDto) {
 		User user = userMapper.userDtoToUser(userDto);
-		findById(user.getId());
-		return userRepository.save(user);
-	}
-
-	public User updateUser(User user) {
 		findById(user.getId());
 		return userRepository.save(user);
 	}

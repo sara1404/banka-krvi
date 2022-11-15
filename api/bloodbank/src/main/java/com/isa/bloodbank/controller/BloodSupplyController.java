@@ -23,7 +23,7 @@ public class BloodSupplyController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/bloodbank") ///{bloodBankId} @PathVariable("bloodBankId") final Long bloodBankId
+	@GetMapping("/bloodbank")
 	public ResponseEntity<List<BloodSupplyDto>> findById() {
 		final Long administratorId = (long) (3);
 		User user = userService.findUserById(administratorId);

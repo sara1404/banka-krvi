@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/bloodBankId") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
+    @GetMapping("/bloodBankId")
     public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
         final Long administratorId = (long) (3);
         Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
@@ -52,10 +52,6 @@ public class UserController {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
-	@PutMapping("/update")
-	private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
-		return ResponseEntity.ok(userService.updateUser(user));
-	}
 
     @GetMapping("/loggedInUser/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {

@@ -23,7 +23,7 @@ public class AppointmentController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/available") //{bloodBankId}/, @PathVariable("bloodBankId") final Long bloodBankId
+	@GetMapping("/available")
 	public ResponseEntity<List<FreeAppointmentDto>> findById() {
 		final Long administratorId = (long) (3);
 		User user = userService.findUserById(administratorId);

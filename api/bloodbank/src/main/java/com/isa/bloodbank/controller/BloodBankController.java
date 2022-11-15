@@ -33,7 +33,7 @@ public class BloodBankController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(/*"/{id}/"*/"/administrator")
+	@GetMapping("/administrator")
 	public ResponseEntity<BloodBankDto> findForAdministrator(/*@PathVariable("id") final Long id*/) {
 		final Long administratorId = (long) (3);
 		User user = userService.findUserById(administratorId);
