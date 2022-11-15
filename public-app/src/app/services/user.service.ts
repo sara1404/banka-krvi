@@ -34,6 +34,10 @@ export class UserService {
     return this.http.post<IUser>(`http://localhost:8080/user/register/admin`, user)
   }
 
+  registerUser(user: IUser) : Observable<IUser>{
+    return this.http.post<IUser>(`http://localhost:8080/auth/register`, user)
+  }
+
   getAvailableCenterAdmins(): Observable<IUser[]>{
     return this.http.get<IUser[]>(`http://localhost:8080/user/center-admins`)
   }

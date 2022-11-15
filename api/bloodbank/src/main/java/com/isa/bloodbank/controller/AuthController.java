@@ -5,12 +5,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.isa.bloodbank.dto.LoginDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.enums.UserType;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.service.UserService;
 
-import java.security.interfaces.RSAPublicKey;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
@@ -18,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +41,9 @@ public class AuthController {
 		if (userService.checkIfEmailAlreadyInUse(user.getEmail())) {
 			return ResponseEntity.badRequest().build();
 		}
-		final var registeredUser = userService.registerUser(userMapper.registerUserDtoToUser(user));
+		var userEntity = userMapper.registerUserDtoToUser(user);
+		userEntity.setUserType(UserType.REGISTERED);
+		final var registeredUser = userService.registerUser(userEntity);
 		if (registeredUser != null) {
 			return ResponseEntity.ok(registeredUser);
 		}

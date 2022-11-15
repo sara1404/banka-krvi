@@ -4,7 +4,15 @@ import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -57,13 +65,12 @@ public class User extends BaseEntity {
 	String workplaceName;
 	@Column
 	String jobTitle;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	Address address;
 
 	@ManyToOne
 	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
 	BloodBank bloodBank;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
-	Address address;
 
 }

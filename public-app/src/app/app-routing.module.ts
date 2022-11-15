@@ -15,12 +15,15 @@ import { OtherAdminsComponent } from './admin-profile/other-admins/other-admins.
 import { FreeAppointmentsComponent } from './admin-profile/free-appointments/free-appointments.component';
 import { BloodSuppliesComponent } from './admin-profile/blood-supplies/blood-supplies.component';
 import { ChangePasswordComponent } from './admin-profile/change-password/change-password.component';
+import { RegisterUserComponent } from './views/register-user/register-user/register-user.component';
+
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminInfoComponent},
   {path: 'bloodbank/info', component:BloodbankInfoComponent},
   {path: 'register/admin', component: RegisterAdminComponent},
   {path: 'register/bloodbank', component: RegisterBloodbankComponent},
+  {path: 'register/user', component: RegisterUserComponent},
   {path: 'users', component: UsersComponent},
   {path: 'bloodBanks', component: DisplayBloodBanksComponent},
   {path: 'userProfile', component: UserProfileComponent},
