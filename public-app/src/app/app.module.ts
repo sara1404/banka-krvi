@@ -16,6 +16,7 @@ import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-d
 import { UserProfileModule } from './views/user-profile/user-profile.module';
 
 import {ToastrModule} from "ngx-toastr"
+import { RegisterUserModule } from './views/register-user/register-user.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {ToastrModule} from "ngx-toastr"
     UserProfileModule,
     RegisterAdminModule,
     RegisterBloodbankModule,
+    RegisterUserModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     })

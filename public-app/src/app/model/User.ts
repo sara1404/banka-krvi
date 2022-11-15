@@ -5,6 +5,8 @@ export interface IUser{
   id: number;
   firstName: string,
   lastName: string,
+  password: string,
+  address: IAddress
   jmbg: number,
   email: string,
   bloodType: string,
@@ -12,7 +14,5 @@ export interface IUser{
   phoneNumber: string,
   gender: string,
   workplaceName: string,
-  jobTitle: string,
-  address: IAddress
+  jobTitle: string
 }
-
