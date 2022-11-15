@@ -2,9 +2,9 @@
 <app-search-blood-banks (bloodBanks)="onSearch($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)" [averageGrade]="averageGrade"></app-search-blood-banks>
 <app-filter-blood-banks (bloodBanks)="onSearch($event)" (averageGrade)="saveAverageGrade($event)" [name]="name" [city]="city"></app-filter-blood-banks>
 <div class="table">
-<mat-table #table [dataSource]="bloodBanks">
+<mat-table #table [dataSource]="bloodBanks" matSort>
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
       <mat-cell *matCellDef="let item">{{item.name}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="street">
@@ -16,7 +16,7 @@
         <mat-cell *matCellDef="let item">{{item.address.number}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="city">
-        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
         <mat-cell *matCellDef="let item">{{item.address.city}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="zipcode">
@@ -28,7 +28,7 @@
         <mat-cell *matCellDef="let item">{{item.address.country}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="averageGrade">
-        <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Average grade</mat-header-cell>
         <mat-cell *matCellDef="let item">{{item.averageGrade}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
