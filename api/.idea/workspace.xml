@@ -165,4 +165,19 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/UserService.java</url>
+          <line>105</line>
+          <properties class="com.isa.bloodbank.service.UserService" method="changePassword">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>

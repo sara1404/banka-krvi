@@ -1,6 +1,7 @@
 package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -67,7 +68,6 @@ public class UserController {
         return ResponseEntity.ok(userService.update(userDto));
     }
 
-
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAll() {
         return ResponseEntity.ok(userService.getAllDto());
@@ -79,4 +79,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getAvailableCenterAdmins());
     }
 
+    @PutMapping("/change-password")
+    public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto){
+        final Long administratorId = (long) (3);
+        User user = userService.findUserById(administratorId);
+        return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
+    }
 }

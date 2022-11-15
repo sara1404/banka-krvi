@@ -1,6 +1,7 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -102,5 +103,14 @@ public class UserService implements UserDetailsService {
 		return userDetails;
 	}
 
-	//public boolean ChangePassword()
+	public boolean changePassword(User user, PasswordChangeDto passwordChangeDto){
+		//treba provera i da je prvi put logovan
+		if(!user.getPassword().equals(passwordChangeDto.getOldPassword()))
+		{
+			return false;
+		}
+		user.setPassword(passwordChangeDto.getNewPassword());
+		userRepository.save(user);
+		return true;
+	}
 }
