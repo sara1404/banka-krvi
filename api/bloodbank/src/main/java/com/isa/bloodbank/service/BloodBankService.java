@@ -32,7 +32,8 @@ public class BloodBankService {
 		return bloodBankRepository.findByAdministratorId(id);
 	}
 	*/
-	public BloodBank update(final BloodBank bloodBank) {
+	public BloodBank update(BloodBankDto bloodBankDto) {
+		BloodBank bloodBank = bloodBankMapper.bloodBankDtoToBloodBank(bloodBankDto);
 		findById(bloodBank.getId());
 		return bloodBankRepository.save(bloodBank);
 	}

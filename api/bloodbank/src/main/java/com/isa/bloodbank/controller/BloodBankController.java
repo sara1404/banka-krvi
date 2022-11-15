@@ -3,6 +3,7 @@ package com.isa.bloodbank.controller;
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
@@ -28,18 +29,20 @@ public class BloodBankController {
 	@Autowired
 	private BloodBankService bloodBankService;
 	@Autowired
+	private BloodBankMapper bloodBankMapper;
+	@Autowired
 	private UserService userService;
 
 	@GetMapping(/*"/{id}/"*/"/administrator")
-	public ResponseEntity<BloodBank> findForAdministrator(/*@PathVariable("id") final Long id*/) {
+	public ResponseEntity<BloodBankDto> findForAdministrator(/*@PathVariable("id") final Long id*/) {
 		final Long administratorId = (long) (3);
 		User user = userService.findUserById(administratorId);
-		return ResponseEntity.ok(bloodBankService.findById(user.getBloodBank().getId()));
+		return ResponseEntity.ok(bloodBankMapper.bloodBankToBloodBankDto(bloodBankService.findById(user.getBloodBank().getId())));
 	}
 
 	@PutMapping("/update")
-	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBank bloodBank) {
-		return ResponseEntity.ok(bloodBankService.update(bloodBank));
+	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
+		return ResponseEntity.ok(bloodBankService.update(bloodBankDto));
 	}
 
 	@GetMapping("/findAll")

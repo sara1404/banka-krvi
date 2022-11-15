@@ -50,8 +50,8 @@ public class UserController {
 
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findUserById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findUserById(id));
+	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findById(id));
 	}
 
 	@PutMapping("/update")

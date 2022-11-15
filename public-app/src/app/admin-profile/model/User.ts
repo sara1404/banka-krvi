@@ -3,17 +3,16 @@ import { IBloodBank } from "./BloodBank"
 
 export interface IUser{
     id: number,
-    userType: string,
     firstName: string,
     lastName: string,
     jmbg: number,
     email: string,
-    password: string,
+    userType: string,
     bloodType: string,
-    bloodBank: IBloodBank,
     phoneNumber: number,
-    address: IAddress,
-    jobTitle: string,
-    workplaceName: string,
     gender: number
+    workplaceName: string,
+    jobTitle: string,
+    password: string,
+    address: IAddress
 }

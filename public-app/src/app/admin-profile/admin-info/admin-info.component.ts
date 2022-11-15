@@ -140,7 +140,6 @@ export class AdminInfoComponent implements OnInit {
       email: email,
       password: password,
       bloodType: bloodType,
-      bloodBank:this.user.bloodBank,
       jmbg: Number(jmbg),
       phoneNumber: Number(phoneNumber),
       address: updatedAddress,
@@ -148,6 +147,7 @@ export class AdminInfoComponent implements OnInit {
       jobTitle: jobTitle,
       gender: this.gender
     };
+    console.log(updatedProfile)
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;
     this.showSave = false;
