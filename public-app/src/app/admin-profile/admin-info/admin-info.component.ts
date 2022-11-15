@@ -45,7 +45,6 @@ export class AdminInfoComponent implements OnInit {
     lastName: string,
     jmbg: string,
     email: string,
-    password: string,
     bloodType: string,
     street: string,
     number: string,
@@ -55,7 +54,7 @@ export class AdminInfoComponent implements OnInit {
     workplaceName: string,
     jobTitle: string):
     boolean{
-    if(firstName == "" || lastName =="" || email=="" || password =="" || bloodType == "" || jmbg==""
+    if(firstName == "" || lastName =="" || email=="" || bloodType == "" || jmbg==""
     || street=="" || number=="" ||city=="" || zipcode == "" || country == "" || workplaceName =="" || jobTitle == ""){
       this.complete = false;
     }else{
@@ -81,11 +80,6 @@ export class AdminInfoComponent implements OnInit {
     }else{
       this.okJMBG = true;
     }
-    if(password.length < 6){
-      this.okPassword = false;
-    }else{
-      this.okPassword = true;
-    }
     if(!this.bloodTypes.includes(bloodType)){
       this.okBloodType = false;
     }else{
@@ -107,7 +101,6 @@ export class AdminInfoComponent implements OnInit {
     lastName: string,
     jmbg: string,
     email: string,
-    password: string,
     bloodType: string,
     phoneNumber: string,
     street: string,
@@ -119,7 +112,7 @@ export class AdminInfoComponent implements OnInit {
     jobTitle: string
   )
   {
-    if(!this.validate(firstName, lastName, jmbg, email, password, bloodType, street, number, city, zipcode, country, workplaceName, jobTitle)){
+    if(!this.validate(firstName, lastName, jmbg, email, bloodType, street, number, city, zipcode, country, workplaceName, jobTitle)){
       return;
     }
     const updatedAddress: IAddress={
@@ -138,14 +131,14 @@ export class AdminInfoComponent implements OnInit {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password,
       bloodType: bloodType,
       jmbg: Number(jmbg),
       phoneNumber: Number(phoneNumber),
       address: updatedAddress,
       workplaceName: workplaceName,
       jobTitle: jobTitle,
-      gender: this.gender
+      gender: this.gender,
+      bloodBank: this.user.bloodBank
     };
     console.log(updatedProfile)
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});

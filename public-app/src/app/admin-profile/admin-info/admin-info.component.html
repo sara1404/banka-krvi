@@ -97,13 +97,6 @@
         </div>
     </div>
     <mat-form-field appearance="fill" class="main-field">
-        <mat-label>Password</mat-label>
-        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.password}}" #password>
-    </mat-form-field>
-    <div class="error" *ngIf="!okPassword">
-        Password must be 6 characters long
-    </div>
-    <mat-form-field appearance="fill" class="main-field">
         <mat-label>Blood type</mat-label>
         <mat-select floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
           <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
@@ -129,6 +122,6 @@
 <div class="example-button-row">
     <button *ngIf="showEdit" mat-raised-button (click)="editClick()">Edit</button>
     <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, 
-    email.value, password.value, bloodType.value, phoneNumber.value, street.value, number.value, city.value,
+    email.value, bloodType.value, phoneNumber.value, street.value, number.value, city.value,
     zipcode.value, country.value, workplaceName.value, jobTitle.value)">Save</button>
 </div>

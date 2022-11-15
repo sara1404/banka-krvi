@@ -42,6 +42,4 @@ public class UserDto {
 	@NotNull
 	String jobTitle;
 	Address address;
-	@NotNull
-	String password;
 }

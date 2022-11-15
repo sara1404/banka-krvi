@@ -7,6 +7,7 @@ import { IAppointment } from '../model/Appointment';
 import { IBloodBank } from '../model/BloodBank';
 import { IBloodSupply } from '../model/BloodSupply';
 import { IUser } from '../model/User';
+import { IPasswordChange } from '../model/PasswordChange';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class AdminInfoService {
   getBloodSupplies():Observable<IBloodSupply[]>{
     //popravi da ne bude 5!!!
     return this.http.get<IBloodSupply[]>('http://localhost:8080/bloodsupply/bloodbank');
+  }
+
+  changePassword(passwordChange: IPasswordChange):Observable<Boolean>{
+    return this.http.put<Boolean>('http://localhost:8080/user/change-password', passwordChange);
   }
 }

@@ -13,6 +13,6 @@ export interface IUser{
     gender: number
     workplaceName: string,
     jobTitle: string,
-    password: string,
-    address: IAddress
+    address: IAddress,
+    bloodBank: IBloodBank
 }
