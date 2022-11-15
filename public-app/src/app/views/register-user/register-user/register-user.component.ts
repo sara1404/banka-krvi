@@ -93,17 +93,6 @@ export class RegisterUserComponent implements OnInit {
     )
   }
 
-  /*userConstructor(form: FormGroup) {
-    this.user.firstName = 
-    this.user.address.city = form.get('city').value;
-    this.user.address.country = form.get('country').value;
-    this.user.address.zipcode = form.get('zipcode').value;
-    this.user.address.street = form.get('street').value;
-    this.user.address.number = form.get('number').value;
-
-
-  }*/
-
   createCompareValidator(
     controlOne: AbstractControl,
     controlTwo: AbstractControl
