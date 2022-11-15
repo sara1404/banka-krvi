@@ -1,13 +1,13 @@
 <form>
     <h1 class="title">Personal informations</h1>
-    <mat-form-field appearance="fill" class="main-field">
+    <mat-form-field appearance="fill" class="address-field">
         <mat-label>Name</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.firstName}}" #firstName>
     </mat-form-field>
     <div class="error" *ngIf="!okName">
         Name must start with uppercase
     </div>
-    <mat-form-field appearance="fill" class="main-field">
+    <mat-form-field appearance="fill" class="address-field">
         <mat-label>Surname</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.lastName}}" #lastName>
     </mat-form-field>
@@ -21,6 +21,14 @@
     <div class="error" *ngIf="!okJMBG">
         You must enter correct jmbg format
     </div>
+    <mat-form-field appearance="fill" class="address-field">
+        <mat-label>Workplace name</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.workplaceName}}" #workplaceName>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="address-field">
+        <mat-label>Job title</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.jobTitle}}" #jobTitle>
+    </mat-form-field>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Phone number</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.phoneNumber}}" #phoneNumber>
@@ -104,5 +112,5 @@
         <button *ngIf="showEdit" mat-raised-button (click)="editClick()">Edit</button>
         <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, 
         email.value, password.value, bloodType.value, phoneNumber.value, street.value, number.value, city.value,
-        zipcode.value, country.value)">Save</button>
+        zipcode.value, country.value, workplaceName.value, jobTitle.value)">Save</button>
 </div>

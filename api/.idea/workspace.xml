@@ -4,56 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/BloodBankDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/UserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/BloodBankMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/services/toast.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/RegisterUserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/components.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/components.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/material/material.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/material/material.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/model/BloodBankk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/model/BloodBankk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/model/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/model/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/services/blood-bank.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/services/blood-bank.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/blood-banks-display.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/blood-banks-display.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/search-blood-banks/search-blood-banks.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/blood-banks-display/search-blood-banks/search-blood-banks.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-admin/register-admin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-bloodbank/register-bloodbank.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/user-profile/user-profile.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/user/user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/users/users.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/styles.scss" afterDir="false" />
-    </list>
+    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

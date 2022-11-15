@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first, Observable } from 'rxjs';
 import { IUser } from '../model/User';
+import { IAddress } from '../model/Address';
 import { AdminInfoService } from '../service/admin-info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -48,10 +49,12 @@ export class AdminInfoComponent implements OnInit {
     number: string,
     city: string,
     zipcode: string,
-    country: string):
+    country: string,
+    workplaceName: string,
+    jobTitle: string):
     boolean{
     if(firstName == "" || lastName =="" || email=="" || password =="" || bloodType == "" || jmbg==""
-    || street=="" || number=="" ||city=="" || zipcode == "" || country == ""){
+    || street=="" || number=="" ||city=="" || zipcode == "" || country == "" || workplaceName =="" || jobTitle == ""){
       this.complete = false;
     }else{
       this.complete = true;
@@ -109,11 +112,23 @@ export class AdminInfoComponent implements OnInit {
     number: string,
     city: string,
     zipcode: string,
-    country: string
+    country: string,
+    workplaceName: string,
+    jobTitle: string
   )
   {
-    if(!this.validate(firstName, lastName, jmbg, email, password, bloodType, street, number, city, zipcode, country)){
+    if(!this.validate(firstName, lastName, jmbg, email, password, bloodType, street, number, city, zipcode, country, workplaceName, jobTitle)){
       return;
+    }
+    const updatedAddress: IAddress={
+      id: this.user.address.id,
+      street: street,
+      number: Number(number),
+      city: city,
+      zipcode: Number(zipcode),
+      country: country,
+      longitude: this.user.address.longitude,
+      latitude: this.user.address.latitude
     }
     const updatedProfile: IUser = {
       id: this.user.id,
@@ -126,7 +141,9 @@ export class AdminInfoComponent implements OnInit {
       bloodBank:this.user.bloodBank,
       jmbg: Number(jmbg),
       phoneNumber: Number(phoneNumber),
-      address: this.user.address
+      address: updatedAddress,
+      workplaceName: workplaceName,
+      jobTitle: jobTitle
     };
     this.adminInfoService.editUser(updatedProfile).subscribe(data=>{this.user = data;});
     this.isDisabled = true;
