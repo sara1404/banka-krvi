@@ -14,6 +14,7 @@ import com.isa.bloodbank.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -68,6 +69,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public UserDto findById(Long id) {
+		Optional<User> user = userRepository.findById(id);
 		return userMapper.userToUserDto(userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 
@@ -75,8 +77,8 @@ public class UserService implements UserDetailsService {
 		return (userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 	public User update(UserDto userDto) {
+		findById(userDto.getId());
 		User user = userMapper.userDtoToUser(userDto);
-		findById(user.getId());
 		return userRepository.save(user);
 	}
 	public List<UserDto> getAvailableCenterAdmins(){

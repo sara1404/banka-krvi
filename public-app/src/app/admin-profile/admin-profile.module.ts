@@ -12,7 +12,7 @@ import { FreeAppointmentsComponent } from './free-appointments/free-appointments
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MatButtonModule,
     MatTableModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class AdminProfileModule { }

@@ -17,18 +17,18 @@
     <div>
         <label>
             <input type="radio"
-                   value="1"
-                   [checked]="gender === 0"
+                   value="FEMALE"
+                   [(ngModel)]="this.user.gender"
                    id="point1"
-                   (change)="onGenderChange(0)"
+                   (change)="onGenderChange('FEMALE')"
                    name="ProfitCode"><small>FEMALE</small>
         </label>
         <label>
             <input type="radio"
-                   value="1"
-                   [checked]="gender === 1"
+                   value="MALE"
+                   [(ngModel)]="this.user.gender"
                    id="point1"
-                   (change)="onGenderChange(1)"
+                   (change)="onGenderChange('MALE')"
                    name="ProfitCode"><small>MALE</small>
         </label>
     </div>

@@ -29,7 +29,6 @@ public class UserDto {
 	String email;
 	@NotNull
 	UserType userType;
-	@NotNull
 	BloodType bloodType;
 	@NotNull
 	BloodBank bloodBank;
@@ -37,9 +36,9 @@ public class UserDto {
 	String phoneNumber;
 	@NotNull
 	Gender gender;
-	@NotNull
 	String workplaceName;
-	@NotNull
 	String jobTitle;
 	Address address;
+	@NotNull
+	String password;
 }
