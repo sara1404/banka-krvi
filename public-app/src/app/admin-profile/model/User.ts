@@ -10,9 +10,10 @@ export interface IUser{
     userType: string,
     bloodType: string,
     phoneNumber: number,
-    gender: number
+    gender: number,
     workplaceName: string,
     jobTitle: string,
     address: IAddress,
-    bloodBank: IBloodBank
+    bloodBank: IBloodBank,
+    password: string
 }
