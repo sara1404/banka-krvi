@@ -16,6 +16,6 @@ public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
 	List<BloodBank> findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(String name, String city);
 
 	BloodBank save(BloodBank bloodBank);
-
 	BloodBank findBloodBankByName(String name);
+
 }

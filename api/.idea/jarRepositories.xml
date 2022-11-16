@@ -16,10 +16,5 @@
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
-    <remote-repository>
-      <option name="id" value="levi9-rent-a-car-rentacar" />
-      <option name="name" value="levi9-rent-a-car-rentacar" />
-      <option name="url" value="https://levi9-rent-a-car-206963782938.d.codeartifact.eu-central-1.amazonaws.com/maven/rentacar/" />
-    </remote-repository>
   </component>
 </project>
