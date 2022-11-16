@@ -3,7 +3,7 @@
         <h1 class="title">Informations about center</h1>
         <mat-form-field appearance="fill" class="main-field">
             <mat-label>Name of center</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.name}}" #name>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.name}}" #name>
         </mat-form-field>
         <div class="error" *ngIf="!okName">
             Name must start with uppercase
@@ -11,49 +11,49 @@
         <div class="address">
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Street</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.street}}" #street>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.street}}" #street>
             </mat-form-field>
             <div class="error" *ngIf="!okStreet">
                 Street must start with uppercase
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Number</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.number}}" #number>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.number}}" #number>
             </mat-form-field>
             <div class="error" *ngIf="!okNumber">
                 Must be number
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>City</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.city}}" #city>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.city}}" #city>
             </mat-form-field>
             <div class="error" *ngIf="!okCity">
                 City must start with uppercase
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Zip code</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.zipcode}}" #zipcode>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.zipcode}}" #zipcode>
             </mat-form-field>
             <div class="error" *ngIf="!okZipcode">
                 zipcode must be number at least 5 characters long
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Country</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.country}}" #country>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.country}}" #country>
             </mat-form-field>
             <div class="error" *ngIf="!okCountry">
                 Country must start with uppercase
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Longitude</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.longitude}}" #longitude>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.longitude}}" #longitude>
             </mat-form-field>
             <div class="error" *ngIf="!okLongitude">
                 Longitude must be number
             </div>
             <mat-form-field appearance="fill" class="field">
                 <mat-label>Latitude</mat-label>
-                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.address.latitude}}" #latitude>
+                <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.address.latitude}}" #latitude>
             </mat-form-field>
             <div class="error" *ngIf="!okLatitude">
                 Latitude must be number
@@ -61,11 +61,11 @@
         </div>
         <mat-form-field appearance="fill" class="main-field">
             <mat-label>Desription</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.description}}" #description>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.description}}" #description>
         </mat-form-field>
         <mat-form-field appearance="fill" class="main-field">
             <mat-label>Average grade</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank.averageGrade}}" #averageGrade>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.bloodBank?.averageGrade}}" #averageGrade>
         </mat-form-field>
         <div class="error" *ngIf="!complete">
             You must fill all fields
