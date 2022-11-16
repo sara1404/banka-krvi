@@ -9,8 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSortModule } from '@angular/material/sort';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -26,7 +27,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSelectModule,
     MatOptionModule,
     MatExpansionModule,
-    MatSortModule
+    MatSortModule,
+    MatRadioModule,
   ],
   exports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSelectModule,
     MatOptionModule,
     MatExpansionModule,
-    MatSortModule
+    MatSortModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}
