@@ -45,17 +45,14 @@ export class AdminInfoComponent implements OnInit {
     lastName: string,
     jmbg: string,
     email: string,
-    bloodType: string,
     street: string,
     number: string,
     city: string,
     zipcode: string,
-    country: string,
-    workplaceName: string,
-    jobTitle: string):
+    country: string):
     boolean{
-    if(firstName == "" || lastName =="" || email=="" || bloodType == "" || jmbg==""
-    || street=="" || number=="" ||city=="" || zipcode == "" || country == "" || workplaceName =="" || jobTitle == ""){
+    if(firstName == "" || lastName =="" || email=="" || jmbg==""
+    || street=="" || number=="" ||city=="" || zipcode == "" || country == ""){
       this.complete = false;
     }else{
       this.complete = true;
@@ -80,11 +77,6 @@ export class AdminInfoComponent implements OnInit {
     }else{
       this.okJMBG = true;
     }
-    if(!this.bloodTypes.includes(bloodType)){
-      this.okBloodType = false;
-    }else{
-      this.okBloodType = true;
-    }
     if(!this.complete || !this.okEmail || !this.okName || !this.okSurname || !this.okJMBG || !this.okBloodType){
       return false;
     }
@@ -101,18 +93,15 @@ export class AdminInfoComponent implements OnInit {
     lastName: string,
     jmbg: string,
     email: string,
-    bloodType: string,
     phoneNumber: string,
     street: string,
     number: string,
     city: string,
     zipcode: string,
-    country: string,
-    workplaceName: string,
-    jobTitle: string
+    country: string
   )
   {
-    if(!this.validate(firstName, lastName, jmbg, email, bloodType, street, number, city, zipcode, country, workplaceName, jobTitle)){
+    if(!this.validate(firstName, lastName, jmbg, email, street, number, city, zipcode, country)){
       return;
     }
     const updatedAddress: IAddress={
@@ -131,12 +120,12 @@ export class AdminInfoComponent implements OnInit {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      bloodType: bloodType,
+      bloodType: this.user.bloodType,
       jmbg: Number(jmbg),
       phoneNumber: Number(phoneNumber),
       address: updatedAddress,
-      workplaceName: workplaceName,
-      jobTitle: jobTitle,
+      workplaceName: this.user.workplaceName,
+      jobTitle: this.user.jobTitle,
       gender: this.gender,
       bloodBank: this.user.bloodBank
     };
