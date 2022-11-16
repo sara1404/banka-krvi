@@ -2,14 +2,14 @@
     <h1 class="title">Personal informations</h1>
     <mat-form-field appearance="fill" class="address-field">
         <mat-label>Name</mat-label>
-        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.firstName}}" #firstName>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.firstName}}" #firstName>
     </mat-form-field>
     <div class="error" *ngIf="!okName">
         Name must start with uppercase
     </div>
     <mat-form-field appearance="fill" class="address-field">
         <mat-label>Surname</mat-label>
-        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.lastName}}" #lastName>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.lastName}}" #lastName>
     </mat-form-field>
     <div class="error" *ngIf="!okSurname">
         Surname must start with uppercase
@@ -34,19 +34,19 @@
     </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>JMBG</mat-label>
-        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.jmbg}}" #jmbg>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.jmbg}}" #jmbg>
     </mat-form-field>
     <div class="error" *ngIf="!okJMBG">
         You must enter correct jmbg format
     </div>
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>Phone number</mat-label>
-        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user.phoneNumber}}" #phoneNumber>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.phoneNumber}}" #phoneNumber>
     </mat-form-field>
     
     <mat-form-field appearance="fill" class="main-field">
         <mat-label>email</mat-label>
-        <input class="input" required matInput [disabled]="true" value="{{this.user.email}}" #email>
+        <input class="input" required matInput [disabled]="true" value="{{this.user?.email}}" #email>
     </mat-form-field>
     <div class="error" *ngIf="!okEmail">
         You must enter valid email
@@ -54,35 +54,35 @@
     <div class="address">
         <mat-form-field appearance="fill" class="address-field">
             <mat-label>Street</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.user.address.street}}" #street>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.street}}" #street>
         </mat-form-field>
         <div class="error" *ngIf="!okStreet">
             Street must start with uppercase
         </div>
         <mat-form-field appearance="fill" class="address-field">
             <mat-label>Number</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.user.address.number}}" #number>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.number}}" #number>
         </mat-form-field>
         <div class="error" *ngIf="!okNumber">
             Must be number
         </div>
         <mat-form-field appearance="fill" class="address-field">
             <mat-label>City</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.user.address.city}}" #city>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.city}}" #city>
         </mat-form-field>
         <div class="error" *ngIf="!okCity">
             City must start with uppercase
         </div>
         <mat-form-field appearance="fill" class="address-field">
             <mat-label>Zip code</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.user.address.zipcode}}" #zipcode>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.zipcode}}" #zipcode>
         </mat-form-field>
         <div class="error" *ngIf="!okZipcode">
             zipcode must be number at least 5 characters long
         </div>
         <mat-form-field appearance="fill" class="address-field">
             <mat-label>Country</mat-label>
-            <input class="input" matInput [disabled]="isDisabled" value="{{this.user.address.country}}" #country>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.country}}" #country>
         </mat-form-field>
         <div class="error" *ngIf="!okCountry">
             Country must start with uppercase
