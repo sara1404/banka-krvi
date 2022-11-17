@@ -16,7 +16,7 @@ export class UserService {
   }
 
   getLoggedInUserProfile() : Observable<IUser> {
-    return this.http.get<IUser>('http://localhost:8080/user/loggedInUser/' + 1);
+    return this.http.get<IUser>('http://localhost:8080/user/loggedInUser/' + 10);
   }
 
   updateUserProfile(user: any) : Observable<IUser> {

@@ -57,7 +57,7 @@ public class BloodBankController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<BloodBankDto> register(@RequestBody final BloodBankDto bloodBank) {
+	public ResponseEntity<BloodBankDto> register(@Valid @RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
 	}
 

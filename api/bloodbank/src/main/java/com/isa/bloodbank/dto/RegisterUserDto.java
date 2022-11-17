@@ -28,7 +28,6 @@ public class RegisterUserDto {
 	String lastName;
 	@NotNull
 	Long jmbg;
-	@NotNull
 	BloodType bloodType;
 	Address address;
 	UserType userType;

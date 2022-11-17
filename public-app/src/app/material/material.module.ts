@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSortModule } from '@angular/material/sort';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -42,8 +42,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatOptionModule,
     MatExpansionModule,
-    MatSortModule,
     MatRadioModule,
-  ],
+    MatSortModule,
+  ]
 })
 export class MaterialModule {}
