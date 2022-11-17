@@ -28,6 +28,7 @@ export class BloodbankInfoComponent implements OnInit {
   okLatitude: boolean = true;
   okDescription: boolean = true;
   okAverageGrade: boolean = true;
+  updated: boolean = false;
   
   ngOnInit(): void {
     this.adminInfoService.getBloodBank().subscribe(data=>{this.bloodBank = data;});
@@ -103,6 +104,7 @@ export class BloodbankInfoComponent implements OnInit {
     this.isDisabled = false;
     this.showSave = true;
     this.showEdit = false;
+    this.updated = false;
   }
   okClick(
     name: string,
@@ -141,6 +143,7 @@ export class BloodbankInfoComponent implements OnInit {
     this.isDisabled = true;
     this.showEdit = true;
     this.showSave = false;
+    this.updated = true;
   }
 
 }

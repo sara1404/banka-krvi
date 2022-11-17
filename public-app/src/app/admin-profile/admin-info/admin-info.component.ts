@@ -34,9 +34,11 @@ export class AdminInfoComponent implements OnInit {
   okCity: boolean = true;
   okZipcode: boolean = true;
   okCountry: boolean = true;
+  updated: boolean = false;
 
   ngOnInit(): void {
     this.adminInfoService.getUser(3).subscribe(data=>{this.user = data;});
+
   }
 
   validate(
@@ -86,6 +88,7 @@ export class AdminInfoComponent implements OnInit {
     this.isDisabled = false;
     this.showSave = true;
     this.showEdit = false;
+    this.updated = false;
   }
   okClick(
     firstName: string,
@@ -133,6 +136,7 @@ export class AdminInfoComponent implements OnInit {
     this.isDisabled = true;
     this.showSave = false;
     this.showEdit = true;
+    this.updated = true;
   }
   
   onGenderChange(entry): void {

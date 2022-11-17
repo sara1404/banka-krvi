@@ -93,6 +93,9 @@
     <div class="error" *ngIf="!complete">
         You must fill all fields
     </div>
+    <div *ngIf="updated" class="ok">
+        Updated
+    </div>
 </form>
 <div class="example-button-row">
     <button *ngIf="showEdit" mat-raised-button (click)="editClick()">Edit</button>
