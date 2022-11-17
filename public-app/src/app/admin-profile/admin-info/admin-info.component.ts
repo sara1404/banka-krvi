@@ -17,7 +17,7 @@ export class AdminInfoComponent implements OnInit {
   user: IUser;
   public bloodTypes: string[] = ['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 
   'O_POSITIVE', 'O_NEGATIVE'];
-  gender: number;
+  gender: number = 0;
 
   public isDisabled: boolean = true;
   complete: boolean = true;
