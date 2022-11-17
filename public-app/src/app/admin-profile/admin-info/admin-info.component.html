@@ -1,13 +1,13 @@
 <form>
     <h1 class="title">Personal informations</h1>
-    <mat-form-field appearance="fill" class="address-field">
+    <mat-form-field appearance="fill" class="main-field">
         <mat-label>Name</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.firstName}}" #firstName>
     </mat-form-field>
     <div class="error" *ngIf="!okName">
         Name must start with uppercase
     </div>
-    <mat-form-field appearance="fill" class="address-field">
+    <mat-form-field appearance="fill" class="main-field">
         <mat-label>Surname</mat-label>
         <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.lastName}}" #lastName>
     </mat-form-field>
@@ -21,6 +21,7 @@
                    [(ngModel)]="this.user.gender"
                    id="point1"
                    (change)="onGenderChange('FEMALE')"
+                   [disabled]="isDisabled"
                    name="ProfitCode"><small>FEMALE</small>
         </label>
         <label>
@@ -29,6 +30,7 @@
                    [(ngModel)]="this.user.gender"
                    id="point1"
                    (change)="onGenderChange('MALE')"
+                   [disabled]="isDisabled"
                    name="ProfitCode"><small>MALE</small>
         </label>
     </div>
@@ -90,6 +92,9 @@
     </div>
     <div class="error" *ngIf="!complete">
         You must fill all fields
+    </div>
+    <div *ngIf="updated" class="ok">
+        Updated
     </div>
 </form>
 <div class="example-button-row">
