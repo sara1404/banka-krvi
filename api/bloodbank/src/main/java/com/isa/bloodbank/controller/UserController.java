@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
     }
     @PostMapping("/register/admin")
-    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
+    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
         System.out.println(centerAdmin + "e");
         return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
     }
