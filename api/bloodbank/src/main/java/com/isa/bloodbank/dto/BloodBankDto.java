@@ -4,6 +4,7 @@ import com.isa.bloodbank.entity.Address;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,8 @@ import lombok.Data;
 
 @Data
 public class BloodBankDto {
+	@Id
+	Long id;
 	@NotNull
 	String name;
 	@NotNull

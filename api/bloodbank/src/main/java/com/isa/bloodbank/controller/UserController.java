@@ -1,5 +1,7 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -29,10 +31,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/bloodBankId/") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
-    public ResponseEntity<List<User>> findByAdministratorId() {
+    @GetMapping("/bloodBankId")
+    public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
         final Long administratorId = (long) (3);
-        final Long bloodBankId = (long) 5;
+        Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
         return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
     }
     @PostMapping("/register/admin")
@@ -45,6 +47,11 @@ public class UserController {
     public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
         return ResponseEntity.ok(userService.search(name, lastName));
     }
+	@GetMapping("/{id}")
+	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findById(id));
+	}
+
 
     @GetMapping("/loggedInUser/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
@@ -62,9 +69,16 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllDto());
     }
 
+
     @GetMapping("/center-admins")
     public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
         return ResponseEntity.ok(userService.getAvailableCenterAdmins());
     }
 
+    @PutMapping("/change-password")
+    public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto){
+        final Long administratorId = (long) (3);
+        User user = userService.findUserById(administratorId);
+        return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
+    }
 }

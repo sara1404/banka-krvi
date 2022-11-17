@@ -1,5 +1,7 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
@@ -12,6 +14,7 @@ import com.isa.bloodbank.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,14 +33,14 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public List<User> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
+	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
 		for (final User user : userRepository.findByBloodBankId(bloodBankId)) {
 			if (user.getId() != administratorId) {
 				bloodBanks.add(user);
 			}
 		}
-		return bloodBanks;//userRepository.findByBloodBankId(bloodBankId);
+		return userMapper.usersToAdministratorDtos(bloodBanks);
 	}
 	public boolean checkIfEmailAlreadyInUse(final String email) {
 		return userRepository.findByEmail(email) != null;
@@ -66,15 +69,18 @@ public class UserService implements UserDetailsService {
 	}
 
 	public UserDto findById(Long id) {
+		Optional<User> user = userRepository.findById(id);
 		return userMapper.userToUserDto(userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 
+	public User findUserById(Long id) {
+		return (userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
+	}
 	public User update(UserDto userDto) {
+		findById(userDto.getId());
 		User user = userMapper.userDtoToUser(userDto);
-		findById(user.getId());
 		return userRepository.save(user);
 	}
-
 	public List<UserDto> getAvailableCenterAdmins(){
 		return userMapper.usersToUserDtos(userRepository.getUsersByUserTypeAndBloodBankIsNull(UserType.ADMIN_CENTER));
 	}
@@ -91,5 +97,16 @@ public class UserService implements UserDetailsService {
 		}
 		UserDetails userDetails = org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).authorities(user.getUserType().toString()).build();
 		return userDetails;
+	}
+
+	public boolean changePassword(User user, PasswordChangeDto passwordChangeDto){
+		//treba provera i da je prvi put logovan
+		if(!user.getPassword().equals(passwordChangeDto.getOldPassword()))
+		{
+			return false;
+		}
+		user.setPassword(passwordChangeDto.getNewPassword());
+		userRepository.save(user);
+		return true;
 	}
 }
