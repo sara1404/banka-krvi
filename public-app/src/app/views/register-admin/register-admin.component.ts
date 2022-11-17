@@ -1,6 +1,7 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { IBloodBank } from 'src/app/model/BloodBankk';
 import { IUser } from 'src/app/model/User';
@@ -30,15 +31,17 @@ export class RegisterAdminComponent implements OnInit {
     lastName: new FormControl('', [Validators.required]),
     jmbg: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    bloodType: new FormControl('', [Validators.required]),
+    bloodType: new FormControl(null, [Validators.required]),
     bloodBankName: new FormControl('', [Validators.required]),
     bloodBank: new FormControl(null),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    gender: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required])
   })
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private bloodbankService: BloodBankService, private userService: UserService, private toastService: ToastService) { }
+  constructor(private bloodbankService: BloodBankService, private userService: UserService, private toastService: ToastService, private router: Router) { }
 
   ngOnInit(): void {
     this.bloodbankService.getBloodBanks().subscribe((data) => this.bloodbanks = data);
@@ -46,31 +49,25 @@ export class RegisterAdminComponent implements OnInit {
 
   registerAdmin(){
     this.registerForm.value.bloodBank = this.findBloodBankByName()
-    console.log(this.registerForm.value)
-    this.toastService.showSuccess("prije")
     this.userService.registerAdmin(this.registerForm.value).subscribe({
       next: (res) => {
-        this.toastService.showSuccess("nice")
+        this.showSuccess()
+        this.router.navigate(['/', 'users'])
       },
       error: (e) => {
-        console.log("error")
-        this.toastService.showError("not nice")
+        this.showError(e)
       },
     })
-    this.registerForm.markAsPristine();
-    this.registerForm.reset();
-
   }
 
-  // showError() {
-  //   this.toast.error('Bad request, please enter valid data.', 'Warning');
-  // }
+  showError(e) {
+    this.toastService.showError("Error");
+  }
 
-  // showSuccess() {
-  //   console.log('okida')
-  //   this.toast.success('Successfully registered center admin.', 'Success');
+  showSuccess() {
+    this.toastService.showSuccess('Successfully registered center admin.');
 
-  // }
+  }
 
 
   findBloodBankByName(){

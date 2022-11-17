@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +40,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   ],
 })
 export class MaterialModule {}

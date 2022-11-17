@@ -10,21 +10,21 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Last Name</mat-label>
-      <input formControlName="lastName" matInput required>
+      <input formControlName="lastName" matInput required  [errorStateMatcher]="matcher">
       <mat-error *ngIf="!registerForm.hasError('required')">
         Please enter last name
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>JMBG</mat-label>
-      <input formControlName="jmbg" matInput required>
+      <input formControlName="jmbg" matInput required  [errorStateMatcher]="matcher">
       <mat-error *ngIf="!registerForm.hasError('required')">
         Please enter jmbg
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Email</mat-label>
-      <input formControlName="email" matInput placeholder="pat@example.com" required>
+      <input formControlName="email" matInput placeholder="pat@example.com" required  [errorStateMatcher]="matcher">
       <mat-error *ngIf="!registerForm.hasError('email') && registerForm.hasError('required')">
         Please enter a valid email address
       </mat-error>
@@ -32,7 +32,7 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="form-field">
+    <!-- <mat-form-field appearance="fill" class="form-field">
       <mat-label>Bloodtype</mat-label>
       <mat-select formControlName="bloodType">
         <mat-option value="0">A_POSITIVE</mat-option>
@@ -49,10 +49,10 @@
       <mat-error *ngIf="!registerForm.hasError('required')">
         Please choose bloodtype
       </mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Bloodbank</mat-label>
-      <mat-select formControlName="bloodBankName">
+      <mat-select formControlName="bloodBankName"  [errorStateMatcher]="matcher">
         <mat-option value="{{bloodbank.name}}" *ngFor="let bloodbank of bloodbanks">{{bloodbank.name}}</mat-option>
       </mat-select>
       <mat-error *ngIf="!registerForm.hasError('required')">
@@ -60,8 +60,19 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Phone number</mat-label>
+      <input formControlName="phoneNumber" matInput required  [errorStateMatcher]="matcher">
+      <mat-error *ngIf="!registerForm.hasError('required')">
+        Please enter phone number
+      </mat-error>
+    </mat-form-field>
+    <mat-radio-group aria-label="Choose gender" formControlName="gender">
+      <mat-radio-button value="FEMALE">Female</mat-radio-button>
+      <mat-radio-button value="MALE">Male</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field appearance="fill" class="form-field">
       <mat-label>Password</mat-label>
-      <input formControlName="password" matInput required>
+      <input formControlName="password" matInput required type="password"  [errorStateMatcher]="matcher">
       <mat-error *ngIf="!registerForm.hasError('minlength') && registerForm.hasError('required')">
         Password must be minimum 8 characters
       </mat-error>
