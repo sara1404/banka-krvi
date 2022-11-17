@@ -1,0 +1,51 @@
+<form>
+  <h1 class="title">Personal informations</h1>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Name</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.firstName}}"
+      #name
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Surname</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.lastName}}"
+      #surname
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>JMBG</mat-label>
+      <input matInput [disabled]="isDisabled"
+      value="{{user.jmbg}}"
+      #jmbg
+      >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+      <mat-label>Blood type</mat-label>
+      <mat-select floatLabel="never" value="{{user.bloodType}}" [disabled]="isDisabled" #bloodType>
+        <mat-option value="A_POSITIVE">A_POSITIVE</mat-option>
+        <mat-option value="A_NEGATIVE">A_NEGATIVE</mat-option>
+        <mat-option value="B_POSITIVE">B_POSITIVE</mat-option>
+        <mat-option value="B_NEGATIVE">B_NEGATIVE</mat-option>
+        <mat-option value="AB_POSITIVE">AB_POSITIVE</mat-option>
+        <mat-option value="AB_NEGATIVE">AB_NEGATIVE</mat-option>
+        <mat-option value="0_POSITIVE">0_POSITIVE</mat-option>
+        <mat-option value="0_NEGATIVE">0_NEGATIVE</mat-option>
+        <mat-option value="HH_POSITIVE">HH_POSITIVE</mat-option>
+        <mat-option value="HH_NEGATIVE">HH_NEGATIVE</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="main-field">
+    <mat-label>email</mat-label>
+    <input matInput [disabled]="true"
+    value="{{user.email}}"
+    #email
+    >
+</mat-form-field>
+</form>
+<div class="example-button-row">
+    <button mat-raised-button (click)="editClick()">Edit</button>
+    <button mat-raised-button (click)="okClick(name.value, surname.value, jmbg.value, bloodType.value, email.value)">Save</button>
+</div>
+
