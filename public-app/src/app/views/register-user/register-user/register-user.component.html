@@ -1,6 +1,8 @@
 <div class="form-wrapper">
-  <form [formGroup]="signUpForm" class="register-admin-form">
+  <form [formGroup]="signUpForm" class="register-user-form">
+
     <label for="" class="title">SIGN UP</label>
+    
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>First Name</mat-label>
       <input formControlName="firstName" matInput />
@@ -10,6 +12,7 @@
         Please enter first name!
       </mat-error>
     </div>
+    
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Last Name</mat-label>
       <input formControlName="lastName" matInput required />
@@ -19,6 +22,7 @@
         Please enter last name!
       </mat-error>
     </div>
+    
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>JMBG</mat-label>
       <input formControlName="jmbg" matInput required />
@@ -31,6 +35,7 @@
         JMBG must contain exactly 13 characters!
       </mat-error>
     </div>
+    
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Email</mat-label>
       <input
@@ -50,33 +55,33 @@
     </div>
 
     <!-- ADDRESS -->
-    <div formGroupName="address">
-      <mat-form-field appearance="fill" class="form-field">
+    <div formGroupName="address" class="address-form">
+      <mat-form-field appearance="fill" class="address-form-field-left">
         <mat-label>Street</mat-label>
         <input formControlName="street" matInput />
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="fill" class="address-form-field-right">
         <mat-label>Street number</mat-label>
         <input formControlName="number" matInput />
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="fill" class="address-form-field-left">
         <mat-label>City</mat-label>
         <input formControlName="city" matInput />
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="fill" class="address-form-field-right">
         <mat-label>ZIP code</mat-label>
         <input formControlName="zipcode" matInput />
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="fill" class="country-field">
         <mat-label>Country</mat-label>
         <input formControlName="country" matInput />
       </mat-form-field>
     </div>
-    
+
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Phone number</mat-label>
       <input formControlName="phoneNumber" matInput />
@@ -110,9 +115,10 @@
         Please choose bloodtype!
       </mat-error>
     </div>
+
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Password</mat-label>
-      <input formControlName="password" matInput required />
+      <input formControlName="password" type="password" matInput required />
     </mat-form-field>
     <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
       <mat-error *ngIf="password.errors['minLength']">
@@ -125,7 +131,7 @@
 
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Re-enter password</mat-label>
-      <input formControlName="confirmPassword" matInput required />
+      <input formControlName="confirmPassword" type="password" matInput required />
     </mat-form-field>
     <div
       *ngIf="
