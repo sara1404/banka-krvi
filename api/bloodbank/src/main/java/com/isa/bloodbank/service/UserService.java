@@ -76,10 +76,14 @@ public class UserService implements UserDetailsService {
 	public User findUserById(Long id) {
 		return (userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
-	public User update(UserDto userDto) {
-		findById(userDto.getId());
-		User user = userMapper.userDtoToUser(userDto);
-		return userRepository.save(user);
+	public User update(UserDto newUserDto) {
+		User user = userRepository.findById(newUserDto.getId()).get();
+		User newUser = userMapper.userDtoToUser(newUserDto);
+
+		newUser.setPassword(user.getPassword());
+		newUser.setUserType(user.getUserType());
+
+		return userRepository.save(newUser);
 	}
 	public List<UserDto> getAvailableCenterAdmins(){
 		return userMapper.usersToUserDtos(userRepository.getUsersByUserTypeAndBloodBankIsNull(UserType.ADMIN_CENTER));
