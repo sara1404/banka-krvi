@@ -5,7 +5,9 @@ import com.isa.bloodbank.entity.BloodBank;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
 	List<BloodBank> findByNameContainingIgnoreCase(String infix);
 

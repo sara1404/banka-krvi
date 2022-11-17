@@ -23,6 +23,7 @@ import { UserProfileModule } from './views/user-profile/user-profile.module';
 
 import {ToastrModule} from "ngx-toastr"
 import { RegisterUserModule } from './views/register-user/register-user.module';
+import { DonationSurveyModule } from './views/donation-survey/donation-survey.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { RegisterUserModule } from './views/register-user/register-user.module';
     RegisterAdminModule,
     RegisterBloodbankModule,
     RegisterUserModule,
+    DonationSurveyModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     })

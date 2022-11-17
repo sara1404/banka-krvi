@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IDonationSurvey } from '../model/DonationSurvey';
 import { IUser } from '../model/User';
 
 @Injectable({
@@ -36,6 +37,10 @@ export class UserService {
 
   registerUser(user: IUser) : Observable<IUser>{
     return this.http.post<IUser>(`http://localhost:8080/auth/register`, user)
+  }
+
+  sendSurvey(survey: IDonationSurvey) : Observable<IDonationSurvey> {
+    return this.http.post<IDonationSurvey>(`http://localhost:8080/survey/fill`, survey);
   }
 
   getAvailableCenterAdmins(): Observable<IUser[]>{

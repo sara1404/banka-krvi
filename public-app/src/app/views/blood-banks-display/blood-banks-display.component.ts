@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IBloodBank } from '../../model/BloodBankk';
 import { BloodBankService } from '../../services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatSortHeader } from '@angular/material/sort';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +21,23 @@ export class DisplayBloodBanksComponent implements OnInit {
   city: string = ""
   averageGrade: number = 0
 
+  @ViewChild(MatSort) sort: MatSort;
+  
   ngOnInit(): void {
     this.bloodBankService
       .getBloodBanks()
-      .subscribe((data) => (this.bloodBanks.data = data));
+      .subscribe((data) => {
+        this.bloodBanks = new MatTableDataSource(data);
+        // fun fact: MatSort with nested objects is not supported by default
+        this.bloodBanks.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'city': return item.address.city;
+            default: return item[property];
+          }
+        };
+        this.bloodBanks.sort = this.sort;
+      });
+      
   }
 
   onSearch(eventData: IBloodBank[]) {

@@ -4,7 +4,100 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="" />
+    <list default="true" id="4b05954b-313b-4762-b566-60e8a9b15736" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/api.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/BloodSupplyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/AdministratorDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/BloodSupplyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/FreeAppointmentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/PasswordChangeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/AppointmentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/BloodSupplyMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodSupplyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodSupplyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/bloodbank.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/BloodbankApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/controller/BloodBankController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/controller/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/Address.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/Appointment.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/AppointmentInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/BaseEntity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/BloodBank.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/BloodSupply.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/enums/BloodType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/entity/enums/UserType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/exception/UserNotFoundException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/repository/BloodBankRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/repository/UserRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/service/BloodBankService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bloodbank/target/classes/com/isa/bloodbank/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-info/admin-info.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-info/admin-info.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-info/admin-info.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-info/admin-info.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-profile.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-profile/admin-profile.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-profile/admin-profile.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-profile/admin-profile.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/admin-profile/admin-profile.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/blood-supplies/blood-supplies.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/blood-supplies/blood-supplies.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/blood-supplies/blood-supplies.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/blood-supplies/blood-supplies.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/change-password/change-password.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/change-password/change-password.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/change-password/change-password.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/change-password/change-password.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/Address.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/Administrator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/Appointment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/BloodBank.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/BloodSupply.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/FreeAppointment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/PasswordChange.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/model/User.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/other-admins/other-admins.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/other-admins/other-admins.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/other-admins/other-admins.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/other-admins/other-admins.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/service/admin-info.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/BloodbankApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/BloodbankApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/BloodBankController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/BloodBankController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/BloodBankDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/BloodBankDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/entity/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/entity/BloodSupply.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/entity/BloodSupply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mapping/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/BloodBankRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bloodbank/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../bloodbank/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,19 +146,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bloodbank" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RunManager" selected="Application.BloodbankApplication">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
