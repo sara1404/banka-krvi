@@ -45,40 +45,25 @@ public class BloodBankService {
 	}
 
 	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final int pageSize, final int pageNumber) {
-		final Page<BloodBank> bloodBanks = search(name, city, pageSize, pageNumber);
-		/*if (averageGrade != 0) {
-			return bloodBankMapper.bloodBanksToBloodBankDtos(filter(bloodBanks, averageGrade));
-		} else {
-			return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBanks);
-		}*/
-		return bloodBanks;
-	}
-
-	private Page<BloodBank> search(final String name, final String city, final int pageSize, final int pageNumber) {
-		if (!name.equals("") && !city.equals("")) {
+		if (!name.equals("") && !city.equals("") && averageGrade != 0) {
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(name, averageGrade, city, PageRequest.of(pageNumber, pageSize));
+		} else if (!name.equals("") && !city.equals("")) {
 			return bloodBankRepository.findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(name, city, PageRequest.of(pageNumber, pageSize));
-			//return pageMapper.pageToPageDto(page);
+		} else if (!name.equals("") && averageGrade != 0){
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqual(name, averageGrade, PageRequest.of(pageNumber, pageSize));
+		} else if (!city.equals("") && averageGrade != 0){
+			return bloodBankRepository.findByAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(averageGrade, city, PageRequest.of(pageNumber, pageSize));
 		} else if (!name.equals("")) {
 			return bloodBankRepository.findByNameContainingIgnoreCase(name, PageRequest.of(pageNumber, pageSize));
-			//return pageMapper.pageToPageDto(page);
 		} else if (!city.equals("")) {
 			return bloodBankRepository.findByAddressId_CityContainingIgnoreCase(city, PageRequest.of(pageNumber, pageSize));
-			//return pageMapper.pageToPageDto(page);
+		} else if (averageGrade != 0){
+			return bloodBankRepository.findByAverageGradeGreaterThanEqual(averageGrade, PageRequest.of(pageNumber, pageSize));
 		} else {
 			return bloodBankRepository.findAll(PageRequest.of(pageNumber, pageSize));
-			//return pageMapper.pageToPageDto(page);
 		}
 	}
 
-	/*private PageDto<BloodBank> filter(final PageDto<BloodBank> bloodBanks, final double averageGrade) {
-		final List<BloodBank> filteredBloodBanks = new ArrayList<BloodBank>();
-		for (final BloodBank bloodBank : bloodBanks) {
-			if (bloodBank.getAverageGrade() >= averageGrade) {
-				filteredBloodBanks.add(bloodBank);
-			}
-		}
-		return filteredBloodBanks;
-	}*/
 
 	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
 		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));
