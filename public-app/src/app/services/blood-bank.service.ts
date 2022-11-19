@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
+import { IPage } from '../model/Page';
 
 
 @Injectable({
@@ -17,9 +18,9 @@ export class BloodBankService {
     );
   }
 
-  searchFilterBloodBanks(name: string, city: string, averageGrade: number) {
-    return this.http.get<IBloodBank[]>(
-      'http://localhost:8080/bloodbank/searchAndFilter?name=' + name + '&city=' + city + '&averageGrade=' + averageGrade
+  getBloodBanksFilterAndSearch(name: string, city: string, averageGrade: number, pageNumber: number) {
+    return this.http.get<IPage>(
+      'http://localhost:8080/bloodbank/searchAndFilter?name=' + name + '&city=' + city + '&averageGrade=' + averageGrade + '&pageSize=' + 2 + '&pageNumber=' + pageNumber
       );
   }
 

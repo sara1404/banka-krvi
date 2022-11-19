@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatExpansionModule,
     MatSortModule,
     MatRadioModule,
+    MatPaginatorModule
   ],
   exports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatExpansionModule,
     MatRadioModule,
     MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {}

@@ -15,12 +15,18 @@ export class FilterBloodBanksComponent implements OnInit {
   @Input() name = "";
   @Input() city = "";
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
+  @Output() totalElements = new EventEmitter<number>();
   @Output() averageGrade = new EventEmitter<number>();
+  @Output() pageNumber = new EventEmitter<number>();
   ngOnInit(): void {}
 
   filterBloodBanks(e: any){
     var averageGrade = parseFloat(e.value);
-    this.bloodBankService.searchFilterBloodBanks(this.name, this.city, averageGrade).subscribe((data) => this.bloodBanks.emit(data));
+    this.bloodBankService.getBloodBanksFilterAndSearch(this.name, this.city, averageGrade, 0).subscribe((data) => {
+    this.bloodBanks.emit(data.content)
+    this.totalElements.emit(data.totalElements);
+    });
     this.averageGrade.emit(averageGrade);
+    this.pageNumber.emit(0);
   }
 }
