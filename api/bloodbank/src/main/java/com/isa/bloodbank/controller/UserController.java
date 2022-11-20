@@ -64,11 +64,15 @@ public class UserController {
         return ResponseEntity.ok(userService.update(userDto));
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getAll() {
-        return ResponseEntity.ok(userService.getAllDto());
+    @GetMapping("/users/{pageNo}")
+    public ResponseEntity<List<UserDto>> getAll(@PathVariable int pageNo) {
+        return ResponseEntity.ok(userService.getAll(pageNo));
     }
 
+    @GetMapping("/users/count")
+    public ResponseEntity<Integer> getAllCount(){
+        return ResponseEntity.ok(userService.getUserCount());
+    }
 
     @GetMapping("/center-admins")
     public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){

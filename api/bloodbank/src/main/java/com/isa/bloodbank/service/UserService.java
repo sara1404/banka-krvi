@@ -12,12 +12,13 @@ import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -60,12 +61,14 @@ public class UserService implements UserDetailsService {
 		return userMapper.usersToUserDtos(users);
 	}
 
-	public List<User> getAll() {
-		return userRepository.findAll();
+	public List<UserDto> getAll(int pageNo){
+		Pageable paging = PageRequest.of(pageNo, 4);
+		Page<User> pagedResult = userRepository.findAll(paging);
+		return userMapper.usersToUserDtos(pagedResult.toList());
 	}
 
-	public List<UserDto> getAllDto(){
-		return userMapper.usersToUserDtos(userRepository.findAll());
+	public int getUserCount(){
+		return userRepository.findAll().size();
 	}
 
 	public UserDto findById(Long id) {

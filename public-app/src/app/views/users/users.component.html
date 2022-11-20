@@ -8,4 +8,9 @@
   <div class="users-wrapper">
     <app-user *ngFor="let user of users" [user]="user"></app-user>
   </div>
+  <mat-paginator
+              [pageSize]="4"
+              [length]="userCount"
+              aria-label="Select page">
+  </mat-paginator>
 </div>

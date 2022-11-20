@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Event } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { tap } from 'rxjs';
 import { IUser } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,13 +9,26 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
 
   users: IUser[] = []
+  userCount: number
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator
+
   constructor(private userService: UserService) { }
+  ngAfterViewInit(): void {
+    this.paginator.page.pipe(tap(() => {
+      this.userService.getUsers(this.paginator?.pageIndex ?? 0).subscribe(data =>{
+        this.users = data
+      })
+    })).subscribe()
+  }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(data =>{
+    this.userService.getUsersCount().subscribe(data => this.userCount = data)
+    this.userService.getUsers(this.paginator?.pageIndex ?? 0).subscribe(data =>{
       this.users = data
     })
   }
@@ -23,7 +37,6 @@ export class UsersComponent implements OnInit {
     e.preventDefault()
     this.userService.search(e.target.value).subscribe(data => {
       this.users = data
-      console.log('search ', this.users)
     })
   }
 

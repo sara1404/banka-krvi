@@ -11,8 +11,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<IUser[]>{
-    return this.http.get<IUser[]>(`http://localhost:8080/user/users`)
+  getUsers(pageNo: number): Observable<IUser[]>{
+    return this.http.get<IUser[]>(`http://localhost:8080/user/users/${pageNo}`)
+  }
+
+  getUsersCount(): Observable<number>{
+    return this.http.get<number>(`http://localhost:8080/user/users/count`)
   }
 
   getLoggedInUserProfile() : Observable<IUser> {
