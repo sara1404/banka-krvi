@@ -1,17 +1,21 @@
 package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.BloodBankDto;
+import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
+import java.awt.*;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +54,9 @@ public class BloodBankController {
 		return ResponseEntity.ok(bloodBankService.findAll());
 	}
 
-	@GetMapping("/searchAndFilter")
-	public ResponseEntity<List<BloodBankDto>> searchAndFilter(@RequestParam final String name, @RequestParam final String city,
-		@RequestParam final double averageGrade) {
-		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade));
+	@GetMapping(value = "/searchAndFilter", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Page<BloodBank>> searchAndFilter(@RequestParam("name") final String name, @RequestParam("city") final String city, @RequestParam("averageGrade") final double averageGrade, @RequestParam("pageSize") final int pageSize, @RequestParam("pageNumber") final int pageNumber) {
+		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, pageSize, pageNumber));
 	}
 
 	@PostMapping("/register")

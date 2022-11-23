@@ -39,6 +39,5 @@ public class UserDto {
 	String workplaceName;
 	String jobTitle;
 	Address address;
-	@NotNull
 	String password;
 }
