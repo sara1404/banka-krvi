@@ -14,14 +14,20 @@ export class SearchBloodBanksComponent implements OnInit {
 
   @Input() averageGrade = 0;
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
+  @Output() totalElements = new EventEmitter<number>();
   @Output() name = new EventEmitter<string>();
   @Output() city = new EventEmitter<string>();
+  @Output() pageNumber = new EventEmitter<number>();
   ngOnInit(): void {}
 
   searchBloodBanks(name: string, city: string, e: Event){
     e.preventDefault();
-    this.bloodBankService.searchFilterBloodBanks(name, city, this.averageGrade).subscribe((data) => this.bloodBanks.emit(data));
+    this.bloodBankService.getBloodBanksFilterAndSearch(name, city, this.averageGrade, 0).subscribe((data) => {
+    this.bloodBanks.emit(data.content)
+    this.totalElements.emit(data.totalElements);
+    });
     this.name.emit(name);
     this.city.emit(city);
+    this.pageNumber.emit(0);
   }
 }
