@@ -1,43 +1,63 @@
 <div class="mainContent">
-<app-search-blood-banks (bloodBanks)="onSearch($event)" (totalElements)="saveTotalElements($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)" [averageGrade]="averageGrade" (pageNumber)="savePageNumber($event)"></app-search-blood-banks>
-<app-filter-blood-banks (bloodBanks)="onSearch($event)" (totalElements)="saveTotalElements($event)" (averageGrade)="saveAverageGrade($event)" [name]="name" [city]="city" (pageNumber)="savePageNumber($event)"></app-filter-blood-banks>
-<div class="table">
-<mat-table #table [dataSource]="bloodBanks" matSort>
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let item">{{item.name}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="street">
+  <app-search-blood-banks
+    (bloodBanks)="onSearch($event)"
+    (totalElements)="saveTotalElements($event)"
+    (name)="saveSearchName($event)"
+    (city)="saveSearchCity($event)"
+    [averageGrade]="averageGrade"
+    (pageNumber)="savePageNumber($event)"
+  ></app-search-blood-banks>
+  <app-filter-blood-banks
+    (bloodBanks)="onSearch($event)"
+    (totalElements)="saveTotalElements($event)"
+    (averageGrade)="saveAverageGrade($event)"
+    [name]="name"
+    [city]="city"
+    (pageNumber)="savePageNumber($event)"
+    (sortBy)="saveSortBy($event)"
+    (sortDirection)="saveSortDirection($event)"
+  ></app-filter-blood-banks>
+  <div class="table">
+    <mat-table #table [dataSource]="bloodBanks">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="street">
         <mat-header-cell *matHeaderCellDef>Street</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.address.street}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="number">
+        <mat-cell *matCellDef="let item">{{ item.address.street }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="number">
         <mat-header-cell *matHeaderCellDef>Number</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.address.number}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="city">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.address.city}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="zipcode">
+        <mat-cell *matCellDef="let item">{{ item.address.number }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.address.city }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="zipcode">
         <mat-header-cell *matHeaderCellDef>Zipcode</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.address.zipcode}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="country">
+        <mat-cell *matCellDef="let item">{{ item.address.zipcode }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="country">
         <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.address.country}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="averageGrade">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Average grade</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{item.averageGrade}}</mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-  <mat-paginator [pageSize]="2" [length]="totalElements" (page)="onPageChanged($event)" [pageIndex]="pageNumber">
-
-</mat-paginator>
+        <mat-cell *matCellDef="let item">{{ item.address.country }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="averageGrade">
+        <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
+        <mat-cell *matCellDef="let item">{{ item.averageGrade }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator
+      [pageSize]="2"
+      [length]="totalElements"
+      (page)="onPageChanged($event)"
+      [pageIndex]="pageNumber"
+    >
+    </mat-paginator>
+  </div>
+  <div></div>
+  <div></div>
 </div>
-<div>
-</div>
-<div>
