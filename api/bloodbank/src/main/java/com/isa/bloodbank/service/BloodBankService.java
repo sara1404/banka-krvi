@@ -45,8 +45,11 @@ public class BloodBankService {
 	}
 
 	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final int pageSize, final int pageNumber,
-		final String sortBy, final String sortDirection) {
+		String sortBy, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
+		if (sortBy == null || sortBy.equals("")) {
+			sortBy = "name";
+		}
 		if (!name.equals("") && !city.equals("") && averageGrade != 0) {
 			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(name, averageGrade,
 				city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));

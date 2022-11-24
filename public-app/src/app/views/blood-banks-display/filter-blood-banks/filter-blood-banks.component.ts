@@ -12,34 +12,25 @@ export class FilterBloodBanksComponent implements OnInit {
 
   @Input() name = '';
   @Input() city = '';
+  @Input() sortBy = '';
+  @Input() sortDirection = '';
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
   @Output() totalElements = new EventEmitter<number>();
   @Output() averageGrade = new EventEmitter<number>();
   @Output() pageNumber = new EventEmitter<number>();
-  @Output() sortBy = new EventEmitter<string>();
-  @Output() sortDirection = new EventEmitter<string>();
+
   ngOnInit(): void {}
 
-  
-  sortAndFilterBloodBanks(e: any) {
+  filterBloodBanks(e: any) {
     var averageGrade = parseFloat(e.value);
-    if(averageGrade != NaN) {
-      var sortBy = e.value.split(' ')[0];
-      var sortDirection = e.value.split(' ')[1];
-      averageGrade = 0;
-    }
-    else {
-      sortBy = '';
-      sortDirection = '';
-    }
     this.bloodBankService
       .getBloodBanksFilterAndSearch(
         this.name,
         this.city,
         averageGrade,
         0,
-        sortBy,
-        sortDirection
+        this.sortBy,
+        this.sortDirection
       )
       .subscribe((data) => {
         this.bloodBanks.emit(data.content);
@@ -47,8 +38,5 @@ export class FilterBloodBanksComponent implements OnInit {
       });
     this.averageGrade.emit(averageGrade);
     this.pageNumber.emit(0);
-    this.sortBy.emit(sortBy);
-    this.sortDirection.emit(sortDirection);
   }
-
 }
