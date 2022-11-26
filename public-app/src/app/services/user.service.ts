@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDonationSurvey } from '../model/DonationSurvey';
+import { IUserSurvey } from '../model/UserSurvey';
 import { IUser } from '../model/User';
 
 @Injectable({
@@ -47,4 +48,7 @@ export class UserService {
     return this.http.get<IUser[]>(`http://localhost:8080/user/center-admins`)
   }
 
+  getSurveyForUser(userId: number):Observable<IUserSurvey>{
+    return this.http.get<IUserSurvey>(`http://localhost:8080/survey/${userId}`);
+  }
 }

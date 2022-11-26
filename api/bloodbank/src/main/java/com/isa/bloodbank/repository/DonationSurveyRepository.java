@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DonationSurveyRepository extends JpaRepository<DonationSurvey, Long> {
+	DonationSurvey findByUserId(Long userId);
 }
