@@ -39,7 +39,6 @@ public class UserController {
     }
     @PostMapping("/register/admin")
     public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
-        System.out.println(centerAdmin + "e");
         return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
     }
 
