@@ -51,8 +51,6 @@ public class UserService implements UserDetailsService {
 		return userRepository.save(user);
 	}
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
-		centerAdmin.setUserType(UserType.ADMIN_CENTER);
-		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
 

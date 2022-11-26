@@ -32,25 +32,17 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <!-- <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Bloodtype</mat-label>
-      <mat-select formControlName="bloodType">
-        <mat-option value="0">A_POSITIVE</mat-option>
-        <mat-option value="1">A_NEGATIVE</mat-option>
-        <mat-option value="2">B_POSITIVE</mat-option>
-        <mat-option value="3">B_NEGATIVE</mat-option>
-        <mat-option value="4">AB_POSITIVE</mat-option>
-        <mat-option value="5">AB_NEGATIVE</mat-option>
-        <mat-option value="6">0_POSITIVE</mat-option>
-        <mat-option value="7">0_NEGATIVE</mat-option>
-        <mat-option value="8">HH_POSITIVE</mat-option>
-        <mat-option value="9">HH_NEGATIVE</mat-option>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Admin type</mat-label>
+      <mat-select formControlName="adminType"  [errorStateMatcher]="matcher">
+        <mat-option value="ADMIN_CENTER">CENTER ADMIN</mat-option>
+        <mat-option value="ADMIN_SYSTEM">SYSTEM ADMIN</mat-option>
       </mat-select>
       <mat-error *ngIf="!registerForm.hasError('required')">
-        Please choose bloodtype
+        Please choose admin type
       </mat-error>
-    </mat-form-field> -->
-    <mat-form-field appearance="fill" class="form-field">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field" *ngIf="this.registerForm.value.adminType === 'ADMIN_CENTER'">
       <mat-label>Bloodbank</mat-label>
       <mat-select formControlName="bloodBankName"  [errorStateMatcher]="matcher">
         <mat-option value="{{bloodbank.name}}" *ngFor="let bloodbank of bloodbanks">{{bloodbank.name}}</mat-option>
