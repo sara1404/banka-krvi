@@ -49,6 +49,6 @@ export class UserService {
   }
 
   getSurveyForUser(userId: number):Observable<IUserSurvey>{
-    return this.http.get<IUserSurvey>(`http://localhost:8080/survey/${userId}`);
+    return this.http.get<IUserSurvey>(`http://localhost:8080/survey/for-user/${userId}`);
   }
 }

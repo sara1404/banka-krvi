@@ -21,8 +21,11 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startExamination(user: IUser){
-    this.dialog.open(ExaminationComponent);
+  startExamination(){
+    this.dialog.open(ExaminationComponent,
+      {
+        data: {user: this.user}
+      });
   }
 }
 
