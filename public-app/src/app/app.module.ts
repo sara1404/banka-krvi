@@ -14,16 +14,14 @@ import { UsersModule } from './views/users/users.module';
 import { MaterialModule } from './material/material.module';
 import { BloodSuppliesComponent } from './admin-profile/blood-supplies/blood-supplies.component';
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
-
-
 import { RegisterAdminModule } from './views/register-admin/register-admin.module';
 import { RegisterBloodbankModule } from './views/register-bloodbank/register-bloodbank.module';
 import { BloodBankDisplayModule } from './views/blood-banks-display/blood-bank-display.module';
 import { UserProfileModule } from './views/user-profile/user-profile.module';
-
 import {ToastrModule} from "ngx-toastr"
 import { RegisterUserModule } from './views/register-user/register-user.module';
 import { DonationSurveyModule } from './views/donation-survey/donation-survey.module';
+import { CreateAppointmentModule } from './views/appointments/create-appointment.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +48,8 @@ import { DonationSurveyModule } from './views/donation-survey/donation-survey.mo
     DonationSurveyModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
-    })
+    }),
+    CreateAppointmentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

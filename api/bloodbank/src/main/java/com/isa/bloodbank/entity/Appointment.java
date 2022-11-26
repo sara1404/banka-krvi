@@ -23,7 +23,7 @@ public class Appointment extends BaseEntity {
 	@Column
 	LocalDateTime startTime;
 	@Column
-	LocalDateTime endTime;
+	double duration;
 	@ManyToMany()
 	List<User> medicalStaff;
 	@Column
@@ -31,6 +31,4 @@ public class Appointment extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "appointment_info_id", referencedColumnName = "id")
 	AppointmentInfo appointmentInfo;
-	//@Column
-	//boolean finished;
 }
