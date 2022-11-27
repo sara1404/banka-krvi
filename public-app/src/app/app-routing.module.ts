@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './admin-profile/change-password/change-
 import { RegisterUserComponent } from './views/register-user/register-user/register-user.component';
 import { DonationSurveyComponent } from './views/donation-survey/donation-survey.component';
 import {CreateAppointmentComponent} from './views/appointments/create-appointment.component'
+import { AdminCalendarComponent } from './views/admin-calendar/admin-calendar.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: 'free/appointments', component:FreeAppointmentsComponent},
   {path: 'bloodsupplies', component:BloodSuppliesComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
-  {path: 'createAppointment', component: CreateAppointmentComponent}
+  {path: 'createAppointment', component: CreateAppointmentComponent},
+  {path: 'admin-calendar', component: AdminCalendarComponent}
 ];
 
 @NgModule({
