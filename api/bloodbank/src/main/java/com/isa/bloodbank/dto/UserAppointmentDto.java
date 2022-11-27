@@ -6,6 +6,7 @@ import lombok.Value;
 
 @Value
 public class UserAppointmentDto {
+	Long id;
 	UserDto user;
 	LocalDateTime startTime;
 	LocalDateTime endTime;

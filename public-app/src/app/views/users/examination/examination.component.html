@@ -1,6 +1,46 @@
-<p *ngIf="checkSurvey() == true">
-    <button class="example-button-row" mat-button color="white" (click)="startExamination()">Start examination</button>
-    <button class="example-button-row" mat-button color="white" (click)="didntShowUp()">Didn't show up</button>
+<div *ngIf="checkSurvey() == true">
+    <table mat-table class="mat-elevation-z8" [dataSource]="userAppointments">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef> Start </th>
+          <td mat-cell *matCellDef="let element"> {{element.startTime | date:'dd.MM.yyyy. hh:mm'}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element"> {{element.endTime | date:'dd.MM.yyyy. hh:mm'}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="startExamination">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button class="example-button-row" mat-button color="white" (click)="startExamination()">Start examination</button> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="didntShowUp">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button class="example-button-row" mat-button color="white" (click)="didntShowUp()">Didn't show up</button>
+            </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="unsuitable">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button class="example-button-row" mat-button color="white" (click)="unsuitable()">Unsuitable</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    
     <!--<button mat-raised-button (click) = "startExamination()">Examination</button>-->
-</p>
+</div>
 <p *ngIf="checkSurvey() == false">ne moze</p>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IDonationSurvey } from '../model/DonationSurvey';
 import { IUserSurvey } from '../model/UserSurvey';
 import { IUser } from '../model/User';
+import { IUserAppointment } from '../model/UserAppointment';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,9 @@ export class UserService {
 
   getSurveyForUser(userId: number):Observable<IUserSurvey>{
     return this.http.get<IUserSurvey>(`http://localhost:8080/survey/for-user/${userId}`);
+  }
+
+  getAppointmentsForUser(userId: number):Observable<IUserAppointment[]>{
+    return this.http.get<IUserAppointment[]>(`http://localhost:8080/appointment/for-user/${userId}`);
   }
 }
