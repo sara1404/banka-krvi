@@ -1,2 +1,6 @@
-<p *ngIf="checkSurvey() == true">moze</p>
+<p *ngIf="checkSurvey() == true">
+    <button class="example-button-row" mat-button color="white" (click)="startExamination()">Start examination</button>
+    <button class="example-button-row" mat-button color="white" (click)="didntShowUp()">Didn't show up</button>
+    <!--<button mat-raised-button (click) = "startExamination()">Examination</button>-->
+</p>
 <p *ngIf="checkSurvey() == false">ne moze</p>

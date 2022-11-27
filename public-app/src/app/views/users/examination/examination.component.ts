@@ -30,4 +30,11 @@ export class ExaminationComponent implements OnInit {
       return false;
   }
 
+  startExamination(){
+
+  }
+  didntShowUp(){
+
+  }
+
 }

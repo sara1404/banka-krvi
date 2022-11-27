@@ -6,6 +6,8 @@ import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;

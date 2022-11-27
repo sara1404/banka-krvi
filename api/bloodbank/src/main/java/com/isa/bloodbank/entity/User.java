@@ -4,12 +4,15 @@ import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -72,5 +75,7 @@ public class User extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
 	BloodBank bloodBank;
+	@ManyToMany()
+	List<Appointment> appointments;
 
 }

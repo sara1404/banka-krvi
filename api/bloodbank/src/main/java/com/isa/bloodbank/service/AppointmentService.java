@@ -1,6 +1,7 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -28,6 +29,10 @@ public class AppointmentService {
 		}
 		return appointmentMapper.appointmentsToFreeAppointmentDtos(availableAppointments);
 		//return availableAppointments;
+	}
+
+	public List<UserAppointmentDto> findAllByUserId(Long userId){
+		return appointmentMapper.appointmentsToUserAppointmentDto(appointmentRepository.findAllByUserId(userId));
 	}
 	
 }
