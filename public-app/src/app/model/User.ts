@@ -14,5 +14,6 @@ export interface IUser{
   phoneNumber: string,
   gender: string,
   workplaceName: string,
-  jobTitle: string
+  jobTitle: string,
+  points: number
 }

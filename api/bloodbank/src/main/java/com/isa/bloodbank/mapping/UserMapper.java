@@ -4,6 +4,7 @@ import com.isa.bloodbank.dto.DonationSurveyDto;
 import com.isa.bloodbank.dto.AdministratorDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
+import com.isa.bloodbank.dto.UserPointDto;
 import com.isa.bloodbank.entity.DonationSurvey;
 import com.isa.bloodbank.entity.User;
 
@@ -23,6 +24,8 @@ public interface UserMapper {
 	List<UserDto> usersToUserDtos(List<User> users);
 	List<User> userDtosToUsers(List<UserDto> users);
 	DonationSurvey surveyDtoToSurvey(DonationSurveyDto surveyDto);
+	UserPointDto userToUserPointDto(User user);
+	User userPointDtoToUser(UserPointDto userPointDto);
 	List<AdministratorDto> usersToAdministratorDtos(List<User> users);
 	List<User> administratorDtosToUsers(List<AdministratorDto> users);
 }

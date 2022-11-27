@@ -43,4 +43,5 @@ public class UserDto {
 	Address address;
 	@NotNull
 	String password;
+	int points;
 }

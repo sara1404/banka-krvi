@@ -77,5 +77,7 @@ public class User extends BaseEntity {
 	BloodBank bloodBank;
 	@ManyToMany()
 	List<Appointment> appointments;
+	@Column
+	int points;
 
 }
