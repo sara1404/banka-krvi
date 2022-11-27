@@ -81,4 +81,9 @@ public class UserController {
         User user = userService.findUserById(administratorId);
         return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
     }
+
+    @PostMapping("/penal-points/{id}")
+    public ResponseEntity<Boolean> addPenalPoints(@PathVariable("id") final Long id){
+        return ResponseEntity.ok(userService.addPenalPoints(id));
+    }
 }
