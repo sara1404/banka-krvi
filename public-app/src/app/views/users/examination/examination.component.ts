@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IAppointment } from 'src/app/admin-profile/model/Appointment';
 import { IUser } from 'src/app/model/User';
 import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { IUserSurvey } from 'src/app/model/UserSurvey';
@@ -39,12 +40,13 @@ export class ExaminationComponent implements OnInit {
   startExamination(){
 
   }
-  didntShowUp(){
+  didntShowUp(element: IUserAppointment){
     this.userService.addPenalPoints(this.userSurvey.userId).subscribe(data=>{this.result = data});
+    this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
   }
 
-  unsuitable(){
-
+  unsuitable(element: IUserAppointment){
+    this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
   }
 
 }

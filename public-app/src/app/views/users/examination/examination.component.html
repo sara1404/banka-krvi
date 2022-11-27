@@ -26,14 +26,14 @@
         <ng-container matColumnDef="didntShowUp">
             <th mat-header-cell *matHeaderCellDef>  </th>
             <td mat-cell *matCellDef="let element"> 
-                <button class="example-button-row" mat-button color="white" (click)="didntShowUp()">Didn't show up</button>
+                <button class="example-button-row" mat-button color="white" (click)="didntShowUp(element)">Didn't show up</button>
             </td>
         </ng-container>
         
         <ng-container matColumnDef="unsuitable">
             <th mat-header-cell *matHeaderCellDef>  </th>
             <td mat-cell *matCellDef="let element"> 
-                <button class="example-button-row" mat-button color="white" (click)="unsuitable()">Unsuitable</button>
+                <button class="example-button-row" mat-button color="white" (click)="unsuitable(element)">Unsuitable</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
