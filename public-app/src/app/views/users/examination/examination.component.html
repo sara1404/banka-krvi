@@ -1,1 +1,2 @@
-<p>{{userSurvey?.tookAntibiotics}}</p>
+<p *ngIf="checkSurvey() == true">moze</p>
+<p *ngIf="checkSurvey() == false">ne moze</p>
