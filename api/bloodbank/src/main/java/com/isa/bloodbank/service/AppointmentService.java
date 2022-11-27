@@ -34,5 +34,14 @@ public class AppointmentService {
 	public List<UserAppointmentDto> findAllByUserId(Long userId){
 		return appointmentMapper.appointmentsToUserAppointmentDto(appointmentRepository.findAllByUserId(userId));
 	}
-	
+
+	public Boolean finishAppointment(Long id){
+		Appointment appointment = appointmentRepository.getReferenceById(id);
+		if(appointment == null){
+			return false;
+		}
+		appointment.setFinished(true);
+		appointmentRepository.save(appointment);
+		return true;
+	}
 }

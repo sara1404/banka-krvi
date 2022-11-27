@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,9 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.findAllByUserId(id));
 	}
 
-
+	@PostMapping("/finish")
+	public ResponseEntity<Boolean> finish(@RequestBody final Long id){
+		return ResponseEntity.ok(appointmentService.finishAppointment(id));
+	}
 
 }

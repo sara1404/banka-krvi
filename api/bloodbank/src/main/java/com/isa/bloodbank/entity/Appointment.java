@@ -34,4 +34,6 @@ public class Appointment extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	User user;
+	@Column
+	boolean finished;
 }
