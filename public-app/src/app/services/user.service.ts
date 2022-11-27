@@ -56,4 +56,9 @@ export class UserService {
   getAppointmentsForUser(userId: number):Observable<IUserAppointment[]>{
     return this.http.get<IUserAppointment[]>(`http://localhost:8080/appointment/for-user/${userId}`);
   }
+
+
+  addPenalPoints(userId: number):Observable<Boolean>{
+    return this.http.post<Boolean>('http://localhost:8080/user/penal-points', userId);
+  }
 }

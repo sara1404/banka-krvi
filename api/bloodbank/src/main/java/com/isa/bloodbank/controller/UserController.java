@@ -82,8 +82,8 @@ public class UserController {
         return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
     }
 
-    @PostMapping("/penal-points/{id}")
-    public ResponseEntity<Boolean> addPenalPoints(@PathVariable("id") final Long id){
+    @PostMapping("/penal-points")
+    public ResponseEntity<Boolean> addPenalPoints(@RequestBody final Long id){
         return ResponseEntity.ok(userService.addPenalPoints(id));
     }
 }
