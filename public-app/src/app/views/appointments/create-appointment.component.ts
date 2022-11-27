@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastService } from '../../services/toast.service';
 import {IWorkingHours} from '../../model/WorkingHours'
+import { BloodBankService } from 'src/app/services/blood-bank.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -14,13 +15,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 function timeValidator(c: FormControl) {
-  const startTime = new Date(CreateAppointmentComponent.workingHours.startTime);
+  const startTime = new Date(CreateAppointmentComponent.workingHours.startTime)
   const endTime = new Date(CreateAppointmentComponent.workingHours.endTime)
   const chosenTime = new Date(c.value)
-  if(chosenTime.getTime < startTime.getTime) {
+  if(chosenTime.getHours() < startTime.getHours() || (chosenTime.getHours() == startTime.getHours() && chosenTime.getMinutes() < startTime.getMinutes())) {
     return {dateValidator: {valid: false}};
   }
-  else if (chosenTime.getTime > endTime.getTime){
+  else if (chosenTime.getHours() > endTime.getHours() || (chosenTime.getHours() == endTime.getHours() && chosenTime.getMinutes() >= endTime.getMinutes())){
     return {dateValidator: {valid: false}};
   }
   else {
@@ -36,10 +37,20 @@ function timeValidator(c: FormControl) {
 })
 export class CreateAppointmentComponent implements OnInit {
 
-  constructor(private appointmentService: AppointmentService, private toastService: ToastService) { }
+  constructor(private appointmentService: AppointmentService,private bloodBankService: BloodBankService, private toastService: ToastService) { }
+  public static workingHours : IWorkingHours = {startTime: new Date(), endTime : new Date()}
+  ngOnInit(){
+    this.bloodBankService.getBloodBankWorkingHours().subscribe({
+      next: (data) => {
+        CreateAppointmentComponent.workingHours = data
+        console.log(data)
+      },
+      error: (e) => {
+        console.log("error")
+      },
+    })
 
-  ngOnInit(){}
-  public static workingHours : IWorkingHours
+  }
   createAppointmentForm = new FormGroup({
     startTime : new FormControl({value : null}, [Validators.required, timeValidator]),
     duration: new FormControl({value : null}, [Validators.required])

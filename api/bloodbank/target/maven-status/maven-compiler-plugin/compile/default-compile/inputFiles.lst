@@ -15,6 +15,7 @@ C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodb
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\UserMapper.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AuthController.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BaseEntity.java
+C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\WorkingHoursMapper.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Address.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodBankService.java
@@ -26,6 +27,7 @@ C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodb
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\DonationSurveyController.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Appointment.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\AppointmentDto.java
+C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\WorkingHoursRepository.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\DonationSurveyDto.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodBankRepository.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
@@ -34,6 +36,7 @@ C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodb
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\UserType.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\config\SecurityConfig.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\BloodSupplyMapper.java
+C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\WorkingHoursDto.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\BaseException.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\PageDto.java
 C:\Users\smvul\Desktop\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\BloodSupplyDto.java

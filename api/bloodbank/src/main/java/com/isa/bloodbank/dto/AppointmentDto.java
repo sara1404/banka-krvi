@@ -9,12 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class AppointmentDto {
-    @Id
-    Long id;
-    Long bloodBankId;
     @NotNull
     LocalDateTime startTime;
     @NotNull
     double duration;
-    boolean available;
 }

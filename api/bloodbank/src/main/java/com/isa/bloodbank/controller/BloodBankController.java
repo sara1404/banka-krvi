@@ -2,8 +2,10 @@ package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.PageDto;
+import com.isa.bloodbank.dto.WorkingHoursDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
@@ -62,6 +64,12 @@ public class BloodBankController {
 	@PostMapping("/register")
 	public ResponseEntity<BloodBankDto> register(@Valid @RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
+	}
+
+	@GetMapping(value = "/getWorkingHours", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<WorkingHours> getWorkingHours() {
+		final Long administratorId = (long) (3);
+		return ResponseEntity.ok(bloodBankService.getWorkingHours(administratorId));
 	}
 
 }
