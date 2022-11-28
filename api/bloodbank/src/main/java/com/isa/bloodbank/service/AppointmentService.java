@@ -7,6 +7,7 @@ import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,14 @@ public class AppointmentService {
 	}
 
 	public List<UserAppointmentDto> findAllByUserId(Long userId){
-		return appointmentMapper.appointmentsToUserAppointmentDto(appointmentRepository.findAllByUserId(userId));
+		List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+		List<Appointment> availableAppointments = new ArrayList<Appointment>();
+		for(Appointment appointment : appointments){
+			if(appointment.isFinished() == false && appointment.getStartTime().compareTo(LocalDateTime.now()) > 0){
+				availableAppointments.add(appointment);
+			}
+		}
+		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
 	public Boolean finishAppointment(Long id){
