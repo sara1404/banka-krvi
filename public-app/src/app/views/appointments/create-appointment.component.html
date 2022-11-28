@@ -8,12 +8,12 @@
         [errorStateMatcher]="matcher"
         >
         <mat-error *ngIf="!createAppointmentForm.hasError('required')">
-          Please enter valid start date and time
+          Enter valid date and time. Hospital working hours : {{getWorkingHours().startTime | date: 'HH:mm'}} - {{getWorkingHours().endTime | date: 'HH:mm'}}
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Duration</mat-label>
-        <input matInput type="number" formControlName="duration"
+        <mat-label>Duration in minutes</mat-label>
+        <input matInput type="number" formControlName="duration" min ="1"
         required
         [errorStateMatcher]="matcher"
         >

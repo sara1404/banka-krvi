@@ -39,6 +39,9 @@ export class CreateAppointmentComponent implements OnInit {
 
   constructor(private appointmentService: AppointmentService,private bloodBankService: BloodBankService, private toastService: ToastService) { }
   public static workingHours : IWorkingHours = {startTime: new Date(), endTime : new Date()}
+  getWorkingHours() : IWorkingHours {
+    return CreateAppointmentComponent.workingHours
+  }
   ngOnInit(){
     this.bloodBankService.getBloodBankWorkingHours().subscribe({
       next: (data) => {
@@ -52,8 +55,8 @@ export class CreateAppointmentComponent implements OnInit {
 
   }
   createAppointmentForm = new FormGroup({
-    startTime : new FormControl({value : null}, [Validators.required, timeValidator]),
-    duration: new FormControl({value : null}, [Validators.required])
+    startTime : new FormControl(null, [Validators.required, timeValidator]),
+    duration: new FormControl(null, [Validators.required])
   })
  
   matcher = new MyErrorStateMatcher();

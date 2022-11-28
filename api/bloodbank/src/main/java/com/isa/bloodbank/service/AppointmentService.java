@@ -35,8 +35,8 @@ public class AppointmentService {
 		//return availableAppointments;
 	}
 
-	public AppointmentDto createAppointment(AppointmentDto appointmentDto, Long adminId){
-		Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+	public AppointmentDto createAppointment(Appointment appointment, Long adminId){
+		//Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		appointment.setBloodBankId(userService.findById(adminId).getBloodBank().getId());
 		appointment.setAvailable(true);
 		appointmentRepository.save(appointment);

@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: 'free/appointments', component:FreeAppointmentsComponent},
   {path: 'bloodsupplies', component:BloodSuppliesComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
-  {path: 'createAppointment', component: CreateAppointmentComponent}
+  {path: 'create-appointment', component: CreateAppointmentComponent}
 ];
 
 @NgModule({

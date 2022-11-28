@@ -33,7 +33,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final AppointmentDto appointmentDto) {
+	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final Appointment appointmentDto) {
 		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
 	}
