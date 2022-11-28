@@ -1,5 +1,7 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AppointmentDto;
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
@@ -18,6 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/appointment")
@@ -44,4 +50,9 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.finishAppointment(id));
 	}
 
+	@PostMapping("/create")
+	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final Appointment appointmentDto) {
+		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
+		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
+	}
 }

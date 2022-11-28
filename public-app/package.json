@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "ng-bootstrap": "^1.6.3",
+    "ngx-pagination": "^6.0.2",
     "ngx-toastr": "^15.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

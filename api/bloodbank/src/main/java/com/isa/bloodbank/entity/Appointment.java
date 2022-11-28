@@ -10,10 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
@@ -23,7 +26,7 @@ public class Appointment extends BaseEntity {
 	@Column
 	LocalDateTime startTime;
 	@Column
-	LocalDateTime endTime;
+	double duration;
 	@ManyToMany()
 	List<User> medicalStaff;
 	@Column

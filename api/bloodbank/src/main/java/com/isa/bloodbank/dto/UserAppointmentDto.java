@@ -9,5 +9,5 @@ public class UserAppointmentDto {
 	Long id;
 	UserDto user;
 	LocalDateTime startTime;
-	LocalDateTime endTime;
+	double duration;
 }

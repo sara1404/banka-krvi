@@ -4,5 +4,5 @@ export interface IUserAppointment {
     id: number;
     user: IUser;
     startTime: Date;
-    endTime: Date;
+    duration: number;
 }

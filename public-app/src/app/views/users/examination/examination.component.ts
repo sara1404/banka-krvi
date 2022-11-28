@@ -17,7 +17,7 @@ export class ExaminationComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private _data: any, private userService: UserService) { }
 
   userSurvey: IUserSurvey;
-  displayedColumns: string[] = ['start', 'end', 'startExamination', 'didntShowUp', 'unsuitable'];
+  displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
   public result: Boolean
   userAppointments: IUserAppointment[]
   ngOnInit(): void {

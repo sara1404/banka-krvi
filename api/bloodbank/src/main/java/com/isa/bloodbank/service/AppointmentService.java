@@ -1,8 +1,11 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
@@ -20,6 +23,8 @@ public class AppointmentService {
 	private AppointmentRepository appointmentRepository;
 	@Autowired
 	private AppointmentMapper appointmentMapper;
+	@Autowired
+	private UserService userService;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -43,13 +48,20 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
-	public Boolean finishAppointment(Long id){
+	public Boolean finishAppointment(Long id) {
 		Appointment appointment = appointmentRepository.getReferenceById(id);
-		if(appointment == null){
+		if (appointment == null) {
 			return false;
 		}
 		appointment.setFinished(true);
 		appointmentRepository.save(appointment);
 		return true;
+	}
+	public AppointmentDto createAppointment(Appointment appointment, Long adminId){
+		//Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		appointment.setBloodBankId(userService.findById(adminId).getBloodBank().getId());
+		appointment.setAvailable(true);
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 }

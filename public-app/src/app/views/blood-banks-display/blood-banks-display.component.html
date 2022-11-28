@@ -1,6 +1,6 @@
 <div class="mainContent">
-<app-search-blood-banks (bloodBanks)="onSearch($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)" [averageGrade]="averageGrade"></app-search-blood-banks>
-<app-filter-blood-banks (bloodBanks)="onSearch($event)" (averageGrade)="saveAverageGrade($event)" [name]="name" [city]="city"></app-filter-blood-banks>
+<app-search-blood-banks (bloodBanks)="onSearch($event)" (totalElements)="saveTotalElements($event)" (name)="saveSearchName($event)" (city)="saveSearchCity($event)" [averageGrade]="averageGrade" (pageNumber)="savePageNumber($event)"></app-search-blood-banks>
+<app-filter-blood-banks (bloodBanks)="onSearch($event)" (totalElements)="saveTotalElements($event)" (averageGrade)="saveAverageGrade($event)" [name]="name" [city]="city" (pageNumber)="savePageNumber($event)"></app-filter-blood-banks>
 <div class="table">
 <mat-table #table [dataSource]="bloodBanks" matSort>
     <ng-container matColumnDef="name">
@@ -34,5 +34,10 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <mat-paginator [pageSize]="2" [length]="totalElements" (page)="onPageChanged($event)" [pageIndex]="pageNumber">
+
+</mat-paginator>
+</div>
+<div>
 </div>
 <div>
