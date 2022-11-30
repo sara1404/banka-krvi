@@ -1,6 +1,6 @@
 package com.isa.bloodbank.entity.enums;
 
-public enum HandEnum {
+public enum Hand {
 	LEFT,
 	RIGHT
 }

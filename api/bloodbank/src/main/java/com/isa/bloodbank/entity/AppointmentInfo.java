@@ -1,7 +1,7 @@
 package com.isa.bloodbank.entity;
 
 import com.isa.bloodbank.entity.enums.BloodType;
-import com.isa.bloodbank.entity.enums.HandEnum;
+import com.isa.bloodbank.entity.enums.Hand;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +29,7 @@ public class AppointmentInfo extends BaseEntity {
 	@Column
 	double tv;
 	@Column
-	HandEnum handEnum;
+	Hand handEnum;
 	@Column
 	double quantity;
 	@Column
