@@ -39,6 +39,8 @@ export class AppointmentInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
   get cuso4() {
     return this.appInfoForm.get('cuso4');
   }
@@ -68,5 +70,11 @@ export class AppointmentInfoComponent implements OnInit {
   }
   get endBlood() {
     return this.appInfoForm.get('endBlood');
+  }
+
+  finish(){
+    if(this.appInfoForm.valid == false) {
+      return;
+    }
   }
 }
