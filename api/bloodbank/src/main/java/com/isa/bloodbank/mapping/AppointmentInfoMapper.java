@@ -9,5 +9,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface AppointmentInfoMapper {
 	AppointmentInfo appointmentDtoToAppointment(AppointmentInfoDto appointment);
-	AppointmentInfoDto appointmentToAppointmentInfoDto(Appointment appointment);
+	AppointmentInfoDto appointmentToAppointmentInfoDto(AppointmentInfo appointment);
 }
