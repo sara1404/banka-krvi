@@ -19,6 +19,7 @@ export class ExaminationComponent implements OnInit {
   userSurvey: IUserSurvey;
   displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
   public result: Boolean
+  start: boolean= false;
   userAppointments: IUserAppointment[]
   ngOnInit(): void {
     console.log(this._data.user.id)
@@ -38,7 +39,7 @@ export class ExaminationComponent implements OnInit {
   }
 
   startExamination(){
-
+    this.start = true;
   }
   didntShowUp(element: IUserAppointment){
     this.userService.addPenalPoints(this.userSurvey.userId).subscribe(data=>{this.result = data});

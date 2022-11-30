@@ -5,6 +5,8 @@ import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users.component';
 import { ExaminationComponent } from './examination/examination.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AppointmentInfoComponent } from './appointment-info/appointment-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,12 +14,15 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     UsersComponent,
     UserComponent,
-    ExaminationComponent
+    ExaminationComponent,
+    AppointmentInfoComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [UsersComponent]
 })
