@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AppointmentAndInfoDto;
 import com.isa.bloodbank.dto.AppointmentInfoDto;
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.AppointmentInfo;
@@ -20,7 +21,7 @@ public class AppointmentInfoController {
 	private AppointmentInfoService appointmentInfoService;
 
 	@PostMapping("/create")
-	public ResponseEntity<AppointmentInfoDto> create( @RequestBody final AppointmentInfoDto appointmentInfoDto){
-		return ResponseEntity.ok(appointmentInfoService.create(appointmentInfoDto));
+	public ResponseEntity<AppointmentInfoDto> create( @RequestBody final AppointmentAndInfoDto appointmentAndInfoDto){
+		return ResponseEntity.ok(appointmentInfoService.create(appointmentAndInfoDto));
 	}
 }

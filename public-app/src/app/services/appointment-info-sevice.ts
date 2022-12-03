@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IPage } from '../model/Page';
 import { IAppointment } from '../model/Appointment';
 import { IAppointmentInfo } from '../model/AppointmentInfo';
+import { IAppointmentAndInfo } from '../admin-profile/model/AppointmentAndInfo';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class AppointmentInfoService {
 
   constructor(private http: HttpClient) {}
 
-    createAppointmentInfo(appointmentInfo: IAppointmentInfo) : Observable<IAppointmentInfo> {
-    return this.http.post<IAppointmentInfo>(`http://localhost:8080/appointmentinfo/create`, appointmentInfo);
+    createAppointmentInfo(appointmentInfo: IAppointmentAndInfo) : Observable<IAppointmentAndInfo> {
+    return this.http.post<IAppointmentAndInfo>(`http://localhost:8080/appointmentinfo/create`, appointmentInfo);
   }
 }

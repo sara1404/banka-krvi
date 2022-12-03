@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAppointment } from 'src/app/admin-profile/model/Appointment';
+import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
 import { IUser } from 'src/app/model/User';
 import { IUserAppointment } from 'src/app/model/UserAppointment';
@@ -63,7 +64,11 @@ export class ExaminationComponent implements OnInit {
       reason: null,
       examBloodType: null
     };
-    this.appointmentInfoService.createAppointmentInfo(info).subscribe(({
+    const appointmentAndInfo: IAppointmentAndInfo = {
+      appointmentId: this.appointment.id,
+      appointmentInfoDto: info
+    }
+    this.appointmentInfoService.createAppointmentInfo(appointmentAndInfo).subscribe(({
       next: (res) => {
         this.showSuccess()
       },

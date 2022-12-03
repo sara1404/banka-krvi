@@ -1,10 +1,13 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.AppointmentDto;
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
+import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -63,5 +66,11 @@ public class AppointmentService {
 		appointment.setAvailable(true);
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public Appointment updateAppointmentInfo(Long id, AppointmentInfo appointmentInfo) {
+		Appointment appointment = appointmentRepository.getReferenceById(id);
+		appointment.setAppointmentInfo(appointmentInfo);
+		return appointmentRepository.save(appointment);
 	}
 }

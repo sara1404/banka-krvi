@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointment } from 'src/app/model/Appointment';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
 import { IUser } from 'src/app/model/User';
@@ -99,8 +100,12 @@ export class AppointmentInfoComponent implements OnInit {
       reason: this.appInfoForm.value.reason,
       examBloodType: this.appInfoForm.value.examBloodType
     };
+    const appointmentAndInfo: IAppointmentAndInfo = {
+      appointmentId: this.appointment.id,
+      appointmentInfoDto: info
+    }
     //console.log(info)
-    this.appointmentInfoService.createAppointmentInfo(info).subscribe(({
+    this.appointmentInfoService.createAppointmentInfo(appointmentAndInfo).subscribe(({
       next: (res) => {
         this.showSuccess()
       },
