@@ -1,19 +1,19 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodBankDto;
-import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.mapping.PageMapper;
 import com.isa.bloodbank.repository.BloodBankRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,32 +38,41 @@ public class BloodBankService {
 		return bloodBankRepository.findByAdministratorId(id);
 	}
 	*/
-	public BloodBank update(BloodBankDto bloodBankDto) {
-		BloodBank bloodBank = bloodBankMapper.bloodBankDtoToBloodBank(bloodBankDto);
+	public BloodBank update(final BloodBankDto bloodBankDto) {
+		final BloodBank bloodBank = bloodBankMapper.bloodBankDtoToBloodBank(bloodBankDto);
 		findById(bloodBank.getId());
 		return bloodBankRepository.save(bloodBank);
 	}
 
-	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final int pageSize, final int pageNumber) {
+	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final int pageSize, final int pageNumber,
+		String sortBy, final String sortDirection) {
+		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
+		if (sortBy == null || sortBy.equals("")) {
+			sortBy = "name";
+		}
 		if (!name.equals("") && !city.equals("") && averageGrade != 0) {
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(name, averageGrade, city, PageRequest.of(pageNumber, pageSize));
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(name, averageGrade,
+				city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 		} else if (!name.equals("") && !city.equals("")) {
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(name, city, PageRequest.of(pageNumber, pageSize));
-		} else if (!name.equals("") && averageGrade != 0){
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqual(name, averageGrade, PageRequest.of(pageNumber, pageSize));
-		} else if (!city.equals("") && averageGrade != 0){
-			return bloodBankRepository.findByAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(averageGrade, city, PageRequest.of(pageNumber, pageSize));
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(name, city,
+				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
+		} else if (!name.equals("") && averageGrade != 0) {
+			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqual(name, averageGrade,
+				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
+		} else if (!city.equals("") && averageGrade != 0) {
+			return bloodBankRepository.findByAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(averageGrade, city,
+				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 		} else if (!name.equals("")) {
-			return bloodBankRepository.findByNameContainingIgnoreCase(name, PageRequest.of(pageNumber, pageSize));
+			return bloodBankRepository.findByNameContainingIgnoreCase(name, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 		} else if (!city.equals("")) {
-			return bloodBankRepository.findByAddressId_CityContainingIgnoreCase(city, PageRequest.of(pageNumber, pageSize));
-		} else if (averageGrade != 0){
-			return bloodBankRepository.findByAverageGradeGreaterThanEqual(averageGrade, PageRequest.of(pageNumber, pageSize));
+			return bloodBankRepository.findByAddressId_CityContainingIgnoreCase(city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
+		} else if (averageGrade != 0) {
+			return bloodBankRepository.findByAverageGradeGreaterThanEqual(averageGrade,
+				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 		} else {
-			return bloodBankRepository.findAll(PageRequest.of(pageNumber, pageSize));
+			return bloodBankRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 		}
 	}
-
 
 	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
 		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));

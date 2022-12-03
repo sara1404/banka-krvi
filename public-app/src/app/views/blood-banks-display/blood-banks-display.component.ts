@@ -22,23 +22,17 @@ export class DisplayBloodBanksComponent implements OnInit {
   averageGrade: number = 0
   pageNumber: number = 0
   totalElements: number = 0
+  sortBy: string;
+  sortDirection: string;
 
   @ViewChild(MatSort) sort: MatSort;
   
   ngOnInit(): void {
     this.bloodBankService
-      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.pageNumber)
+      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.pageNumber, this.sortBy, this.sortDirection)
       .subscribe((data) => {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
-        // fun fact: MatSort with nested objects is not supported by default
-        this.bloodBanks.sortingDataAccessor = (item, property) => {
-          switch(property) {
-            case 'city': return item.address.city;
-            default: return item[property];
-          }
-        };
-        this.bloodBanks.sort = this.sort;
       });
       
   }
@@ -58,10 +52,18 @@ export class DisplayBloodBanksComponent implements OnInit {
     this.averageGrade = eventData;
   }
 
+  saveSortBy(eventData: string) {
+    this.sortBy = eventData;
+  }
+
+  saveSortDirection(eventData: string) {
+    this.sortDirection = eventData;
+  }
+
   onPageChanged(e : any){
     this.pageNumber = e.pageIndex;
     this.bloodBankService
-      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, e.pageIndex)
+      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, e.pageIndex, this.sortBy, this.sortDirection)
       .subscribe((data) => {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
