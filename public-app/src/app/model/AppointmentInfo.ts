@@ -8,5 +8,8 @@ export interface IAppointmentInfo{
     examBloodType: string,
     quantity: number,
     startBlood: Date
-    endBlood: Date
+    endBlood: Date,
+    surveyAccepted: boolean,
+    accepted: boolean,
+    reason: string
 }

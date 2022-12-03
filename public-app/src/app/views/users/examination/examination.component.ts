@@ -22,13 +22,11 @@ export class ExaminationComponent implements OnInit {
   start: boolean= false;
   userAppointments: IUserAppointment[]
   ngOnInit(): void {
-    console.log(this._data.user.id)
     this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{this.userSurvey = data;});
     this.userService.getAppointmentsForUser(this._data.user.id).subscribe(data=>{this.userAppointments = data;});
   }
 
   checkSurvey(): boolean{
-    console.log(this.userAppointments)
     if(this.userSurvey?.weight >= 50 && this.userSurvey?.fluSymptoms == false && this.userSurvey?.skinIrritations == false
       && this.userSurvey?.abnormalBloodPressure == false && this.userSurvey?.tookAntibiotics == false 
       && this.userSurvey?.onPeriod == false && this.userSurvey?.dentistIntervention == false 

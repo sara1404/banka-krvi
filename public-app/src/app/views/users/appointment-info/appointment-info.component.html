@@ -61,10 +61,23 @@
             </mat-error>
           </div>
       </div>
+    <div>
+      <label for="" class="title">Acceptance</label>
+      <mat-radio-group class="radio" aria-label="Accepted">
+        <mat-radio-button value="True">Yes</mat-radio-button>
+        <mat-radio-button value="False">No</mat-radio-button>
+      </mat-radio-group>
+    
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Reason</mat-label>
+          <input formControlName="reason" matInput />
+      </mat-form-field>
+    </div>
+
 
       <div>
         <label for="" class="title">Blood</label>
-    </div>
+      </div>
       <div>
         <mat-form-field appearance="fill" class="form-field">
             <mat-label>Bloodtype</mat-label>
