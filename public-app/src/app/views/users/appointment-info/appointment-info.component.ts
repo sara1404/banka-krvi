@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   AbstractControl,
   Form,
@@ -8,8 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { IAppointment } from 'src/app/model/Appointment';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
 import { IUser } from 'src/app/model/User';
+import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { AppointmentInfoService } from 'src/app/services/appointment-info-sevice';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
@@ -21,6 +23,9 @@ import { UserService } from 'src/app/services/user.service';
 export class AppointmentInfoComponent implements OnInit {
   appInfoForm: FormGroup;
   user: IAppointmentInfo;
+
+  @Input() appointment: IUserAppointment;
+  result: Boolean
 
   constructor(fb: FormBuilder, private userService: UserService, private toastService: ToastService, private appointmentInfoService: AppointmentInfoService) {
     this.appInfoForm = fb.group({
@@ -103,6 +108,7 @@ export class AppointmentInfoComponent implements OnInit {
         this.showError(e)
       },
     }));
+    this.userService.finishAppointment(this.appointment.id).subscribe(data => {this.result = data});
     /*
     this.info.cuso4 = Number(this.appInfoForm.get('cuso4'));
     this.info.hemoglobinometer = this.appInfoForm.value.hemoglobinometer

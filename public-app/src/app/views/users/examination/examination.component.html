@@ -19,7 +19,7 @@
         <ng-container matColumnDef="startExamination">
             <th mat-header-cell *matHeaderCellDef>  </th>
             <td mat-cell *matCellDef="let element"> 
-                <button *ngIf="checkSurvey() == true" class="example-button-row" mat-button color="white" (click)="startExamination()">Start examination</button> 
+                <button *ngIf="checkSurvey() == true" class="example-button-row" mat-button color="white" (click)="startExamination(element)">Start examination</button> 
             </td>
         </ng-container>
 
@@ -42,6 +42,6 @@
     <!--<button mat-raised-button (click) = "startExamination()">Examination</button>-->
 </div>
 <div *ngIf="this.start==true">
-    <app-appointment-info></app-appointment-info>
+    <app-appointment-info [appointment]="appointment"></app-appointment-info>
 </div>
 <p *ngIf="checkSurvey() == false">ne moze</p>
