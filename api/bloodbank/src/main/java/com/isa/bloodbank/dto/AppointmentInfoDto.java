@@ -5,6 +5,8 @@ import com.isa.bloodbank.entity.enums.Hand;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+
 import net.bytebuddy.asm.Advice.Local;
 
 import lombok.Data;
@@ -12,7 +14,7 @@ import lombok.Data;
 @Data
 public class AppointmentInfoDto {
 	double cuso4;
-	double hemoglobinoemeter;
+	double hemoglobinometer;
 	double ta;
 	double tt;
 	double tv;
@@ -21,4 +23,7 @@ public class AppointmentInfoDto {
 	double quantity;
 	LocalDateTime startBlood;
 	LocalDateTime endBlood;
+	boolean surveyAccepted;
+	boolean accepted;
+	String reason;
 }

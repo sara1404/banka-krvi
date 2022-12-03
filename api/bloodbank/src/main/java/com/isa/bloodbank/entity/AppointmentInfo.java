@@ -36,4 +36,10 @@ public class AppointmentInfo extends BaseEntity {
 	LocalDateTime startBlood;
 	@Column
 	LocalDateTime endBlood;
+	@Column
+	boolean surveyAccepted;
+	@Column
+	boolean accepted;
+	@Column
+	String reason;
 }
