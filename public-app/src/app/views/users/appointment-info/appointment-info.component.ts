@@ -32,8 +32,8 @@ export class AppointmentInfoComponent implements OnInit {
       hand: new FormControl('', [Validators.required]),
       examBloodType: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required]),
-      startBlood: new FormControl('', [Validators.required]),
-      endBlood: new FormControl('', [Validators.required]),
+      //startBlood: new FormControl('', [Validators.required]),
+      //endBlood: new FormControl('', [Validators.required]),
       reason: new FormControl('', [Validators.required])
     });
    }
@@ -67,12 +67,14 @@ export class AppointmentInfoComponent implements OnInit {
   get quantity() {
     return this.appInfoForm.get('quantity');
   }
+  /*
   get startBlood() {
     return this.appInfoForm.get('startBlood');
   }
   get endBlood() {
     return this.appInfoForm.get('endBlood');
   }
+  */
 
   finish(){
     /*if(this.appInfoForm.valid == false) {
@@ -87,8 +89,6 @@ export class AppointmentInfoComponent implements OnInit {
       tt: this.appInfoForm.value.tt,
       hand: this.appInfoForm.value.hand,
       quantity: this.appInfoForm.value.quantity,
-      startBlood: null,
-      endBlood: null,
       surveyAccepted: true,
       accepted: this.appInfoForm.value.accepted,
       reason: this.appInfoForm.value.reason,

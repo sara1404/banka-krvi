@@ -21,8 +21,6 @@ public class AppointmentInfoDto {
 	Hand hand;
 	BloodType examBloodType;
 	double quantity;
-	LocalDateTime startBlood;
-	LocalDateTime endBlood;
 	boolean surveyAccepted;
 	boolean accepted;
 	String reason;

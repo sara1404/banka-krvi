@@ -43,7 +43,7 @@
     
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>TT</mat-label>
-            <input type="number" formControlName="ta" matInput />
+            <input type="number" formControlName="tt" matInput />
           </mat-form-field>
           <div *ngIf="tt?.invalid && (tt?.dirty || tt?.touched)">
             <mat-error *ngIf="tt.errors['required']">
@@ -119,7 +119,7 @@
           </div>
       </div>
 
-      
+      <!--
       <div>
         <mat-form-field appearance="fill" class="form-field">
             <mat-label>Start</mat-label>
@@ -141,6 +141,7 @@
             </mat-error>
           </div>
       </div>
+      -->
       
       <input
       type="submit"
