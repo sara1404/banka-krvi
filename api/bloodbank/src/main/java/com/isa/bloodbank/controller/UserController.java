@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,61 +29,65 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	PasswordEncoder encoder;
 
-    @GetMapping("/bloodBankId")
-    public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
-        final Long administratorId = (long) (3);
-        Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
-        return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
-    }
-    @PostMapping("/register/admin")
-    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
-        System.out.println(centerAdmin + "e");
-        return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
-    }
+	@GetMapping("/bloodBankId")
+	public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
+		final Long administratorId = (long) (3);
+		final Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
+		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
+	}
 
-    @GetMapping("/search")
-    public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
-        return ResponseEntity.ok(userService.search(name, lastName));
-    }
+	@PostMapping("/register/admin")
+	public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
+		System.out.println(centerAdmin + "e");
+		centerAdmin.setPassword(encoder.encode(centerAdmin.getPassword()));
+		return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
+		return ResponseEntity.ok(userService.search(name, lastName));
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
+	@GetMapping("/loggedInUser/{id}")
+	public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findById(id));
+	}
 
-    @GetMapping("/loggedInUser/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
-        return ResponseEntity.ok(userService.findById(id));
-    }
+	@PutMapping("/update/")
+	private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
+		System.out.println(userDto);
+		return ResponseEntity.ok(userService.update(userDto));
+	}
 
-    @PutMapping("/update/")
-    private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
-        System.out.println(userDto);
-        return ResponseEntity.ok(userService.update(userDto));
-    }
+	@GetMapping("/users/{pageNo}")
+	public ResponseEntity<List<UserDto>> getAll(@PathVariable final int pageNo) {
+		return ResponseEntity.ok(userService.getAll(pageNo));
+	}
 
-    @GetMapping("/users/{pageNo}")
-    public ResponseEntity<List<UserDto>> getAll(@PathVariable int pageNo) {
-        return ResponseEntity.ok(userService.getAll(pageNo));
-    }
+	@GetMapping("/users/count")
+	public ResponseEntity<Integer> getAllCount() {
+		return ResponseEntity.ok(userService.getUserCount());
+	}
 
-    @GetMapping("/users/count")
-    public ResponseEntity<Integer> getAllCount(){
-        return ResponseEntity.ok(userService.getUserCount());
-    }
+	@GetMapping("/center-admins")
+	public ResponseEntity<List<UserDto>> getAvailableCenterAdmins() {
+		return ResponseEntity.ok(userService.getAvailableCenterAdmins());
+	}
 
-    @GetMapping("/center-admins")
-    public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
-        return ResponseEntity.ok(userService.getAvailableCenterAdmins());
-    }
-
-    @PutMapping("/change-password")
-    public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto){
-        final Long administratorId = (long) (3);
-        User user = userService.findUserById(administratorId);
-        return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
-    }
+	@PutMapping("/change-password")
+	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto) {
+		final Long administratorId = (long) (3);
+		final User user = userService.findUserById(administratorId);
+		return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
+	}
 }

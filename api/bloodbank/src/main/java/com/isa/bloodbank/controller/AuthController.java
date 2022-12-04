@@ -1,29 +1,30 @@
 package com.isa.bloodbank.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.isa.bloodbank.dto.LoginDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.UserType;
 import com.isa.bloodbank.mapping.UserMapper;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.UserService;
-
-import java.time.Instant;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController
 @RequestMapping("/auth")
@@ -33,16 +34,21 @@ public class AuthController {
 	private UserService userService;
 	@Autowired
 	private UserMapper userMapper;
-
-	//private final JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	AuthenticationManager authenticationManager;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	JwtUtils jwtUtils;
 
 	@PostMapping("/register")
 	public ResponseEntity<User> registerUser(@RequestBody @Valid final RegisterUserDto user) {
 		if (userService.checkIfEmailAlreadyInUse(user.getEmail())) {
 			return ResponseEntity.badRequest().build();
 		}
-		var userEntity = userMapper.registerUserDtoToUser(user);
+		final var userEntity = userMapper.registerUserDtoToUser(user);
 		userEntity.setUserType(UserType.REGISTERED);
+		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		final var registeredUser = userService.registerUser(userEntity);
 		if (registeredUser != null) {
 			return ResponseEntity.ok(registeredUser);
@@ -51,32 +57,18 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<Boolean> login(@RequestBody @Valid final LoginDto credentials) {
-		try {
-			/*
-			Authentication authenticate = authenticationManager
-				.authenticate(
-					new UsernamePasswordAuthenticationToken(
-						credentials.getEmail(), credentials.getPassword()
-					)
-				);
+	public ResponseEntity<?> login(@Valid @RequestBody final LoginDto loginRequest) {
 
-			User user = (User) authenticate.getPrincipal();
-			*/
-			User user = userService.findByEmail(credentials.getEmail());
-			return ResponseEntity.ok()
-				.header(
-					HttpHeaders.AUTHORIZATION,
-					JWT.create()
-						.withIssuedAt(Instant.now())
-						.withExpiresAt(Instant.now())
-						.withClaim("id", user.getId())
-						.sign(Algorithm.HMAC256("aaa"))
-						.toString()
-				)
-				.body(true);
-		} catch (BadCredentialsException ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
+		final Authentication authentication = authenticationManager.authenticate(
+			new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		final String jwt = jwtUtils.generateJwtToken(authentication);
+		return ResponseEntity.ok(jwt);
+	}
+
+	@GetMapping("/a")
+	public ResponseEntity<?> aaa(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		return ResponseEntity.ok(jwtUtils.parseAndGetEmailFromToken(authHeader));
 	}
 }
