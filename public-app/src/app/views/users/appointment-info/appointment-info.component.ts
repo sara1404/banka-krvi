@@ -11,6 +11,7 @@ import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointment } from 'src/app/model/Appointment';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
+import { IEquipment } from 'src/app/model/Equipment';
 import { IUser } from 'src/app/model/User';
 import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { AppointmentInfoService } from 'src/app/services/appointment-info-sevice';
@@ -40,7 +41,10 @@ export class AppointmentInfoComponent implements OnInit {
       quantity: new FormControl('', [Validators.required]),
       //startBlood: new FormControl('', [Validators.required]),
       //endBlood: new FormControl('', [Validators.required]),
-      reason: new FormControl('', [Validators.required])
+      reason: new FormControl('', [Validators.required]),
+      needle: new FormControl('', [Validators.required]),
+      bandage: new FormControl('', [Validators.required]),
+      bag: new FormControl('', [Validators.required])
     });
    }
 
@@ -72,6 +76,15 @@ export class AppointmentInfoComponent implements OnInit {
   }
   get quantity() {
     return this.appInfoForm.get('quantity');
+  }
+  get needle() {
+    return this.appInfoForm.get('needle');
+  }
+  get bandage() {
+    return this.appInfoForm.get('bandage');
+  }
+  get bag() {
+    return this.appInfoForm.get('bag');
   }
   /*
   get startBlood() {
@@ -114,6 +127,21 @@ export class AppointmentInfoComponent implements OnInit {
       },
     }));
     this.userService.finishAppointment(this.appointment.id).subscribe(data => {this.result = data});
+    const needles: IEquipment = {
+      equipmentType: "NEEDLE",
+      quantity: this.appInfoForm.value.needle
+    }
+    const bandages: IEquipment = {
+      equipmentType: "BANDAGE",
+      quantity: this.appInfoForm.value.bandage
+    }
+    const bags: IEquipment = {
+      equipmentType: "BAG",
+      quantity: this.appInfoForm.value.bag
+    }
+    this.appointmentInfoService.usedEquipment(needles).subscribe();
+    this.appointmentInfoService.usedEquipment(bandages).subscribe();
+    this.appointmentInfoService.usedEquipment(bags).subscribe();
     /*
     this.info.cuso4 = Number(this.appInfoForm.get('cuso4'));
     this.info.hemoglobinometer = this.appInfoForm.value.hemoglobinometer

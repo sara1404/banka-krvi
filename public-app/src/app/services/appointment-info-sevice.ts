@@ -6,6 +6,7 @@ import { IPage } from '../model/Page';
 import { IAppointment } from '../model/Appointment';
 import { IAppointmentInfo } from '../model/AppointmentInfo';
 import { IAppointmentAndInfo } from '../admin-profile/model/AppointmentAndInfo';
+import { IEquipment } from '../model/Equipment';
 
 
 @Injectable({
@@ -17,5 +18,9 @@ export class AppointmentInfoService {
 
     createAppointmentInfo(appointmentInfo: IAppointmentAndInfo) : Observable<IAppointmentAndInfo> {
     return this.http.post<IAppointmentAndInfo>(`http://localhost:8080/appointmentinfo/create`, appointmentInfo);
-  }
+    }
+
+    usedEquipment(equipment:IEquipment):Observable<Boolean>{
+      return this.http.post<Boolean>(`http://localhost:8080/equipment/used`, equipment);
+    }
 }
