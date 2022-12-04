@@ -29,6 +29,7 @@ public class AppointmentService {
 	@Autowired
 	private UserService userService;
 
+
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
 		for (final Appointment appointment : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
