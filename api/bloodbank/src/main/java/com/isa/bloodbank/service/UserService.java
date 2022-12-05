@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +28,8 @@ public class UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	PasswordEncoder encoder;
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
 
@@ -45,11 +48,14 @@ public class UserService {
 	}
 
 	public User registerUser(final User user) {
+		user.setUserType(UserType.REGISTERED);
+		user.setPassword(encoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
 		centerAdmin.setUserType(UserType.ADMIN_CENTER);
+		centerAdmin.setPassword(encoder.encode(centerAdmin.getPassword()));
 		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
@@ -95,7 +101,6 @@ public class UserService {
 	public User findByEmail(final String email) {
 		return userRepository.findByEmail(email);
 	}
-
 
 	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
 		//treba provera i da je prvi put logovan

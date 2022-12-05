@@ -10,4 +10,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'bootstrap/scss/bootstrap';
 
 // regular style toast
+  
+.submit-btn{
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: rgb(4, 158, 4);
+    border-radius: .7em;
+    color: #fff;
+    font-size: 1.2rem;
+  }
 
+  .submit-btn:hover{
+    background-color: rgb(3, 116, 3);
+  }

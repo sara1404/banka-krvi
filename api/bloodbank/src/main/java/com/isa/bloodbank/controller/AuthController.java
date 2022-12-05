@@ -2,8 +2,8 @@ package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.LoginDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
+import com.isa.bloodbank.dto.TokenDto;
 import com.isa.bloodbank.entity.User;
-import com.isa.bloodbank.entity.enums.UserType;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.UserService;
@@ -47,8 +47,6 @@ public class AuthController {
 			return ResponseEntity.badRequest().build();
 		}
 		final var userEntity = userMapper.registerUserDtoToUser(user);
-		userEntity.setUserType(UserType.REGISTERED);
-		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		final var registeredUser = userService.registerUser(userEntity);
 		if (registeredUser != null) {
 			return ResponseEntity.ok(registeredUser);
@@ -64,11 +62,11 @@ public class AuthController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		final String jwt = jwtUtils.generateJwtToken(authentication);
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.ok(new TokenDto(jwt));
 	}
 
-	@GetMapping("/a")
-	public ResponseEntity<?> aaa(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+	@GetMapping("/current")
+	public ResponseEntity<?> current(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		return ResponseEntity.ok(jwtUtils.getUserFromToken(authHeader));
 	}
 }
