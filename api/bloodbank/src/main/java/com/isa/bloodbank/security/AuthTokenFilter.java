@@ -1,6 +1,6 @@
 package com.isa.bloodbank.security;
 
-import com.isa.bloodbank.service.UserService;
+import com.isa.bloodbank.security.userdetail.UserDetailsServiceImpl;
 
 import java.io.IOException;
 
@@ -20,9 +20,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtUtils jwtUtils;
-
 	@Autowired
-	private UserService userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain)
@@ -45,17 +44,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 		} catch (final Exception e) {
 			System.out.println("Cannot set user authentication: " + e.getMessage());
 		}
-
 		filterChain.doFilter(request, response);
 	}
 
 	private String parseJwt(final HttpServletRequest request) {
 		final String headerAuth = request.getHeader("Authorization");
-
 		if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-			return headerAuth.substring(7, headerAuth.length());
+			return headerAuth.substring(7);
 		}
-
 		return null;
 	}
 }

@@ -1,4 +1,4 @@
-package com.isa.bloodbank.security;
+package com.isa.bloodbank.security.userdetail;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.isa.bloodbank.entity.User;

@@ -1,7 +1,12 @@
 package com.isa.bloodbank.security;
 
+import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.security.userdetail.UserDetailsImpl;
+import com.isa.bloodbank.service.UserService;
+
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +18,8 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtUtils {
+	@Autowired
+	private UserService userService;
 	private final String jwtSecret = "IsaProjekatSecret";
 
 	private final int jwtExpirationMs = 1000 * 60 * 60;
@@ -29,11 +36,14 @@ public class JwtUtils {
 			.compact();
 	}
 
+	public User getUserFromToken(String token) {
+		return userService.findByEmail(parseAndGetEmailFromToken(token));
+	}
 	public String getEmailFromJwtToken(final String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 
-	public String parseAndGetEmailFromToken(final String authHeader) {
+	private String parseAndGetEmailFromToken(final String authHeader) {
 		return getEmailFromJwtToken(authHeader.substring(7));
 	}
 
@@ -50,7 +60,6 @@ public class JwtUtils {
 		} catch (final IllegalArgumentException e) {
 			System.out.println("JWT claims string is empty: " + e.getMessage());
 		}
-
 		return false;
 	}
 }

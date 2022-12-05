@@ -69,6 +69,6 @@ public class AuthController {
 
 	@GetMapping("/a")
 	public ResponseEntity<?> aaa(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
-		return ResponseEntity.ok(jwtUtils.parseAndGetEmailFromToken(authHeader));
+		return ResponseEntity.ok(jwtUtils.getUserFromToken(authHeader));
 	}
 }

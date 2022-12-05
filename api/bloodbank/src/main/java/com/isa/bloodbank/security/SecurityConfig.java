@@ -1,6 +1,6 @@
 package com.isa.bloodbank.security;
 
-import com.isa.bloodbank.service.UserService;
+import com.isa.bloodbank.security.userdetail.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-	private final UserService userService;
+	private final UserDetailsServiceImpl userDetailService;
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
@@ -35,15 +35,15 @@ public class SecurityConfig {
 	}
 
 	@Autowired
-	public SecurityConfig(final UserService userService) {
-		this.userService = userService;
+	public SecurityConfig(final UserDetailsServiceImpl userDetailService) {
+		this.userDetailService = userDetailService;
 	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-		authProvider.setUserDetailsService(userService);
+		authProvider.setUserDetailsService(userDetailService);
 		authProvider.setPasswordEncoder(passwordEncoder());
 
 		return authProvider;

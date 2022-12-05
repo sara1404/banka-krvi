@@ -10,7 +10,6 @@ import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
-import com.isa.bloodbank.security.UserDetailsImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +19,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
-
+public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private BloodBankRepository bloodBankRepository;
-	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private BloodBankRepository bloodBankRepository;
 
 	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
@@ -101,14 +96,6 @@ public class UserService implements UserDetailsService {
 		return userRepository.findByEmail(email);
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-		final var user = userRepository.findByEmail(email);
-		if (user == null) {
-			throw new UsernameNotFoundException(email);
-		}
-		return UserDetailsImpl.build(user);
-	}
 
 	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
 		//treba provera i da je prvi put logovan

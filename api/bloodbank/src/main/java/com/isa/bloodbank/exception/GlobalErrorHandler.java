@@ -14,11 +14,8 @@ public class GlobalErrorHandler {
 	}
 
 	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<?> handleSqlException(final RuntimeException e) throws BaseException {
-		System.out.println("Triggered");
-		final BaseException exc = new BaseException("Unique constraint violated!", HttpStatus.BAD_REQUEST);
-		throw exc;
-		//return new ResponseEntity<>(new StandardErrorResponse(exc), HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> handleRuntimeException(final RuntimeException e) {
+		return new ResponseEntity<>(new StandardErrorResponse(new BaseException(e.getMessage(), HttpStatus.BAD_REQUEST)), HttpStatus.BAD_REQUEST);
 	}
 
 }

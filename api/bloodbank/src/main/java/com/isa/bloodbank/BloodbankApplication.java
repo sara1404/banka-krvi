@@ -12,7 +12,7 @@ public class BloodbankApplication {
 	public static void main(final String[] args) {
 		SpringApplication.run(BloodbankApplication.class, args);
 	}
-
+	/*
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
@@ -22,4 +22,5 @@ public class BloodbankApplication {
 			}
 		};
 	}
+	 */
 }
