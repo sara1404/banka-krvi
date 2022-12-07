@@ -62,12 +62,13 @@ export class ExaminationComponent implements OnInit {
       surveyAccepted: false,
       accepted: null,
       reason: null,
-      examBloodType: null
+      examBloodType: "A_POSITIVE"
     };
     const appointmentAndInfo: IAppointmentAndInfo = {
-      appointmentId: this.appointment.id,
+      appointmentId: element.id,
       appointmentInfoDto: info
     }
+    console.log(appointmentAndInfo)
     this.appointmentInfoService.createAppointmentInfo(appointmentAndInfo).subscribe(({
       next: (res) => {
         this.showSuccess()

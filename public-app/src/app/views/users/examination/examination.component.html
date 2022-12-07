@@ -1,4 +1,4 @@
-<div *ngIf="checkSurvey() == true && this.start==false">
+<div *ngIf=" this.start==false">
     <table mat-table class="mat-elevation-z8" [dataSource]="userAppointments">
 
         <!--- Note that these columns can be defined in any order.
@@ -44,4 +44,4 @@
 <div *ngIf="this.start==true">
     <app-appointment-info [appointment]="appointment"></app-appointment-info>
 </div>
-<p *ngIf="checkSurvey() == false">ne moze</p>
+<!--<p *ngIf="checkSurvey() == false">ne moze</p>-->
