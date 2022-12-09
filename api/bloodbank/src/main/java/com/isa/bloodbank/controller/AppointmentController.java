@@ -37,4 +37,9 @@ public class AppointmentController {
 		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
 	}
+
+	@GetMapping("/appointments")
+	public ResponseEntity<List<AppointmentDto>> getAppointments(@RequestParam("month") final int month, @RequestParam("year") final int year){
+		return ResponseEntity.ok(appointmentService.getAppointments(month, year));
+	}
 }

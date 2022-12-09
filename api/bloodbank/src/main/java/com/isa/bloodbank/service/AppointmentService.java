@@ -4,6 +4,7 @@ import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
+import com.isa.bloodbank.entity.AppointmentInfo;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -41,5 +42,10 @@ public class AppointmentService {
 		appointment.setAvailable(true);
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public List<AppointmentDto> getAppointments(int month, int year){
+		List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year);
+		return appointmentMapper.appointmentsToAppointmentDtos(appointments);
 	}
 }

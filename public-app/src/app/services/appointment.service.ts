@@ -11,9 +11,14 @@ import { IAppointment } from '../model/Appointment';
 })
 export class AppointmentService {
 
+  base = "http://localhost:8080/appointment"
   constructor(private http: HttpClient) {}
 
-    createAppointment(appointment: IAppointment) : Observable<IAppointment> {
+  createAppointment(appointment: IAppointment) : Observable<IAppointment> {
     return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment);
+  }
+
+  getAppointmentsForChosenMonth(month: number, year: number): Observable<any>{
+    return this.http.get(`${this.base}/appointments?month=${month}&year=${year}`)
   }
 }

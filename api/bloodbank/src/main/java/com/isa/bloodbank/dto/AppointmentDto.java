@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class AppointmentDto {
     @NotNull
     LocalDateTime startTime;
