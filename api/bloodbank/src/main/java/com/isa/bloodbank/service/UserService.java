@@ -19,20 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
-
+public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private BloodBankRepository bloodBankRepository;
-	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	private BloodBankRepository bloodBankRepository;
 
 	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
@@ -43,15 +42,20 @@ public class UserService implements UserDetailsService {
 		}
 		return userMapper.usersToAdministratorDtos(bloodBanks);
 	}
+
 	public boolean checkIfEmailAlreadyInUse(final String email) {
 		return userRepository.findByEmail(email) != null;
 	}
 
 	public User registerUser(final User user) {
+		user.setUserType(UserType.REGISTERED);
+		user.setPassword(encoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
+
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
 		centerAdmin.setUserType(UserType.ADMIN_CENTER);
+		centerAdmin.setPassword(encoder.encode(centerAdmin.getPassword()));
 		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
@@ -61,55 +65,46 @@ public class UserService implements UserDetailsService {
 		return userMapper.usersToUserDtos(users);
 	}
 
-	public List<UserDto> getAll(int pageNo){
-		Pageable paging = PageRequest.of(pageNo, 4);
-		Page<User> pagedResult = userRepository.findAll(paging);
+	public List<UserDto> getAll(final int pageNo) {
+		final Pageable paging = PageRequest.of(pageNo, 4);
+		final Page<User> pagedResult = userRepository.findAll(paging);
 		return userMapper.usersToUserDtos(pagedResult.toList());
 	}
 
-	public int getUserCount(){
+	public int getUserCount() {
 		return userRepository.findAll().size();
 	}
 
-	public UserDto findById(Long id) {
-		Optional<User> user = userRepository.findById(id);
+	public UserDto findById(final Long id) {
+		final Optional<User> user = userRepository.findById(id);
 		return userMapper.userToUserDto(userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 
-	public User findUserById(Long id) {
+	public User findUserById(final Long id) {
 		return (userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
-	public User update(UserDto newUserDto) {
-		User user = userRepository.findById(newUserDto.getId()).get();
-		User newUser = userMapper.userDtoToUser(newUserDto);
+
+	public User update(final UserDto newUserDto) {
+		final User user = userRepository.findById(newUserDto.getId()).get();
+		final User newUser = userMapper.userDtoToUser(newUserDto);
 
 		newUser.setPassword(user.getPassword());
 		newUser.setUserType(user.getUserType());
 
 		return userRepository.save(newUser);
 	}
-	public List<UserDto> getAvailableCenterAdmins(){
+
+	public List<UserDto> getAvailableCenterAdmins() {
 		return userMapper.usersToUserDtos(userRepository.getUsersByUserTypeAndBloodBankIsNull(UserType.ADMIN_CENTER));
 	}
 
-	public User findByEmail(String email){
+	public User findByEmail(final String email) {
 		return userRepository.findByEmail(email);
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-		var user = userRepository.findByEmail(email);
-		if(user == null){
-			throw new UsernameNotFoundException(email);
-		}
-		UserDetails userDetails = org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).authorities(user.getUserType().toString()).build();
-		return userDetails;
-	}
-
-	public boolean changePassword(User user, PasswordChangeDto passwordChangeDto){
+	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
 		//treba provera i da je prvi put logovan
-		if(!user.getPassword().equals(passwordChangeDto.getOldPassword()))
-		{
+		if (!user.getPassword().equals(passwordChangeDto.getOldPassword())) {
 			return false;
 		}
 		user.setPassword(passwordChangeDto.getNewPassword());
