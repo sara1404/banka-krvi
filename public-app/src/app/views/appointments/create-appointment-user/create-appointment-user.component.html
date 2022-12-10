@@ -27,8 +27,108 @@
         <mat-cell *matCellDef="let item">{{ item.averageGrade }}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"
+      (click)="selection.toggle(row)"
+      [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+      ></mat-row>
     </mat-table>
+    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+    <div>
+      <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
+      <button mat-button matStepperNext (click)="showQuestions()">
+        Next
+      </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <form [formGroup]="surveyForm" class="survey-form">
+      <label for="" class="title">DONATION SURVEY</label>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Weight[kg]</mat-label>
+        <input formControlName="weight" type="number" min="0" max="250" matInput />
+      </mat-form-field>
+  
+      <table>
+        <tr>
+          <td>
+            Have you experienced any flu or virus infections in the last month?
+          </td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Do you have any skin irritations?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Do you have high/low blood pressure?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Were you on antibiotics therapy in the last 7 days?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Are you on your period?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Did you have any major/minor dentist interventions?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+  
+        <tr>
+          <td>Have you had tattoos/piercings in the last 6 months?</td>
+          <td>
+            <mat-radio-group formControlName="fluSymptoms">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext (click)="scheduleAppointment()">
+        Schedule
+      </button>
+    </div>
   </mat-step>
 </mat-stepper>
   
