@@ -10,7 +10,7 @@ import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
-import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,14 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -40,9 +34,10 @@ public class BloodBankController {
 	private UserService userService;
 
 	@GetMapping("/administrator")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<BloodBankDto> findForAdministrator(/*@PathVariable("id") final Long id*/) {
 		final Long administratorId = (long) (3);
-		User user = userService.findUserById(administratorId);
+		final User user = userService.findUserById(administratorId);
 		return ResponseEntity.ok(bloodBankMapper.bloodBankToBloodBankDto(bloodBankService.findById(user.getBloodBank().getId())));
 	}
 
@@ -57,8 +52,16 @@ public class BloodBankController {
 	}
 
 	@GetMapping(value = "/searchAndFilter", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Page<BloodBank>> searchAndFilter(@RequestParam("name") final String name, @RequestParam("city") final String city, @RequestParam("averageGrade") final double averageGrade, @RequestParam("pageSize") final int pageSize, @RequestParam("pageNumber") final int pageNumber) {
-		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, pageSize, pageNumber));
+	public ResponseEntity<Page<BloodBank>> searchAndFilter(
+		@RequestParam("name") final String name,
+		@RequestParam("city") final String city,
+		@RequestParam("averageGrade") final double averageGrade,
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNumber") final int pageNumber,
+		@RequestParam("sortDirection") final String sortDirection,
+		@RequestParam("sortBy") final String sortBy
+	) {
+		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, pageSize, pageNumber, sortBy, sortDirection));
 	}
 
 	@PostMapping("/register")
@@ -72,4 +75,9 @@ public class BloodBankController {
 		return ResponseEntity.ok(bloodBankService.getWorkingHours(administratorId));
 	}
 
+	@GetMapping(value = "/recommend/{startTime}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<BloodBankDto>> recommend(@PathVariable("startTime") final String startTime){
+		System.out.println(LocalDateTime.parse(startTime));
+		return ResponseEntity.ok(bloodBankService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime)));
+	}
 }

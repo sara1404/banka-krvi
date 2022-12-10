@@ -1,0 +1,11 @@
+<div class="select">
+    <mat-select (selectionChange)="sortBloodBanks($event)" placeholder="Sort by" floatLabel="never">
+        <mat-select-trigger>Sort by</mat-select-trigger>
+        <mat-option value="name ASC">Name ascending</mat-option>
+        <mat-option value="name DESC">Name descending</mat-option>
+        <mat-option value="address.city ASC">City ascending</mat-option>
+        <mat-option value="address.city DESC">City descending</mat-option>
+        <mat-option value="averageGrade ASC">Average grade ascending</mat-option>
+        <mat-option value="averageGrade DESC">Average grade descending</mat-option>
+    </mat-select>
+</div>

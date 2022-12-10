@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatStepperModule} from '@angular/material/stepper'
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatExpansionModule,
     MatSortModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
   ],
   exports: [
     CommonModule,
@@ -47,7 +49,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatExpansionModule,
     MatRadioModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule {}

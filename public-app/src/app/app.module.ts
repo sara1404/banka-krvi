@@ -22,6 +22,8 @@ import {ToastrModule} from "ngx-toastr"
 import { RegisterUserModule } from './views/register-user/register-user.module';
 import { DonationSurveyModule } from './views/donation-survey/donation-survey.module';
 import { CreateAppointmentModule } from './views/appointments/create-appointment.module';
+import { UserLoginModule } from './views/user-login/user-login.module';
+import { CreateAppointmentUserModule } from './views/appointments/create-appointment-user/create-appointment-user.module';
 
 @NgModule({
   declarations: [
@@ -46,10 +48,12 @@ import { CreateAppointmentModule } from './views/appointments/create-appointment
     RegisterBloodbankModule,
     RegisterUserModule,
     DonationSurveyModule,
+    UserLoginModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
-    CreateAppointmentModule
+    CreateAppointmentModule,
+    CreateAppointmentUserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
