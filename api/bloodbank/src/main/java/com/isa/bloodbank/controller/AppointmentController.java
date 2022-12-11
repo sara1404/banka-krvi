@@ -44,10 +44,10 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
 	}
 
-	@GetMapping(value = "/recommend/{startTime}" ,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<AppointmentDto>> recommend(@PathVariable("startTime") final String startTime){
+	@GetMapping(value = "/recommend" ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AppointmentDto>> recommend(@RequestParam("startTime") final String startTime, @RequestParam("pageSize") final int pageSize, @RequestParam("pageNumber") final int pageNumber){
 		System.out.println(LocalDateTime.parse(startTime));
-		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime)));
+		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime), pageSize, pageNumber));
 	}
 	@PutMapping("/schedule")
 	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) {

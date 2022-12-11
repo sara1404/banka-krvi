@@ -20,7 +20,7 @@ export class AppointmentService {
 
   getBloodBanksWithFreeTimeSlots(startTime: Date){
     return this.http.get<IAppointment[]>(
-      `http://localhost:8080/appointment/recommend/` + startTime
+      `http://localhost:8080/appointment/recommend?startTime=` + startTime + '&pageSize=' + 2 + '&pageNumber=' + 1
     );
   }
 

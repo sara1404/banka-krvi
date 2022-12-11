@@ -48,7 +48,7 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public List<AppointmentDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime){
+	public List<AppointmentDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime, int pageSize, int pageNumber){
 		List<Appointment> ret = new ArrayList<>();
 		for (Appointment a:  appointmentRepository.findByStartTimeAndAvailable(startTime, true)) {
 			boolean exists = false;
@@ -57,7 +57,7 @@ public class AppointmentService {
 			}
 			if (!exists) ret.add(a);
 		}
-		return appointmentMapper.appointmentsToAppointmentDtos(ret);
+		return appointmentMapper.appointmentsToAppointmentDtos(ret.subList((pageNumber - 1)*pageSize, (pageNumber - 1)*pageSize + pageSize - 1));
 	}
 
 	public AppointmentDto scheduleAppointment(AppointmentDto appointmentDto, Long userId)
