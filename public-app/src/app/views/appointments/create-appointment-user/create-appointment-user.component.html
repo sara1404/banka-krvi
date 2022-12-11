@@ -13,18 +13,18 @@
     </form>
   </mat-step>
   <mat-step>
-    <mat-table #table [dataSource]="bloodBanks">
+    <mat-table #table [dataSource]="appointments">
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.name }}</mat-cell>
+        <mat-cell *matCellDef="let item">{{ item.bloodBank.name }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="city">
         <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.address.city }}</mat-cell>
+        <mat-cell *matCellDef="let item">{{ item.bloodBank.address.city }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="averageGrade">
         <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.averageGrade }}</mat-cell>
+        <mat-cell *matCellDef="let item">{{ item.bloodBank.averageGrade }}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"
@@ -36,12 +36,13 @@
     <mat-spinner *ngIf="showSpinner"></mat-spinner>
     <div>
       <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
-      <button mat-button matStepperNext (click)="showQuestions()">
+      <button mat-button matStepperNext>
         Next
       </button>
     </div>
   </mat-step>
   <mat-step>
+    <div class="form-wrapper">
     <form [formGroup]="surveyForm" class="survey-form">
       <label for="" class="title">DONATION SURVEY</label>
       <mat-form-field appearance="fill" class="form-field">
@@ -123,12 +124,13 @@
         </tr>
       </table>
     </form>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext (click)="scheduleAppointment()">
-        Schedule
-      </button>
-    </div>
+  </div>
+  <div>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext (click)="scheduleAppointment()">
+      Schedule
+    </button>
+  </div>
   </mat-step>
 </mat-stepper>
   

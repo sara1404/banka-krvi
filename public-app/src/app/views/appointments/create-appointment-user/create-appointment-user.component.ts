@@ -5,8 +5,11 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastService } from '../../../services/toast.service';
 import { BloodBankService } from 'src/app/services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { IAppointment } from 'src/app/model/Appointment';
 import { IBloodBank } from 'src/app/model/BloodBankk';
 import { SelectionModel } from '@angular/cdk/collections';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -24,7 +27,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CreateAppointmentUserComponent implements OnInit {
   public surveyForm: FormGroup;
-  constructor(private fb: FormBuilder,private appointmentService: AppointmentService,private bloodBankService: BloodBankService, private toastService: ToastService) {
+  constructor(private fb: FormBuilder,private appointmentService: AppointmentService,private bloodBankService: BloodBankService, private toastService: ToastService, private userService: UserService, private router: Router) {
     this.surveyForm = fb.group({
       weight: [0, [Validators.required, Validators.min(0), Validators.max(250)]],
       fluSymptoms: [true, [Validators.required]],
@@ -43,7 +46,7 @@ export class CreateAppointmentUserComponent implements OnInit {
   startTimeForm = new FormGroup({
     startTime : new FormControl(null, [Validators.required]),
   })
-  bloodBanks = new MatTableDataSource<IBloodBank>()
+  appointments = new MatTableDataSource<IAppointment>([])
   selection = new SelectionModel<IBloodBank>(false);
   displayedColumns: string[] = ["name", "city", "averageGrade"]
   showSpinner : boolean = false
@@ -51,11 +54,11 @@ export class CreateAppointmentUserComponent implements OnInit {
   recommendBloodBanks() {
     this.showSpinner = true
     console.log(this.startTimeForm.getRawValue());
-    this.bloodBankService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value).subscribe({
+    this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value).subscribe({
       next: (res) => {
-        this.showSpinner = false
-        this.bloodBanks = new MatTableDataSource(res);
         console.log(res)
+        this.showSpinner = false
+        this.appointments = new MatTableDataSource(res);
       },
       error: (e) => {
         console.log("error")
@@ -65,15 +68,32 @@ export class CreateAppointmentUserComponent implements OnInit {
   }
 
   deleteBloodBanks(){
-    this.bloodBanks = new MatTableDataSource([]);
-  }
-
-  showQuestions(){
-    console.log(this.selection.selected)
+    this.appointments = new MatTableDataSource([]);
   }
 
   scheduleAppointment(){
-    
+    console.log(this.selection.selected[0])
+    if(this.surveyForm.valid) {
+      this.userService.sendSurvey(this.surveyForm.value).subscribe(
+        (res) => {
+          this.toastService.showSuccess("Successfully sent survey!");
+        },
+        (err) => {
+          this.toastService.showError("Error occured while sending survey, status code: " + err.status);
+        }
+      );
+
+      this.appointmentService.scheduleAppointment(this.selection.selected[0]).subscribe(
+        (res) => {
+          this.toastService.showSuccess("Successfully scheduled appointment!");
+          this.router.navigate(['/']);
+        },
+        (err) => {
+          this.toastService.showError("Error occured while sending survey, status code: " + err.status);
+        }
+      );
+    }
+
   }
 }
 

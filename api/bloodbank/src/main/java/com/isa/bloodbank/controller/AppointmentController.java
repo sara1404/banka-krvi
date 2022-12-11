@@ -9,9 +9,11 @@ import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.service.AppointmentService;
 import com.isa.bloodbank.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,5 +38,16 @@ public class AppointmentController {
 	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final Appointment appointmentDto) {
 		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
+	}
+
+	@GetMapping(value = "/recommend/{startTime}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AppointmentDto>> recommend(@PathVariable("startTime") final String startTime){
+		System.out.println(LocalDateTime.parse(startTime));
+		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime)));
+	}
+	@PutMapping("/schedule")
+	public ResponseEntity<AppointmentDto> scheduleAppointment(@Valid @RequestBody final AppointmentDto appointmentDto) {
+		final Long userId = (long)(5);
+		return ResponseEntity.ok(appointmentService.scheduleAppointment(appointmentDto, userId));
 	}
 }

@@ -56,10 +56,4 @@ export class BloodBankService {
       `http://localhost:8080/bloodbank/getWorkingHours`
     );
   }
-
-  getBloodBanksWithFreeTimeSlots(startTime: Date){
-    return this.http.get<IBloodBank[]>(
-      `http://localhost:8080/bloodbank/recommend/` + startTime
-    );
-  }
 }

@@ -1,5 +1,6 @@
 package com.isa.bloodbank.service;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.WorkingHoursDto;
@@ -94,18 +95,8 @@ public class BloodBankService {
 		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));
 	}
 
-	public WorkingHours getWorkingHours(Long adminId){
+	public WorkingHours getWorkingHours(Long adminId) {
 		WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
 		return workingHours;
-	}
-
-	public List<BloodBankDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime){
-		List<Appointment> appointments = appointmentRepository.findAllByStartTimeAndAvailable(startTime, true);
-		List<BloodBank> bloodBanks = new ArrayList<>();
-		for (Appointment a : appointments){
-			bloodBanks.add(bloodBankRepository.findById(a.getBloodBankId()).stream().findFirst().orElseThrow(UserNotFoundException::new));
-		}
-		bloodBanks.stream().distinct();
-		return bloodBankMapper.bloodBanksToBloodBankDtos(bloodBanks);
 	}
 }

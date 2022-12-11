@@ -21,8 +21,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Appointment extends BaseEntity {
-	@Column
-	Long bloodBankId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "blood_bank_id", referencedColumnName = "id")
+	BloodBank bloodBank;
 	@Column
 	LocalDateTime startTime;
 	@Column
@@ -34,4 +35,7 @@ public class Appointment extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "appointment_info_id", referencedColumnName = "id")
 	AppointmentInfo appointmentInfo;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	User user;
 }

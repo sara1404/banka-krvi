@@ -5,13 +5,16 @@ import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.isa.bloodbank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,8 @@ public class AppointmentService {
 	private AppointmentMapper appointmentMapper;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -37,9 +42,24 @@ public class AppointmentService {
 
 	public AppointmentDto createAppointment(Appointment appointment, Long adminId){
 		//Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		appointment.setBloodBankId(userService.findById(adminId).getBloodBank().getId());
+		appointment.setBloodBank(userService.findById(adminId).getBloodBank());
 		appointment.setAvailable(true);
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public List<AppointmentDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime){
+		List<Appointment> appointments = appointmentRepository.findAllByStartTimeAndAvailable(startTime, true);
+		return appointmentMapper.appointmentsToAppointmentDtos(appointments);
+	}
+
+	public AppointmentDto scheduleAppointment(AppointmentDto appointmentDto, Long userId)
+	{
+		Appointment appointment = appointmentRepository.findById(appointmentDto.getId()).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setAvailable(false);
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
+
 	}
 }

@@ -1,5 +1,6 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.WorkingHoursDto;
@@ -75,9 +76,4 @@ public class BloodBankController {
 		return ResponseEntity.ok(bloodBankService.getWorkingHours(administratorId));
 	}
 
-	@GetMapping(value = "/recommend/{startTime}" ,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<BloodBankDto>> recommend(@PathVariable("startTime") final String startTime){
-		System.out.println(LocalDateTime.parse(startTime));
-		return ResponseEntity.ok(bloodBankService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime)));
-	}
 }
