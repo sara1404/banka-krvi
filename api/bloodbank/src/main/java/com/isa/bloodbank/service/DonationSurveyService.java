@@ -7,6 +7,7 @@ import com.isa.bloodbank.repository.DonationSurveyRepository;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,13 @@ public class DonationSurveyService {
 	}
 
 	public UserSurveyDto findByUserId(Long userId){
-
-		return surveyMapper.donationSurveyToUserSurveyDto(surveyRepository.findByUserId(userId));
+		List<DonationSurvey> surveys = surveyRepository.findByUserId(userId);
+		DonationSurvey last = surveys.get(0);
+		for(DonationSurvey survey : surveys){
+			if(survey.getDateCreated().compareTo(last.getDateCreated()) > 0){
+				last = survey;
+			}
+		}
+		return surveyMapper.donationSurveyToUserSurveyDto(last);
 	}
 }
