@@ -6,6 +6,7 @@ import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.AppointmentService;
 import com.isa.bloodbank.service.UserService;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 	@Autowired
 	private UserService userService;
+    @Autowired
+    private JwtUtils jwtUtils;
 
 	@GetMapping("/available")
 	public ResponseEntity<List<FreeAppointmentDto>> findById() {
@@ -35,8 +39,8 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final Appointment appointmentDto) {
-		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
+	public ResponseEntity<AppointmentDto> createAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final Appointment appointmentDto) {
+		Long administratorId = jwtUtils.getUserFromToken(authHeader).getId(); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
 	}
 
@@ -46,8 +50,8 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime)));
 	}
 	@PutMapping("/schedule")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(@Valid @RequestBody final AppointmentDto appointmentDto) {
-		final Long userId = (long)(5);
+	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) {
+		Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.scheduleAppointment(appointmentDto, userId));
 	}
 }

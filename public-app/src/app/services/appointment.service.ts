@@ -14,7 +14,8 @@ export class AppointmentService {
   constructor(private http: HttpClient) {}
 
     createAppointment(appointment: IAppointment) : Observable<IAppointment> {
-    return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment);
+      var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment, {headers: headers});
   }
 
   getBloodBanksWithFreeTimeSlots(startTime: Date){
@@ -25,7 +26,7 @@ export class AppointmentService {
 
   
   scheduleAppointment(appointment: any): Observable<IAppointment> {
-    var headers = new HttpHeaders().set('Content-Type', 'application/json');
+    var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.put<IAppointment>(
       `http://localhost:8080/appointment/schedule`,
       JSON.stringify(appointment),
