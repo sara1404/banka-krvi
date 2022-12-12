@@ -1,13 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICredentials } from '../model/Credentials';
 import { IToken } from '../model/Token';
+import { IUser } from '../model/User';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
+  header = {
+    headers: new HttpHeaders()
+      .set('Authorization',  `Bearer ${localStorage.getItem('token')}`)
+  }
+
   constructor(private http: HttpClient) {}
 
   loginUser(credentials: ICredentials): Observable<IToken> {
@@ -31,4 +38,7 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
+  getCurrentUser() : Observable<IUser>{
+    return this.http.get<IUser>('http://localhost:8080/auth/current', this.header)
+  }
 }

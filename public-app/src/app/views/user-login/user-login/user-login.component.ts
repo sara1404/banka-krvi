@@ -37,9 +37,18 @@ export class UserLoginComponent implements OnInit {
       this.authService.loginUser(this.form.value).subscribe(
         (res) => {
           this.authService.setSession(res.token);
+          this.authService.getCurrentUser().subscribe(data => {
+            console.log(data.firstLogged)
+            if(data.firstLogged === false)
+              this.router.navigate(['/changePassword']).then(() => {
+                window.location.reload();
+              })
+              return
+          })
           this.router.navigate(['/']).then(() => {
             window.location.reload();
           });
+
         },
         (err) => {
           this.toastService.showError(

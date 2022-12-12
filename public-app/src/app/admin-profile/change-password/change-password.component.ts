@@ -25,14 +25,14 @@ export class ChangePasswordComponent implements OnInit {
     if(oldPassword == "" || newPassword == ""){
       return false;
     }
-    if(newPassword.length < 6 || oldPassword.length < 6){
+    if(newPassword.length < 6 || oldPassword.length < 5){
       this.okPassword = false;
       this.okPasswordText = "Password must be 6 characters long";
       return false;
     }else{
       this.okPassword = true;
     }
-    
+
     return true;
   }
   change(oldPassword: string, newPassword: string){
@@ -46,7 +46,7 @@ export class ChangePasswordComponent implements OnInit {
       oldPassword: oldPassword,
       newPassword: newPassword
     };
-    
+
     this.adminInfoService.changePassword(updatedPassword).subscribe(data=>{this.result = data;
       if(data==true){
         this.updatedPassword = true;

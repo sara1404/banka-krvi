@@ -6,11 +6,9 @@ import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -40,4 +38,5 @@ public class UserDto {
 	String jobTitle;
 	Address address;
 	String password;
+	Boolean firstLogged;
 }

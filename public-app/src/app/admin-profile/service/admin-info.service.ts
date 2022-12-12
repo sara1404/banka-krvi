@@ -25,7 +25,7 @@ export class AdminInfoService {
   {
     return this.http.put<IUser>('http://localhost:8080/user/update/', user);
   }
-  
+
   getBloodBank():Observable<IBloodBank>{
     return this.http.get<IBloodBank>('http://localhost:8080/bloodbank/administrator');
   }
