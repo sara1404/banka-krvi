@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import com.isa.bloodbank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,16 +50,23 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public List<AppointmentDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime, int pageSize, int pageNumber){
+	public PageDto<AppointmentDto> getBloodBanksWithFreeAppointments(LocalDateTime startTime, int pageSize, int pageNumber, final String sortDirection){
+		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		List<Appointment> ret = new ArrayList<>();
-		for (Appointment a:  appointmentRepository.findByStartTimeAndAvailable(startTime, true)) {
+		for (Appointment a:  appointmentRepository.findByStartTimeAndAvailable(startTime, true, Sort.by(sortingDirection, "bloodBank.averageGrade"))) {
 			boolean exists = false;
 			for (Appointment a2 : ret) {
 				if (a.getBloodBank().getId() == a2.getBloodBank().getId()) exists = true;
 			}
 			if (!exists) ret.add(a);
 		}
-		return appointmentMapper.appointmentsToAppointmentDtos(ret.subList((pageNumber - 1)*pageSize, (pageNumber - 1)*pageSize + pageSize - 1));
+		PageDto<AppointmentDto> page = new PageDto();
+		page.setTotalElements(ret.size());
+		List<AppointmentDto> retDto = appointmentMapper.appointmentsToAppointmentDtos(ret);
+		if (ret.isEmpty()) page.setContent(retDto);
+		else if ((pageNumber + 1)*pageSize > ret.size()) page.setContent(retDto.subList(pageNumber*pageSize, ret.size()));
+		else page.setContent(retDto.subList(pageNumber*pageSize, pageNumber*pageSize + pageSize));
+		return page;
 	}
 
 	public AppointmentDto scheduleAppointment(AppointmentDto appointmentDto, Long userId)

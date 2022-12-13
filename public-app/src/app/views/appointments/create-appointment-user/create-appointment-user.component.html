@@ -13,33 +13,49 @@
     </form>
   </mat-step>
   <mat-step>
-    <mat-table #table [dataSource]="appointments">
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.bloodBank.name }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="city">
-        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.bloodBank.address.city }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="averageGrade">
-        <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.bloodBank.averageGrade }}</mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"
-      (click)="selection.toggle(row)"
-      [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
-      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
-      ></mat-row>
-    </mat-table>
-    <mat-spinner *ngIf="showSpinner"></mat-spinner>
-    <div>
-      <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
-      <button mat-button matStepperNext>
-        Next
-      </button>
+    <div class="select">
+      <mat-select (selectionChange)="sort($event)" placeholder="Sort by" floatLabel="never">
+          <mat-select-trigger>Sort by</mat-select-trigger>
+          <mat-option value="ASC">Grade ascending</mat-option>
+          <mat-option value="DESC">Grade descending</mat-option>
+      </mat-select>
     </div>
+    <div class="content">
+      <mat-table #table [dataSource]="appointments">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{ item.bloodBank.name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{ item.bloodBank.address.city }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="averageGrade">
+          <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{ item.bloodBank.averageGrade }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+        [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+        ></mat-row>
+      </mat-table>
+      <mat-spinner *ngIf="showSpinner"></mat-spinner>
+      <mat-paginator
+      [pageSize]="2"
+      [length]="totalElements"
+      (page)="onPageChanged($event)"
+      [pageIndex]="pageNumber"
+      >
+    </mat-paginator>
+      <div>
+        <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
+        <button mat-button matStepperNext>
+          Next
+        </button>
+      </div>
+  </div>
   </mat-step>
   <mat-step>
     <div class="form-wrapper">

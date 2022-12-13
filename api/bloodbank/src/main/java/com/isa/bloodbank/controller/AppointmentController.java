@@ -1,9 +1,6 @@
 package com.isa.bloodbank.controller;
 
-import com.isa.bloodbank.dto.AppointmentDto;
-import com.isa.bloodbank.dto.BloodBankDto;
-import com.isa.bloodbank.dto.FreeAppointmentDto;
-import com.isa.bloodbank.dto.UserDto;
+import com.isa.bloodbank.dto.*;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.security.JwtUtils;
@@ -45,9 +42,12 @@ public class AppointmentController {
 	}
 
 	@GetMapping(value = "/recommend" ,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<AppointmentDto>> recommend(@RequestParam("startTime") final String startTime, @RequestParam("pageSize") final int pageSize, @RequestParam("pageNumber") final int pageNumber){
+	public ResponseEntity<PageDto<AppointmentDto>> recommend(@RequestParam("startTime") final String startTime,
+															 @RequestParam("pageSize") final int pageSize,
+															 @RequestParam("pageNumber") final int pageNumber,
+											 				 @RequestParam("sortDirection") final String sortDirection){
 		System.out.println(LocalDateTime.parse(startTime));
-		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime), pageSize, pageNumber));
+		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime), pageSize, pageNumber, sortDirection));
 	}
 	@PutMapping("/schedule")
 	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) {

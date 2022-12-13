@@ -50,15 +50,52 @@ export class CreateAppointmentUserComponent implements OnInit {
   selection = new SelectionModel<IBloodBank>(false);
   displayedColumns: string[] = ["name", "city", "averageGrade"]
   showSpinner : boolean = false
+  pageNumber: number = 0
+  totalElements: number = 0
+  sortDirection: string = "ASC"
 
   recommendBloodBanks() {
     this.showSpinner = true
     console.log(this.startTimeForm.getRawValue());
-    this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value).subscribe({
+    this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value, this.pageNumber, this.sortDirection).subscribe({
       next: (res) => {
         console.log(res)
         this.showSpinner = false
-        this.appointments = new MatTableDataSource(res);
+        this.appointments = new MatTableDataSource(res.content);
+        this.totalElements = res.totalElements;
+      },
+      error: (e) => {
+        console.log("error")
+      },
+    }
+    )
+  }
+
+  onPageChanged(e : any){
+    this.pageNumber = e.pageIndex;
+    console.log(this.pageNumber)
+    this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value, this.pageNumber, this.sortDirection).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.showSpinner = false
+        this.appointments = new MatTableDataSource(res.content);
+        this.totalElements = res.totalElements;
+      },
+      error: (e) => {
+        console.log("error")
+      },
+    }
+    )
+  }
+
+  sort(e: any) {
+    this.sortDirection = e.value;
+    this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value, this.pageNumber, this.sortDirection).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.showSpinner = false
+        this.appointments = new MatTableDataSource(res.content);
+        this.totalElements = res.totalElements;
       },
       error: (e) => {
         console.log("error")
@@ -93,7 +130,6 @@ export class CreateAppointmentUserComponent implements OnInit {
         }
       );
     }
-
   }
 }
 

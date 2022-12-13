@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
-import { IPage } from '../model/Page';
+import { IPage, IPageAppointment } from '../model/Page';
 import { IAppointment } from '../model/Appointment';
 
 
@@ -18,9 +18,9 @@ export class AppointmentService {
     return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment, {headers: headers});
   }
 
-  getBloodBanksWithFreeTimeSlots(startTime: Date){
-    return this.http.get<IAppointment[]>(
-      `http://localhost:8080/appointment/recommend?startTime=` + startTime + '&pageSize=' + 2 + '&pageNumber=' + 1
+  getBloodBanksWithFreeTimeSlots(startTime: Date, pageNumber: number, sortDirection: string){
+    return this.http.get<IPageAppointment>(
+      `http://localhost:8080/appointment/recommend?startTime=` + startTime + '&pageSize=' + 2 + '&pageNumber=' + pageNumber + '&sortDirection=' + sortDirection   
     );
   }
 

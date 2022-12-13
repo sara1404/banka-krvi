@@ -41,3 +41,20 @@
     }
   }
 }
+
+.select{
+  position: absolute;
+  left: 60%;
+  top: 25%;
+}
+
+.content{
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 700px;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
