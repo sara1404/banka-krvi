@@ -25,7 +25,7 @@ export class ChangePasswordComponent implements OnInit {
     if(oldPassword == "" || newPassword == ""){
       return false;
     }
-    if(newPassword.length < 6 || oldPassword.length < 6){
+    if(newPassword.length < 6 ){
       this.okPassword = false;
       this.okPasswordText = "Password must be 6 characters long";
       return false;

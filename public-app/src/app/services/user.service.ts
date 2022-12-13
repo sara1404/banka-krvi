@@ -87,4 +87,6 @@ export class UserService {
   finishAppointment(appointmentId: number):Observable<Boolean>{
     return this.http.post<Boolean>('http://localhost:8080/appointment/finish', appointmentId);
   }
+
+  
 }

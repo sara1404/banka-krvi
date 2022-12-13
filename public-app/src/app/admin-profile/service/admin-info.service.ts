@@ -8,13 +8,15 @@ import { IBloodBank } from '../model/BloodBank';
 import { IBloodSupply } from '../model/BloodSupply';
 import { IUser } from '../model/User';
 import { IPasswordChange } from '../model/PasswordChange';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminInfoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getUser(userId: number): Observable<IUser>{
     //zakucano na 3, to treba da je logovan
@@ -49,6 +51,9 @@ export class AdminInfoService {
   }
 
   changePassword(passwordChange: IPasswordChange):Observable<Boolean>{
-    return this.http.put<Boolean>('http://localhost:8080/user/change-password', passwordChange);
+    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    //headers.set('Content-Type', 'application/json');
+    return this.http.put<Boolean>('http://localhost:8080/user/change-password', passwordChange, { headers: headers });
   }
+
 }
