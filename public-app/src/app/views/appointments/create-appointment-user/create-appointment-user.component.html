@@ -3,10 +3,16 @@
     <form [formGroup]="startTimeForm">
       <mat-form-field appearance="fill">
         <mat-label>Start date</mat-label>
-        <input formControlName="startTime" matInput type="datetime-local"/>
+        <input formControlName="startTime" matInput type="datetime-local"
+        required
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="!startTimeForm.hasError('required')">
+          Please enter valid date and time!
+        </mat-error>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext (click)="recommendBloodBanks()">
+        <button mat-button matStepperNext (click)="recommendBloodBanks()" [disabled]="!startTimeForm.valid">
           Next
         </button>
       </div>
@@ -51,7 +57,7 @@
     </mat-paginator>
       <div>
         <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
-        <button mat-button matStepperNext>
+        <button mat-button matStepperNext [disabled]="!isSelected()">
           Next
         </button>
       </div>

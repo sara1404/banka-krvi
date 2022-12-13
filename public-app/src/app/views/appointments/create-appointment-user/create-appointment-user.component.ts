@@ -46,6 +46,11 @@ export class CreateAppointmentUserComponent implements OnInit {
   startTimeForm = new FormGroup({
     startTime : new FormControl(null, [Validators.required]),
   })
+  matcher = new MyErrorStateMatcher();
+  isSelected(){
+    return this.selection.selected[0] != null
+  }
+
   appointments = new MatTableDataSource<IAppointment>([])
   selection = new SelectionModel<IBloodBank>(false);
   displayedColumns: string[] = ["name", "city", "averageGrade"]
