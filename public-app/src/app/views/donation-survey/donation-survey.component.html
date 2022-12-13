@@ -3,13 +3,7 @@
     <label for="" class="title">DONATION SURVEY</label>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Weight[kg]</mat-label>
-      <input
-        formControlName="weight"
-        type="number"
-        min="0"
-        max="250"
-        matInput
-      />
+      <input formControlName="weight" type="number" min="0" max="250" matInput />
     </mat-form-field>
 
     <table>
@@ -85,11 +79,6 @@
         </td>
       </tr>
     </table>
-    <input
-      type="submit"
-      (click)="sendSurvey()"
-      value="Send survey"
-      class="form-field submit-btn"
-    />
+    <input type="submit" (click)="sendSurvey()" value="Send survey" class="form-field submit-btn" />
   </form>
 </div>

@@ -19,6 +19,7 @@ import { RegisterUserComponent } from './views/register-user/register-user/regis
 import { DonationSurveyComponent } from './views/donation-survey/donation-survey.component';
 import { ExaminationComponent } from './views/users/examination/examination.component';
 import {CreateAppointmentComponent} from './views/appointments/create-appointment.component'
+import { UserLoginComponent } from './views/user-login/user-login/user-login.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: 'bloodsupplies', component:BloodSuppliesComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
   {path: 'examiantion', component:ExaminationComponent},
-  {path: 'create-appointment', component: CreateAppointmentComponent}
+  {path: 'create-appointment', component: CreateAppointmentComponent},
+  {path: 'login', component: UserLoginComponent }
 ];
 
 @NgModule({
