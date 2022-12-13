@@ -111,6 +111,7 @@ export class CreateAppointmentUserComponent implements OnInit {
 
   deleteBloodBanks(){
     this.appointments = new MatTableDataSource([]);
+    this.selection.selected[0] = null;
   }
 
   scheduleAppointment(){
