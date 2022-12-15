@@ -106,7 +106,8 @@ public class UserService {
 
 	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
 		//treba provera i da je prvi put logovan
-		if (encoder.matches(user.getPassword(), passwordChangeDto.getOldPassword())) {
+		if (!encoder.matches(passwordChangeDto.getOldPassword(), user.getPassword())) {
+			System.out.println();
 			return false;
 		}
 		user.setPassword(encoder.encode(passwordChangeDto.getNewPassword()));
