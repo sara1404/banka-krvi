@@ -1,0 +1,30 @@
+<div class="form-wrapper">
+  <form class="create-appointment-form" [formGroup]="createAppointmentForm">
+    <h1 class="title">Create appointment</h1>
+    <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Start date and time</mat-label>
+        <input matInput type="datetime-local" formControlName="startTime"
+        required
+        [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="!createAppointmentForm.hasError('required')">
+          Enter valid date and time. Hospital working hours : {{getWorkingHours().startTime | date: 'HH:mm'}} - {{getWorkingHours().endTime | date: 'HH:mm'}}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Duration in minutes</mat-label>
+        <input matInput type="number" formControlName="duration" min ="1"
+        required
+        [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="!createAppointmentForm.hasError('required')">
+          Please enter duration
+        </mat-error>
+    </mat-form-field>
+    <div class="buttons">
+      <input (click)="saveClick($event)" type="submit" value="Create" class="form-field submit-btn" [disabled]="!createAppointmentForm.valid">
+    </div>
+  </form>
+  </div>
+  
+  

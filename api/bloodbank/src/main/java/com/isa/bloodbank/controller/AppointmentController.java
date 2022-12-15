@@ -1,6 +1,9 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AppointmentDto;
+import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
@@ -12,8 +15,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/appointment")
@@ -30,4 +40,19 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(user.getBloodBank().getId()));
 	}
 
+	@GetMapping("/for-user/{id}")
+	public ResponseEntity<List<UserAppointmentDto>> findAllByUserId(@PathVariable("id") final Long id){
+		return ResponseEntity.ok(appointmentService.findAllByUserId(id));
+	}
+
+	@PostMapping("/finish")
+	public ResponseEntity<Boolean> finish(@RequestBody final Long id){
+		return ResponseEntity.ok(appointmentService.finishAppointment(id));
+	}
+
+	@PostMapping("/create")
+	public ResponseEntity<AppointmentDto> createAppointment(@Valid @RequestBody final Appointment appointmentDto) {
+		final Long administratorId = (long) (3); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
+		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
+	}
 }

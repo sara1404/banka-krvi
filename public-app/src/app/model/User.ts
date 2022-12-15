@@ -15,5 +15,9 @@ export interface IUser{
   gender: string,
   workplaceName: string,
   jobTitle: string,
+<<<<<<< HEAD
   firstLogged: boolean
+=======
+  points: number
+>>>>>>> feature/examination
 }

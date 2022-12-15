@@ -39,4 +39,5 @@ public class UserDto {
 	Address address;
 	String password;
 	Boolean firstLogged;
+	int points;
 }

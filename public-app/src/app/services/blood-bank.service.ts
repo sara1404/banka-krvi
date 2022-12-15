@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
 import { IPage } from '../model/Page';
+import { IWorkingHours } from '../model/WorkingHours';
 
 @Injectable({
   providedIn: 'root',
@@ -49,4 +50,11 @@ export class BloodBankService {
       bloodbank
     );
   }
+
+  getBloodBankWorkingHours() {
+    return this.http.get<IWorkingHours>(
+      `http://localhost:8080/bloodbank/getWorkingHours`
+    );
+  }
+
 }

@@ -23,4 +23,7 @@ public class BloodBank extends BaseEntity {
 	String description;
 	@Column
 	double averageGrade;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "working_hours_id", referencedColumnName = "id")
+	WorkingHours  workingHours;
 }
