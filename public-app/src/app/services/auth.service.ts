@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICredentials } from '../model/Credentials';
 import { IToken } from '../model/Token';
+import { IUser } from '../model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,12 @@ export class AuthService {
 
   isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  getLoggedUser():Observable<IUser>{
+    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    //headers.set('Content-Type', 'application/json');
+    return this.http.get<IUser>('http://localhost:8080/user/current', { headers: headers });
   }
 
 }

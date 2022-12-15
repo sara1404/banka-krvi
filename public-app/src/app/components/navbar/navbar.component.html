@@ -1,5 +1,6 @@
 <div class="navbar">
-  <div routerLink="userProfile" class="user">sindzeri</div>
+  <!-- *ngIf="user.userType == 'REGISTERED' || user.userType == 'ADMIN_CENTER' || user.userType != 'ADMIN_SYSTEM'"-->
+  <div  routerLink="userProfile" class="user">sindzeri</div>
   <div *ngIf="isLoggedIn" routerLink="changePassword" class="user">Change password</div>
   <div *ngIf="!isLoggedIn" routerLink="login" class="user">Login</div>
   <div *ngIf="isLoggedIn" class="user" (click)="logout()">Logout</div>

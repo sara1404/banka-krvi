@@ -1,14 +1,15 @@
 <div class="sidebar-wrapper">
-  <div routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
-  <div routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
+  <!--*ngIf="user.userType == 'REGISTERED' || user.userType == 'ADMIN_CENTER' || user.userType != 'ADMIN_SYSTEM'"-->
+  <div *ngIf="isLoggedIn" routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
+  <div *ngIf="isLoggedIn" routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
   <div routerLink='register/user' class="sidebar-option">REGISTER USER</div>
-  <div routerLink='users' class="sidebar-option">USERS</div>
-  <div routerLink='admin/profile' class="sidebar-option">ADMIN PERSONAL INFORMATIONS</div>
-  <div routerLink='bloodbank/info' class="sidebar-option">BLOODBANK INFO</div>
-  <div routerLink='other/admins' class="sidebar-option">OTHER ADMINS</div>
-  <div routerLink='free/appointments' class="sidebar-option">FREE APPOINTMENTS</div>
-  <div routerLink='bloodsupplies' class="sidebar-option">BLOOD SUPPLIES</div>
+  <div *ngIf="isLoggedIn" routerLink='users' class="sidebar-option">USERS</div>
+  <div *ngIf="isLoggedIn" routerLink='admin/profile' class="sidebar-option">ADMIN PERSONAL INFORMATIONS</div>
+  <div *ngIf="isLoggedIn" routerLink='bloodbank/info' class="sidebar-option">BLOODBANK INFO</div>
+  <div *ngIf="isLoggedIn" routerLink='other/admins' class="sidebar-option">OTHER ADMINS</div>
+  <div *ngIf="isLoggedIn" routerLink='free/appointments' class="sidebar-option">FREE APPOINTMENTS</div>
+  <div *ngIf="isLoggedIn" routerLink='bloodsupplies' class="sidebar-option">BLOOD SUPPLIES</div>
   <div routerLink='bloodBanks' class="sidebar-option">BLOOD BANKS</div>
-  <div routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
-  <div routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
+  <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
+  <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
 </div>

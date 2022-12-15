@@ -67,6 +67,6 @@ public class AuthController {
 
 	@GetMapping("/current")
 	public ResponseEntity<?> current(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
-		return ResponseEntity.ok(jwtUtils.getUserFromToken(authHeader));
+		return ResponseEntity.ok(userMapper.userToUserDto(jwtUtils.getUserFromToken(authHeader)));
 	}
 }
