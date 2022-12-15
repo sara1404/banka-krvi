@@ -19,6 +19,6 @@ export class AppointmentService {
   }
 
   getAppointmentsForChosenMonth(month: number, year: number): Observable<any>{
-    return this.http.get(`${this.base}/appointments?month=${month}&year=${year}`)
+    return this.http.get<any>(`${this.base}/appointments?month=${month}&year=${year}`)
   }
 }

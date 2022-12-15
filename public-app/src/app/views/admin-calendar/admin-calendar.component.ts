@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { IAppointment } from 'src/app/model/Appointment';
+import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { EventColor } from 'calendar-utils';
 import { map, Subject, Observable } from 'rxjs';
@@ -41,9 +41,9 @@ export class AdminCalendarComponent implements OnInit {
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
   //appointments: IAppointment[] = []
-  events: CalendarEvent<{ appointment: IAppointment}>[] = []
+  events: CalendarEvent<{ appointment: IUserAppointment}>[] = []
 
-  selectedEvent: CalendarEvent<{ appointment: IAppointment }> = {
+  selectedEvent: CalendarEvent<{ appointment: IUserAppointment }> = {
     title: null as any,
     start: null as any,
     color: { ...colors['blue'] },
@@ -65,8 +65,8 @@ export class AdminCalendarComponent implements OnInit {
     console.log(this.viewDate.getMonth(), this.viewDate.getFullYear())
     this.appointmentService.getAppointmentsForChosenMonth(this.viewDate.getMonth() + 1, this.viewDate.getFullYear())
     .pipe(
-      map((results: IAppointment[]) => {
-      return results.map((appointment: IAppointment) => {
+      map((results: IUserAppointment[]) => {
+      return results.map((appointment: IUserAppointment) => {
         return {
           title: this.createTitle(appointment),
           start: new Date(appointment.startTime),
@@ -81,7 +81,7 @@ export class AdminCalendarComponent implements OnInit {
 
 
     .subscribe(
-      (response: CalendarEvent<{ appointment: IAppointment }>[]) => {
+      (response: CalendarEvent<{ appointment: IUserAppointment }>[]) => {
         this.events = response;
         console.log(this.events)
       },
@@ -91,7 +91,7 @@ export class AdminCalendarComponent implements OnInit {
     );
   }
 
-  createTitle(appointment: IAppointment): string {
+  createTitle(appointment: IUserAppointment): string {
     return (
       "Start: " + new Date(appointment.startTime) + '\n' +
       "End: " + addMinutes(new Date(appointment.startTime), appointment.duration) + '\n' +
