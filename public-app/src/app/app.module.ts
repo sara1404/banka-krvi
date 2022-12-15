@@ -23,6 +23,7 @@ import { RegisterUserModule } from './views/register-user/register-user.module';
 import { DonationSurveyModule } from './views/donation-survey/donation-survey.module';
 import { CreateAppointmentModule } from './views/appointments/create-appointment.module';
 import { UserLoginModule } from './views/user-login/user-login.module';
+import { AdminCalendarModule } from './views/admin-calendar/admin-calendar.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserLoginModule } from './views/user-login/user-login.module';
     RegisterUserModule,
     DonationSurveyModule,
     UserLoginModule,
+    AdminCalendarModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
