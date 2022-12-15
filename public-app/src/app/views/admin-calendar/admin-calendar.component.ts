@@ -6,7 +6,7 @@ import { EventColor } from 'calendar-utils';
 import { map, Subject, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { addDays, subDays, addMinutes } from 'date-fns';
-
+import { ViewEncapsulation } from '@angular/core';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -26,7 +26,7 @@ const colors: Record<string, EventColor> = {
 @Component({
   selector: 'app-admin-calendar',
   templateUrl: './admin-calendar.component.html',
-  styleUrls: ['./admin-calendar.component.scss']
+  styleUrls: ['./admin-calendar.component.scss'],
 })
 export class AdminCalendarComponent implements OnInit {
 
@@ -95,7 +95,7 @@ export class AdminCalendarComponent implements OnInit {
     return (
       "Start: " + new Date(appointment.startTime) + '\n' +
       "End: " + addMinutes(new Date(appointment.startTime), appointment.duration) + '\n' +
-      "User: " + "fiksni"
+      "User: " + appointment?.user?.firstName + " " + appointment?.user?.lastName
     );
   }
 

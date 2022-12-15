@@ -13,10 +13,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\UserSurveyDto.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\EquipmentController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\SurveyMapper.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\PageMapper.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodSupplyService.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\UserDto.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\FreeAppointmentDto.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AppointmentController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AuthController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\BloodSupplyDto.java
@@ -25,7 +21,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\UserService.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\AppointmentAndInfoDto.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\EquipmentService.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\UserService.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\Appointment.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\UserType.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\BloodbankApplication.java
@@ -35,7 +30,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\AppointmentInfoMapper.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\AppointmentInfoController.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodBankController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\GlobalErrorHandler.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\BloodSupplyController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\BloodType.java
@@ -46,9 +40,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\StandardErrorResponse.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\TokenDto.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\PasswordChangeDto.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\UserRepository.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\exception\StandardErrorResponse.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\WorkingHoursRepository.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\enums\Gender.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\BloodSupplyRepository.java
@@ -59,8 +50,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\security\JwtUtils.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\EquipmentRepository.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\WorkingHoursMapper.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\WorkingHoursMapper.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\config\SecurityConfig.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\DonationSurveyRepository.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\DonationSurvey.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\mapping\UserMapper.java
@@ -76,8 +65,6 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\security\userdetail\UserDetailsImpl.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodSupply.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\AppointmentInfoDto.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\BloodBankDto.java
-D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\BloodSupply.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\dto\DonationSurveyDto.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\controller\DonationSurveyController.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\repository\AppointmentRepository.java
@@ -87,4 +74,3 @@ D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\blo
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\service\BloodBankService.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\entity\User.java
 D:\programiranje projekti\isa\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\security\SecurityConfig.java
-
