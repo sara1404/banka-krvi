@@ -38,14 +38,14 @@ export class UserLoginComponent implements OnInit {
         (res) => {
           this.authService.setSession(res.token);
           this.authService.getCurrentUser().subscribe(data => {
-            console.log(data.firstLogged)
+            console.log(data)
             if(data.firstLogged === false)
-              this.router.navigate(['/changePassword']).then(() => {
+              this.router.navigate(['/app/changePassword']).then(() => {
                 window.location.reload();
               })
               return
           })
-          this.router.navigate(['/']).then(() => {
+          this.router.navigate(['/app']).then(() => {
             window.location.reload();
           });
 

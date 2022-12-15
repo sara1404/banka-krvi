@@ -105,15 +105,14 @@ public class UserService {
 	}
 
 	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
-
-		System.out.println(user.getPassword() + " " + encoder.encode(passwordChangeDto.getOldPassword()));
-		if (!user.getPassword().equals(encoder.encode(passwordChangeDto.getOldPassword()))) {
+		//treba provera i da je prvi put logovan
+		if (!encoder.matches(passwordChangeDto.getOldPassword(), user.getPassword())) {
+			System.out.println();
 			return false;
 		}
-		final String encodedPassword = encoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
+		user.setPassword(encoder.encode(passwordChangeDto.getNewPassword()));
 		user.setFirstLogged(true);
-
+		userRepository.save(user);
 		return true;
 	}
 

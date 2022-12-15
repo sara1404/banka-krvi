@@ -21,4 +21,16 @@
     background-color: black;
     border-radius: 1em;
   }
+
+  .nav-icon{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid white;
+    margin: 20px 0;
+
+    img{
+      margin-top: -25px;
+      padding-bottom: 15px;
+    }
+  }
 }

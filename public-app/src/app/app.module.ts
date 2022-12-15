@@ -27,7 +27,7 @@ import { UserLoginModule } from './views/user-login/user-login.module';
 @NgModule({
   declarations: [
     AppComponent,
-    BloodSuppliesComponent
+    BloodSuppliesComponent,
   ],
   imports: [
     BrowserModule,
