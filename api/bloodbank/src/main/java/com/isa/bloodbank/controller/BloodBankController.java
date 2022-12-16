@@ -1,12 +1,17 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.BloodBankDto;
+import com.isa.bloodbank.dto.PageDto;
+import com.isa.bloodbank.dto.WorkingHoursDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,14 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -70,6 +68,12 @@ public class BloodBankController {
 	@PostMapping("/register")
 	public ResponseEntity<BloodBankDto> register(@Valid @RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
+	}
+
+	@GetMapping(value = "/getWorkingHours", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<WorkingHours> getWorkingHours() {
+		final Long administratorId = (long) (3);
+		return ResponseEntity.ok(bloodBankService.getWorkingHours(administratorId));
 	}
 
 }

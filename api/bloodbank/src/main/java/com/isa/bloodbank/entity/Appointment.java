@@ -10,20 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Appointment extends BaseEntity {
-	@Column
-	Long bloodBankId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "blood_bank_id", referencedColumnName = "id")
+	BloodBank bloodBank;
 	@Column
 	LocalDateTime startTime;
 	@Column
-	LocalDateTime endTime;
+	double duration;
 	@ManyToMany()
 	List<User> medicalStaff;
 	@Column
@@ -31,6 +35,7 @@ public class Appointment extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "appointment_info_id", referencedColumnName = "id")
 	AppointmentInfo appointmentInfo;
-	//@Column
-	//boolean finished;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	User user;
 }

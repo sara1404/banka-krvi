@@ -33,14 +33,14 @@ export class UserProfileComponent implements OnInit {
     jobTitle: new FormControl({value: null, disabled: true}, [Validators.required]),
     workplaceName: new FormControl({value: null, disabled: true}),
     address: new FormGroup({
-      id: new FormControl({}),
+      id: new FormControl(),
       street : new FormControl({value : null, disabled: true}, [Validators.required]),
       number : new FormControl({value : null, disabled : true}, [Validators.required]),
       city : new FormControl({value : null, disabled : true}, [Validators.required]),
       zipcode : new FormControl({value : null, disabled : true}, [Validators.required]),
       country : new FormControl({value : null, disabled : true}, [Validators.required]),
-      longitude: new FormControl({}),
-      latitude: new FormControl({})
+      longitude: new FormControl(),
+      latitude: new FormControl()
     }),
     bloodType: new FormControl({value : null, disabled: true}, [Validators.required]),
     email: new FormControl({value: null, disabled: true}, [Validators.required, Validators.email]),

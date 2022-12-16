@@ -92,6 +92,7 @@ public class UserService {
 
 		newUser.setPassword(user.getPassword());
 		newUser.setUserType(user.getUserType());
+		newUser.setBloodBank(user.getBloodBank());
 
 		return userRepository.save(newUser);
 	}

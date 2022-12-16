@@ -50,9 +50,6 @@ export class RegisterUserComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
-    this.signUpForm.addValidators(
-      this.createCompareValidator(this.password, this.confirmPassword)
-    );
   }
 
   ngOnInit(): void {}
@@ -98,6 +95,7 @@ export class RegisterUserComponent implements OnInit {
     controlTwo: AbstractControl
   ) {
     return () => {
+      return null;
       if (controlOne.value !== controlTwo.value)
         return { match_error: 'Value does not match' };
       return null;
