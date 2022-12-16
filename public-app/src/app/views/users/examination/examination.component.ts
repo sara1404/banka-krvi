@@ -1,6 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAppointment } from 'src/app/admin-profile/model/Appointment';
 import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ExaminationComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
+  constructor(public dialogRef: MatDialogRef<ExaminationComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
 
   userSurvey: IUserSurvey;
   displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
@@ -27,6 +27,8 @@ export class ExaminationComponent implements OnInit {
   userAppointments: IUserAppointment[]
   appointment: IUserAppointment
   noAppointments: boolean = false;
+
+  //
   ngOnInit(): void {
     this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{this.userSurvey = data;});
     this.userService.getAppointmentsForUser(this._data.user.id).subscribe(data=>{this.userAppointments = data;});
@@ -50,6 +52,7 @@ export class ExaminationComponent implements OnInit {
   didntShowUp(element: IUserAppointment){
     this.userService.addPenalPoints(this.userSurvey.userId).subscribe(data=>{this.result = data});
     this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
+    this.dialogRef.close();
   }
 
   unsuitable(element: IUserAppointment){
@@ -80,6 +83,7 @@ export class ExaminationComponent implements OnInit {
       },
     }));
     this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
+    this.dialogRef.close();
   }
   showError(e) {
     this.toastService.showError("Error");
@@ -88,6 +92,10 @@ export class ExaminationComponent implements OnInit {
   showSuccess() {
     this.toastService.showSuccess('Successfully saved info.');
 
+  }
+
+  close(close: boolean){
+    if(close == true) this.dialogRef.close();
   }
 
 }

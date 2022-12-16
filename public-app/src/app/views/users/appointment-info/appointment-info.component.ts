@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   AbstractControl,
   Form,
@@ -28,6 +28,7 @@ export class AppointmentInfoComponent implements OnInit {
 
   @Input() appointment: IUserAppointment;
   result: Boolean
+  @Output() newItemEvent = new EventEmitter<boolean>();
 
   constructor(fb: FormBuilder, private userService: UserService, private toastService: ToastService, private appointmentInfoService: AppointmentInfoService) {
     this.appInfoForm = fb.group({
@@ -142,6 +143,7 @@ export class AppointmentInfoComponent implements OnInit {
     this.appointmentInfoService.usedEquipment(needles).subscribe();
     this.appointmentInfoService.usedEquipment(bandages).subscribe();
     this.appointmentInfoService.usedEquipment(bags).subscribe();
+    this.newItemEvent.emit(true);
     /*
     this.info.cuso4 = Number(this.appInfoForm.get('cuso4'));
     this.info.hemoglobinometer = this.appInfoForm.value.hemoglobinometer

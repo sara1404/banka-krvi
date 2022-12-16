@@ -45,6 +45,6 @@
     <p>There are no appointments for this user</p>
 </div>
 <div *ngIf="this.start==true">
-    <app-appointment-info [appointment]="appointment"></app-appointment-info>
+    <app-appointment-info (newItemEvent)="close($event)" [appointment]="appointment"></app-appointment-info>
 </div>
 <!--<p *ngIf="checkSurvey() == false">ne moze</p>-->

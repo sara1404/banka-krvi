@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
   startExamination(){
     this.dialog.open(ExaminationComponent,
       {
-        data: {user: this.user}
+        data: {user: this.user, dialog: this.dialog}
       });
   }
 }
