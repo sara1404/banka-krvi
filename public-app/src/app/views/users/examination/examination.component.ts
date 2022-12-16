@@ -26,9 +26,11 @@ export class ExaminationComponent implements OnInit {
   start: boolean= false;
   userAppointments: IUserAppointment[]
   appointment: IUserAppointment
+  noAppointments: boolean = false;
   ngOnInit(): void {
     this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{this.userSurvey = data;});
     this.userService.getAppointmentsForUser(this._data.user.id).subscribe(data=>{this.userAppointments = data;});
+    if(this.userAppointments?.length == 0) this.noAppointments = true;
   }
 
   checkSurvey(): boolean{

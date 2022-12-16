@@ -1,4 +1,4 @@
-<div *ngIf=" this.start==false">
+<div *ngIf=" this.start==false && this.userAppointments?.length > 0">
     <table mat-table class="mat-elevation-z8" [dataSource]="userAppointments">
 
         <!--- Note that these columns can be defined in any order.
@@ -40,6 +40,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <!--<button mat-raised-button (click) = "startExamination()">Examination</button>-->
+</div>
+<div *ngIf="this.userAppointments?.length == 0">
+    <p>There are no appointments for this user</p>
 </div>
 <div *ngIf="this.start==true">
     <app-appointment-info [appointment]="appointment"></app-appointment-info>
