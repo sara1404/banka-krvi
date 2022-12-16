@@ -18,6 +18,12 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
     //this.authService.getLoggedUser().subscribe(data=>{this.user = data;});
+    var interval = setInterval(() => {
+      this.refresh(); // api call
+   }, 200);
+  }
+  refresh(){
+    this.ngOnInit();
   }
 
 }
