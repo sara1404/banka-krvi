@@ -49,13 +49,15 @@ public class UserService {
 
 	public User registerUser(final User user) {
 		user.setUserType(UserType.REGISTERED);
-		user.setPassword(encoder.encode(user.getPassword()));
+		final String encodedPassword = encoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 		return userRepository.save(user);
 	}
 
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
 		centerAdmin.setUserType(UserType.ADMIN_CENTER);
-		centerAdmin.setPassword(encoder.encode(centerAdmin.getPassword()));
+		final String encodedPassword = encoder.encode(centerAdmin.getPassword());
+		centerAdmin.setPassword(encodedPassword);
 		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
