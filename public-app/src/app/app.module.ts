@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminProfileModule } from './admin-profile/admin-profile.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -25,6 +25,7 @@ import {ToastrModule} from "ngx-toastr"
 import { RegisterUserModule } from './views/register-user/register-user.module';
 import { DonationSurveyModule } from './views/donation-survey/donation-survey.module';
 import { UserLoginModule } from './views/user-login/user-login.module';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { UserLoginModule } from './views/user-login/user-login.module';
       positionClass: "toast-bottom-right"
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
