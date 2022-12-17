@@ -6,12 +6,14 @@ import { IUserSurvey } from '../model/UserSurvey';
 import { IUser } from '../model/User';
 import { IUserAppointment } from '../model/UserAppointment';
 import { Token } from '@angular/compiler';
+import { AuthService } from './auth.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getUsers(pageNo: number): Observable<IUser[]> {
     return this.http.get<IUser[]>(`http://localhost:8080/user/users/${pageNo}`);
@@ -22,8 +24,12 @@ export class UserService {
   }
 
   getLoggedInUserProfile(): Observable<IUser> {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  `Bearer ${localStorage.getItem('token')}`)
+    }
     return this.http.get<IUser>(
-      'http://localhost:8080/user/loggedInUser/' + 10
+      'http://localhost:8080/user/getUserProfile', header
     );
   }
 
@@ -60,6 +66,10 @@ export class UserService {
 
   registerUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`http://localhost:8080/auth/register`, user);
+  }
+
+  confirmUserRegistration(email: string) {
+    return this.http.post(`http://localhost:8080/user/activate/${email}`, null);
   }
 
   sendSurvey(survey: IDonationSurvey): Observable<IDonationSurvey> {

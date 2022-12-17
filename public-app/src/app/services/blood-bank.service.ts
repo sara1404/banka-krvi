@@ -56,5 +56,4 @@ export class BloodBankService {
       `http://localhost:8080/bloodbank/getWorkingHours`
     );
   }
-
 }

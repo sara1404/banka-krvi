@@ -10,7 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
@@ -21,8 +26,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Appointment extends BaseEntity {
-	@Column
-	Long bloodBankId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "blood_bank_id", referencedColumnName = "id")
+	BloodBank bloodBank;
 	@Column
 	LocalDateTime startTime;
 	@Column
@@ -39,4 +45,5 @@ public class Appointment extends BaseEntity {
 	User user;
 	@Column
 	boolean finished;
+
 }

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminProfileModule } from './admin-profile/admin-profile.module';
 import { AdminProfileComponent } from './admin-profile/admin-profile/admin-profile.component';
-
-
 import { RegisterAdminComponent } from './views/register-admin/register-admin.component';
 import { RegisterBloodbankComponent } from './views/register-bloodbank/register-bloodbank.component';
 import { UsersComponent } from './views/users/users.component';
@@ -20,6 +18,8 @@ import { DonationSurveyComponent } from './views/donation-survey/donation-survey
 import { ExaminationComponent } from './views/users/examination/examination.component';
 import {CreateAppointmentComponent} from './views/appointments/create-appointment.component'
 import { UserLoginComponent } from './views/user-login/user-login/user-login.component';
+import { ConfirmRegistrationComponent } from './views/register-user/confirm-registration/confirm-registration.component';
+import { CreateAppointmentUserComponent } from './views/appointments/create-appointment-user/create-appointment-user.component';
 
 
 const routes: Routes = [
@@ -38,8 +38,11 @@ const routes: Routes = [
   {path: 'changePassword', component: ChangePasswordComponent},
   {path: 'examiantion', component:ExaminationComponent},
   {path: 'create-appointment', component: CreateAppointmentComponent},
-  {path: 'login', component: UserLoginComponent }
-];
+  {path: 'login', component: UserLoginComponent },
+  {path: 'confirm/user/:email', component: ConfirmRegistrationComponent},
+  {path: 'create-appointment', component: CreateAppointmentComponent},
+  {path: 'create-appointment-user', component: CreateAppointmentUserComponent}
+  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -2,18 +2,21 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
+import com.isa.bloodbank.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +27,8 @@ public class AppointmentService {
 	private AppointmentMapper appointmentMapper;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -59,7 +64,7 @@ public class AppointmentService {
 
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
 		//Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		appointment.setBloodBankId(userService.findById(adminId).getBloodBank().getId());
+		appointment.setBloodBank(userService.findById(adminId).getBloodBank());
 		appointment.setAvailable(true);
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
@@ -73,5 +78,40 @@ public class AppointmentService {
 		final Appointment appointment = findById(id);
 		appointment.setAppointmentInfo(appointmentInfo);
 		return appointmentRepository.save(appointment);
+	}
+
+	public PageDto<AppointmentDto> getBloodBanksWithFreeAppointments(final LocalDateTime startTime, final int pageSize, final int pageNumber, final String sortDirection) {
+		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+		final List<Appointment> ret = new ArrayList<>();
+		for (final Appointment a : appointmentRepository.findByStartTimeAndAvailable(startTime, true, Sort.by(sortingDirection, "bloodBank.averageGrade"))) {
+			boolean exists = false;
+			for (final Appointment a2 : ret) {
+				if (a.getBloodBank().getId() == a2.getBloodBank().getId()) {
+					exists = true;
+				}
+			}
+			if (!exists) {
+				ret.add(a);
+			}
+		}
+		final PageDto<AppointmentDto> page = new PageDto();
+		page.setTotalElements(ret.size());
+		final List<AppointmentDto> retDto = appointmentMapper.appointmentsToAppointmentDtos(ret);
+		if (ret.isEmpty()) {
+			page.setContent(retDto);
+		} else if ((pageNumber + 1) * pageSize > ret.size()) {
+			page.setContent(retDto.subList(pageNumber * pageSize, ret.size()));
+		} else {
+			page.setContent(retDto.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
+		}
+		return page;
+	}
+
+	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) {
+		final Appointment appointment = appointmentRepository.findById(appointmentDto.getId()).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setAvailable(false);
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 }
