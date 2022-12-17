@@ -82,7 +82,7 @@ export class ExaminationComponent implements OnInit {
         this.showError(e)
       },
     }));
-    this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
+    //this.userService.finishAppointment(element.id).subscribe(data => {this.result = data});
     this.dialogRef.close();
   }
   showError(e) {

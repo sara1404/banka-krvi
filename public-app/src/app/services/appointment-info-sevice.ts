@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
 import { IPage } from '../model/Page';
@@ -17,10 +17,12 @@ export class AppointmentInfoService {
   constructor(private http: HttpClient) {}
 
     createAppointmentInfo(appointmentInfo: IAppointmentAndInfo) : Observable<IAppointmentAndInfo> {
-    return this.http.post<IAppointmentAndInfo>(`http://localhost:8080/appointmentinfo/create`, appointmentInfo);
+      var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post<IAppointmentAndInfo>(`http://localhost:8080/appointmentinfo/create`, appointmentInfo, { headers: headers });
     }
 
     usedEquipment(equipment:IEquipment):Observable<Boolean>{
-      return this.http.post<Boolean>(`http://localhost:8080/equipment/used`, equipment);
+      var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+      return this.http.post<Boolean>(`http://localhost:8080/equipment/used`, equipment, { headers: headers });
     }
 }

@@ -3,6 +3,7 @@ package com.isa.bloodbank.service;
 import com.isa.bloodbank.dto.AppointmentAndInfoDto;
 import com.isa.bloodbank.dto.AppointmentInfoDto;
 import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.AppointmentInfoMapper;
 import com.isa.bloodbank.repository.AppointmentInfoRepository;
 
@@ -20,7 +21,7 @@ public class AppointmentInfoService {
 	@Autowired
 	private BloodSupplyService bloodSupplyService;
 
-	public AppointmentInfoDto create(final AppointmentAndInfoDto appointmentAndInfoDto) {
+	public AppointmentInfoDto create(final AppointmentAndInfoDto appointmentAndInfoDto, final User loggedUser) {
 		//appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
 		final AppointmentInfoDto dto = appointmentInfoMapper.appointmentToAppointmentInfoDto(
 			appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
@@ -28,8 +29,9 @@ public class AppointmentInfoService {
 		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfo);
 		if (appointmentAndInfoDto.getAppointmentInfoDto().isAccepted()) {
 			bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(),
-				appointmentAndInfoDto.getAppointmentInfoDto().getQuantity());
+				appointmentAndInfoDto.getAppointmentInfoDto().getQuantity(), loggedUser);
 		}
+		appointmentService.finishAppointment(appointmentAndInfoDto.getAppointmentId());
 		return dto;
 	}
 }
