@@ -1,5 +1,6 @@
 package com.isa.bloodbank.mapping;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 
@@ -15,4 +16,7 @@ public interface AppointmentMapper {
 	List<FreeAppointmentDto> appointmentsToFreeAppointmentDtos(List<Appointment> appointments);
 	List<Appointment> freeAppointmentDtosToAppointments(List<FreeAppointmentDto> appointments);
 
+	Appointment appointmentDtoToAppointment(AppointmentDto appointment);
+	AppointmentDto appointmentToAppointmentDto(Appointment appointment);
+	List<AppointmentDto> appointmentsToAppointmentDtos(List<Appointment> appointments);
 }

@@ -1,0 +1,60 @@
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+  background: #999;
+}
+
+.form-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 480px;
+
+  mat-radio-button {
+    margin-left: 0.5em;
+  }
+
+  tr {
+    height: 2em;
+  }
+  .survey-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em 10em;
+    width: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .form-field{
+      width: 80%;
+    }
+
+    .title{
+      justify-content: center;
+      margin-bottom: 2em;
+      font-size: 1.6rem;
+      user-select: none;
+    }
+  }
+}
+
+.select{
+  position: absolute;
+  left: 60%;
+  top: 25%;
+}
+
+.content{
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 700px;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}

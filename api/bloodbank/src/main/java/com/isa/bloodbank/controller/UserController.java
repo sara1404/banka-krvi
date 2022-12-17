@@ -5,6 +5,8 @@ import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.UserMapper;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.UserService;
 
 import java.util.List;
@@ -12,17 +14,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -33,6 +28,10 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	PasswordEncoder encoder;
+	@Autowired
+	private JwtUtils jwtUtils;
+	@Autowired
+	private UserMapper userMapper;
 
 	@GetMapping("/bloodBankId")
 	public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
@@ -58,9 +57,10 @@ public class UserController {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
-	@GetMapping("/loggedInUser/{id}")
-	public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findById(id));
+	@GetMapping("/getUserProfile")
+	public ResponseEntity<UserDto> getUserProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
 	@PutMapping("/update/")
