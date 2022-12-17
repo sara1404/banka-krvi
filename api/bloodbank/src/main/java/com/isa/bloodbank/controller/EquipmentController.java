@@ -7,6 +7,7 @@ import com.isa.bloodbank.service.EquipmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,7 +23,7 @@ public class EquipmentController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/used")
-	//@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public Boolean removeEquipment(@RequestBody final EquipmentDto equipmentDto,
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
