@@ -59,6 +59,10 @@ export class UserService {
     return this.http.post<IUser>(`http://localhost:8080/auth/register`, user);
   }
 
+  confirmUserRegistration(email: string) {
+    return this.http.post(`http://localhost:8080/user/activate/${email}`, null);
+  }
+
   sendSurvey(survey: IDonationSurvey): Observable<IDonationSurvey> {
     return this.http.post<IDonationSurvey>(
       `http://localhost:8080/survey/fill`,
