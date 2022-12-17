@@ -117,24 +117,25 @@ export class AppointmentInfoComponent implements OnInit {
       quantity: this.appInfoForm.value.bag
     }
     this.appointmentInfoService.usedEquipment(needles).subscribe(data => this.resultEquipmentNeedles = data);
-    if(!this.resultEquipmentNeedles)
+    if(this.resultEquipmentNeedles == false)
+    {
+      this.showErrorEquipment();
+      return;
+    }else{
+      this.appointmentInfoService.usedEquipment(bandages).subscribe(data => this.resultEquipmentBandages = data);
+      if(this.resultEquipmentBandages == false)
+      {
+        this.showErrorEquipment();
+        return;
+      }else{
+        this.appointmentInfoService.usedEquipment(bags).subscribe(data => this.resultEquipmentBags = data);
+    if(this.resultEquipmentBags == false)
     {
       this.showErrorEquipment();
       return;
     }
-    this.appointmentInfoService.usedEquipment(bandages).subscribe(data => this.resultEquipmentBandages = data);
-    if(!this.resultEquipmentBandages)
-    {
-      this.showErrorEquipment();
-      return;
+      } 
     }
-    this.appointmentInfoService.usedEquipment(bags).subscribe(data => this.resultEquipmentBags = data);
-    if(!this.resultEquipmentBags)
-    {
-      this.showErrorEquipment();
-      return;
-    }
-    
     if(this.resultEquipmentNeedles && this.resultEquipmentBandages && this.resultEquipmentBags){
       const info: IAppointmentInfo = {
         cuso4: this.appInfoForm.value.cuso4,
