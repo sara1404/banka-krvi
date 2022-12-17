@@ -63,9 +63,10 @@
       </div>
     <div>
       <label for="" class="title">Acceptance</label>
-      <mat-radio-group class="radio" aria-label="Accepted">
-        <mat-radio-button value="True">Yes</mat-radio-button>
-        <mat-radio-button value="False">No</mat-radio-button>
+      <!--formControlName="accepted"-->
+      <mat-radio-group [(ngModel)]="acceptedClick"  class="radio" aria-label="Accepted">
+        <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="true">Yes</mat-radio-button>
+        <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="false">No</mat-radio-button>
       </mat-radio-group>
     
       <mat-form-field appearance="fill" class="form-field">

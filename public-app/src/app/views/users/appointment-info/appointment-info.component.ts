@@ -28,9 +28,7 @@ export class AppointmentInfoComponent implements OnInit {
 
   @Input() appointment: IUserAppointment;
   result: Boolean
-  resultEquipmentNeedles: Boolean;
-  resultEquipmentBandages: Boolean;
-  resultEquipmentBags: Boolean;
+  acceptedClick: boolean = true;
   @Output() newItemEvent = new EventEmitter<boolean>();
 
   constructor(fb: FormBuilder, private userService: UserService, private toastService: ToastService, private appointmentInfoService: AppointmentInfoService) {
@@ -48,7 +46,8 @@ export class AppointmentInfoComponent implements OnInit {
       reason: new FormControl('', [Validators.required]),
       needle: new FormControl('', [Validators.required]),
       bandage: new FormControl('', [Validators.required]),
-      bag: new FormControl('', [Validators.required])
+      bag: new FormControl('', [Validators.required]),
+      accepted: new FormControl('', [Validators.required])
     });
    }
 
@@ -99,11 +98,43 @@ export class AppointmentInfoComponent implements OnInit {
   }
   */
 
+  changeSelectedAcceptance(){
+    console.log('menja')
+    console.log(this.acceptedClick)
+  }
   finish(){
     /*if(this.appInfoForm.valid == false) {
       console.log('nece')
       return;
     }*/
+    console.log(this.acceptedClick)
+    const info: IAppointmentInfo = {
+      cuso4: this.appInfoForm.value.cuso4,
+      hemoglobinometer: this.appInfoForm.value.hemoglobinometer,
+      ta: this.appInfoForm.value.ta,
+      tv: this.appInfoForm.value.tv,
+      tt: this.appInfoForm.value.tt,
+      hand: this.appInfoForm.value.hand,
+      quantity: this.appInfoForm.value.quantity,
+      surveyAccepted: true,
+      accepted: this.acceptedClick,
+      reason: this.appInfoForm.value.reason,
+      examBloodType: this.appInfoForm.value.examBloodType
+    };
+    const appointmentAndInfo: IAppointmentAndInfo = {
+      appointmentId: this.appointment.id,
+      appointmentInfoDto: info
+    }
+    //console.log(info)
+    this.appointmentInfoService.createAppointmentInfo(appointmentAndInfo).subscribe(({
+      next: (res) => {
+        this.showSuccess()
+      },
+      error: (e) => {
+        this.showError(e)
+      },
+    }));
+    
     const needles: IEquipment = {
       equipmentType: "NEEDLE",
       quantity: this.appInfoForm.value.needle
@@ -116,78 +147,11 @@ export class AppointmentInfoComponent implements OnInit {
       equipmentType: "BAG",
       quantity: this.appInfoForm.value.bag
     }
-    this.appointmentInfoService.usedEquipment(needles).subscribe(data => this.resultEquipmentNeedles = data);
-    if(this.resultEquipmentNeedles == false)
-    {
-      this.showErrorEquipment();
-      return;
-    }else{
-      this.appointmentInfoService.usedEquipment(bandages).subscribe(data => this.resultEquipmentBandages = data);
-      if(this.resultEquipmentBandages == false)
-      {
-        this.showErrorEquipment();
-        return;
-      }else{
-        this.appointmentInfoService.usedEquipment(bags).subscribe(data => this.resultEquipmentBags = data);
-    if(this.resultEquipmentBags == false)
-    {
-      this.showErrorEquipment();
-      return;
-    }
-      } 
-    }
-    if(this.resultEquipmentNeedles && this.resultEquipmentBandages && this.resultEquipmentBags){
-      const info: IAppointmentInfo = {
-        cuso4: this.appInfoForm.value.cuso4,
-        hemoglobinometer: this.appInfoForm.value.hemoglobinometer,
-        ta: this.appInfoForm.value.ta,
-        tv: this.appInfoForm.value.tv,
-        tt: this.appInfoForm.value.tt,
-        hand: this.appInfoForm.value.hand,
-        quantity: this.appInfoForm.value.quantity,
-        surveyAccepted: true,
-        accepted: this.appInfoForm.value.accepted,
-        reason: this.appInfoForm.value.reason,
-        examBloodType: this.appInfoForm.value.examBloodType
-      };
-      const appointmentAndInfo: IAppointmentAndInfo = {
-        appointmentId: this.appointment.id,
-        appointmentInfoDto: info
-      }
-      //console.log(info)
-      this.appointmentInfoService.createAppointmentInfo(appointmentAndInfo).subscribe(({
-        next: (res) => {
-          this.showSuccess()
-        },
-        error: (e) => {
-          this.showError(e)
-        },
-      }));
-      this.userService.finishAppointment(this.appointment.id).subscribe(data => {this.result = data});
-      this.newItemEvent.emit(true);
-    }
-    /*
-    this.info.cuso4 = Number(this.appInfoForm.get('cuso4'));
-    this.info.hemoglobinometer = this.appInfoForm.value.hemoglobinometer
-    this.info.ta = this.appInfoForm.value.ta
-    this.info.tv = this.appInfoForm.value.tv
-    this.info.tt = this.appInfoForm.value.tt
-    this.info.hand = this.appInfoForm.value.hand
-    this.info.quantity = this.appInfoForm.value.quantity
-    this.info.startBlood = null //this.appInfoForm.value.startBlood
-    this.info.endBlood = null//this.appInfoForm.value.endBlood
-    this.info.surveyAccepted = true
-    this.info.accepted = this.appInfoForm.value.accepted
-    this.info.reason = this.appInfoForm.value.reason
-    console.log(this.info)
-    this.appointmentInfoService.createAppointmentInfo(this.info).subscribe(({
-      next: (res) => {
-        this.showSuccess()
-      },
-      error: (e) => {
-        this.showError(e)
-      },
-    }));*/
+    this.userService.finishAppointment(this.appointment.id).subscribe(data => {this.result = data});
+    this.appointmentInfoService.usedEquipment(needles).subscribe();
+    this.appointmentInfoService.usedEquipment(bandages).subscribe();
+    this.appointmentInfoService.usedEquipment(bags).subscribe();
+    this.newItemEvent.emit(true);
   }
   showError(e) {
     this.toastService.showError("Error");
@@ -196,8 +160,5 @@ export class AppointmentInfoComponent implements OnInit {
   showSuccess() {
     this.toastService.showSuccess('Successfully saved info.');
 
-  }
-  showErrorEquipment() {
-    this.toastService.showError("Not enough equipment");
   }
 }

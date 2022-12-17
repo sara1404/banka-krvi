@@ -21,10 +21,11 @@ public class AppointmentInfoService {
 	private BloodSupplyService bloodSupplyService;
 
 	public AppointmentInfoDto create(final AppointmentAndInfoDto appointmentAndInfoDto) {
+		//appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
 		final AppointmentInfoDto dto = appointmentInfoMapper.appointmentToAppointmentInfoDto(
-			appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto())));
+			appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
 		final AppointmentInfo appointmentInfo = appointmentInfoMapper.appointmentDtoToAppointment(dto);
-		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfoMapper.appointmentDtoToAppointment(dto));
+		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfo);
 		if (appointmentAndInfoDto.getAppointmentInfoDto().isAccepted()) {
 			bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(),
 				appointmentAndInfoDto.getAppointmentInfoDto().getQuantity());
