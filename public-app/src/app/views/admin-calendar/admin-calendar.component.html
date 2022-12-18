@@ -1,0 +1,48 @@
+<div class="calendar-info-wrapper">
+  <div class="calendar-info">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+
+        (click)="previousWeek()"
+
+      >
+        Previous
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+
+
+      >
+        Today
+      </div>
+      <div
+        class="btn btn-primary"
+
+        (click)="nextWeek()"
+      >
+        Next
+      </div>
+    </div>
+
+    <div class="date">
+      <h1>{{ viewDate | date: "M/y"}}</h1>
+    </div>
+  </div>
+
+
+  <div class="calendar">
+    <mwl-calendar-week-view
+      [viewDate]="viewDate"
+      [daysInWeek]="daysInWeek"
+      [dayStartHour]="dayStartHour"
+      [dayEndHour]="dayEndHour"
+      [hourSegmentHeight]="hourSegmentHeight"
+      [events]="events">
+    </mwl-calendar-week-view>
+  </div>
+
+</div>
+
+
+

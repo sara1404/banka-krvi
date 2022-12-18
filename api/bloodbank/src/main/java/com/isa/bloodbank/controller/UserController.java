@@ -17,7 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -59,7 +68,7 @@ public class UserController {
 
 	@GetMapping("/getUserProfile")
 	public ResponseEntity<UserDto> getUserProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
-		User user = jwtUtils.getUserFromToken(authHeader);
+		final User user = jwtUtils.getUserFromToken(authHeader);
 		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
@@ -67,6 +76,11 @@ public class UserController {
 	private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
 		System.out.println(userDto);
 		return ResponseEntity.ok(userService.update(userDto));
+	}
+
+	@PostMapping("/penal-points")
+	public ResponseEntity<Boolean> addPenalPoints(@RequestBody final Long id) {
+		return ResponseEntity.ok(userService.addPenalPoints(id));
 	}
 
 	@GetMapping("/users/{pageNo}")
@@ -93,9 +107,11 @@ public class UserController {
 	}
 
 	@PutMapping("/change-password")
-	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto) {
-		final Long administratorId = (long) (3);
-		final User user = userService.findUserById(administratorId);
-		return ResponseEntity.ok(userService.changePassword(user, passwordChangeDto));
+	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		//final Long administratorId = (long) (3);
+		//final User user = userService.findUserById(administratorId);
+		return ResponseEntity.ok(userService.changePassword(loggedUser, passwordChangeDto));
 	}
 }

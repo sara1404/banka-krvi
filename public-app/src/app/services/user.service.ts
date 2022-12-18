@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDonationSurvey } from '../model/DonationSurvey';
+import { IUserSurvey } from '../model/UserSurvey';
 import { IUser } from '../model/User';
+import { IUserAppointment } from '../model/UserAppointment';
+import { Token } from '@angular/compiler';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -78,5 +81,22 @@ export class UserService {
   getAvailableCenterAdmins(): Observable<IUser[]> {
     return this.http.get<IUser[]>(`http://localhost:8080/user/center-admins`);
   }
+
+  getSurveyForUser(userId: number):Observable<IUserSurvey>{
+    return this.http.get<IUserSurvey>(`http://localhost:8080/survey/for-user/${userId}`);
+  }
+
+  getAppointmentsForUser(userId: number):Observable<IUserAppointment[]>{
+    return this.http.get<IUserAppointment[]>(`http://localhost:8080/appointment/for-user/${userId}`);
+  }
+
+  addPenalPoints(userId: number):Observable<Boolean>{
+    return this.http.post<Boolean>('http://localhost:8080/user/penal-points', userId);
+  }
+
+  finishAppointment(appointmentId: number):Observable<Boolean>{
+    return this.http.post<Boolean>('http://localhost:8080/appointment/finish', appointmentId);
+  }
+
 
 }

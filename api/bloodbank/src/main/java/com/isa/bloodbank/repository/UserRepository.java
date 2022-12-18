@@ -1,5 +1,6 @@
 package com.isa.bloodbank.repository;
 
+import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.UserType;
 
@@ -21,5 +22,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> getUsersByFirstNameContainsAndLastNameContains(String firstName, String lastName);
 
 	List<User> getUsersByUserTypeAndBloodBankIsNull(UserType type);
-
 }

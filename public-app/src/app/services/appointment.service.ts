@@ -12,11 +12,15 @@ import { IUser } from '../model/User';
 })
 export class AppointmentService {
 
+  base = "http://localhost:8080/appointment"
   constructor(private http: HttpClient) {}
 
+
+  getAppointmentsForChosenMonth(month: number, year: number): Observable<any>{
+    return this.http.get<any>(`${this.base}/appointments?month=${month}&year=${year}`)
+  }
+
   createAppointment(appointment: IAppointment) : Observable<IAppointment> {
-    console.log("E");
-    console.log(appointment)
       var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment, {headers: headers});
   }
@@ -28,11 +32,11 @@ export class AppointmentService {
 
   getBloodBanksWithFreeTimeSlots(startTime: Date, pageNumber: number, sortDirection: string){
     return this.http.get<IPageAppointment>(
-      `http://localhost:8080/appointment/recommend?startTime=` + startTime + '&pageSize=' + 2 + '&pageNumber=' + pageNumber + '&sortDirection=' + sortDirection   
+      `http://localhost:8080/appointment/recommend?startTime=` + startTime + '&pageSize=' + 2 + '&pageNumber=' + pageNumber + '&sortDirection=' + sortDirection
     );
   }
 
-  
+
   scheduleAppointment(appointment: any): Observable<IAppointment> {
     var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.put<IAppointment>(
