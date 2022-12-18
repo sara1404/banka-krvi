@@ -3,12 +3,7 @@ package com.isa.bloodbank.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -28,14 +23,15 @@ public class Appointment extends BaseEntity {
 	LocalDateTime startTime;
 	@Column
 	double duration;
-	@ManyToMany()
-	List<User> medicalStaff;
 	@Column
 	boolean available;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "appointment_info_id", referencedColumnName = "id")
 	AppointmentInfo appointmentInfo;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	User user;
+	@ManyToOne
+	@JoinColumn(name = "nurse_id", referencedColumnName = "id")
+	User nurse;
 }

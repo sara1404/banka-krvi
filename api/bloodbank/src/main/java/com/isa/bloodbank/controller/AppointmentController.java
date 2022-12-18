@@ -35,6 +35,12 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(user.getBloodBank().getId()));
 	}
 
+	@GetMapping(value="/getAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<UserDto>> findAvailableMedicalStaff(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @RequestParam("startTime") final String startTime,
+																   @RequestParam("duration") final double duration){
+		Long administratorId = jwtUtils.getUserFromToken(authHeader).getId();
+		return ResponseEntity.ok(appointmentService.findAvailableMedicalStaff(administratorId, LocalDateTime.parse(startTime), duration));
+	}
 	@PostMapping("/create")
 	public ResponseEntity<AppointmentDto> createAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final Appointment appointmentDto) {
 		Long administratorId = jwtUtils.getUserFromToken(authHeader).getId(); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
