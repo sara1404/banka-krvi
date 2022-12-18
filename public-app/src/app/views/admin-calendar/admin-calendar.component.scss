@@ -1,0 +1,25 @@
+.calendar-info-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+  width: 70%;
+  margin-left: 25%;
+
+  .calendar-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .date{
+      font-size: 25px;
+      font-weight: bold;
+    }
+  }
+
+  .calendar{
+    overflow-y: scroll;
+    max-height: 600px;
+  }
+}
+
+

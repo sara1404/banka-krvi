@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { IUser } from 'src/app/model/User';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { ExaminationComponent } from '../examination/examination.component';
+
+export interface ExaminationData {
+  user: IUser
+}
 
 @Component({
   selector: 'app-user',
@@ -9,9 +15,18 @@ import { IUser } from 'src/app/model/User';
 export class UserComponent implements OnInit {
 
   @Input() user: IUser
-  constructor() { }
+  constructor(public dialog: MatDialog) { 
+  }
 
   ngOnInit(): void {
   }
 
+  startExamination(){
+    this.dialog.open(ExaminationComponent,
+      {
+        data: {user: this.user}
+      });
+  }
 }
+
+

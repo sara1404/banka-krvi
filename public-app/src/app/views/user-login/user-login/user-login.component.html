@@ -1,13 +1,20 @@
-<form [formGroup]="form">
-    <mat-form-field appearance="fill" class="form-field">
+<form [formGroup]="form" class="form-wrapper">
+    <div class="form">
+      <h1>Welcome back! Please log in!</h1>
+      <mat-form-field appearance="fill" class="form-field">
         <mat-label>Email</mat-label>
         <input formControlName="email" matInput />
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput type="password" />
-    </mat-form-field>
-    <br>
-    <input type="submit" (click)="login()" value="Login" class="form-field submit-btn" />
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput type="password" />
+      </mat-form-field>
+      <br>
+      <input type="submit" (click)="login()" value="Login" class="form-field submit-btn" />
+    </div>
+
+    <div class="pic">
+      <img src="assets/hospital.jpg" alt="">
+    </div>
 </form>

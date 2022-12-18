@@ -1,25 +1,28 @@
 package com.isa.bloodbank.dto;
 
-import com.isa.bloodbank.entity.AppointmentInfo;
-import com.isa.bloodbank.entity.User;
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
+
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+
 @Data
 public class AppointmentDto {
-    @NotNull
-    LocalDateTime startTime;
-    @NotNull
-    double duration;
-    BloodBankDto bloodBank;
-    @Id
-    Long id;
+	@NotNull
+	LocalDateTime startTime;
+	@NotNull
+	double duration;
+	BloodBankDto bloodBank;
+	@Id
+	Long id;
 }

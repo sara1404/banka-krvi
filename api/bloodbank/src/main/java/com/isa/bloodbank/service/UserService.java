@@ -125,10 +125,22 @@ public class UserService {
 
 	public boolean changePassword(final User user, final PasswordChangeDto passwordChangeDto) {
 		//treba provera i da je prvi put logovan
-		if (!user.getPassword().equals(passwordChangeDto.getOldPassword())) {
+		if (!encoder.matches(passwordChangeDto.getOldPassword(), user.getPassword())) {
+			System.out.println();
 			return false;
 		}
-		user.setPassword(passwordChangeDto.getNewPassword());
+		user.setPassword(encoder.encode(passwordChangeDto.getNewPassword()));
+		user.setFirstLogged(true);
+		userRepository.save(user);
+		return true;
+	}
+
+	public boolean addPenalPoints(final Long id) {
+		final User user = userRepository.findById(id).get();
+		if (user == null) {
+			return false;
+		}
+		user.setPoints(user.getPoints() - 1);
 		userRepository.save(user);
 		return true;
 	}

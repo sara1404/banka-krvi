@@ -1,25 +1,17 @@
 package com.isa.bloodbank.service;
 
-import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.BloodBankDto;
-import com.isa.bloodbank.dto.PageDto;
-import com.isa.bloodbank.dto.WorkingHoursDto;
-import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.BloodBank;
-import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.BloodBankMapper;
-import com.isa.bloodbank.mapping.PageMapper;
 import com.isa.bloodbank.mapping.WorkingHoursMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
 import com.isa.bloodbank.repository.BloodBankRepository;
+import com.isa.bloodbank.repository.WorkingHoursRepository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.isa.bloodbank.repository.WorkingHoursRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -95,8 +87,8 @@ public class BloodBankService {
 		return bloodBankMapper.bloodBankToBloodBankDto(bloodBankRepository.save(bloodBankMapper.bloodBankDtoToBloodBank(bloodBank)));
 	}
 
-	public WorkingHours getWorkingHours(Long adminId) {
-		WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
+	public WorkingHours getWorkingHours(final Long adminId) {
+		final WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
 		return workingHours;
 	}
 }
