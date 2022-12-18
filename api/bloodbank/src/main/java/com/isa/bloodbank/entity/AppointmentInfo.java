@@ -21,8 +21,6 @@ public class AppointmentInfo extends BaseEntity {
 	double tt;
 	@Column
 	double tv;
-	//@Enumerated(EnumType.STRING)
-	//@Column
 	String hand;
 	@Column
 	double quantity;
