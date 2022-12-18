@@ -64,7 +64,7 @@
     <div>
       <label for="" class="title">Acceptance</label>
       <!--formControlName="accepted"-->
-      <mat-radio-group [(ngModel)]="acceptedClick"  class="radio" aria-label="Accepted">
+      <mat-radio-group [(ngModel)]="acceptedClick" [ngModelOptions]="{standalone: true}"  class="radio" aria-label="Accepted">
         <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="true">Yes</mat-radio-button>
         <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="false">No</mat-radio-button>
       </mat-radio-group>
@@ -80,35 +80,15 @@
         <label for="" class="title">Blood</label>
       </div>
       <div>
-        <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Bloodtype</mat-label>
-            <mat-select formControlName="examBloodType">
-              <mat-option value="0">A+</mat-option>
-              <mat-option value="1">A-</mat-option>
-              <mat-option value="2">B+</mat-option>
-              <mat-option value="3">B-</mat-option>
-              <mat-option value="4">AB+</mat-option>
-              <mat-option value="5">AB-</mat-option>
-              <mat-option value="6">O+</mat-option>
-              <mat-option value="7">O-</mat-option>
-              <mat-option value="8">HH+</mat-option>
-              <mat-option value="9">HH-</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div *ngIf="examBloodType?.invalid && (examBloodType?.dirty || examBloodType?.touched)">
-            <mat-error *ngIf="examBloodType.errors['required']">
-              Please choose bloodtype!
-            </mat-error>
-          </div>
-          
+          <!--
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Hand</mat-label>
-            <mat-select formControlName="hand">
-              <mat-option value="LEFT">Left</mat-option>
-              <mat-option value="RIGHT">Right</mat-option>
+            <mat-select (selectionChange)="changeHand($event)" formControlName="hand">
+              <mat-option value="0">Left</mat-option>
+              <mat-option value="1">Right</mat-option>
             </mat-select>
           </mat-form-field>
-    
+          -->
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Quantity</mat-label>
             <input type="number" formControlName="quantity" matInput />

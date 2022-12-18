@@ -48,8 +48,11 @@ public class AppointmentController {
 	}
 
 	@GetMapping("/for-user/{id}")
-	public ResponseEntity<List<UserAppointmentDto>> findAllByUserId(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(appointmentService.findAllByUserId(id));
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<List<UserAppointmentDto>> findAllByUserId(@PathVariable("id") final Long id,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(appointmentService.findAllByUserId(id, loggedUser));
 	}
 
 	@PostMapping("/finish")

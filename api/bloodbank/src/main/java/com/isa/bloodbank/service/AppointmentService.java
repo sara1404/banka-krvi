@@ -6,6 +6,7 @@ import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
@@ -41,11 +42,12 @@ public class AppointmentService {
 		//return availableAppointments;
 	}
 
-	public List<UserAppointmentDto> findAllByUserId(final Long userId) {
+	public List<UserAppointmentDto> findAllByUserId(final Long userId, final User loggedUser) {
 		final List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
 		for (final Appointment appointment : appointments) {
-			if (appointment.isFinished() == false && appointment.getStartTime().compareTo(LocalDateTime.now()) > 0) {
+			if (appointment.isFinished() == false && appointment.getStartTime().compareTo(LocalDateTime.now()) > 0 &&
+				appointment.getBloodBank() == loggedUser.getBloodBank()) {
 				availableAppointments.add(appointment);
 			}
 		}
@@ -80,7 +82,8 @@ public class AppointmentService {
 		return appointmentRepository.save(appointment);
 	}
 
-	public PageDto<AppointmentDto> getBloodBanksWithFreeAppointments(final LocalDateTime startTime, final int pageSize, final int pageNumber, final String sortDirection) {
+	public PageDto<AppointmentDto> getBloodBanksWithFreeAppointments(final LocalDateTime startTime, final int pageSize, final int pageNumber,
+		final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		final List<Appointment> ret = new ArrayList<>();
 		for (final Appointment a : appointmentRepository.findByStartTimeAndAvailable(startTime, true, Sort.by(sortingDirection, "bloodBank.averageGrade"))) {

@@ -29,6 +29,7 @@ export class AppointmentInfoComponent implements OnInit {
   @Input() appointment: IUserAppointment;
   result: Boolean
   acceptedClick: boolean = true;
+  handSelect: string
   @Output() newItemEvent = new EventEmitter<boolean>();
 
   constructor(fb: FormBuilder, private userService: UserService, private toastService: ToastService, private appointmentInfoService: AppointmentInfoService) {
@@ -102,6 +103,14 @@ export class AppointmentInfoComponent implements OnInit {
     console.log('menja')
     console.log(this.acceptedClick)
   }
+  changeHand(evt: any){
+    console.log('stampa value')
+    console.log(evt.value)
+    this.appInfoForm.value.hand = evt.value
+    this.handSelect = evt.value
+    console.log('stampa polje')
+    console.log(this.appInfoForm.value.hand)
+  }
   finish(){
     /*if(this.appInfoForm.valid == false) {
       console.log('nece')
@@ -114,12 +123,11 @@ export class AppointmentInfoComponent implements OnInit {
       ta: this.appInfoForm.value.ta,
       tv: this.appInfoForm.value.tv,
       tt: this.appInfoForm.value.tt,
-      hand: this.appInfoForm.value.hand,
+      //handEnum: this.handSelect, //this.appInfoForm.value.hand,
       quantity: this.appInfoForm.value.quantity,
       surveyAccepted: true,
       accepted: this.acceptedClick,
-      reason: this.appInfoForm.value.reason,
-      examBloodType: this.appInfoForm.value.examBloodType
+      reason: this.appInfoForm.value.reason
     };
     const appointmentAndInfo: IAppointmentAndInfo = {
       appointmentId: this.appointment.id,

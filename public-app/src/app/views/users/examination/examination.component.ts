@@ -62,12 +62,11 @@ export class ExaminationComponent implements OnInit {
       ta: null,
       tv: null,
       tt: null,
-      hand: null,
+      //handEnum: null,
       quantity: null,
       surveyAccepted: false,
       accepted: null,
-      reason: null,
-      examBloodType: "A_POSITIVE"
+      reason: null
     };
     const appointmentAndInfo: IAppointmentAndInfo = {
       appointmentId: element.id,
