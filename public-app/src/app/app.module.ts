@@ -24,6 +24,7 @@ import { DonationSurveyModule } from './views/donation-survey/donation-survey.mo
 import { CreateAppointmentModule } from './views/appointments/create-appointment.module';
 import { UserLoginModule } from './views/user-login/user-login.module';
 import { AdminCalendarModule } from './views/admin-calendar/admin-calendar.module';
+import { CreateAppointmentUserModule } from './views/appointments/create-appointment-user/create-appointment-user.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminCalendarModule } from './views/admin-calendar/admin-calendar.modul
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
-    CreateAppointmentModule
+    CreateAppointmentModule,
+    CreateAppointmentUserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

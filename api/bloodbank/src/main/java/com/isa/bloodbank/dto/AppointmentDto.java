@@ -2,6 +2,7 @@ package com.isa.bloodbank.dto;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -21,4 +22,7 @@ public class AppointmentDto {
 	LocalDateTime startTime;
 	@NotNull
 	double duration;
+	BloodBankDto bloodBank;
+	@Id
+	Long id;
 }

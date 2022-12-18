@@ -5,6 +5,7 @@ import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.UserService;
 
@@ -37,7 +38,9 @@ public class UserController {
 	@Autowired
 	PasswordEncoder encoder;
 	@Autowired
-	JwtUtils jwtUtils;
+	private JwtUtils jwtUtils;
+	@Autowired
+	private UserMapper userMapper;
 
 	@GetMapping("/bloodBankId")
 	public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
@@ -63,9 +66,10 @@ public class UserController {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
-	@GetMapping("/loggedInUser/{id}")
-	public ResponseEntity<UserDto> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findById(id));
+	@GetMapping("/getUserProfile")
+	public ResponseEntity<UserDto> getUserProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
 	@PutMapping("/update/")

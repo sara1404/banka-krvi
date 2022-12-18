@@ -56,9 +56,11 @@ export class CreateAppointmentComponent implements OnInit {
   }
   createAppointmentForm = new FormGroup({
     startTime : new FormControl(null, [Validators.required, timeValidator]),
-    duration: new FormControl(null, [Validators.required])
+    duration: new FormControl(null, [Validators.required]),
+    bloodBank: new FormControl(null),
+    id: new FormControl(null)
   })
- 
+
   matcher = new MyErrorStateMatcher();
 
   saveClick(e : Event){
