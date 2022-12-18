@@ -1,7 +1,5 @@
 package com.isa.bloodbank.entity;
 
-import com.isa.bloodbank.entity.enums.Hand;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -25,7 +23,7 @@ public class AppointmentInfo extends BaseEntity {
 	double tv;
 	//@Enumerated(EnumType.STRING)
 	//@Column
-	Hand handEnum;
+	String hand;
 	@Column
 	double quantity;
 	@Column

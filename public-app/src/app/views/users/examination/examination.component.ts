@@ -62,7 +62,7 @@ export class ExaminationComponent implements OnInit {
       ta: null,
       tv: null,
       tt: null,
-      //handEnum: null,
+      hand: null,
       quantity: null,
       surveyAccepted: false,
       accepted: null,

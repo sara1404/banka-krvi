@@ -11,7 +11,7 @@ public class AppointmentInfoDto {
 	double ta;
 	double tt;
 	double tv;
-	//Hand handEnum;
+	String hand;
 	BloodType examBloodType;
 	double quantity;
 	boolean surveyAccepted;

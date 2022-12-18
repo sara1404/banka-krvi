@@ -123,7 +123,7 @@ export class AppointmentInfoComponent implements OnInit {
       ta: this.appInfoForm.value.ta,
       tv: this.appInfoForm.value.tv,
       tt: this.appInfoForm.value.tt,
-      //handEnum: this.handSelect, //this.appInfoForm.value.hand,
+      hand: this.handSelect, //this.appInfoForm.value.hand,
       quantity: this.appInfoForm.value.quantity,
       surveyAccepted: true,
       accepted: this.acceptedClick,

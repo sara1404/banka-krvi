@@ -4,7 +4,7 @@ export interface IAppointmentInfo{
     ta: number,
     tt: number,
     tv: number,
-    //handEnum: string,
+    hand: string,
     quantity: number,
     surveyAccepted: boolean,
     accepted: boolean,
