@@ -7,6 +7,8 @@ import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.UserType;
 import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mailer.MailService;
+import com.isa.bloodbank.mailer.MailTemplateService;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
@@ -32,6 +34,10 @@ public class UserService {
 	PasswordEncoder encoder;
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	MailService mailService;
+	@Autowired
+	MailTemplateService templateService;
 
 	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
@@ -48,10 +54,22 @@ public class UserService {
 	}
 
 	public User registerUser(final User user) {
-		user.setUserType(UserType.REGISTERED);
+		user.setUserType(UserType.UNAUTENTIFICATED);
 		final String encodedPassword = encoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		if (!mailService.registerUserEmail(user.getEmail())) {
+			return null;
+		}
 		return userRepository.save(user);
+	}
+
+	public User confirmUserRegistration(final String email) {
+		final User user = findByEmail(email);
+		if (user != null && user.getUserType() == UserType.UNAUTENTIFICATED) {
+			user.setUserType(UserType.REGISTERED);
+			return userRepository.save(user);
+		}
+		return null;
 	}
 
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
