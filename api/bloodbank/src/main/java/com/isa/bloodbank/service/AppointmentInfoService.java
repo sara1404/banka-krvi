@@ -20,15 +20,20 @@ public class AppointmentInfoService {
 	private AppointmentService appointmentService;
 	@Autowired
 	private BloodSupplyService bloodSupplyService;
+	@Autowired
+	private UserService userService;
 
+	//izmenila za krv
 	public AppointmentInfoDto create(final AppointmentAndInfoDto appointmentAndInfoDto, final User loggedUser) {
 		//appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
 		final AppointmentInfoDto dto = appointmentInfoMapper.appointmentToAppointmentInfoDto(
 			appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
 		final AppointmentInfo appointmentInfo = appointmentInfoMapper.appointmentDtoToAppointment(dto);
 		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfo);
+		final User user = appointmentService.findById(appointmentAndInfoDto.getAppointmentId()).getUser();
 		if (appointmentAndInfoDto.getAppointmentInfoDto().isAccepted()) {
-			bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(),
+			//bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(),
+			bloodSupplyService.addBlood(user.getBloodType(),
 				appointmentAndInfoDto.getAppointmentInfoDto().getQuantity(), loggedUser);
 		}
 		appointmentService.finishAppointment(appointmentAndInfoDto.getAppointmentId());

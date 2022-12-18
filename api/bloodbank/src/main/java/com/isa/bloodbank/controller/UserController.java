@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,7 +80,9 @@ public class UserController {
 	}
 
 	@PostMapping("/penal-points")
-	public ResponseEntity<Boolean> addPenalPoints(@RequestBody final Long id) {
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<Boolean> addPenalPoints(@RequestBody final Long id,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		return ResponseEntity.ok(userService.addPenalPoints(id));
 	}
 

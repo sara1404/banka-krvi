@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,10 +53,12 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/finish")
-	public ResponseEntity<Boolean> finish(@RequestBody final Long id) {
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<Boolean> finish(@RequestBody final Long id,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		return ResponseEntity.ok(appointmentService.finishAppointment(id));
 	}
-	
+
 	@PostMapping("/create")
 	public ResponseEntity<AppointmentDto> createAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@Valid @RequestBody final Appointment appointmentDto) {
