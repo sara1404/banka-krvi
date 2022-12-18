@@ -97,6 +97,14 @@ public class UserController {
 	public ResponseEntity<List<UserDto>> getAvailableCenterAdmins() {
 		return ResponseEntity.ok(userService.getAvailableCenterAdmins());
 	}
+	
+	@PostMapping("/activate/{email}")
+	public ResponseEntity<?> confirmUserRegistration(@PathVariable("email") final String email) {
+		if (userService.confirmUserRegistration(email) != null) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
+	}
 
 	@PutMapping("/change-password")
 	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto,

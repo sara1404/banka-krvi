@@ -4,12 +4,14 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 
 
 
 @NgModule({
   declarations: [
-    RegisterUserComponent
+    RegisterUserComponent,
+    ConfirmRegistrationComponent
   ],
   imports: [
     CommonModule,

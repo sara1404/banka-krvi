@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminProfileModule } from './admin-profile/admin-profile.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -24,6 +24,7 @@ import { DonationSurveyModule } from './views/donation-survey/donation-survey.mo
 import { CreateAppointmentModule } from './views/appointments/create-appointment.module';
 import { UserLoginModule } from './views/user-login/user-login.module';
 import { AdminCalendarModule } from './views/admin-calendar/admin-calendar.module';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { CreateAppointmentUserModule } from './views/appointments/create-appointment-user/create-appointment-user.module';
 
 @NgModule({
@@ -51,13 +52,15 @@ import { CreateAppointmentUserModule } from './views/appointments/create-appoint
     DonationSurveyModule,
     UserLoginModule,
     AdminCalendarModule,
+    CreateAppointmentModule,
+    CreateAppointmentUserModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
-    CreateAppointmentModule,
-    CreateAppointmentUserModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
