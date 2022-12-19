@@ -1,5 +1,8 @@
 <div class="sidebar-wrapper">
   <!--*ngIf="user.userType == 'REGISTERED' || user.userType == 'ADMIN_CENTER' || user.userType != 'ADMIN_SYSTEM'"-->
+  <div class="nav-icon">
+    <img src="assets/icons/hospital.png" alt="hospital-logo">
+  </div>
   <div *ngIf="isLoggedIn" routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
   <div *ngIf="isLoggedIn" routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
   <div routerLink='register/user' class="sidebar-option">REGISTER USER</div>
@@ -13,5 +16,6 @@
   <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
   <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
+  <div *ngIf="isLoggedIn" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
   <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
 </div>

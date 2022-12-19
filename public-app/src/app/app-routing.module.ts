@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+/*
+<<<<<<< HEAD
 import { AdminProfileModule } from './admin-profile/admin-profile.module';
 import { AdminProfileComponent } from './admin-profile/admin-profile/admin-profile.component';
 import { RegisterAdminComponent } from './views/register-admin/register-admin.component';
@@ -17,12 +19,13 @@ import { RegisterUserComponent } from './views/register-user/register-user/regis
 import { DonationSurveyComponent } from './views/donation-survey/donation-survey.component';
 import { ExaminationComponent } from './views/users/examination/examination.component';
 import {CreateAppointmentComponent} from './views/appointments/create-appointment.component'
+=======
+>>>>>>> develop*/
 import { UserLoginComponent } from './views/user-login/user-login/user-login.component';
-import { ConfirmRegistrationComponent } from './views/register-user/confirm-registration/confirm-registration.component';
-import { CreateAppointmentUserComponent } from './views/appointments/create-appointment-user/create-appointment-user.component';
-
+import { MainAppComponent } from './components/main-app/main-app.component';
 
 const routes: Routes = [
+/*
   {path: 'admin/profile', component:AdminInfoComponent},
   {path: 'bloodbank/info', component:BloodbankInfoComponent},
   {path: 'register/admin', component: RegisterAdminComponent},
@@ -43,9 +46,25 @@ const routes: Routes = [
   {path: 'create-appointment', component: CreateAppointmentComponent},
   {path: 'create-appointment-user', component: CreateAppointmentUserComponent}
   ]
+*/
+  {
+    path: '',
+    component: UserLoginComponent,
+  },
+  {
+    path: 'app',
+    component: MainAppComponent,
+    loadChildren: () =>
+      import('./user-routing/user-routing.module').then(
+        (x) => x.UserRoutingModule
+      ),
+  },
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
+
 export class AppRoutingModule { }

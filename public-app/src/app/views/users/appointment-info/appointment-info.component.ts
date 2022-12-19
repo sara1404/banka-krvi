@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
-import { IAppointment } from 'src/app/model/Appointment';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
 import { IEquipment } from 'src/app/model/Equipment';
 import { IUser } from 'src/app/model/User';

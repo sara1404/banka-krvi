@@ -8,7 +8,6 @@ import { IUserAppointment } from '../model/UserAppointment';
 import { Token } from '@angular/compiler';
 import { AuthService } from './auth.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -99,5 +98,5 @@ export class UserService {
     return this.http.post<Boolean>('http://localhost:8080/appointment/finish', appointmentId);
   }
 
-  
+
 }

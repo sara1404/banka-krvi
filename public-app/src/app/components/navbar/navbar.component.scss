@@ -1,25 +1,21 @@
 .navbar{
-  width:100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 9vh;
-  background-color: #2C2C2E;
-  z-index: 50;
+  margin-bottom: 0;
+  background-color: #202020;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  padding: 1.98rem 4rem;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 20px;
 
   .user{
     color: #fff;
-    padding: 1rem;
-    margin-right: 2rem;
-    font-size: 1rem;
-    user-select: none;
-    cursor: pointer;
   }
 
   .user:hover{
-    background-color: #dc3545;
-    border-radius: 1em;
+    text-decoration: underline;
+    cursor: pointer;
   }
+
+
 }

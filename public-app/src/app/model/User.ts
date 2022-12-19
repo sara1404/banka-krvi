@@ -15,6 +15,7 @@ export interface IUser{
   gender: string,
   workplaceName: string,
   jobTitle: string,
+  firstLogged: boolean
   address: IAddress,
   points: number
 }

@@ -1,30 +1,54 @@
-<div class="form-wrapper">
-  <form class="create-appointment-form" [formGroup]="createAppointmentForm">
-    <h1 class="title">Create appointment</h1>
-    <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Start date and time</mat-label>
-        <input matInput type="datetime-local" formControlName="startTime"
-        required
-        [errorStateMatcher]="matcher"
+
+<div class="wrapper">
+<mat-stepper>
+  <mat-step>
+    <form class="create-appointment-form" [formGroup]="createAppointmentForm">
+      <h1 class="title">Create appointment</h1>
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Start date and time</mat-label>
+          <input matInput type="datetime-local" formControlName="startTime"
+          required
+          [errorStateMatcher]="matcher"
+          >
+          <mat-error *ngIf="!createAppointmentForm.hasError('required')">
+            Enter valid date and time. Hospital working hours : {{getWorkingHours().startTime | date: 'HH:mm'}} - {{getWorkingHours().endTime | date: 'HH:mm'}}
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Duration in minutes</mat-label>
+          <input matInput type="number" formControlName="duration" min ="1"
+          required
+          [errorStateMatcher]="matcher"
+          >
+          <mat-error *ngIf="!createAppointmentForm.hasError('required')">
+            Please enter duration
+          </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext (click)="recommendMedicalStaff()" [disabled]="!createAppointmentForm.valid">
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [completed]="createAppointmentForm.value.nurse?.length === 1">
+    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+    <form [formGroup]="createAppointmentForm">
+      <mat-selection-list [multiple]="false" formControlName="nurse">
+        <mat-list-option
+          value="{{ nurse.id }}"
+          *ngFor="let nurse of medicalStaff"
         >
-        <mat-error *ngIf="!createAppointmentForm.hasError('required')">
-          Enter valid date and time. Hospital working hours : {{getWorkingHours().startTime | date: 'HH:mm'}} - {{getWorkingHours().endTime | date: 'HH:mm'}}
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Duration in minutes</mat-label>
-        <input matInput type="number" formControlName="duration" min ="1"
-        required
-        [errorStateMatcher]="matcher"
-        >
-        <mat-error *ngIf="!createAppointmentForm.hasError('required')">
-          Please enter duration
-        </mat-error>
-    </mat-form-field>
-    <div class="buttons">
-      <input (click)="saveClick($event)" type="submit" value="Create" class="form-field submit-btn" [disabled]="!createAppointmentForm.valid">
-    </div>
-  </form>
-  </div>
+          {{ nurse.firstName }} {{nurse.lastName}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext [disabled]="!isSelected()" (click)="saveClick($event)">Create</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
+</div>
   
   

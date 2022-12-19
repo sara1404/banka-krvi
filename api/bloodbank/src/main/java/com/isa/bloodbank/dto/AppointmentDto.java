@@ -15,14 +15,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Data
 
+@Data
 public class AppointmentDto {
+	@Id
+	Long id;
 	@NotNull
 	LocalDateTime startTime;
 	@NotNull
 	double duration;
 	BloodBankDto bloodBank;
-	@Id
-	Long id;
+	UserDto nurse;
 }

@@ -27,7 +27,7 @@ export class AdminInfoService {
   {
     return this.http.put<IUser>('http://localhost:8080/user/update/', user);
   }
-  
+
   getBloodBank():Observable<IBloodBank>{
     return this.http.get<IBloodBank>('http://localhost:8080/bloodbank/administrator');
   }
@@ -55,5 +55,4 @@ export class AdminInfoService {
     //headers.set('Content-Type', 'application/json');
     return this.http.put<Boolean>('http://localhost:8080/user/change-password', passwordChange, { headers: headers });
   }
-
 }

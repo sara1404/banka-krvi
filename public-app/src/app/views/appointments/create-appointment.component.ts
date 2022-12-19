@@ -5,6 +5,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ToastService } from '../../services/toast.service';
 import {IWorkingHours} from '../../model/WorkingHours'
 import { BloodBankService } from 'src/app/services/blood-bank.service';
+import { IUser } from 'src/app/model/User';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -58,14 +59,54 @@ export class CreateAppointmentComponent implements OnInit {
     startTime : new FormControl(null, [Validators.required, timeValidator]),
     duration: new FormControl(null, [Validators.required]),
     bloodBank: new FormControl(null),
-    id: new FormControl(null)
+    id: new FormControl(null),
+    nurse: new FormControl([])
   })
+
+  medicalStaffForm = new FormGroup({
+    medicalStaff: new FormControl([]),
+  });
+
+  medicalStaff: IUser[] = [];
+  showSpinner: boolean = false;
  
   matcher = new MyErrorStateMatcher();
 
+  findNurseById(id:number) : IUser {
+    var nurse = null
+    this.medicalStaff.forEach(i => {
+      if (i.id == id) nurse = i
+    });
+    return nurse
+  }
+
+  recommendMedicalStaff(){
+    this.medicalStaff = []
+    this.createAppointmentForm.controls.nurse.setValue([])
+    this.showSpinner = true;
+    this.appointmentService.recommendMedicalStaff(this.createAppointmentForm.controls.startTime.value, this.createAppointmentForm.controls.duration.value).subscribe({
+      next: (res) => {
+        this.showSpinner = false;
+        this.medicalStaff = res
+        console.log(res);
+      },
+      error: (e) => {
+        console.log("error")
+        this.toastService.showError("Error")
+      },
+    })
+  }
+
+   isSelected(){
+    return this.createAppointmentForm.controls.nurse.value[0] != null
+  }
+
   saveClick(e : Event){
+    console.log(this.createAppointmentForm.controls.nurse.value);
+    var nurse = this.findNurseById(this.createAppointmentForm.controls.nurse.value[0])
+    console.log(nurse)
     e.preventDefault();
-    this.appointmentService.createAppointment(this.createAppointmentForm.getRawValue()).subscribe({
+    this.appointmentService.createAppointment({id: null, bloodBank: this.createAppointmentForm.controls.bloodBank.value,startTime: this.createAppointmentForm.controls.startTime.value, duration: this.createAppointmentForm.controls.duration.value, nurse: nurse}).subscribe({
       next: (res) => {
         this.toastService.showSuccess("Successfuly created apointment")
       },

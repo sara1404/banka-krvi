@@ -4,6 +4,7 @@ import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.FreeAppointmentDto;
 import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.security.JwtUtils;
@@ -46,7 +47,7 @@ public class AppointmentController {
 		final User user = userService.findUserById(administratorId);
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(user.getBloodBank().getId()));
 	}
-
+	
 	@GetMapping("/for-user/{id}")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<UserAppointmentDto>> findAllByUserId(@PathVariable("id") final Long id,
@@ -62,15 +63,31 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.finishAppointment(id));
 	}
 
-	@PostMapping("/create")
-	public ResponseEntity<AppointmentDto> createAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@Valid @RequestBody final Appointment appointmentDto) {
+	@GetMapping(value = "/getAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<UserDto>> findAvailableMedicalStaff(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@RequestParam("startTime") final String startTime,
+		@RequestParam("duration") final double duration) {
+		final Long administratorId = jwtUtils.getUserFromToken(authHeader).getId();
+		return ResponseEntity.ok(appointmentService.findAvailableMedicalStaff(administratorId, LocalDateTime.parse(startTime), duration));
+	}
+
+	@GetMapping("/appointments")
+	public ResponseEntity<List<AppointmentDto>> getAppointments(@RequestParam("month") final int month, @RequestParam("year") final int year) {
+		return ResponseEntity.ok(appointmentService.getAppointments(month, year));
+	}
+
+	public ResponseEntity<AppointmentDto> createAppointment(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@Valid
+		@RequestBody final Appointment appointmentDto) {
 		final Long administratorId = jwtUtils.getUserFromToken(authHeader).getId(); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
 		return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto, administratorId));
 	}
 
 	@GetMapping(value = "/recommend", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PageDto<AppointmentDto>> recommend(@RequestParam("startTime") final String startTime,
+
+	public ResponseEntity<PageDto<AppointmentDto>> recommend(
+		@RequestParam("startTime") final String startTime,
 		@RequestParam("pageSize") final int pageSize,
 		@RequestParam("pageNumber") final int pageNumber,
 		@RequestParam("sortDirection") final String sortDirection) {
@@ -79,8 +96,10 @@ public class AppointmentController {
 	}
 
 	@PutMapping("/schedule")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@Valid @RequestBody final AppointmentDto appointmentDto) {
+	public ResponseEntity<AppointmentDto> scheduleAppointment(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@Valid
+		@RequestBody final AppointmentDto appointmentDto) {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.scheduleAppointment(appointmentDto, userId));
 	}

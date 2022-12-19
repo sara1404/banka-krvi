@@ -130,6 +130,7 @@ public class UserService {
 			return false;
 		}
 		user.setPassword(encoder.encode(passwordChangeDto.getNewPassword()));
+		user.setFirstLogged(true);
 		userRepository.save(user);
 		return true;
 	}

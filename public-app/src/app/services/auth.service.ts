@@ -9,6 +9,12 @@ import { IUser } from '../model/User';
   providedIn: 'root',
 })
 export class AuthService {
+
+  header = {
+    headers: new HttpHeaders()
+      .set('Authorization',  `Bearer ${localStorage.getItem('token')}`)
+  }
+
   constructor(private http: HttpClient) {}
 
   loginUser(credentials: ICredentials): Observable<IToken> {
@@ -36,6 +42,9 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
+  getCurrentUser() : Observable<IUser>{
+    return this.http.get<IUser>('http://localhost:8080/auth/current', this.header)
+  }
   getLoggedUser():Observable<IUser>{
     var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     //headers.set('Content-Type', 'application/json');

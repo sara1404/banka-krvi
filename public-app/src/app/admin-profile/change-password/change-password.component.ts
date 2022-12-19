@@ -32,7 +32,7 @@ export class ChangePasswordComponent implements OnInit {
     }else{
       this.okPassword = true;
     }
-    
+
     return true;
   }
   change(oldPassword: string, newPassword: string){
@@ -46,7 +46,7 @@ export class ChangePasswordComponent implements OnInit {
       oldPassword: oldPassword,
       newPassword: newPassword
     };
-    
+
     this.adminInfoService.changePassword(updatedPassword).subscribe(data=>{this.result = data;
       if(data==true){
         this.updatedPassword = true;

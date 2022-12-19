@@ -15,6 +15,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -34,7 +35,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     MatRadioModule,
     MatPaginatorModule,
     MatStepperModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   exports: [
     CommonModule,
@@ -52,7 +54,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     MatSortModule,
     MatPaginatorModule,
     MatStepperModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ]
 })
 export class MaterialModule {}
