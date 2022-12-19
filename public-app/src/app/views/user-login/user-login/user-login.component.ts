@@ -59,7 +59,7 @@ export class UserLoginComponent implements OnInit {
     }
   }
   continue(){
-    this.router.navigate(['/app']).then(() => {
+    this.router.navigate(['']).then(() => {
       window.location.reload();
     });
   }
