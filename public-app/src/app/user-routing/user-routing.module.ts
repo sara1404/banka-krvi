@@ -34,8 +34,7 @@ const routes: Routes = [
   {path: 'changePassword', component: ChangePasswordComponent},
   {path: 'examiantion', component:ExaminationComponent},
   {path: 'create-appointment', component: CreateAppointmentComponent},
-  {path: 'admin-calendar', component: AdminCalendarComponent},
-  //{path: 'login', component: UserLoginComponent},
+  {path: 'admin-calendar', component: AdminCalendarComponent}
 ];
 
 @NgModule({
