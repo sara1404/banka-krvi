@@ -26,4 +26,5 @@ public class AppointmentDto {
 	double duration;
 	BloodBankDto bloodBank;
 	UserDto nurse;
+	UserDto user;
 }

@@ -29,4 +29,11 @@ export class NavbarComponent implements OnInit {
       window.location.reload();
     });
   }
+  login() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
+  }
 }

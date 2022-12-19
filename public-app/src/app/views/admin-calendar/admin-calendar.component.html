@@ -38,7 +38,8 @@
       [dayStartHour]="dayStartHour"
       [dayEndHour]="dayEndHour"
       [hourSegmentHeight]="hourSegmentHeight"
-      [events]="events">
+      [events]="events"
+      (eventClicked)="click($event)">
     </mwl-calendar-week-view>
   </div>
 
