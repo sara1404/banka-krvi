@@ -7,6 +7,10 @@ import { map, Subject, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { addDays, subDays, addMinutes } from 'date-fns';
 import { ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ClickedAppointmentComponent } from './clicked-appointment/clicked-appointment.component';
+import { UserService } from 'src/app/services/user.service';
+import { IUser } from 'src/app/model/User';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -42,16 +46,17 @@ export class AdminCalendarComponent implements OnInit {
   CalendarView = CalendarView;
   //appointments: IAppointment[] = []
   events: CalendarEvent<{ appointment: IUserAppointment}>[] = []
+  user: IUser
 
   selectedEvent: CalendarEvent<{ appointment: IUserAppointment }> = {
     title: null as any,
     start: null as any,
     color: { ...colors['blue'] },
     end: null as any,
-    meta: null as any,
+    meta: null as any
   };
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService, private userService: UserService, public dialog: MatDialog) {
     this.viewDate = new Date(Date.now())
    }
 
@@ -115,5 +120,16 @@ export class AdminCalendarComponent implements OnInit {
   nextWeek(){
     this.viewDate = addDays(this.viewDate, 7)
     this.getAppointments()
+  }
+
+  click({ event }: { event: CalendarEvent }){
+    console.log('kliknuo');
+    console.log(event.meta.appointment)
+    this.userService.getUser(event.meta.appointment.user.id).subscribe(data => this.user = data);
+
+    this.dialog.open(ClickedAppointmentComponent,
+      {
+        data: {appointment: event.meta.appointment, user:this.user}
+      });
   }
 }
