@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { EventColor } from 'calendar-utils';
 import { map, Subject, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { addDays, subDays, addMinutes } from 'date-fns';
+import { addDays, subDays, addMinutes, addMonths, subMonths } from 'date-fns';
 import { ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -30,7 +31,7 @@ const colors: Record<string, EventColor> = {
 })
 export class AdminCalendarComponent implements OnInit {
 
-
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   viewDate: Date
   viewDateEnd: Date
@@ -43,6 +44,9 @@ export class AdminCalendarComponent implements OnInit {
   //appointments: IAppointment[] = []
   events: CalendarEvent<{ appointment: IUserAppointment}>[] = []
 
+  displayAppointment: IUserAppointment
+  displayAppointmentValue: boolean = false
+
   selectedEvent: CalendarEvent<{ appointment: IUserAppointment }> = {
     title: null as any,
     start: null as any,
@@ -51,7 +55,7 @@ export class AdminCalendarComponent implements OnInit {
     meta: null as any,
   };
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService, private modal: NgbModal) {
     this.viewDate = new Date(Date.now())
    }
 
@@ -99,21 +103,33 @@ export class AdminCalendarComponent implements OnInit {
     );
   }
 
-  // previousMonth(){
-  //   this.viewDate = new Date(this.viewDate.setMonth((this.viewDate.getMonth() + 1) - 1));
-  // }
-
-  // nextMonth(){
-  //   this.viewDate = new Date(this.viewDate.setMonth((this.viewDate.getMonth() + 1) + 1));
-  // }
-
   previousWeek(){
-    this.viewDate = subDays(this.viewDate, 7)
+    if(this.view === CalendarView.Month)
+      this.viewDate = subMonths(this.viewDate, 1)
+    else
+      this.viewDate = subDays(this.viewDate, 7)
     this.getAppointments()
   }
 
   nextWeek(){
-    this.viewDate = addDays(this.viewDate, 7)
+    if(this.view === CalendarView.Month)
+      this.viewDate = addMonths(this.viewDate, 1)
+    else
+      this.viewDate = addDays(this.viewDate, 7)
     this.getAppointments()
+  }
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  handleEvent(event: CalendarEvent){
+    console.log(event.meta)
+    this.displayAppointment = event.meta.appointment
+    this.displayAppointmentValue = true
+  }
+
+  closeModal(){
+    this.displayAppointmentValue = false
   }
 }

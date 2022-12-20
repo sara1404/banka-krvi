@@ -6,6 +6,7 @@ import com.isa.bloodbank.dto.PageDto;
 import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
@@ -76,8 +77,10 @@ public class AppointmentService {
 		return appointmentRepository.save(appointment);
 	}
 
-	public List<AppointmentDto> getAppointments(final int month, final int year) {
-		final List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year);
+	public List<AppointmentDto> getAppointments(final int month, final int year, final Long administratorId) {
+		final User administator = userService.findUserById(administratorId);
+		final List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year,
+			administator.getBloodBank().getId());
 		return appointmentMapper.appointmentsToAppointmentDtos(appointments);
 	}
 

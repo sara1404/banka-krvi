@@ -57,8 +57,11 @@ public class AppointmentController {
 	}
 
 	@GetMapping("/appointments")
-	public ResponseEntity<List<AppointmentDto>> getAppointments(@RequestParam("month") final int month, @RequestParam("year") final int year) {
-		return ResponseEntity.ok(appointmentService.getAppointments(month, year));
+	public ResponseEntity<List<AppointmentDto>> getAppointments(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@RequestParam("month") final int month, @RequestParam("year") final int year) {
+		final Long administratorId = jwtUtils.getUserFromToken(authHeader).getId(); //na osnovu ulogovanog adminitratora trazimo id banke za koju pravi termine
+		return ResponseEntity.ok(appointmentService.getAppointments(month, year, administratorId));
 	}
 
 	@PostMapping("/create")

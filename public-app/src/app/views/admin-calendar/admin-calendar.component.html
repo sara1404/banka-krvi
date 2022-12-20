@@ -25,14 +25,44 @@
       </div>
     </div>
 
+
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Week
+        </div>
+      </div>
+    </div>
+
     <div class="date">
       <h1>{{ viewDate | date: "M/y"}}</h1>
     </div>
   </div>
 
 
-  <div class="calendar">
+
+
+  <div class="calendar" [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="handleEvent($event.event)"
+    >
+    </mwl-calendar-month-view>
     <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
       [viewDate]="viewDate"
       [daysInWeek]="daysInWeek"
       [dayStartHour]="dayStartHour"
@@ -42,6 +72,16 @@
     </mwl-calendar-week-view>
   </div>
 
+</div>
+
+<div class="modal-wrapper" *ngIf="displayAppointmentValue">
+  <div class="modal">
+    <div (click)="closeModal()" class="close-icon">
+      <img src="assets/icons/close-icon.png" alt="close" height="25" width="25">
+    </div>
+    <div>Start time: {{displayAppointment.startTime | date:'short'}}</div>
+    <div>End time:</div>
+  </div>
 </div>
 
 
