@@ -16,7 +16,8 @@ export class AppointmentService {
   constructor(private http: HttpClient) {}
 
   getAppointmentsForChosenMonth(month: number, year: number): Observable<any>{
-    return this.http.get<any>(`${this.base}/appointments?month=${month}&year=${year}`)
+    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get<any>(`${this.base}/appointments?month=${month}&year=${year}`, {headers: headers})
   }
 
   createAppointment(appointment: IAppointment) : Observable<IAppointment> {

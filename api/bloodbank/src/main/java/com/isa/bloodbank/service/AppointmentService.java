@@ -127,8 +127,10 @@ public class AppointmentService {
 		return appointmentRepository.save(appointment);
 	}
 
-	public List<AppointmentDto> getAppointments(final int month, final int year) {
-		final List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year);
+	public List<AppointmentDto> getAppointments(final int month, final int year, final Long administratorId) {
+		final User administator = userService.findUserById(administratorId);
+		final List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year,
+			administator.getBloodBank().getId());
 		return appointmentMapper.appointmentsToAppointmentDtos(appointments);
 	}
 
