@@ -1,16 +1,11 @@
 package com.isa.bloodbank.entity;
 
-import com.isa.bloodbank.entity.enums.BloodType;
-import com.isa.bloodbank.entity.enums.Hand;
-
-import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -21,15 +16,12 @@ public class AppointmentInfo extends BaseEntity {
 	@Column
 	double hemoglobinometer;
 	@Column
-	BloodType examBloodType;
-	@Column
 	double ta;
 	@Column
 	double tt;
 	@Column
 	double tv;
-	@Column
-	Hand handEnum;
+	String hand;
 	@Column
 	double quantity;
 	@Column

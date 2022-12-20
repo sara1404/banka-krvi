@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { IUserAppointment } from 'src/app/model/UserAppointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { EventColor } from 'calendar-utils';
 import { map, Subject, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { addDays, subDays, addMinutes } from 'date-fns';
+import { addDays, subDays, addMinutes, addMonths, subMonths } from 'date-fns';
 import { ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { ClickedAppointmentComponent } from './clicked-appointment/clicked-appointment.component';
+import { UserService } from 'src/app/services/user.service';
+import { IUser } from 'src/app/model/User';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -30,7 +35,7 @@ const colors: Record<string, EventColor> = {
 })
 export class AdminCalendarComponent implements OnInit {
 
-
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   viewDate: Date
   viewDateEnd: Date
@@ -42,16 +47,20 @@ export class AdminCalendarComponent implements OnInit {
   CalendarView = CalendarView;
   //appointments: IAppointment[] = []
   events: CalendarEvent<{ appointment: IUserAppointment}>[] = []
+  user: IUser
+
+  displayAppointment: IUserAppointment
+  displayAppointmentValue: boolean = false
 
   selectedEvent: CalendarEvent<{ appointment: IUserAppointment }> = {
     title: null as any,
     start: null as any,
     color: { ...colors['blue'] },
     end: null as any,
-    meta: null as any,
+    meta: null as any
   };
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService, private userService: UserService, public dialog: MatDialog) {
     this.viewDate = new Date(Date.now())
    }
 
@@ -99,21 +108,34 @@ export class AdminCalendarComponent implements OnInit {
     );
   }
 
-  // previousMonth(){
-  //   this.viewDate = new Date(this.viewDate.setMonth((this.viewDate.getMonth() + 1) - 1));
-  // }
-
-  // nextMonth(){
-  //   this.viewDate = new Date(this.viewDate.setMonth((this.viewDate.getMonth() + 1) + 1));
-  // }
-
   previousWeek(){
-    this.viewDate = subDays(this.viewDate, 7)
+    if(this.view === CalendarView.Month)
+      this.viewDate = subMonths(this.viewDate, 1)
+    else
+      this.viewDate = subDays(this.viewDate, 7)
     this.getAppointments()
   }
 
   nextWeek(){
-    this.viewDate = addDays(this.viewDate, 7)
+    if(this.view === CalendarView.Month)
+      this.viewDate = addMonths(this.viewDate, 1)
+    else
+      this.viewDate = addDays(this.viewDate, 7)
     this.getAppointments()
+  }
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  click({ event }: { event: CalendarEvent }){
+    console.log('kliknuo');
+    console.log(event.meta.appointment)
+    this.userService.getUser(event.meta.appointment.user.id).subscribe(data => this.user = data);
+
+    this.dialog.open(ClickedAppointmentComponent,
+      {
+        data: {appointment: event.meta.appointment, user:this.user}
+      });
   }
 }

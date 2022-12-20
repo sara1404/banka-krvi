@@ -2,8 +2,8 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.AppointmentAndInfoDto;
 import com.isa.bloodbank.dto.AppointmentInfoDto;
-import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.AppointmentInfoMapper;
 import com.isa.bloodbank.repository.AppointmentInfoRepository;
 
@@ -20,12 +20,23 @@ public class AppointmentInfoService {
 	private AppointmentService appointmentService;
 	@Autowired
 	private BloodSupplyService bloodSupplyService;
+	@Autowired
+	private UserService userService;
 
-	public AppointmentInfoDto create(AppointmentAndInfoDto appointmentAndInfoDto){
-		AppointmentInfoDto dto = appointmentInfoMapper.appointmentToAppointmentInfoDto(appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto())));
-		AppointmentInfo appointmentInfo = appointmentInfoMapper.appointmentDtoToAppointment(dto);
-		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfoMapper.appointmentDtoToAppointment(dto));
-		bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(), appointmentAndInfoDto.getAppointmentInfoDto().getQuantity());
+	//izmenila za krv
+	public AppointmentInfoDto create(final AppointmentAndInfoDto appointmentAndInfoDto, final User loggedUser) {
+		//appointmentInfoRepository.save(appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
+		final AppointmentInfoDto dto = appointmentInfoMapper.appointmentToAppointmentInfoDto(
+			appointmentInfoMapper.appointmentDtoToAppointment(appointmentAndInfoDto.getAppointmentInfoDto()));
+		final AppointmentInfo appointmentInfo = appointmentInfoMapper.appointmentDtoToAppointment(dto);
+		appointmentService.updateAppointmentInfo(appointmentAndInfoDto.getAppointmentId(), appointmentInfo);
+		final User user = appointmentService.findById(appointmentAndInfoDto.getAppointmentId()).getUser();
+		if (appointmentAndInfoDto.getAppointmentInfoDto().isAccepted()) {
+			//bloodSupplyService.addBlood(appointmentAndInfoDto.getAppointmentInfoDto().getExamBloodType(),
+			bloodSupplyService.addBlood(user.getBloodType(),
+				appointmentAndInfoDto.getAppointmentInfoDto().getQuantity(), loggedUser);
+		}
+		appointmentService.finishAppointment(appointmentAndInfoDto.getAppointmentId());
 		return dto;
 	}
 }

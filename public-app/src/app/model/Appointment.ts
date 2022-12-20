@@ -6,5 +6,6 @@ export interface IAppointment{
     startTime: Date
     duration: number
     bloodBank: IBloodBank
-    nurse: IUser
+    nurse: IUser,
+    user: IUser
 }

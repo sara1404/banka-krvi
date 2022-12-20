@@ -104,7 +104,7 @@ export class CreateAppointmentComponent implements OnInit {
   saveClick(e : Event){
     var nurse = this.findNurseById(this.createAppointmentForm.controls.nurse.value[0])
     e.preventDefault();
-    this.appointmentService.createAppointment({id: null, bloodBank: this.createAppointmentForm.controls.bloodBank.value,startTime: this.createAppointmentForm.controls.startTime.value, duration: this.createAppointmentForm.controls.duration.value, nurse: nurse}).subscribe({
+    this.appointmentService.createAppointment({id: null, bloodBank: this.createAppointmentForm.controls.bloodBank.value,startTime: this.createAppointmentForm.controls.startTime.value, duration: this.createAppointmentForm.controls.duration.value, nurse: nurse, user:null}).subscribe({
       next: (res) => {
         this.toastService.showSuccess("Successfuly created apointment")
       },

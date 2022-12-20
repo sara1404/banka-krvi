@@ -160,4 +160,11 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="appointmentInfo.handEnum" />
+      </configuration>
+    </watches-manager>
+  </component>
 </project>

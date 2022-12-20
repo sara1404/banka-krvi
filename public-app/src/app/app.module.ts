@@ -57,6 +57,7 @@ import { CreateAppointmentUserModule } from './views/appointments/create-appoint
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
+    CreateAppointmentModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

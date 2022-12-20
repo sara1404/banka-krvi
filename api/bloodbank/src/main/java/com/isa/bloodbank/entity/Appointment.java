@@ -1,9 +1,13 @@
 package com.isa.bloodbank.entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -36,9 +40,9 @@ public class Appointment extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	User user;
+	@Column
+	boolean finished;
 	@ManyToOne
 	@JoinColumn(name = "nurse_id", referencedColumnName = "id")
 	User nurse;
-	@Column
-	boolean finished;
 }

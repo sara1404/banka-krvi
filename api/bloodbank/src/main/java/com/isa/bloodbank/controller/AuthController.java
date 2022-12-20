@@ -42,7 +42,8 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/register")
-	public ResponseEntity<User> registerUser(@RequestBody @Valid final RegisterUserDto user) {
+	public ResponseEntity<User> registerUser(@RequestBody @Valid final RegisterUserDto user,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		if (userService.checkIfEmailAlreadyInUse(user.getEmail())) {
 			return ResponseEntity.badRequest().build();
 		}
