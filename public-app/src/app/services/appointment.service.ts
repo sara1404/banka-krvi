@@ -4,6 +4,7 @@ import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
 import { IPage, IPageAppointment } from '../model/Page';
 import { IAppointment } from '../model/Appointment';
+import { IUser } from '../model/User';
 
 
 @Injectable({
@@ -14,7 +15,6 @@ export class AppointmentService {
   base = "http://localhost:8080/appointment"
   constructor(private http: HttpClient) {}
 
-
   getAppointmentsForChosenMonth(month: number, year: number): Observable<any>{
     var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.get<any>(`${this.base}/appointments?month=${month}&year=${year}`, {headers: headers})
@@ -24,6 +24,11 @@ export class AppointmentService {
       var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<IAppointment>(`http://localhost:8080/appointment/create`, appointment, {headers: headers});
   }
+
+  recommendMedicalStaff(startTime: Date, duration: number) : Observable<IUser[]> {
+    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+  return this.http.get<IUser[]>(`http://localhost:8080/appointment/getAvailableMedicalStaff?startTime=` + startTime + "&duration=" + duration , {headers: headers});
+}
 
   getBloodBanksWithFreeTimeSlots(startTime: Date, pageNumber: number, sortDirection: string){
     return this.http.get<IPageAppointment>(

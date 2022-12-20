@@ -1,12 +1,16 @@
 package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.EquipmentDto;
+import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.EquipmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class EquipmentController {
 	@Autowired
 	private EquipmentService equipmentService;
+	@Autowired
+	JwtUtils jwtUtils;
 
 	@PostMapping("/used")
-	public Boolean removeEquipment(@RequestBody EquipmentDto equipmentDto){
-		return equipmentService.removeEquipment(equipmentDto);
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public Boolean removeEquipment(@RequestBody final EquipmentDto equipmentDto,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		return equipmentService.removeEquipment(equipmentDto, loggedUser);
 	}
 }

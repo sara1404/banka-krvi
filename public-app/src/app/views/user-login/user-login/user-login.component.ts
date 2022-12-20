@@ -58,4 +58,9 @@ export class UserLoginComponent implements OnInit {
       );
     }
   }
+  continue(){
+    this.router.navigate(['']).then(() => {
+      window.location.reload();
+    });
+  }
 }

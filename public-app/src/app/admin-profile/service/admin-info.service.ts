@@ -20,7 +20,7 @@ export class AdminInfoService {
 
   getUser(userId: number): Observable<IUser>{
     //zakucano na 3, to treba da je logovan
-    return this.http.get<IUser>(`http://localhost:8080/user/3`)
+    return this.http.get<IUser>(`http://localhost:8080/user/${userId}`);
   }
 
   editUser(user: IUser)

@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodSupplyDto;
 import com.isa.bloodbank.entity.BloodSupply;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.mapping.BloodSupplyMapper;
 import com.isa.bloodbank.repository.BloodSupplyRepository;
@@ -24,10 +25,16 @@ public class BloodSupplyService {
 		return bloodSupplyMapper.bloodSuppliesToBloodSupplyDtos(bloodSupplyRepository.findByBloodBankId(bloodBankId));
 	}
 
-	public boolean addBlood(BloodType bloodType, double quantity){
-		final Long administratorId = (long) (3);
-		Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
+	public boolean addBlood(final BloodType bloodType, final double quantity, final User loggedUser) {
+		final Long bloodBankId = loggedUser.getBloodBank().getId();
 		BloodSupply bloodSupply = bloodSupplyRepository.findByBloodBankIdAndBloodType(bloodBankId, bloodType);
+		if (bloodSupply == null) {
+			bloodSupply = new BloodSupply();
+			bloodSupply.setQuantity(0);
+			bloodSupply.setBloodType(bloodType);
+			bloodSupply.setBloodBankId(bloodBankId);
+			bloodSupplyRepository.save(bloodSupply);
+		}
 		bloodSupply.setQuantity(bloodSupply.getQuantity() + quantity);
 		bloodSupplyRepository.save(bloodSupply);
 		return true;

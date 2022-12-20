@@ -15,7 +15,7 @@
   <div routerLink='bloodBanks' class="sidebar-option">BLOOD BANKS</div>
   <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
-  <div routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
-  <div routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
-  <div routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
+  <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
+  <div *ngIf="isLoggedIn" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
+  <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
 </div>

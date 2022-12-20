@@ -1,7 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IAppointment } from 'src/app/admin-profile/model/Appointment';
 import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
 import { IUser } from 'src/app/model/User';
@@ -12,29 +10,28 @@ import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-examination',
-  templateUrl: './examination.component.html',
-  styleUrls: ['./examination.component.scss']
+  selector: 'app-clicked-appointment',
+  templateUrl: './clicked-appointment.component.html',
+  styleUrls: ['./clicked-appointment.component.scss']
 })
-export class ExaminationComponent implements OnInit {
+export class ClickedAppointmentComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ExaminationComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
+  constructor(public dialogRef: MatDialogRef<ClickedAppointmentComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
 
   userSurvey: IUserSurvey;
-  displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
+  //displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
   public result: Boolean
   start: boolean= false;
   userAppointments: IUserAppointment[]
   appointment: IUserAppointment
   noAppointments: boolean = false;
-
-  //
+  user: IUser
   ngOnInit(): void {
     this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{this.userSurvey = data;});
-    this.userService.getAppointmentsForUser(this._data.user.id).subscribe(data=>{this.userAppointments = data;});
-    if(this.userAppointments?.length == 0) this.noAppointments = true;
+    this.appointment = this._data.appointment;
+    this.user = this._data.user;
+    console.log(this.appointment)
   }
-
   checkSurvey(): boolean{
     if(this.userSurvey?.weight >= 50 && this.userSurvey?.fluSymptoms == false && this.userSurvey?.skinIrritations == false
       && this.userSurvey?.abnormalBloodPressure == false && this.userSurvey?.tookAntibiotics == false 
