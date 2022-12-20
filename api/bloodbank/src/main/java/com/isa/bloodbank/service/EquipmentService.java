@@ -27,4 +27,17 @@ public class EquipmentService {
 		equipmentRepository.save(equipment);
 		return true;
 	}
+
+	public Equipment addEquipment(final Equipment equipment) {
+		System.out.println(equipment);
+		final Equipment existingEquipment = equipmentRepository.findByBloodBankIdAndEquipmentType(equipment.getBloodBank().getId(),
+			equipment.getEquipmentType());
+		if (existingEquipment == null) {
+			equipmentRepository.save(equipment);
+			return equipment;
+		}
+		existingEquipment.setQuantity(existingEquipment.getQuantity() + equipment.getQuantity());
+		equipmentRepository.save(existingEquipment);
+		return existingEquipment;
+	}
 }

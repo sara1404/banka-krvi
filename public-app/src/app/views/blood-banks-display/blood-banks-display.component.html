@@ -1,5 +1,5 @@
 <div class="mainContent">
-  
+
     <app-search-blood-banks
     (bloodBanks)="onSearch($event)"
     (totalElements)="saveTotalElements($event)"
@@ -58,7 +58,7 @@
       </ng-container>
       <ng-container matColumnDef="averageGrade">
         <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
-        <mat-cell *matCellDef="let item">{{ item.averageGrade }}</mat-cell>
+        <mat-cell *matCellDef="let item">{{ item.averageGrade }} <button class="add-equip-btn" (click)="displayModal(item)">Add equipment</button></mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

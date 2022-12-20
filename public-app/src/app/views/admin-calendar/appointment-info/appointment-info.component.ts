@@ -141,16 +141,61 @@ export class AppointmentInfoComponent implements OnInit {
         this.showError(e)
       },
     }));
-    
+
     const needles: IEquipment = {
+      bloodBank: {
+        name: '',
+        address: {
+          id: 0,
+          street: '',
+          number: 0,
+          city: '',
+          zipcode: 0,
+          country: '',
+          longitude: 0,
+          latitude: 0
+        },
+        description: '',
+        averageGrade: 0
+      },
       equipmentType: "NEEDLE",
       quantity: this.appInfoForm.value.needle
     }
     const bandages: IEquipment = {
+      bloodBank: {
+        name: '',
+        address: {
+          id: 0,
+          street: '',
+          number: 0,
+          city: '',
+          zipcode: 0,
+          country: '',
+          longitude: 0,
+          latitude: 0
+        },
+        description: '',
+        averageGrade: 0
+      },
       equipmentType: "BANDAGE",
       quantity: this.appInfoForm.value.bandage
     }
     const bags: IEquipment = {
+      bloodBank: {
+        name: '',
+        address: {
+          id: 0,
+          street: '',
+          number: 0,
+          city: '',
+          zipcode: 0,
+          country: '',
+          longitude: 0,
+          latitude: 0
+        },
+        description: '',
+        averageGrade: 0
+      },
       equipmentType: "BAG",
       quantity: this.appInfoForm.value.bag
     }
