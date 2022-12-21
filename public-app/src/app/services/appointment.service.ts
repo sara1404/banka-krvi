@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IBloodBank } from '../model/BloodBankk';
 import { Observable } from 'rxjs';
-import { IPage, IPageAppointment } from '../model/Page';
+import { IPage, IPageAppointment, IPageUser } from '../model/Page';
 import { IAppointment } from '../model/Appointment';
 import { IUser } from '../model/User';
 
@@ -41,6 +41,21 @@ export class AppointmentService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.put<IAppointment>(
       `http://localhost:8080/appointment/schedule`,
+      JSON.stringify(appointment),
+      { headers: headers }
+    );
+  }
+
+  getBloodBanksWithAvailableMedicalStaff(startTime: Date, duration: number, pageNumber: number, sortDirection: string) : Observable<IPageUser> {
+    return this.http.get<IPageUser>(
+      `http://localhost:8080/appointment/findBloodBanksWithAvailableMedicalStaff?startTime=` + startTime  + '&duration=' + duration + '&pageSize=' + 2 + '&pageNumber=' + pageNumber +  '&sortDirection=' + sortDirection
+    );
+  }
+
+  userCreates(appointment: any): Observable<IAppointment> {
+    var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post<IAppointment>(
+      `http://localhost:8080/appointment/userCreates`,
       JSON.stringify(appointment),
       { headers: headers }
     );
