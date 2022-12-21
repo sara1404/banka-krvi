@@ -4,6 +4,8 @@ import { BloodBankService } from '../../services/blood-bank.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatSortHeader } from '@angular/material/sort';
+import { AddEquipmentModalComponent } from './add-equipment-modal/add-equipment-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,7 @@ import { MatSortHeader } from '@angular/material/sort';
 export class DisplayBloodBanksComponent implements OnInit {
   constructor(
     private bloodBankService: BloodBankService,
+    public dialog: MatDialog
   ) {}
 
   bloodBanks = new MatTableDataSource<IBloodBank>();
@@ -26,7 +29,7 @@ export class DisplayBloodBanksComponent implements OnInit {
   sortDirection: string;
 
   @ViewChild(MatSort) sort: MatSort;
-  
+
   ngOnInit(): void {
     this.bloodBankService
       .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.pageNumber, this.sortBy, this.sortDirection)
@@ -34,7 +37,7 @@ export class DisplayBloodBanksComponent implements OnInit {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
       });
-      
+
   }
 
   onSearch(eventData: IBloodBank[]) {
@@ -76,5 +79,12 @@ export class DisplayBloodBanksComponent implements OnInit {
 
   saveTotalElements(eventData: number){
     this.totalElements = eventData;
+  }
+
+  displayModal(item){
+    this.dialog.open(AddEquipmentModalComponent,
+      {
+        data: {bloodbank: item}
+      });
   }
 }

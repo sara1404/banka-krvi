@@ -142,7 +142,7 @@ export class AppointmentInfoComponent implements OnInit {
         this.showError(e)
       },
     }));
-    
+
     const needles: IEquipment = {
       equipmentType: "NEEDLE",
       quantity: this.appInfoForm.value.needle,

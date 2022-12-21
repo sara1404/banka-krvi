@@ -15,12 +15,13 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Equipment extends BaseEntity{
+public class Equipment extends BaseEntity {
 	@Column
 	EquipmentType equipmentType;
 	@Column
 	int quantity;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
 	BloodBank bloodBank;
+
 }
