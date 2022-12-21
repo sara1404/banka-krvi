@@ -16,6 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -36,7 +37,8 @@ import { MatListModule } from '@angular/material/list';
     MatPaginatorModule,
     MatStepperModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { MatListModule } from '@angular/material/list';
     MatPaginatorModule,
     MatStepperModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}

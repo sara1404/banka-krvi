@@ -1,10 +1,13 @@
 <div *ngIf="this.start==false">
     <table>
+        <tr>Start time: {{this.appointment.startTime | date:'short'}}</tr>
+        <tr>Duration: {{this.appointment.duration}} minutes</tr>
+
         <tr>
             <!--
             <td>{{this.appointment.startTime| date:'dd.MM.yyyy. HH:mm'}}</td>
             <td>{{this.appointment.duration}}</td>-->
-            <td>{{this.user.firstName}}  {{this.user.lastName}}</td>
+            <td>User: {{this.user.firstName}}  {{this.user.lastName}}</td>
             <td><button *ngIf="checkSurvey() == true" class="example-button-row" mat-button color="white" (click)="startExamination(this.appointment)">Start examination</button> </td>
             <td><button *ngIf="checkSurvey() == true" class="example-button-row" mat-button color="white" (click)="didntShowUp(this.appointment)">Didn't show up</button></td>
             <td><button *ngIf="checkSurvey() == false" class="example-button-row" mat-button color="white" (click)="unsuitable(appointment)">Unsuitable</button></td>

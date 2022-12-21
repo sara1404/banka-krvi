@@ -17,8 +17,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
 	Appointment save(Appointment appointments);
 
-	@Query("select a from Appointment a where month(a.startTime) = ?1 and year(a.startTime) = ?2")
-	List<Appointment> findAllByStartTimeMonthValueAndStartTime_Year(int month, int year);
+	@Query("select a from Appointment a where month(a.startTime) = ?1 and year(a.startTime) = ?2 and a.bloodBank.id = ?3")
+	List<Appointment> findAllByStartTimeMonthValueAndStartTime_Year(int month, int year, Long bloodBankId);
 
 	List<Appointment> findByStartTimeAndAvailable(LocalDateTime startTime, boolean available, Sort sort);
 }
