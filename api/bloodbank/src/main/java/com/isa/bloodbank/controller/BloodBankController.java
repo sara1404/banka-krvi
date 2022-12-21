@@ -1,9 +1,6 @@
 package com.isa.bloodbank.controller;
 
-import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.dto.BloodBankDto;
-import com.isa.bloodbank.dto.PageDto;
-import com.isa.bloodbank.dto.WorkingHoursDto;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
@@ -11,7 +8,6 @@ import com.isa.bloodbank.mapping.BloodBankMapper;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,7 +17,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +46,7 @@ public class BloodBankController {
 	}
 
 	@PutMapping("/update")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
 	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBankDto));
 	}
@@ -66,6 +70,7 @@ public class BloodBankController {
 	}
 
 	@PostMapping("/register")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
 	public ResponseEntity<BloodBankDto> register(@Valid @RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
 	}
