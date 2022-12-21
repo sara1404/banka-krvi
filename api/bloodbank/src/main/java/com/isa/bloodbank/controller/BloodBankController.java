@@ -66,6 +66,8 @@ public class BloodBankController {
 	}
 
 	@PostMapping("/register")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
+
 	public ResponseEntity<BloodBankDto> register(@Valid @RequestBody final BloodBankDto bloodBank) {
 		return ResponseEntity.ok(bloodBankService.registerBloodBank(bloodBank));
 	}

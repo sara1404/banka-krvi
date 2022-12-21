@@ -72,6 +72,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping("/appointments")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<AppointmentDto>> getAppointments(
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@RequestParam("month") final int month, @RequestParam("year") final int year) {

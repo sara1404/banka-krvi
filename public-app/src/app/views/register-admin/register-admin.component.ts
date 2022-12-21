@@ -53,7 +53,7 @@ export class RegisterAdminComponent implements OnInit {
     this.userService.registerAdmin(this.registerForm.value).subscribe({
       next: (res) => {
         this.showSuccess()
-        this.router.navigate(['/', 'users'])
+        this.router.navigate(['/app/', 'users'])
       },
       error: (e) => {
         this.showError(e)

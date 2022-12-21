@@ -1,6 +1,7 @@
 package com.isa.bloodbank.dto;
 
 import com.isa.bloodbank.entity.Address;
+import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.entity.enums.UserType;
 
@@ -35,4 +36,5 @@ public class RegisterUserDto {
 	String gender;
 	String workplaceName;
 	String jobTitle;
+	BloodBank bloodBank;
 }
