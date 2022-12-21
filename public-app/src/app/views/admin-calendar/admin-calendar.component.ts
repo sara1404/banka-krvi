@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ClickedAppointmentComponent } from './clicked-appointment/clicked-appointment.component';
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/model/User';
+import { YearViewComponent } from './year-view/year-view.component';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -60,9 +61,14 @@ export class AdminCalendarComponent implements OnInit {
     meta: null as any
   };
 
-  constructor(private appointmentService: AppointmentService, private userService: UserService, public dialog: MatDialog) {
+  selectedDate: Date
+
+
+  constructor(private appointmentService: AppointmentService, private userService: UserService, public dialog: MatDialog, public yearViewDialog: MatDialog) {
     this.viewDate = new Date(Date.now())
    }
+
+ 
 
   ngOnInit(): void {
     this.viewDate = new Date('2022-12-05');
@@ -138,4 +144,20 @@ export class AdminCalendarComponent implements OnInit {
         data: {appointment: event.meta.appointment, user:this.user}
       });
   }
+
+
+  displayYearView(){
+    let dialogRef = this.yearViewDialog.open(YearViewComponent, {
+      data: {selected: this.selectedDate}
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === undefined) return 
+      this.viewDate = result
+      this.view = CalendarView.Month
+      this.getAppointments()
+    });
+  }
+
+ 
 }

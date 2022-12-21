@@ -9,13 +9,14 @@ import { AppointmentInfoComponent } from './appointment-info/appointment-info.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialModule } from 'src/app/material/material.module';
+import { YearViewModule } from './year-view/year-view.module';
 
 
 @NgModule({
   declarations: [
     AdminCalendarComponent,
     ClickedAppointmentComponent,
-    AppointmentInfoComponent
+    AppointmentInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +24,8 @@ import { MaterialModule } from 'src/app/material/material.module';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MaterialModule
+    MaterialModule,
+    YearViewModule
   ]
 
 })

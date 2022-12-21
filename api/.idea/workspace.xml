@@ -55,12 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/programiranje projekti/isa/banka-krvi/api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "35aaa0abc36032d48f0ec73f881b7d89",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.BloodbankApplication">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
@@ -121,6 +132,7 @@
     <list>
       <item itemvalue="Application.BloodbankApplication" />
       <item itemvalue="Maven.Maven" />
+      <item itemvalue="Spring Boot.BloodbankApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -143,6 +155,8 @@
       <workItem from="1667675844291" duration="4852000" />
       <workItem from="1667731233021" duration="9350000" />
       <workItem from="1667747812958" duration="5495000" />
+      <workItem from="1671639923196" duration="543000" />
+      <workItem from="1671640541200" duration="1387000" />
     </task>
     <servers />
   </component>
