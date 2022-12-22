@@ -207,6 +207,8 @@ public class AppointmentService {
         for (Appointment a: appointments){
             if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) canSchedule = false;
         }
+		User user = userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		if (user.getPoints() > 2) canSchedule = false;
         return canSchedule;
     }
 }
