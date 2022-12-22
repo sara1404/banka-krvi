@@ -16,8 +16,6 @@ public class EquipmentService {
 	private UserService userService;
 
 	public Boolean removeEquipment(final EquipmentDto dto, final User loggedUser) {
-		//final Long administratorId = (long) (3);
-		//final Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
 		final Long bloodBankId = loggedUser.getBloodBank().getId();
 		final Equipment equipment = equipmentRepository.findByBloodBankIdAndEquipmentType(bloodBankId, dto.getEquipmentType());
 		equipment.setQuantity(equipment.getQuantity() - dto.getQuantity());
@@ -29,7 +27,6 @@ public class EquipmentService {
 	}
 
 	public Equipment addEquipment(final Equipment equipment) {
-		System.out.println(equipment);
 		final Equipment existingEquipment = equipmentRepository.findByBloodBankIdAndEquipmentType(equipment.getBloodBank().getId(),
 			equipment.getEquipmentType());
 		if (existingEquipment == null) {

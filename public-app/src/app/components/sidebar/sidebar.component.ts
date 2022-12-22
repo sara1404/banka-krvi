@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IUser } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,14 +13,10 @@ export class SidebarComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  isLoggedIn: boolean;
+  @Input() isLoggedIn: boolean;
   user: IUser;
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
-    //this.authService.getLoggedUser().subscribe(data=>{this.user = data;});
-    var interval = setInterval(() => {
-      this.refresh(); // api call
-   }, 200);
   }
   refresh(){
     this.ngOnInit();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/model/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   isLoggedIn:boolean;
+  @Output() loginEvent = new EventEmitter<boolean>();
   user: IUser;
 
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']).then(() => {
       window.location.reload();
     });
+    this.loginEvent.emit(this.isLoggedIn);
   }
   login() {
     this.authService.logout();
@@ -35,5 +37,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']).then(() => {
       window.location.reload();
     });
+    this.loginEvent.emit(this.isLoggedIn);
   }
 }

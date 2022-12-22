@@ -140,7 +140,7 @@ public class UserService {
 		if (user == null) {
 			return false;
 		}
-		user.setPoints(user.getPoints() - 1);
+		user.setPoints(user.getPoints() + 1);
 		userRepository.save(user);
 		return true;
 	}

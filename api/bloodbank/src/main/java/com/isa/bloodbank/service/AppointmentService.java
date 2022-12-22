@@ -1,10 +1,6 @@
 package com.isa.bloodbank.service;
 
-import com.isa.bloodbank.dto.AppointmentDto;
-import com.isa.bloodbank.dto.FreeAppointmentDto;
-import com.isa.bloodbank.dto.PageDto;
-import com.isa.bloodbank.dto.UserAppointmentDto;
-import com.isa.bloodbank.dto.UserDto;
+import com.isa.bloodbank.dto.*;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
 import com.isa.bloodbank.entity.BloodBank;
@@ -13,6 +9,7 @@ import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
+import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -35,6 +32,8 @@ public class AppointmentService {
 	private UserRepository userRepository;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private BloodBankRepository bloodBankRepository;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -59,17 +58,38 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
-	public List<UserDto> findAvailableMedicalStaff(final Long adminId, final LocalDateTime startTime, final double duration) {
-		final BloodBank bloodBank = userService.findById(adminId).getBloodBank();
+	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize, final int pageNumber, String sortDirection){
+		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+		List<UserDto> nurses = new ArrayList<>();
+		for (BloodBank b: bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade")))
+		{
+			List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
+			if (!availableNurses.isEmpty()){
+				nurses.add(availableNurses.get(0)); //u medicinskoj sestri pise bloodBank za koji radi
+			}
+		}
+        final PageDto<UserDto> page = new PageDto();
+        page.setTotalElements(nurses.size());
+        if (nurses.isEmpty()) {
+            page.setContent(nurses);
+        } else if ((pageNumber + 1) * pageSize > nurses.size()) {
+            page.setContent(nurses.subList(pageNumber * pageSize, nurses.size()));
+        } else {
+            page.setContent(nurses.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
+        }
+        return page;
+	}
+
+	public List<UserDto> findAvailableMedicalStaff(final Long bloodBankId, final LocalDateTime startTime, final double duration) {
 		final List<User> notAvailableNurses = new ArrayList<>();
-		for (final Appointment a : appointmentRepository.findAllByBloodBankId(bloodBank.getId())) {
+		for (final Appointment a : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
 			if (startsAndEndDuringAppointment(a, startTime, duration) || startsBeforeAndEndDuringAppointment(a, startTime, duration) ||
 				startsDuringAndEndAfterAppointment(a, startTime, duration)) {
 				notAvailableNurses.add(a.getNurse());
 			}
 		}
 		final List<User> availableNurses = new ArrayList<>();
-		for (final User nurse : userRepository.findByBloodBankId(bloodBank.getId())) {
+		for (final User nurse : userRepository.findByBloodBankId(bloodBankId)) {
 			boolean isAvailable = true;
 			for (final User notAvailableNurse : notAvailableNurses) {
 				if (nurse.getId() == notAvailableNurse.getId()) {
@@ -171,4 +191,22 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
+
+	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId){
+		Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		appointment.setAvailable(false);
+		appointment.setFinished(false);
+		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+    public boolean canUserScheduleAppointment(final Long userId, LocalDateTime startTime){
+        List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+        boolean canSchedule = true;
+        for (Appointment a: appointments){
+            if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) canSchedule = false;
+        }
+        return canSchedule;
+    }
 }
