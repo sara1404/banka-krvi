@@ -5,6 +5,7 @@
   </div>
   <div *ngIf="isLoggedIn" routerLink='create-appointment-user' class="sidebar-option">SCHEDULE APPOINTMENT</div>
    <div *ngIf="isLoggedIn" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
+   <div *ngIf="isLoggedIn" routerLink='appointments/predefined' class="sidebar-option">PREDEFINED APPOINTMENTS</div>
   <div *ngIf="isLoggedIn" routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
   <div *ngIf="isLoggedIn" routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
   <div routerLink='register/user' class="sidebar-option">REGISTER USER</div>
@@ -16,6 +17,6 @@
   <div *ngIf="isLoggedIn" routerLink='bloodsupplies' class="sidebar-option">BLOOD SUPPLIES</div>
   <div routerLink='bloodBanks' class="sidebar-option">BLOOD BANKS</div>
   <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
-  <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
+  
 </div>

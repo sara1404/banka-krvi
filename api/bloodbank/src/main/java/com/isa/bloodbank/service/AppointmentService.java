@@ -1,7 +1,15 @@
 package com.isa.bloodbank.service;
 
-import com.isa.bloodbank.dto.*;
-import com.isa.bloodbank.entity.*;
+import com.isa.bloodbank.dto.AppointmentDto;
+import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.PageDto;
+import com.isa.bloodbank.dto.UserAppointmentDto;
+import com.isa.bloodbank.dto.UserDto;
+import com.isa.bloodbank.entity.Appointment;
+import com.isa.bloodbank.entity.AppointmentInfo;
+import com.isa.bloodbank.entity.BloodBank;
+import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -13,9 +21,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.bytebuddy.asm.Advice;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -57,36 +64,42 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
-	private boolean compareWorkingHoursAndStartTime(WorkingHours workingHours, LocalDateTime startTime, double duration){
-		if (startTime.getHour() < workingHours.getStartTime().getHour() || (startTime.getHour() == workingHours.getStartTime().getHour() && startTime.getMinute() < workingHours.getStartTime().getMinute()))
+	private boolean compareWorkingHoursAndStartTime(final WorkingHours workingHours, final LocalDateTime startTime, final double duration) {
+		if (startTime.getHour() < workingHours.getStartTime().getHour() ||
+			(startTime.getHour() == workingHours.getStartTime().getHour() && startTime.getMinute() < workingHours.getStartTime().getMinute())) {
 			return false;
-		else if (startTime.plusMinutes((long)duration).getHour() > workingHours.getEndTime().getHour() || (startTime.plusMinutes((long)duration).getHour() == workingHours.getEndTime().getHour() && startTime.plusMinutes((long)duration).getMinute() > workingHours.getEndTime().getMinute()))
+		} else if (startTime.plusMinutes((long) duration).getHour() > workingHours.getEndTime().getHour() ||
+			(startTime.plusMinutes((long) duration).getHour() == workingHours.getEndTime().getHour() &&
+				startTime.plusMinutes((long) duration).getMinute() > workingHours.getEndTime().getMinute())) {
 			return false;
-		else
+		} else {
 			return true;
+		}
 	}
 
-	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize, final int pageNumber, String sortDirection){
+	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize,
+		final int pageNumber, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
-		List<UserDto> nurses = new ArrayList<>();
-		for (BloodBank b: bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade")))
-		{
-			if (!compareWorkingHoursAndStartTime(b.getWorkingHours(), startTime, duration)) continue;
-			List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
-			if (!availableNurses.isEmpty()){
+		final List<UserDto> nurses = new ArrayList<>();
+		for (final BloodBank b : bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade"))) {
+			if (!compareWorkingHoursAndStartTime(b.getWorkingHours(), startTime, duration)) {
+				continue;
+			}
+			final List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
+			if (!availableNurses.isEmpty()) {
 				nurses.add(availableNurses.get(0)); //u medicinskoj sestri pise bloodBank za koji radi
 			}
 		}
-        final PageDto<UserDto> page = new PageDto();
-        page.setTotalElements(nurses.size());
-        if (nurses.isEmpty()) {
-            page.setContent(nurses);
-        } else if ((pageNumber + 1) * pageSize > nurses.size()) {
-            page.setContent(nurses.subList(pageNumber * pageSize, nurses.size()));
-        } else {
-            page.setContent(nurses.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
-        }
-        return page;
+		final PageDto<UserDto> page = new PageDto();
+		page.setTotalElements(nurses.size());
+		if (nurses.isEmpty()) {
+			page.setContent(nurses);
+		} else if ((pageNumber + 1) * pageSize > nurses.size()) {
+			page.setContent(nurses.subList(pageNumber * pageSize, nurses.size()));
+		} else {
+			page.setContent(nurses.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
+		}
+		return page;
 	}
 
 	public List<UserDto> findAvailableMedicalStaff(final Long bloodBankId, final LocalDateTime startTime, final double duration) {
@@ -201,8 +214,17 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId){
-		Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+	public AppointmentDto scheduleAppointmentById(final Long appointmentId, final Long userId) {
+		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setAvailable(false);
+		appointment.setFinished(false);
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
+		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
@@ -210,14 +232,39 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-    public boolean canUserScheduleAppointment(final Long userId, LocalDateTime startTime){
-        List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
-        boolean canSchedule = true;
-        for (Appointment a: appointments){
-            if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) canSchedule = false;
-        }
-		User user = userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		if (user.getPoints() > 2) canSchedule = false;
-        return canSchedule;
-    }
+	public List<Appointment> getPredefined(final int pageSize, final int pageNum) {
+		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize));
+	}
+
+	public List<Appointment> getPersonalAppointments(final Long userId, final int pageSize, final int pageNum) {
+		return appointmentRepository.getPersonal(userId, PageRequest.of(pageNum, pageSize));
+	}
+
+	public boolean cancelAppointment(final Long appointmentId, final Long userId) {
+		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		if (!appointment.isFinished() && appointment.getUser().getId() == userId &&
+			LocalDateTime.now().plusHours(24).isBefore(appointment.getStartTime())) {
+			appointment.setAvailable(true);
+			appointment.setUser(null);
+			appointmentRepository.save(appointment);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean canUserScheduleAppointment(final Long userId, final LocalDateTime startTime) {
+		final List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+		boolean canSchedule = true;
+		for (final Appointment a : appointments) {
+			if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) {
+				canSchedule = false;
+			}
+		}
+		final User user = userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		if (user.getPoints() > 2) {
+			canSchedule = false;
+		}
+		return canSchedule;
+	}
+
 }

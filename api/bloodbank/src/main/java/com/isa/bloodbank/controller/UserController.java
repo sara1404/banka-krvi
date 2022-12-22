@@ -79,7 +79,7 @@ public class UserController {
 	}
 
 	@PutMapping("/update/")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
+	@PreAuthorize("hasAuthority('REGISTERED')")
 	private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
 		System.out.println(userDto);
 		return ResponseEntity.ok(userService.update(userDto));
@@ -111,7 +111,6 @@ public class UserController {
 	}
 
 	@PostMapping("/activate/{email}")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<?> confirmUserRegistration(@PathVariable("email") final String email) {
 		if (userService.confirmUserRegistration(email) != null) {
 			return ResponseEntity.ok().build();

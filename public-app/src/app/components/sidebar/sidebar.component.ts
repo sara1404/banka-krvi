@@ -18,8 +18,4 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
-  refresh(){
-    this.ngOnInit();
-  }
-
 }

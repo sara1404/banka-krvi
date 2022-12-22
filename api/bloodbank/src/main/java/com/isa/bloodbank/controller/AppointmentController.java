@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/appointment")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
@@ -134,8 +136,49 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.userCreatesAppointment(appointmentDto, userId));
 	}
 
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	@GetMapping("/predefined")
+	public ResponseEntity<List<Appointment>> getPredefinedAppointments(
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNum") final int pageNum) {
+		return ResponseEntity.ok(appointmentService.getPredefined(pageSize, pageNum));
+	}
+
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	@GetMapping("/personal")
+	public ResponseEntity<List<Appointment>> getPersonalAppointments(
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNum") final int pageNum,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader
+	) {
+		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
+		return ResponseEntity.ok(appointmentService.getPersonalAppointments(userId, pageSize, pageNum));
+	}
+
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	@PutMapping("/schedule/{id}")
+	public ResponseEntity<AppointmentDto> scheduleAppointment(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@PathVariable("id") final Long id) {
+		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
+		return ResponseEntity.ok(appointmentService.scheduleAppointmentById(id, userId));
+	}
+
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	@PutMapping("/cancel/{id}")
+	public ResponseEntity<?> cancelAppointment(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@PathVariable("id") final Long id) {
+		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
+		if (appointmentService.cancelAppointment(id, userId)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
+	}
+
 	@GetMapping("/canUserScheduleAppointment")
-	public ResponseEntity<Boolean> canUserScheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @RequestParam("startTime") final String startTime){
+	public ResponseEntity<Boolean> canUserScheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@RequestParam("startTime") final String startTime) {
 		return ResponseEntity.ok(appointmentService.canUserScheduleAppointment(jwtUtils.getUserFromToken(authHeader).getId(), LocalDateTime.parse(startTime)));
 	}
 }

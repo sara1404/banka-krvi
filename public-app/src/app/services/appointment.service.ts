@@ -61,6 +61,21 @@ export class AppointmentService {
     );
   }
 
+  getPredefinedAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/predefined?pageSize=${pageSize}&pageNum=${pageNumber}`);
+  }
+
+  getPersonalAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/personal?pageSize=${pageSize}&pageNum=${pageNumber}`);
+  }
+
+  scheduleAppointmentById(id: number) : Observable<IAppointment[]> {
+    return this.http.put<IAppointment[]>(`http://localhost:8080/appointment/schedule/${id}`, null);
+  }
+
+  cancelAppointmentById(id: number){
+    return this.http.put(`http://localhost:8080/appointment/cancel/${id}`, null);
+  }
   canUserScheduleAppointment(startTime: Date) {
     var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.get<Boolean>(

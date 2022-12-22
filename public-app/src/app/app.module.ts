@@ -26,11 +26,16 @@ import { UserLoginModule } from './views/user-login/user-login.module';
 import { AdminCalendarModule } from './views/admin-calendar/admin-calendar.module';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { CreateAppointmentUserModule } from './views/appointments/create-appointment-user/create-appointment-user.module';
+import { PredefinedAppointmentsComponent } from './views/predefined-appointments/predefined-appointments.component';
+import { PersonalAppointmentsComponent } from './views/personal-appointments/personal-appointments.component';
+import { PredefinedAppointmentsModule } from './views/predefined-appointments/predefined-appointments.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BloodSuppliesComponent,
+    PredefinedAppointmentsComponent,
+    PersonalAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import { CreateAppointmentUserModule } from './views/appointments/create-appoint
     AdminCalendarModule,
     CreateAppointmentModule,
     CreateAppointmentUserModule,
+    PredefinedAppointmentsModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),

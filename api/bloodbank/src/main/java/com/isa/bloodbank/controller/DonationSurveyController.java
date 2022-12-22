@@ -2,6 +2,7 @@ package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.DonationSurveyDto;
 import com.isa.bloodbank.mapping.UserMapper;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.DonationSurveyService;
 
 import javax.validation.Valid;
@@ -25,12 +26,14 @@ public class DonationSurveyController {
 	private DonationSurveyService surveyService;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	JwtUtils jwtUtils;
 
 	@PostMapping("/fill")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
-	public ResponseEntity fillSurvey(@RequestBody @Valid final DonationSurveyDto survey) {
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	public ResponseEntity fillSurvey(@RequestBody @Valid final DonationSurveyDto survey, @RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final var saveSurvey = userMapper.surveyDtoToSurvey(survey);
-		saveSurvey.setUserId(5l);
+		saveSurvey.setUserId(jwtUtils.getUserFromToken(authHeader).getId());
 		if (surveyService.saveSurvey(saveSurvey)) {
 			return ResponseEntity.ok().build();
 		}
