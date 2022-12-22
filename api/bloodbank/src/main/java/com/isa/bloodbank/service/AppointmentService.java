@@ -1,10 +1,7 @@
 package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.*;
-import com.isa.bloodbank.entity.Appointment;
-import com.isa.bloodbank.entity.AppointmentInfo;
-import com.isa.bloodbank.entity.BloodBank;
-import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.*;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -16,6 +13,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.bytebuddy.asm.Advice;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -58,11 +57,21 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
+	private boolean compareWorkingHoursAndStartTime(WorkingHours workingHours, LocalDateTime startTime, double duration){
+		if (startTime.getHour() < workingHours.getStartTime().getHour() || (startTime.getHour() == workingHours.getStartTime().getHour() && startTime.getMinute() < workingHours.getStartTime().getMinute()))
+			return false;
+		else if (startTime.plusMinutes((long)duration).getHour() > workingHours.getEndTime().getHour() || (startTime.plusMinutes((long)duration).getHour() == workingHours.getEndTime().getHour() && startTime.plusMinutes((long)duration).getMinute() > workingHours.getEndTime().getMinute()))
+			return false;
+		else
+			return true;
+	}
+
 	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize, final int pageNumber, String sortDirection){
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		List<UserDto> nurses = new ArrayList<>();
 		for (BloodBank b: bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade")))
 		{
+			if (!compareWorkingHoursAndStartTime(b.getWorkingHours(), startTime, duration)) continue;
 			List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
 			if (!availableNurses.isEmpty()){
 				nurses.add(availableNurses.get(0)); //u medicinskoj sestri pise bloodBank za koji radi
