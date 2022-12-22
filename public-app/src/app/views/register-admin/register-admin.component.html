@@ -34,7 +34,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Admin type</mat-label>
-      <mat-select formControlName="adminType"  [errorStateMatcher]="matcher">
+      <mat-select formControlName="userType"  [errorStateMatcher]="matcher">
         <mat-option value="ADMIN_CENTER">CENTER ADMIN</mat-option>
         <mat-option value="ADMIN_SYSTEM">SYSTEM ADMIN</mat-option>
       </mat-select>
@@ -42,7 +42,7 @@
         Please choose admin type
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="form-field" *ngIf="this.registerForm.value.adminType === 'ADMIN_CENTER'">
+    <mat-form-field appearance="fill" class="form-field" *ngIf="this.registerForm.value.userType === 'ADMIN_CENTER'">
       <mat-label>Bloodbank</mat-label>
       <mat-select formControlName="bloodBankName"  [errorStateMatcher]="matcher">
         <mat-option value="{{bloodbank.name}}" *ngFor="let bloodbank of bloodbanks">{{bloodbank.name}}</mat-option>

@@ -15,6 +15,7 @@ import { PersonalAppointmentsComponent } from "../views/personal-appointments/pe
 import { PredefinedAppointmentsComponent } from "../views/predefined-appointments/predefined-appointments.component";
 import { RegisterAdminComponent } from "../views/register-admin/register-admin.component";
 import { RegisterBloodbankComponent } from "../views/register-bloodbank/register-bloodbank.component";
+import { ConfirmRegistrationComponent } from "../views/register-user/confirm-registration/confirm-registration.component";
 import { RegisterUserComponent } from "../views/register-user/register-user/register-user.component";
 import { UserLoginComponent } from "../views/user-login/user-login/user-login.component";
 import { UserProfileComponent } from "../views/user-profile/user-profile.component";
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'examiantion', component:ExaminationComponent},
   {path: 'create-appointment', component: CreateAppointmentComponent},
   {path: 'admin-calendar', component: AdminCalendarComponent},
+  {path: 'confirm/user/:email', component: ConfirmRegistrationComponent},
   {path: 'create-appointment-user', component: CreateAppointmentUserComponent},
   {path: 'appointments/predefined', component: PredefinedAppointmentsComponent},
   {path: 'appointments/personal', component: PersonalAppointmentsComponent},

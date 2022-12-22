@@ -16,6 +16,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatListModule } from '@angular/material/list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -38,6 +40,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatStepperModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule
   ],
   exports: [
@@ -58,6 +62,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatStepperModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule
   ]
 })

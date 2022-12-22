@@ -73,7 +73,8 @@ public class UserService {
 	}
 
 	public RegisterUserDto registerCenterAdmin(final RegisterUserDto centerAdmin) {
-		centerAdmin.setUserType(UserType.ADMIN_CENTER);
+		//centerAdmin.setUserType(UserType.ADMIN_CENTER);
+		System.out.println(centerAdmin.getUserType());
 		final String encodedPassword = encoder.encode(centerAdmin.getPassword());
 		centerAdmin.setPassword(encodedPassword);
 		//centerAdmin.setBloodBank(bloodBankRepository.findBloodBankByName(centerAdmin.getBloodBankName()));
@@ -140,7 +141,7 @@ public class UserService {
 		if (user == null) {
 			return false;
 		}
-		user.setPoints(user.getPoints() - 1);
+		user.setPoints(user.getPoints() + 1);
 		userRepository.save(user);
 		return true;
 	}

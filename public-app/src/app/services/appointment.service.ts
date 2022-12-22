@@ -76,4 +76,11 @@ export class AppointmentService {
   cancelAppointmentById(id: number){
     return this.http.put(`http://localhost:8080/appointment/cancel/${id}`, null);
   }
+  canUserScheduleAppointment(startTime: Date) {
+    var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get<Boolean>(
+      `http://localhost:8080/appointment/canUserScheduleAppointment?startTime=` + startTime,
+      { headers: headers }
+    );
+  }
 }

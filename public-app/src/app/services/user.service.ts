@@ -57,9 +57,14 @@ export class UserService {
   }
 
   registerAdmin(user: any): Observable<IUser> {
+    console.log(user)
+    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<IUser>(
       `http://localhost:8080/user/register/admin`,
-      user
+      user,
+      {
+        headers: headers
+      }
     );
   }
 

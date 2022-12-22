@@ -1,0 +1,16 @@
+<form [formGroup]="equipmentForm" class="create-equipment-form">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Equipment type</mat-label>
+    <mat-select formControlName="equipmentType">
+      <mat-option value="NEEDLE">NEEDLE</mat-option>
+      <mat-option value="BAG">BAG</mat-option>
+      <mat-option value="BANDAGE">BANDAGE</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Equipment quantity</mat-label>
+    <input matInput formControlName="quantity" type="number" min="1"/>
+  </mat-form-field>
+  <button class="add-equip-btn" (click)="addNewEquipment()">Add new equipment</button>
+</form>

@@ -1,3 +1,4 @@
+import { IBloodBank } from "./BloodBankk";
 import { IUser } from "./User";
 
 export interface IUserAppointment {
@@ -5,4 +6,5 @@ export interface IUserAppointment {
     user: IUser;
     startTime: Date;
     duration: number;
+    bloodBank: IBloodBank
 }

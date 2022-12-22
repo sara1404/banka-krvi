@@ -9,6 +9,7 @@ import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
@@ -63,11 +64,27 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
+	private boolean compareWorkingHoursAndStartTime(final WorkingHours workingHours, final LocalDateTime startTime, final double duration) {
+		if (startTime.getHour() < workingHours.getStartTime().getHour() ||
+			(startTime.getHour() == workingHours.getStartTime().getHour() && startTime.getMinute() < workingHours.getStartTime().getMinute())) {
+			return false;
+		} else if (startTime.plusMinutes((long) duration).getHour() > workingHours.getEndTime().getHour() ||
+			(startTime.plusMinutes((long) duration).getHour() == workingHours.getEndTime().getHour() &&
+				startTime.plusMinutes((long) duration).getMinute() > workingHours.getEndTime().getMinute())) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize,
 		final int pageNumber, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		final List<UserDto> nurses = new ArrayList<>();
 		for (final BloodBank b : bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade"))) {
+			if (!compareWorkingHoursAndStartTime(b.getWorkingHours(), startTime, duration)) {
+				continue;
+			}
 			final List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
 			if (!availableNurses.isEmpty()) {
 				nurses.add(availableNurses.get(0)); //u medicinskoj sestri pise bloodBank za koji radi
@@ -225,7 +242,8 @@ public class AppointmentService {
 
 	public boolean cancelAppointment(final Long appointmentId, final Long userId) {
 		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		if (!appointment.isFinished() && appointment.getUser().getId() == userId && LocalDateTime.now().plusHours(24).isBefore(appointment.getStartTime())) {
+		if (!appointment.isFinished() && appointment.getUser().getId() == userId &&
+			LocalDateTime.now().plusHours(24).isBefore(appointment.getStartTime())) {
 			appointment.setAvailable(true);
 			appointment.setUser(null);
 			appointmentRepository.save(appointment);
@@ -233,4 +251,20 @@ public class AppointmentService {
 		}
 		return false;
 	}
+
+	public boolean canUserScheduleAppointment(final Long userId, final LocalDateTime startTime) {
+		final List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+		boolean canSchedule = true;
+		for (final Appointment a : appointments) {
+			if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) {
+				canSchedule = false;
+			}
+		}
+		final User user = userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		if (user.getPoints() > 2) {
+			canSchedule = false;
+		}
+		return canSchedule;
+	}
+
 }
