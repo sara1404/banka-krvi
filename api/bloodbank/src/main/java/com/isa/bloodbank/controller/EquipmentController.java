@@ -2,6 +2,7 @@ package com.isa.bloodbank.controller;
 
 import com.isa.bloodbank.dto.EquipmentDto;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.EquipmentMapper;
 import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.EquipmentService;
 
@@ -21,6 +22,8 @@ public class EquipmentController {
 	private EquipmentService equipmentService;
 	@Autowired
 	JwtUtils jwtUtils;
+	@Autowired
+	EquipmentMapper equipmentMapper;
 
 	@PostMapping("/used")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
@@ -29,4 +32,12 @@ public class EquipmentController {
 		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
 		return equipmentService.removeEquipment(equipmentDto, loggedUser);
 	}
+
+	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public EquipmentDto addEquipment(@RequestBody final EquipmentDto equipmentDto) {
+		System.out.println(equipmentDto.getBloodBank());
+		return equipmentMapper.equipmentToEquipmentDto(equipmentService.addEquipment(equipmentMapper.equipmentDtoToEquipment(equipmentDto)));
+	}
+
 }

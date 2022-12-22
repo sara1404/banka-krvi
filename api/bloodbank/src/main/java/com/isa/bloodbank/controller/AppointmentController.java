@@ -42,12 +42,12 @@ public class AppointmentController {
 	private JwtUtils jwtUtils;
 
 	@GetMapping("/available")
-	public ResponseEntity<List<FreeAppointmentDto>> findById() {
-		final Long administratorId = (long) (3);
-		final User user = userService.findUserById(administratorId);
-		return ResponseEntity.ok(appointmentService.findAvailableAppointments(user.getBloodBank().getId()));
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<List<FreeAppointmentDto>> findById(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(appointmentService.findAvailableAppointments(loggedUser.getBloodBank().getId()));
 	}
-	
+
 	@GetMapping("/for-user/{id}")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<UserAppointmentDto>> findAllByUserId(@PathVariable("id") final Long id,
@@ -64,14 +64,17 @@ public class AppointmentController {
 	}
 
 	@GetMapping(value = "/getAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<UserDto>> findAvailableMedicalStaff(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@RequestParam("startTime") final String startTime,
 		@RequestParam("duration") final double duration) {
 		final Long adminId = jwtUtils.getUserFromToken(authHeader).getId();
-		return ResponseEntity.ok(appointmentService.findAvailableMedicalStaff(userService.findById(adminId).getBloodBank().getId(), LocalDateTime.parse(startTime), duration));
+		return ResponseEntity.ok(
+			appointmentService.findAvailableMedicalStaff(userService.findById(adminId).getBloodBank().getId(), LocalDateTime.parse(startTime), duration));
 	}
 
 	@GetMapping("/appointments")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<AppointmentDto>> getAppointments(
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@RequestParam("month") final int month, @RequestParam("year") final int year) {
@@ -80,6 +83,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
 	public ResponseEntity<AppointmentDto> createAppointment(
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@Valid @RequestBody final Appointment appointmentDto) {
@@ -88,17 +92,19 @@ public class AppointmentController {
 	}
 
 	@GetMapping(value = "/recommend", produces = MediaType.APPLICATION_JSON_VALUE)
-
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
 	public ResponseEntity<PageDto<AppointmentDto>> recommend(
 		@RequestParam("startTime") final String startTime,
 		@RequestParam("pageSize") final int pageSize,
 		@RequestParam("pageNumber") final int pageNumber,
-		@RequestParam("sortDirection") final String sortDirection) {
+		@RequestParam("sortDirection") final String sortDirection,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		System.out.println(LocalDateTime.parse(startTime));
 		return ResponseEntity.ok(appointmentService.getBloodBanksWithFreeAppointments(LocalDateTime.parse(startTime), pageSize, pageNumber, sortDirection));
 	}
 
 	@PutMapping("/schedule")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
 	public ResponseEntity<AppointmentDto> scheduleAppointment(
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@Valid
@@ -108,19 +114,22 @@ public class AppointmentController {
 	}
 
 	@GetMapping(value = "/findBloodBanksWithAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
 	public ResponseEntity<PageDto<UserDto>> getBloodBanksWithAvailableMedicalStaff(
-			@RequestParam("startTime") final String startTime,
-			@RequestParam("duration") final double duration,
-			@RequestParam("pageSize") final int pageSize,
-			@RequestParam("pageNumber") final int pageNumber,
-			@RequestParam("sortDirection") final String sortDirection) {
-		return ResponseEntity.ok(appointmentService.findBloodBanksWithAvailableMedicalStaff(LocalDateTime.parse(startTime), duration, pageSize, pageNumber, sortDirection));
+		@RequestParam("startTime") final String startTime,
+		@RequestParam("duration") final double duration,
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNumber") final int pageNumber,
+		@RequestParam("sortDirection") final String sortDirection) {
+		return ResponseEntity.ok(
+			appointmentService.findBloodBanksWithAvailableMedicalStaff(LocalDateTime.parse(startTime), duration, pageSize, pageNumber, sortDirection));
 	}
 
 	@PostMapping("/userCreates")
+	@PreAuthorize("hasAuthority('REGISTERED')")
 	public ResponseEntity<AppointmentDto> userCreatesAppointment(
-			@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-			@Valid @RequestBody final AppointmentDto appointmentDto) {
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@Valid @RequestBody final AppointmentDto appointmentDto) {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.userCreatesAppointment(appointmentDto, userId));
 	}

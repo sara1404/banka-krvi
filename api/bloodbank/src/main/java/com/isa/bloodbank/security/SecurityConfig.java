@@ -61,7 +61,11 @@ public class SecurityConfig {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
-			.antMatchers("/**").permitAll()
+			.antMatchers("/**")
+			.permitAll().and().authorizeRequests().antMatchers("/api/register/user")
+			.permitAll().and().authorizeRequests().antMatchers("/api/bloodBanks")
+			.permitAll().and().authorizeRequests().antMatchers("/api/login")
+			.permitAll()
 			.anyRequest().authenticated();
 
 		http.authenticationProvider(authenticationProvider());

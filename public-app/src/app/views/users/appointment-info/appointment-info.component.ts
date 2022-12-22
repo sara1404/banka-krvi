@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { TitleStrategy } from '@angular/router';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { IAppointmentAndInfo } from 'src/app/admin-profile/model/AppointmentAndInfo';
 import { IAppointmentInfo } from 'src/app/model/AppointmentInfo';
@@ -141,18 +142,21 @@ export class AppointmentInfoComponent implements OnInit {
         this.showError(e)
       },
     }));
-    
+
     const needles: IEquipment = {
       equipmentType: "NEEDLE",
-      quantity: this.appInfoForm.value.needle
+      quantity: this.appInfoForm.value.needle,
+      bloodBank: this.appointment.bloodBank
     }
     const bandages: IEquipment = {
       equipmentType: "BANDAGE",
-      quantity: this.appInfoForm.value.bandage
+      quantity: this.appInfoForm.value.bandage,
+      bloodBank: this.appointment.bloodBank
     }
     const bags: IEquipment = {
       equipmentType: "BAG",
-      quantity: this.appInfoForm.value.bag
+      quantity: this.appInfoForm.value.bag,
+      bloodBank: this.appointment.bloodBank
     }
     this.userService.finishAppointment(this.appointment.id).subscribe(data => {this.result = data});
     this.appointmentInfoService.usedEquipment(needles).subscribe();

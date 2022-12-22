@@ -44,6 +44,7 @@ public class UserController {
 	private UserMapper userMapper;
 
 	@GetMapping("/bloodBankId")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
 	public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
 		final Long administratorId = (long) (3);
 		final Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
@@ -51,6 +52,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register/admin")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
 	public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
 		System.out.println(centerAdmin + "e");
 		centerAdmin.setPassword(centerAdmin.getPassword());
@@ -58,22 +60,26 @@ public class UserController {
 	}
 
 	@GetMapping("/search")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
 		return ResponseEntity.ok(userService.search(name, lastName));
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
 	@GetMapping("/getUserProfile")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<UserDto> getUserProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final User user = jwtUtils.getUserFromToken(authHeader);
 		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
 	@PutMapping("/update/")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
 		System.out.println(userDto);
 		return ResponseEntity.ok(userService.update(userDto));
@@ -87,21 +93,25 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{pageNo}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<List<UserDto>> getAll(@PathVariable final int pageNo) {
 		return ResponseEntity.ok(userService.getAll(pageNo));
 	}
 
 	@GetMapping("/users/count")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<Integer> getAllCount() {
 		return ResponseEntity.ok(userService.getUserCount());
 	}
 
 	@GetMapping("/center-admins")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
 	public ResponseEntity<List<UserDto>> getAvailableCenterAdmins() {
 		return ResponseEntity.ok(userService.getAvailableCenterAdmins());
 	}
 
 	@PostMapping("/activate/{email}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<?> confirmUserRegistration(@PathVariable("email") final String email) {
 		if (userService.confirmUserRegistration(email) != null) {
 			return ResponseEntity.ok().build();
@@ -110,6 +120,7 @@ public class UserController {
 	}
 
 	@PutMapping("/change-password")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto,
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final User loggedUser = jwtUtils.getUserFromToken(authHeader);

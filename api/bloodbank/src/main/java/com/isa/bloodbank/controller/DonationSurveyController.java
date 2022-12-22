@@ -27,6 +27,7 @@ public class DonationSurveyController {
 	private UserMapper userMapper;
 
 	@PostMapping("/fill")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity fillSurvey(@RequestBody @Valid final DonationSurveyDto survey) {
 		final var saveSurvey = userMapper.surveyDtoToSurvey(survey);
 		saveSurvey.setUserId(5l);
