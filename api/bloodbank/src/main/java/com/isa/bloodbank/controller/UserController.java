@@ -66,6 +66,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
@@ -92,11 +93,13 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{pageNo}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<List<UserDto>> getAll(@PathVariable final int pageNo) {
 		return ResponseEntity.ok(userService.getAll(pageNo));
 	}
 
 	@GetMapping("/users/count")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<Integer> getAllCount() {
 		return ResponseEntity.ok(userService.getUserCount());
 	}
@@ -108,6 +111,7 @@ public class UserController {
 	}
 
 	@PostMapping("/activate/{email}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<?> confirmUserRegistration(@PathVariable("email") final String email) {
 		if (userService.confirmUserRegistration(email) != null) {
 			return ResponseEntity.ok().build();

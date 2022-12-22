@@ -5,6 +5,7 @@ import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.mapping.BloodBankMapper;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.BloodBankService;
 import com.isa.bloodbank.service.UserService;
 
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,13 +39,15 @@ public class BloodBankController {
 	private BloodBankMapper bloodBankMapper;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private JwtUtils jwtUtils;
 
 	@GetMapping("/administrator")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
-	public ResponseEntity<BloodBankDto> findForAdministrator(/*@PathVariable("id") final Long id*/) {
-		final Long administratorId = (long) (3);
-		final User user = userService.findUserById(administratorId);
-		return ResponseEntity.ok(bloodBankMapper.bloodBankToBloodBankDto(bloodBankService.findById(user.getBloodBank().getId())));
+	public ResponseEntity<BloodBankDto> findForAdministrator(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(bloodBankMapper.bloodBankToBloodBankDto(bloodBankService.findById(loggedUser.getBloodBank().getId())));
 	}
 
 	@PutMapping("/update")
