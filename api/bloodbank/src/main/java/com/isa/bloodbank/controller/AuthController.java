@@ -68,7 +68,12 @@ public class AuthController {
 	@GetMapping("/current")
 	public ResponseEntity<?> current(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		if (authHeader.length() > 7) {
-			return ResponseEntity.ok(jwtUtils.getUserFromToken(authHeader));
+			try {
+				return ResponseEntity.ok(jwtUtils.getUserFromToken(authHeader));
+			} catch (final Exception e) {
+				return null;
+			}
+
 		}
 		return ResponseEntity.status(401).build();
 	}
