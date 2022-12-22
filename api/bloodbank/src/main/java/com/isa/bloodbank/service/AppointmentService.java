@@ -1,6 +1,10 @@
 package com.isa.bloodbank.service;
 
-import com.isa.bloodbank.dto.*;
+import com.isa.bloodbank.dto.AppointmentDto;
+import com.isa.bloodbank.dto.FreeAppointmentDto;
+import com.isa.bloodbank.dto.PageDto;
+import com.isa.bloodbank.dto.UserAppointmentDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.AppointmentInfo;
 import com.isa.bloodbank.entity.BloodBank;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -58,26 +63,26 @@ public class AppointmentService {
 		return appointmentMapper.appointmentsToUserAppointmentDto(availableAppointments);
 	}
 
-	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize, final int pageNumber, String sortDirection){
+	public PageDto<UserDto> findBloodBanksWithAvailableMedicalStaff(final LocalDateTime startTime, final double duration, final int pageSize,
+		final int pageNumber, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
-		List<UserDto> nurses = new ArrayList<>();
-		for (BloodBank b: bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade")))
-		{
-			List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
-			if (!availableNurses.isEmpty()){
+		final List<UserDto> nurses = new ArrayList<>();
+		for (final BloodBank b : bloodBankRepository.findAll(Sort.by(sortingDirection, "averageGrade"))) {
+			final List<UserDto> availableNurses = findAvailableMedicalStaff(b.getId(), startTime, duration);
+			if (!availableNurses.isEmpty()) {
 				nurses.add(availableNurses.get(0)); //u medicinskoj sestri pise bloodBank za koji radi
 			}
 		}
-        final PageDto<UserDto> page = new PageDto();
-        page.setTotalElements(nurses.size());
-        if (nurses.isEmpty()) {
-            page.setContent(nurses);
-        } else if ((pageNumber + 1) * pageSize > nurses.size()) {
-            page.setContent(nurses.subList(pageNumber * pageSize, nurses.size()));
-        } else {
-            page.setContent(nurses.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
-        }
-        return page;
+		final PageDto<UserDto> page = new PageDto();
+		page.setTotalElements(nurses.size());
+		if (nurses.isEmpty()) {
+			page.setContent(nurses);
+		} else if ((pageNumber + 1) * pageSize > nurses.size()) {
+			page.setContent(nurses.subList(pageNumber * pageSize, nurses.size()));
+		} else {
+			page.setContent(nurses.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
+		}
+		return page;
 	}
 
 	public List<UserDto> findAvailableMedicalStaff(final Long bloodBankId, final LocalDateTime startTime, final double duration) {
@@ -192,12 +197,37 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId){
-		Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+	public AppointmentDto scheduleAppointmentById(final Long appointmentId, final Long userId) {
+		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setAvailable(false);
+		appointmentRepository.save(appointment);
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
+		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	}
+
+	public List<Appointment> getPredefined(final int pageSize, final int pageNum) {
+		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize));
+	}
+
+	public List<Appointment> getPersonalAppointments(final Long userId, final int pageSize, final int pageNum) {
+		return appointmentRepository.getPersonal(userId, PageRequest.of(pageNum, pageSize));
+	}
+
+	public boolean cancelAppointment(final Long appointmentId, final Long userId) {
+		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
+		if (!appointment.isFinished() && appointment.getUser().getId() == userId && appointment.getStartTime().plusHours(24).isBefore(LocalDateTime.now())) {
+			appointmentRepository.delete(appointment);
+			return true;
+		}
+		return false;
 	}
 }
