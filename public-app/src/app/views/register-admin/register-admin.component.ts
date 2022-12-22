@@ -32,7 +32,7 @@ export class RegisterAdminComponent implements OnInit {
     jmbg: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     bloodType: new FormControl(null, [Validators.required]),
-    adminType: new FormControl('', [Validators.required]),
+    userType: new FormControl('', [Validators.required]),
     bloodBankName: new FormControl('', [Validators.required]),
     bloodBank: new FormControl(null),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -66,7 +66,7 @@ export class RegisterAdminComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastService.showSuccess('Successfully registered center admin.');
+    this.toastService.showSuccess('Successfully registered admin.');
 
   }
 

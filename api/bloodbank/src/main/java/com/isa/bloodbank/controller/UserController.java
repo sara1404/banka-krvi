@@ -52,7 +52,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register/admin")
-	@PreAuthorize("hasAuthority('ADMIN_SYSTEM')")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
 		System.out.println(centerAdmin.getBloodBank() + "e");
 		centerAdmin.setPassword(centerAdmin.getPassword());
