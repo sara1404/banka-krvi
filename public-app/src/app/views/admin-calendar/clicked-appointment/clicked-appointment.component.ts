@@ -16,7 +16,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClickedAppointmentComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ClickedAppointmentComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
+  constructor(public dialogRef: MatDialogRef<ClickedAppointmentComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) {
+
+   }
 
   userSurvey: IUserSurvey;
   //displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
@@ -27,10 +29,14 @@ export class ClickedAppointmentComponent implements OnInit {
   noAppointments: boolean = false;
   user: IUser
   ngOnInit(): void {
-    this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{this.userSurvey = data;});
-    this.appointment = this._data.appointment;
-    this.user = this._data.user;
-    console.log(this.appointment)
+    console.log(this._data.user)
+    this.userService.getSurveyForUser(this._data.user.id).subscribe(data=>{
+      this.userSurvey = data;
+      this.appointment = this._data.appointment;
+      this.user = this._data.user;
+      console.log(this.appointment)
+    });
+
   }
   checkSurvey(): boolean{
     if(this.userSurvey?.weight >= 50 && this.userSurvey?.fluSymptoms == false && this.userSurvey?.skinIrritations == false

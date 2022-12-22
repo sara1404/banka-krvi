@@ -13,6 +13,7 @@ import { ClickedAppointmentComponent } from './clicked-appointment/clicked-appoi
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/model/User';
 import { YearViewComponent } from './year-view/year-view.component';
+import { IAppointment } from 'src/app/model/Appointment';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -76,6 +77,13 @@ export class AdminCalendarComponent implements OnInit {
     this.getAppointments()
   }
 
+  chooseColor(appointment: IUserAppointment){
+    if(appointment.user == null){
+      return colors['green']
+    }
+    return colors['blue']
+  }
+
   getAppointments(){
     console.log(this.viewDate.getMonth(), this.viewDate.getFullYear())
     this.appointmentService.getAppointmentsForChosenMonth(this.viewDate.getMonth() + 1, this.viewDate.getFullYear())
@@ -85,7 +93,7 @@ export class AdminCalendarComponent implements OnInit {
         return {
           title: this.createTitle(appointment),
           start: new Date(appointment.startTime),
-          color: { ...colors['blue'] },
+          color: { ...this.chooseColor(appointment) },
           end: addMinutes(new Date(appointment.startTime), appointment.duration),
           meta: {
             appointment,
@@ -106,11 +114,17 @@ export class AdminCalendarComponent implements OnInit {
     );
   }
 
+  displayUserForAppointment(appointment: IUserAppointment){
+    if(appointment.user == null)
+      return 'Free appointment'
+    return appointment?.user?.firstName + " " + appointment?.user?.lastName
+  }
+
   createTitle(appointment: IUserAppointment): string {
     return (
-      "Start: " + new Date(appointment.startTime) + '\n' +
-      "End: " + addMinutes(new Date(appointment.startTime), appointment.duration) + '\n' +
-      "User: " + appointment?.user?.firstName + " " + appointment?.user?.lastName
+      "Start: " + new Date(appointment.startTime) + "\n" +
+      "End: " + addMinutes(new Date(appointment.startTime), appointment.duration) + "\n" +
+      "User: " + this.displayUserForAppointment(appointment)
     );
   }
 
@@ -137,12 +151,13 @@ export class AdminCalendarComponent implements OnInit {
   click({ event }: { event: CalendarEvent }){
     console.log('kliknuo');
     console.log(event.meta.appointment)
-    this.userService.getUser(event.meta.appointment.user.id).subscribe(data => this.user = data);
-
-    this.dialog.open(ClickedAppointmentComponent,
-      {
-        data: {appointment: event.meta.appointment, user:this.user}
-      });
+    this.userService.getUser(event.meta.appointment.user.id).subscribe(data => {
+      this.user = data
+      this.dialog.open(ClickedAppointmentComponent,
+        {
+          data: {appointment: event.meta.appointment, user:this.user}
+        });
+    });
   }
 
 
