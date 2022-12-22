@@ -201,6 +201,7 @@ public class AppointmentService {
 		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 		appointment.setAvailable(false);
+		appointment.setFinished(false);
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
@@ -224,8 +225,10 @@ public class AppointmentService {
 
 	public boolean cancelAppointment(final Long appointmentId, final Long userId) {
 		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		if (!appointment.isFinished() && appointment.getUser().getId() == userId && appointment.getStartTime().plusHours(24).isBefore(LocalDateTime.now())) {
-			appointmentRepository.delete(appointment);
+		if (!appointment.isFinished() && appointment.getUser().getId() == userId && LocalDateTime.now().plusHours(24).isBefore(appointment.getStartTime())) {
+			appointment.setAvailable(true);
+			appointment.setUser(null);
+			appointmentRepository.save(appointment);
 			return true;
 		}
 		return false;

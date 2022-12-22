@@ -11,6 +11,8 @@ import { CreateAppointmentUserComponent } from "../views/appointments/create-app
 import { CreateAppointmentComponent } from "../views/appointments/create-appointment.component";
 import { DisplayBloodBanksComponent } from "../views/blood-banks-display/blood-banks-display.component";
 import { DonationSurveyComponent } from "../views/donation-survey/donation-survey.component";
+import { PersonalAppointmentsComponent } from "../views/personal-appointments/personal-appointments.component";
+import { PredefinedAppointmentsComponent } from "../views/predefined-appointments/predefined-appointments.component";
 import { RegisterAdminComponent } from "../views/register-admin/register-admin.component";
 import { RegisterBloodbankComponent } from "../views/register-bloodbank/register-bloodbank.component";
 import { RegisterUserComponent } from "../views/register-user/register-user/register-user.component";
@@ -36,7 +38,9 @@ const routes: Routes = [
   {path: 'examiantion', component:ExaminationComponent},
   {path: 'create-appointment', component: CreateAppointmentComponent},
   {path: 'admin-calendar', component: AdminCalendarComponent},
-  {path: 'create-appointment-user', component: CreateAppointmentUserComponent}
+  {path: 'create-appointment-user', component: CreateAppointmentUserComponent},
+  {path: 'appointments/predefined', component: PredefinedAppointmentsComponent},
+  {path: 'appointments/personal', component: PersonalAppointmentsComponent},
 ];
 
 @NgModule({

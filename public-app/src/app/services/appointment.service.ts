@@ -60,4 +60,20 @@ export class AppointmentService {
       { headers: headers }
     );
   }
+
+  getPredefinedAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/predefined?pageSize=${pageSize}&pageNum=${pageNumber}`);
+  }
+
+  getPersonalAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/personal?pageSize=${pageSize}&pageNum=${pageNumber}`);
+  }
+
+  scheduleAppointmentById(id: number) : Observable<IAppointment[]> {
+    return this.http.put<IAppointment[]>(`http://localhost:8080/appointment/schedule/${id}`, null);
+  }
+
+  cancelAppointmentById(id: number){
+    return this.http.put(`http://localhost:8080/appointment/cancel/${id}`, null);
+  }
 }

@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/appointment")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
@@ -154,7 +156,7 @@ public class AppointmentController {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.scheduleAppointmentById(id, userId));
 	}
-	
+
 	@PreAuthorize("hasAuthority('REGISTERED')")
 	@PutMapping("/cancel/{id}")
 	public ResponseEntity<?> cancelAppointment(
@@ -162,8 +164,8 @@ public class AppointmentController {
 		@PathVariable("id") final Long id) {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		if (appointmentService.cancelAppointment(id, userId)) {
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.ok().build();
 		}
-		return ResponseEntity.ok().build();
+		return ResponseEntity.badRequest().build();
 	}
 }

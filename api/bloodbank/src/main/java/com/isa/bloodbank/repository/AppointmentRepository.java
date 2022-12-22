@@ -23,7 +23,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
 	List<Appointment> findByStartTimeAndAvailable(LocalDateTime startTime, boolean available, Sort sort);
 
-	@Query("select a from Appointment a where a.startTime > ?1 and a.nurse is not null and a.user is not null")
+	@Query("select a from Appointment a where a.startTime > ?1 and a.nurse is not null and a.user is null")
 	List<Appointment> getPredefined(LocalDateTime currentTime, Pageable pageable);
 
 	@Query("select a from Appointment a where a.user.id = ?1")

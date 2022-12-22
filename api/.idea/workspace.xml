@@ -9,7 +9,12 @@
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/free-appointments/free-appointments.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/components/sidebar/sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/services/appointment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/services/appointment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/user-routing/user-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/user-routing/user-routing.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
