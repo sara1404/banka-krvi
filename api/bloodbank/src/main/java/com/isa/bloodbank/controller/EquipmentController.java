@@ -35,7 +35,6 @@ public class EquipmentController {
 
 	@PostMapping("/create")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
-	//@PreAuthorize("hasAnyAuthority('ADMIN_SYSTEM', 'ADMIN_CENTER')")
 	public EquipmentDto addEquipment(@RequestBody final EquipmentDto equipmentDto) {
 		System.out.println(equipmentDto.getBloodBank());
 		return equipmentMapper.equipmentToEquipmentDto(equipmentService.addEquipment(equipmentMapper.equipmentDtoToEquipment(equipmentDto)));
