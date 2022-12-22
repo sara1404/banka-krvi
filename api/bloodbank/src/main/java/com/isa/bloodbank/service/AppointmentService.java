@@ -200,4 +200,13 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
+
+    public boolean canUserScheduleAppointment(final Long userId, LocalDateTime startTime){
+        List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+        boolean canSchedule = true;
+        for (Appointment a: appointments){
+            if (a.getStartTime().plusMonths(6).isAfter(startTime) || startTime.isBefore(a.getStartTime())) canSchedule = false;
+        }
+        return canSchedule;
+    }
 }

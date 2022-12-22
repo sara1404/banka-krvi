@@ -62,8 +62,17 @@ export class CreateAppointmentUserComponent implements OnInit {
   sortDirection: string = "ASC"
   createdAppointment : boolean = false
   appointment : IAppointment 
+  canSchedule : Boolean = true
 
   recommendBloodBanks() {
+    this.appointmentService.canUserScheduleAppointment(this.startTimeForm.controls.startTime.value).subscribe({
+      next : (data) => {
+        this.canSchedule = data
+        if (this.canSchedule == false){
+          this.toastService.showError("Sorry, you cannot schedule an appointment");
+        }
+      }
+    })
     this.showSpinner = true
     console.log(this.startTimeForm.getRawValue());
     this.appointmentService.getBloodBanksWithFreeTimeSlots(this.startTimeForm.controls.startTime.value, this.pageNumber, this.sortDirection).subscribe({
@@ -119,7 +128,12 @@ export class CreateAppointmentUserComponent implements OnInit {
   }
 
   scheduleAppointment(){
-    if(this.surveyForm.valid) {
+    if (this.canSchedule == false){
+      this.toastService.showError("Sorry, you cannot schedule an appointment");
+      console.log("sorry");
+      return;
+    }
+    if(this.surveyForm.valid && this.canSchedule) {
       this.userService.sendSurvey(this.surveyForm.value).subscribe(
         (res) => {
           this.toastService.showSuccess("Successfully sent survey!");

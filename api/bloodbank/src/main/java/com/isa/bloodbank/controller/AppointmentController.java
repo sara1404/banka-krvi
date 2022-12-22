@@ -133,4 +133,9 @@ public class AppointmentController {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.userCreatesAppointment(appointmentDto, userId));
 	}
+
+	@GetMapping("/canUserScheduleAppointment")
+	public ResponseEntity<Boolean> canUserScheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @RequestParam("startTime") final String startTime){
+		return ResponseEntity.ok(appointmentService.canUserScheduleAppointment(jwtUtils.getUserFromToken(authHeader).getId(), LocalDateTime.parse(startTime)));
+	}
 }
