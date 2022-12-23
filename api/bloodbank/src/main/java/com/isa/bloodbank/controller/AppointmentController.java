@@ -140,8 +140,9 @@ public class AppointmentController {
 	@GetMapping("/predefined")
 	public ResponseEntity<List<Appointment>> getPredefinedAppointments(
 		@RequestParam("pageSize") final int pageSize,
-		@RequestParam("pageNum") final int pageNum) {
-		return ResponseEntity.ok(appointmentService.getPredefined(pageSize, pageNum));
+		@RequestParam("pageNum") final int pageNum,
+		@RequestParam("direction") final String direction) {
+		return ResponseEntity.ok(appointmentService.getPredefined(pageSize, pageNum, direction));
 	}
 
 	@PreAuthorize("hasAuthority('REGISTERED')")
@@ -161,7 +162,11 @@ public class AppointmentController {
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
 		@PathVariable("id") final Long id) {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		return ResponseEntity.ok(appointmentService.scheduleAppointmentById(id, userId));
+		final AppointmentDto appointmentDto = appointmentService.scheduleAppointmentById(id, userId);
+		if (appointmentDto != null) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
 	}
 
 	@PreAuthorize("hasAuthority('REGISTERED')")

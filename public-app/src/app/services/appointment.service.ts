@@ -61,8 +61,8 @@ export class AppointmentService {
     );
   }
 
-  getPredefinedAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {
-    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/predefined?pageSize=${pageSize}&pageNum=${pageNumber}`);
+  getPredefinedAppointments(pageSize: number, pageNumber: number, direction: string) : Observable<IAppointment[]> {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/predefined?pageSize=${pageSize}&pageNum=${pageNumber}&direction=${direction}`);
   }
 
   getPersonalAppointments(pageSize: number, pageNumber: number) : Observable<IAppointment[]> {

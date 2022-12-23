@@ -5,6 +5,7 @@ import { IAppointment } from 'src/app/model/Appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { MatButton } from '@angular/material/button';
 import { ToastService } from 'src/app/services/toast.service';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-predefined-appointments',
@@ -15,8 +16,9 @@ export class PredefinedAppointmentsComponent implements OnInit {
   predefinedAppointments: MatTableDataSource<IAppointment>;
   
   displayedColumns:string[] = ['startTime', 'duration', 'bloodBank', 'action'];
-  pageSizePredefined = 20;
-  pageNumberPredefined = 0;
+  pageSize = 20;
+  pageNumber = 0;
+  sortDirection = "ASC";
   
   length: number;
   currentPage: number;
@@ -28,11 +30,16 @@ export class PredefinedAppointmentsComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getPredefinedAppointments();
-    
   }
 
+  changeSortDirection() {
+    this.sortDirection = this.sortDirection == "DESC" ? "ASC" : "DESC"; 
+    this.getPredefinedAppointments();
+  }
+
+
   private getPredefinedAppointments() {
-    this.appointmentService.getPredefinedAppointments(this.pageSizePredefined, this.pageNumberPredefined)
+    this.appointmentService.getPredefinedAppointments(this.pageSize, this.pageNumber, this.sortDirection)
       .subscribe((response) => {
         this.predefinedAppointments = new MatTableDataSource<IAppointment>(response);
         this.predefinedAppointments.paginator = this.paginatorPredefined;

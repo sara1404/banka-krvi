@@ -24,6 +24,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,6 +41,8 @@ public class AppointmentService {
 	private UserMapper userMapper;
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private DonationSurveyService donationSurveyService;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -216,11 +219,15 @@ public class AppointmentService {
 
 	public AppointmentDto scheduleAppointmentById(final Long appointmentId, final Long userId) {
 		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
-		appointment.setAvailable(false);
-		appointment.setFinished(false);
-		appointmentRepository.save(appointment);
-		return appointmentMapper.appointmentToAppointmentDto(appointment);
+		if (canUserScheduleAppointment(userId, appointment.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
+			donationSurveyService.findByUserId(userId) != null) {
+			appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+			appointment.setAvailable(false);
+			appointment.setFinished(false);
+			appointmentRepository.save(appointment);
+			return appointmentMapper.appointmentToAppointmentDto(appointment);
+		}
+		return null;
 	}
 
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
@@ -232,8 +239,9 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public List<Appointment> getPredefined(final int pageSize, final int pageNum) {
-		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize));
+	public List<Appointment> getPredefined(final int pageSize, final int pageNum, final String sortDirection) {
+		final Direction direction = sortDirection.toUpperCase().equals("ASC") ? Direction.ASC : Direction.DESC;
+		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize, Sort.by(direction, "startTime")));
 	}
 
 	public List<Appointment> getPersonalAppointments(final Long userId, final int pageSize, final int pageNum) {

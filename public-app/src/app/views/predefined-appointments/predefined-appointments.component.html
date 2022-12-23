@@ -1,6 +1,9 @@
 <div class="wrapper">
+    <a routerLink="../personal">Personal appointments</a>
+    <br>
+    <button mat-button (click)="changeSortDirection()">Change sorting</button>
+    <br>
     <div class="appointments-wrapper">
-        <a routerLink="../personal">Personal appointments</a>
         <mat-table #table [dataSource]="predefinedAppointments">
             <ng-container matColumnDef="startTime">
                 <mat-header-cell *matHeaderCellDef>Start time</mat-header-cell>
@@ -19,7 +22,8 @@
 
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let appointment"><button mat-raised-button color="primary" (click)="schedule(appointment.id)">Make an appointment</button></mat-cell>
+                <mat-cell *matCellDef="let appointment"><button mat-raised-button color="primary"
+                        (click)="schedule(appointment.id)">Make an appointment</button></mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -29,5 +33,5 @@
         </mat-paginator>
     </div>
 
-    
+
 </div>
