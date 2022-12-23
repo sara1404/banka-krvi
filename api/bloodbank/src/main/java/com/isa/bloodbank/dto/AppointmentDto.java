@@ -27,4 +27,5 @@ public class AppointmentDto {
 	BloodBankDto bloodBank;
 	UserDto nurse;
 	UserDto user;
+	boolean finished;
 }

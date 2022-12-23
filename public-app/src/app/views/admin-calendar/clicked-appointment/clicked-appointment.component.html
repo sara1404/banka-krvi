@@ -1,4 +1,4 @@
-<div *ngIf="this.start==false">
+<div *ngIf="this.start==false && finishedAppointment() == false">
     <table>
         <tr>Start time: {{this.appointment?.startTime | date:'short'}}</tr>
         <tr>Duration: {{this.appointment?.duration}} minutes</tr>
@@ -17,6 +17,9 @@
     </table>
     <!--<button mat-raised-button (click) = "startExamination()">Examination</button>-->
 </div>
-<div *ngIf="this.start==true">
+<div *ngIf="this.start==true && finishedAppointment() == false">
     <app-appointment-info (newItemEvent)="close($event)" [appointment]="appointment"></app-appointment-info>
+</div>
+<div *ngIf="finishedAppointment() == true">
+    Appointment is finished
 </div>

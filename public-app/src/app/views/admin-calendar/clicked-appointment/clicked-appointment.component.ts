@@ -38,6 +38,11 @@ export class ClickedAppointmentComponent implements OnInit {
     });
 
   }
+
+  finishedAppointment():boolean{
+    if(this._data.appointment.finished == true) return true
+    return false
+  }
   checkSurvey(): boolean{
     if(this.userSurvey?.weight >= 50 && this.userSurvey?.fluSymptoms == false && this.userSurvey?.skinIrritations == false
       && this.userSurvey?.abnormalBloodPressure == false && this.userSurvey?.tookAntibiotics == false 

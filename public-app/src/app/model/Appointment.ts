@@ -7,5 +7,6 @@ export interface IAppointment{
     duration: number
     bloodBank: IBloodBank
     nurse: IUser,
-    user: IUser
+    user: IUser,
+    finished: boolean
 }
