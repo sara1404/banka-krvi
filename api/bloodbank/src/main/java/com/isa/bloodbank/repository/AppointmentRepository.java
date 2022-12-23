@@ -28,4 +28,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
 	@Query("select a from Appointment a where a.user.id = ?1")
 	List<Appointment> getPersonal(Long userId, Pageable pageable);
+
+	@Query("select a from Appointment a where a.user.id = ?1")
+	List<Appointment> getPersonal(Long userId);
 }
