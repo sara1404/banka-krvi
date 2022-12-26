@@ -51,7 +51,7 @@ public class BloodBankController {
 	}
 
 	@PutMapping("/update")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBankDto));
 	}
