@@ -29,6 +29,8 @@ import { CreateAppointmentUserModule } from './views/appointments/create-appoint
 import { PredefinedAppointmentsComponent } from './views/predefined-appointments/predefined-appointments.component';
 import { PersonalAppointmentsComponent } from './views/personal-appointments/personal-appointments.component';
 import { PredefinedAppointmentsModule } from './views/predefined-appointments/predefined-appointments.module';
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { PredefinedAppointmentsModule } from './views/predefined-appointments/pr
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    AuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

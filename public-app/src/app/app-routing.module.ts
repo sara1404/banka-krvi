@@ -4,6 +4,9 @@ import { UserLoginComponent } from './views/user-login/user-login/user-login.com
 import { MainAppComponent } from './components/main-app/main-app.component';
 import { RegisterUserComponent } from './views/register-user/register-user/register-user.component';
 import { DisplayBloodBanksComponent } from './views/blood-banks-display/blood-banks-display.component';
+import { AuthGuard } from './services/auth.guard';
+import { Role } from './model/Role';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -12,7 +15,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./user-routing/user-routing.module').then(
         (x) => x.UserRoutingModule
-      ),
+      )
   },
   {
     path: 'app',
@@ -21,37 +24,18 @@ const routes: Routes = [
       import('./user-routing/user-routing.module').then(
         (x) => x.UserRoutingModule
       ),
+      canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: UserLoginComponent
-  },
-  /*
-  {
-    path: 'register/user/login',
-    component: UserLoginComponent
-  },
-  {
-    path: 'register/user',
-    component: MainAppComponent,
-    loadChildren: () =>
-      import('./user-routing/user-routing.module').then(
-        (x) => x.UserRoutingModule
-      )
-  },
-  {
-    path: 'bloodBanks',
-    component: MainAppComponent,
-    loadChildren: () =>
-      import('./user-routing/user-routing.module').then(
-        (x) => x.UserRoutingModule
-      )
-  }*/
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard, AuthService]
 })
 
 export class AppRoutingModule { }

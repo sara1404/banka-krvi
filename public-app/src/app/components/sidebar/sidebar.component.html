@@ -5,7 +5,7 @@
   </div>
   <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='create-appointment-user' class="sidebar-option">SCHEDULE APPOINTMENT</div>
    <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
-   <div *ngIf="isLoggedIn && (this.user.userType=='REGISTERED' || this.user.userType=='ADMIN_CENTER')" routerLink='appointments/predefined' class="sidebar-option">PREDEFINED APPOINTMENTS</div>
+   <div *ngIf="isLoggedIn && (this.user.userType=='REGISTERED')" routerLink='appointments/predefined' class="sidebar-option">PREDEFINED APPOINTMENTS</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADIM_SYSTEM'" routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_SYSTEM'" routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
   <div routerLink='register/user' class="sidebar-option">REGISTER USER</div>
