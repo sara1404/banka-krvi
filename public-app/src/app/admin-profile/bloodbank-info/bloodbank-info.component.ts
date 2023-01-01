@@ -3,6 +3,17 @@ import { zip } from 'rxjs';
 import { IAddress } from '../model/Address';
 import { IBloodBank } from '../model/BloodBank';
 import { AdminInfoService } from '../service/admin-info.service';
+import {fromLonLat, toLonLat} from 'ol/proj';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import Vector from 'ol/source/Vector.js'
+import Point from 'ol/geom/Point'
+import Feature from 'ol/Feature'
+import Style from 'ol/style/Style'
+import Circle from 'ol/style/Circle'
+import Fill from 'ol/style/Fill'
 
 @Component({
   selector: 'app-bloodbank-info',
@@ -13,6 +24,7 @@ export class BloodbankInfoComponent implements OnInit {
 
   constructor(private adminInfoService: AdminInfoService) { }
   public bloodBank: IBloodBank;
+  map: Map;
 
   public isDisabled: boolean = true;
   complete: boolean = true;
@@ -29,9 +41,43 @@ export class BloodbankInfoComponent implements OnInit {
   okDescription: boolean = true;
   okAverageGrade: boolean = true;
   updated: boolean = false;
+
+  longitude: number;
+  latitude: number;
   
   ngOnInit(): void {
-    this.adminInfoService.getBloodBank().subscribe(data=>{this.bloodBank = data;});
+    this.adminInfoService.getBloodBank().subscribe(data=>{this.bloodBank = data;
+      /*var layer = new layer.Vector({
+        source: new Vector({
+            features: [
+                new Feature({
+                    geometry: new Point(fromLonLat([this.bloodBank.address.longitude, this.bloodBank.address.latitude]))
+                })
+            ]
+        }),
+        style: new Style({
+          image: new Circle({
+            radius: 2,
+            fill: new Fill({color: 'red'})
+          })
+        })
+      });*/
+      this.map = new Map({
+        view: new View({
+          center: fromLonLat([this.bloodBank.address.longitude, this.bloodBank.address.latitude]),
+          zoom: 18,
+        }),
+        layers: [
+          new TileLayer({
+            source: new OSM(),
+          }),
+          //layer
+        ],
+        target: 'ol-map'
+      });
+      
+    });
+    
   }
 
   validate(
@@ -144,6 +190,46 @@ export class BloodbankInfoComponent implements OnInit {
     this.showEdit = true;
     this.showSave = false;
     this.updated = true;
+  }
+
+  getCoord(event: any){
+    var coordinate = this.map.getEventCoordinate(event);
+    var lonlat = toLonLat(coordinate)
+    this.reverseGeoCode(lonlat)
+    //console.log(lonlat)
+    //console.log(coordinate)
+  }
+
+  reverseGeoCode(coords){
+    fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + coords[0] + '&lat=' + coords[1])
+                .then(function (response) {
+                    return response.json();
+                }).then(json => {
+                console.log(coords);
+                this.longitude = coords[0];
+                this.latitude = coords[1];
+                console.log(json.address);
+                if (json.address.city) {
+                  this.bloodBank.address.city = json.address.city;
+                } else if (json.address.city_district) {
+                  this.bloodBank.address.city = json.address.city_district;
+                }
+
+                if (json.address.road) {
+                  this.bloodBank.address.street = json.address.road;
+                }
+
+                if (json.address.house_number) {
+                  this.bloodBank.address.number = json.address.house_number;
+                }
+
+                if (json.address.postcode) {
+                  this.bloodBank.address.zipcode = json.address.postcode;
+                }
+                this.bloodBank.address.longitude = this.longitude;
+                this.bloodBank.address.latitude = this.latitude;
+                }
+                )
   }
 
 }
