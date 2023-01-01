@@ -219,9 +219,6 @@ export class BloodbankInfoComponent implements OnInit {
     });
     layer.set('name', 'vectorLayer');
     this.map.addLayer(layer)
-    console.log(this.map.getAllLayers())
-    //console.log(lonlat)
-    //console.log(coordinate)
   }
 
   reverseGeoCode(coords){
@@ -237,18 +234,26 @@ export class BloodbankInfoComponent implements OnInit {
                   this.bloodBank.address.city = json.address.city;
                 } else if (json.address.city_district) {
                   this.bloodBank.address.city = json.address.city_district;
+                }else{
+                  this.bloodBank.address.city = null
                 }
 
                 if (json.address.road) {
                   this.bloodBank.address.street = json.address.road;
+                }else{
+                  this.bloodBank.address.street = null
                 }
 
                 if (json.address.house_number) {
                   this.bloodBank.address.number = json.address.house_number;
+                }else{
+                  this.bloodBank.address.number = null
                 }
 
                 if (json.address.postcode) {
                   this.bloodBank.address.zipcode = json.address.postcode;
+                }else{
+                  this.bloodBank.address.zipcode = null
                 }
                 this.bloodBank.address.longitude = this.longitude;
                 this.bloodBank.address.latitude = this.latitude;
