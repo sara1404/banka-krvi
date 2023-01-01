@@ -14,6 +14,7 @@ import Feature from 'ol/Feature'
 import Style from 'ol/style/Style'
 import Circle from 'ol/style/Circle'
 import Fill from 'ol/style/Fill'
+import VectorLayer from 'ol/layer/Vector.js';
 
 @Component({
   selector: 'app-bloodbank-info',
@@ -47,7 +48,7 @@ export class BloodbankInfoComponent implements OnInit {
   
   ngOnInit(): void {
     this.adminInfoService.getBloodBank().subscribe(data=>{this.bloodBank = data;
-      /*var layer = new layer.Vector({
+      var layer = new VectorLayer({
         source: new Vector({
             features: [
                 new Feature({
@@ -57,11 +58,12 @@ export class BloodbankInfoComponent implements OnInit {
         }),
         style: new Style({
           image: new Circle({
-            radius: 2,
+            radius: 5,
             fill: new Fill({color: 'red'})
           })
         })
-      });*/
+      });
+      layer.set('name', 'vectorLayer');
       this.map = new Map({
         view: new View({
           center: fromLonLat([this.bloodBank.address.longitude, this.bloodBank.address.latitude]),
@@ -70,12 +72,11 @@ export class BloodbankInfoComponent implements OnInit {
         layers: [
           new TileLayer({
             source: new OSM(),
-          }),
-          //layer
+          })
         ],
         target: 'ol-map'
       });
-      
+      this.map.addLayer(layer);
     });
     
   }
@@ -196,6 +197,29 @@ export class BloodbankInfoComponent implements OnInit {
     var coordinate = this.map.getEventCoordinate(event);
     var lonlat = toLonLat(coordinate)
     this.reverseGeoCode(lonlat)
+    this.map.getLayers().forEach(layer => {
+      if (layer.get('name') && layer.get('name') == 'vectorLayer'){
+          this.map.removeLayer(layer)
+      }
+    });
+    var layer = new VectorLayer({
+      source: new Vector({
+          features: [
+              new Feature({
+                  geometry: new Point(fromLonLat([lonlat[0], lonlat[1]]))
+              })
+          ]
+      }),
+      style: new Style({
+        image: new Circle({
+          radius: 5,
+          fill: new Fill({color: 'red'})
+        })
+      })
+    });
+    layer.set('name', 'vectorLayer');
+    this.map.addLayer(layer)
+    console.log(this.map.getAllLayers())
     //console.log(lonlat)
     //console.log(coordinate)
   }
