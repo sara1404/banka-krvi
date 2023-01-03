@@ -47,7 +47,8 @@ export class PredefinedAppointmentsComponent implements OnInit {
   }
 
   schedule(id: number) {
-    this.appointmentService.scheduleAppointmentById(id).subscribe(
+    var app = this.getAppointmentById(id)
+    this.appointmentService.scheduleAppointment(app).subscribe(
       (res) => {
         this.toastService.showSuccess('You just made an appointment!');
         this.getPredefinedAppointments();
@@ -58,5 +59,13 @@ export class PredefinedAppointmentsComponent implements OnInit {
     )
   }
 
-
+  getAppointmentById(id: number): IAppointment{
+    var app = null
+    this.predefinedAppointments.data.forEach(element => {
+      if (element.id == id){
+        app = element
+      }
+    });
+    return app
+  }
 }
