@@ -22,6 +22,9 @@ export class BloodBankService {
     name: string,
     city: string,
     averageGrade: number,
+    lng: number,
+    lat: number,
+    distance: number,
     pageNumber: number,
     sortBy: string = 'name',
     sortDirection: string = 'ASC'
@@ -33,6 +36,12 @@ export class BloodBankService {
         city +
         '&averageGrade=' +
         averageGrade +
+        '&lng=' + 
+        lng +
+        '&lat=' + 
+        lat +
+        '&distance=' + 
+        distance +
         '&pageSize=' +
         2 +
         '&pageNumber=' +
@@ -55,5 +64,13 @@ export class BloodBankService {
     return this.http.get<IWorkingHours>(
       `http://localhost:8080/bloodbank/getWorkingHours`
     );
+  }
+
+  getLocationService() : Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resp=> {
+        resolve({lng: resp.coords.longitude, lat: resp.coords.latitude})
+      })
+    })
   }
 }

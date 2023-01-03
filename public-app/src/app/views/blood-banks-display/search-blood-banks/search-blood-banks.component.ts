@@ -13,16 +13,24 @@ export class SearchBloodBanksComponent implements OnInit {
   ) {}
 
   @Input() averageGrade = 0;
+  @Input() lng = 0;
+  @Input() lat = 0
+  @Input() distance = 6378
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
   @Output() totalElements = new EventEmitter<number>();
   @Output() name = new EventEmitter<string>();
   @Output() city = new EventEmitter<string>();
   @Output() pageNumber = new EventEmitter<number>();
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.bloodBankService.getLocationService().then(resp=> {
+      this.lng = resp.lng
+      this.lat = resp.lat
+    })
+  }
 
   searchBloodBanks(name: string, city: string, e: Event){
     e.preventDefault();
-    this.bloodBankService.getBloodBanksFilterAndSearch(name, city, this.averageGrade, 0).subscribe((data) => {
+    this.bloodBankService.getBloodBanksFilterAndSearch(name, city, this.averageGrade, this.lng, this.lat, this.distance , 0).subscribe((data) => {
     this.bloodBanks.emit(data.content)
     this.totalElements.emit(data.totalElements);
     });

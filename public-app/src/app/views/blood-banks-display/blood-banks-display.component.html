@@ -6,6 +6,9 @@
     (name)="saveSearchName($event)"
     (city)="saveSearchCity($event)"
     [averageGrade]="averageGrade"
+    [lng]="lng"
+    [lat]="lat"
+    [distance]="distance"
     (pageNumber)="savePageNumber($event)"
   ></app-search-blood-banks>
     <br>
@@ -15,6 +18,9 @@
     (averageGrade)="saveAverageGrade($event)"
     [name]="name"
     [city]="city"
+    [lng]="lng"
+    [lat]="lat"
+    [distance]="distance"
     (pageNumber)="savePageNumber($event)"
     [sortBy]="sortBy"
     [sortDirection]="sortDirection"
@@ -26,10 +32,22 @@
     [averageGrade]="averageGrade"
     [name]="name"
     [city]="city"
+    [lng]="lng"
+    [lat]="lat"
+    [distance]="distance"
     (pageNumber)="savePageNumber($event)"
     (sortBy)="saveSortBy($event)"
     (sortDirection)="saveSortDirection($event)"
   ></app-sort-blood-banks>
+  <div class="select">
+    <mat-select (selectionChange)="getLocation($event)" placeholder="Distance" floatLabel="never">
+      <mat-select-trigger>Distance</mat-select-trigger>
+      <mat-option value="6378">Remove filter</mat-option>
+      <mat-option value="10">10km</mat-option>
+      <mat-option value="50">50km</mat-option>
+      <mat-option value="100">100km</mat-option>
+    </mat-select>
+  </div>
   <div class="table">
     <mat-table #table [dataSource]="bloodBanks">
       <ng-container matColumnDef="name">

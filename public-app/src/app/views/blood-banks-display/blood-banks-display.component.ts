@@ -27,12 +27,19 @@ export class DisplayBloodBanksComponent implements OnInit {
   totalElements: number = 0
   sortBy: string;
   sortDirection: string;
+  lng: number = 0
+  lat: number = 0
+  distance : number = 6378
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
+    this.bloodBankService.getLocationService().then(resp=> {
+      this.lng = resp.lng
+      this.lat = resp.lat
+    })
     this.bloodBankService
-      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.pageNumber, this.sortBy, this.sortDirection)
+      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, this.pageNumber, this.sortBy, this.sortDirection)
       .subscribe((data) => {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
@@ -66,7 +73,7 @@ export class DisplayBloodBanksComponent implements OnInit {
   onPageChanged(e : any){
     this.pageNumber = e.pageIndex;
     this.bloodBankService
-      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, e.pageIndex, this.sortBy, this.sortDirection)
+      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, e.pageIndex, this.sortBy, this.sortDirection)
       .subscribe((data) => {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
@@ -85,6 +92,16 @@ export class DisplayBloodBanksComponent implements OnInit {
     this.dialog.open(AddEquipmentModalComponent,
       {
         data: {bloodbank: item}
+      });
+  }
+
+  getLocation(e: any){
+    this.distance = parseFloat(e.value);
+    this.bloodBankService
+      .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, 0, this.sortBy, this.sortDirection)
+      .subscribe((data) => {
+        this.bloodBanks = new MatTableDataSource(data.content);
+        this.totalElements = data.totalElements;
       });
   }
 }
