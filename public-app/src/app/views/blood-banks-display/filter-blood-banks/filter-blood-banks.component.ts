@@ -12,6 +12,9 @@ export class FilterBloodBanksComponent implements OnInit {
 
   @Input() name = '';
   @Input() city = '';
+  @Input() lng = 0;
+  @Input() lat = 0
+  @Input() distance = 6378 
   @Input() sortBy = '';
   @Input() sortDirection = '';
   @Output() bloodBanks = new EventEmitter<IBloodBank[]>();
@@ -28,6 +31,9 @@ export class FilterBloodBanksComponent implements OnInit {
         this.name,
         this.city,
         averageGrade,
+        this.lng,
+        this.lat,
+        this.distance,
         0,
         this.sortBy,
         this.sortDirection

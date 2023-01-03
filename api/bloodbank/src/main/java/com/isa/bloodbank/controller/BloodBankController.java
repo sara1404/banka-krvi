@@ -66,12 +66,15 @@ public class BloodBankController {
 		@RequestParam("name") final String name,
 		@RequestParam("city") final String city,
 		@RequestParam("averageGrade") final double averageGrade,
+		@RequestParam("lng") final double lng,
+		@RequestParam("lat") final double lat,
+		@RequestParam("distance") final double distance,
 		@RequestParam("pageSize") final int pageSize,
 		@RequestParam("pageNumber") final int pageNumber,
 		@RequestParam("sortDirection") final String sortDirection,
 		@RequestParam("sortBy") final String sortBy
 	) {
-		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, pageSize, pageNumber, sortBy, sortDirection));
+		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
 	}
 
 	@PostMapping("/register")
