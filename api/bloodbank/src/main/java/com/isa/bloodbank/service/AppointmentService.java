@@ -47,7 +47,7 @@ public class AppointmentService {
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
 		for (final Appointment appointment : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
-			if ((appointment.isAvailable() == true)) {
+			if ((appointment.isAvailable() == true && appointment.getStartTime().compareTo(LocalDateTime.now()) > 0)) {
 				availableAppointments.add(appointment);
 			}
 		}

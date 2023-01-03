@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/resources/register_user_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/resources/register_user_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/donation-survey/donation-survey.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/donation-survey/donation-survey.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-user/confirm-registration/confirm-registration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-user/confirm-registration/confirm-registration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/views/register-user/confirm-registration/confirm-registration.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/views/register-user/confirm-registration/confirm-registration.component.scss" afterDir="false" />
-    </list>
+    <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

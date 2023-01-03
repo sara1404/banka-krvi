@@ -45,10 +45,12 @@ public class UserController {
 
 	@GetMapping("/bloodBankId")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
-	public ResponseEntity<List<AdministratorDto>> findByAdministratorId() {
-		final Long administratorId = (long) (3);
-		final Long bloodBankId = userService.findById(administratorId).getBloodBank().getId();
-		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
+	public ResponseEntity<List<AdministratorDto>> findByAdministratorId(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader
+	) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		final Long bloodBankId = loggedUser.getBloodBank().getId();
+		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, loggedUser.getId()));
 	}
 
 	@PostMapping("/register/admin")
