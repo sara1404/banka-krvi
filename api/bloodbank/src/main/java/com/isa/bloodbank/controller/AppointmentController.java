@@ -13,11 +13,13 @@ import com.isa.bloodbank.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -107,12 +109,17 @@ public class AppointmentController {
 
 	@PutMapping("/schedule")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(
-		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@Valid
-		@RequestBody final AppointmentDto appointmentDto) {
+	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) throws Exception{
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		return ResponseEntity.ok(appointmentService.scheduleAppointment(appointmentDto, userId));
+		try {
+			AppointmentDto dto = appointmentService.scheduleAppointment(appointmentDto, userId);
+			if (dto != null) {
+				return ResponseEntity.ok(dto);
+			}
+			return ResponseEntity.badRequest().build();
+		} catch(Exception e) {
+			return new ResponseEntity<AppointmentDto>(HttpStatus.I_AM_A_TEAPOT);
+		}
 	}
 
 	@GetMapping(value = "/findBloodBanksWithAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -156,18 +163,20 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.getPersonalAppointments(userId, pageSize, pageNum));
 	}
 
-	@PreAuthorize("hasAuthority('REGISTERED')")
+	/*@PreAuthorize("hasAuthority('REGISTERED')")
 	@PutMapping("/schedule/{id}")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(
-		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@PathVariable("id") final Long id) {
+	public ResponseEntity<AppointmentDto> scheduleAppointment (@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @PathVariable("id") final Long id) throws Exception {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		final AppointmentDto appointmentDto = appointmentService.scheduleAppointmentById(id, userId);
-		if (appointmentDto != null) {
-			return ResponseEntity.ok().build();
+		try {
+			final AppointmentDto appointmentDto = appointmentService.scheduleAppointmentById(id, userId);
+			if (appointmentDto != null) {
+				return ResponseEntity.ok().build();
+			}
+			return ResponseEntity.badRequest().build();
+		} catch(Exception e) {
+		return new ResponseEntity<AppointmentDto>(HttpStatus.I_AM_A_TEAPOT); // :)
 		}
-		return ResponseEntity.badRequest().build();
-	}
+	}*/
 
 	@PreAuthorize("hasAuthority('REGISTERED')")
 	@PutMapping("/cancel/{id}")
