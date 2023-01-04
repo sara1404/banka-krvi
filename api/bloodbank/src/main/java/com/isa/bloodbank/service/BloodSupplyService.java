@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodSupplyDto;
 import com.isa.bloodbank.entity.BloodSupply;
+import com.isa.bloodbank.entity.MonthlyTransfer;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.enums.BloodType;
 import com.isa.bloodbank.mapping.BloodSupplyMapper;
@@ -38,6 +39,56 @@ public class BloodSupplyService {
 		bloodSupply.setQuantity(bloodSupply.getQuantity() + quantity);
 		bloodSupplyRepository.save(bloodSupply);
 		return true;
+	}
+
+	public void removeMonthlyBlood(final MonthlyTransfer mt) {
+		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.bloodBank.getId());
+		for (final BloodSupply bloodSupply : bloodSupplies) {
+			if (bloodSupply.getBloodType() == BloodType.A_POSITIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.APlus);
+			} else if (bloodSupply.getBloodType() == BloodType.A_NEGATIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.AMinus);
+			} else if (bloodSupply.getBloodType() == BloodType.B_POSITIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.BPlus);
+			} else if (bloodSupply.getBloodType() == BloodType.B_NEGATIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.BMinus);
+			} else if (bloodSupply.getBloodType() == BloodType.AB_POSITIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.ABPlus);
+			} else if (bloodSupply.getBloodType() == BloodType.AB_NEGATIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.ABMinus);
+			} else if (bloodSupply.getBloodType() == BloodType.O_POSITIVE) {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.OPlus);
+			} else {
+				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.OMinus);
+			}
+			bloodSupplyRepository.save(bloodSupply);
+		}
+	}
+
+	public boolean checkAmountForMonthlyTransfer(final MonthlyTransfer mt) {
+		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.bloodBank.getId());
+		for (final BloodSupply bloodSupply : bloodSupplies) {
+			if (bloodSupply.getBloodType() == BloodType.A_POSITIVE && bloodSupply.getQuantity() < mt.getAPlus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.A_NEGATIVE && bloodSupply.getQuantity() < mt.getAMinus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.B_POSITIVE && bloodSupply.getQuantity() < mt.getBPlus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.B_NEGATIVE && bloodSupply.getQuantity() < mt.getBMinus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.AB_POSITIVE && bloodSupply.getQuantity() < mt.getABPlus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.AB_NEGATIVE && bloodSupply.getQuantity() < mt.getABMinus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.O_POSITIVE && bloodSupply.getQuantity() < mt.getOPlus()) {
+				return false;
+			} else if (bloodSupply.getBloodType() == BloodType.O_NEGATIVE && bloodSupply.getQuantity() < mt.getOMinus()) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

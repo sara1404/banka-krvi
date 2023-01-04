@@ -156,5 +156,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.microsoft.sqlserver:mssql-jdbc:11.2.1.jre8" level="project" />
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct-processor:1.5.3.Final" level="project" />
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.5.3.Final" level="project" />
+    <orderEntry type="library" name="amqp-client-5.16.0" level="project" />
   </component>
 </module>
