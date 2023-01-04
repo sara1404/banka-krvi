@@ -15,15 +15,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BloodBankRepository extends JpaRepository<BloodBank, Long> {
-	Page<BloodBank> findByNameContainingIgnoreCase(String infix, PageRequest pageRequest);
-	Page<BloodBank> findByAddressId_CityContainingIgnoreCase(String city, PageRequest pageRequest);
-	Page<BloodBank> findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(String name, String city, PageRequest pageRequest);
-	Page<BloodBank> findByAverageGradeGreaterThanEqual(double averageGrade, PageRequest pageRequest);
-	Page<BloodBank> findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqual(String infix, double averageGrade, PageRequest pageRequest);
-	Page<BloodBank> findByAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(double averageGrade, String city, PageRequest pageRequest);
-	Page<BloodBank> findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(String name, double averageGrade, String city, PageRequest pageRequest);
+
 	BloodBank save(BloodBank bloodBank);
-	BloodBank findBloodBankByName(String name);
 
 	String HAVERSINE_FORMULA = "(6371 * acos(cos(radians(:latitude)) * cos(radians(a.latitude)) *" +
 			" cos(radians(a.longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(a.latitude))))";
