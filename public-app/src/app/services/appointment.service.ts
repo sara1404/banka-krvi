@@ -83,4 +83,9 @@ export class AppointmentService {
       { headers: headers }
     );
   }
+
+  getById(id: string): Observable<IAppointment>{
+    var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get<IAppointment>(`http://localhost:8080/appointment/${id}`, { headers: headers })
+  }
 }

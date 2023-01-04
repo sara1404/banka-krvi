@@ -7,7 +7,7 @@ import { ExaminationComponent } from './examination/examination.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppointmentInfoComponent } from './appointment-info/appointment-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 
 @NgModule({
@@ -22,8 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxScannerQrcodeModule,
   ],
-  exports: [UsersComponent]
+  exports: [UsersComponent],
 })
 export class UsersModule { }
