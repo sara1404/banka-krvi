@@ -29,6 +29,7 @@ import { CreateAppointmentUserModule } from './views/appointments/create-appoint
 import { PredefinedAppointmentsComponent } from './views/predefined-appointments/predefined-appointments.component';
 import { PersonalAppointmentsComponent } from './views/personal-appointments/personal-appointments.component';
 import { PredefinedAppointmentsModule } from './views/predefined-appointments/predefined-appointments.module';
+import { QrCodeScanModule } from './views/qr/qr-code-scan/qr-code-scan.module';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PredefinedAppointmentsModule } from './views/predefined-appointments/pr
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
-    CreateAppointmentModule
+    CreateAppointmentModule,
+    QrCodeScanModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

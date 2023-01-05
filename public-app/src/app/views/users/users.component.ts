@@ -16,36 +16,14 @@ import { AppointmentInfoComponent } from './appointment-info/appointment-info.co
 })
 export class UsersComponent implements OnInit, AfterViewInit {
 
-  public config: BaseConfig = {
-    // isAuto: false,
-    isDraw: false,
-    // isBeep: true,
-    // isAlwaysEmit: true,
-    text: { 
-      font: '25px serif', // Hiden { font: '0px', bottom: 40 },
-      fillStyle: 'red' 
-    },
-    frame: {
-      strokeStyle: 'red'
-    },
-    medias: {
-      audio: false,
-      video: {
-        width: { ideal: 1280 },
-        height: { ideal: 720 },
-        facingMode: 'user', // Front and back camera { facingMode: front ? "user" : "environment" }
-      }
-    } // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-  };
-  appointment: IAppointment
+
   users: IUser[] = []
   userCount: number
   currentInput:any;
   @ViewChild(MatPaginator)
   paginator: MatPaginator
-  public qrCodeResult: ScannerQRCodeResult[] = [];
 
-  constructor(private userService: UserService, private qrcode: NgxScannerQrcodeService, private appointmentService: AppointmentService) { }
+  constructor(private userService: UserService,) { }
   ngAfterViewInit(): void {
     this.paginator.page.pipe(tap(() => {
       this.userService.getUsers(this.paginator?.pageIndex ?? 0).subscribe(data =>{
@@ -76,15 +54,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onSelects(files: any) {
-    this.qrcode.loadFiles(files, Object.assign({isDraw: true, isBeep: true}, this.config)).subscribe((res: ScannerQRCodeResult[]) => {
-      this.qrCodeResult = res.filter(f => f.urlQR);
-      this.appointmentService.getById(this.qrCodeResult[0].data).subscribe(data => {
-        this.appointment = data
-        console.log(this.appointment)
-      })
-      console.log(this.qrCodeResult[0].data)
-    });
-  }
+
 
 }

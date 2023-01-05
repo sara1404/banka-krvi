@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="wrapper">
+        <input #file type="file" (change)="onSelects(file.files)" [multiple]="'multiple'" [accept]="'.jpg, .png, .gif, .jpeg'" class="btn btn-success my-2"/>
+        <div *ngFor="let item of qrCodeResult" class="code">
+            <ngx-scanner-qrcode #actionFile="scanner" [src]="item.url" [config]="config"></ngx-scanner-qrcode>
+        </div>
+    </div>
+</div>
