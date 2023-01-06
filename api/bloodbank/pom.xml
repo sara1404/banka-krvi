@@ -110,6 +110,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.3.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
