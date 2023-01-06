@@ -11,6 +11,7 @@ import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mailer.MailService;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
@@ -47,6 +48,11 @@ public class AppointmentService {
 	private BloodBankRepository bloodBankRepository;
 	@Autowired
 	private DonationSurveyService donationSurveyService;
+	@Autowired
+	private QrCodeService qrCodeService;
+	@Autowired
+	MailService mailService;
+
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -223,24 +229,12 @@ public class AppointmentService {
 			app.setAvailable(false);
 			app.setAppointmentInfo(appointmentRepository.getById(appointmentDto.getId()).getAppointmentInfo());
 			appointmentRepository.save(app);
+			qrCodeService.generateAppointmentQrCode(app);
+			mailService.sendEmailWithQrCode(app.getUser().getEmail(), app);
 			return appointmentMapper.appointmentToAppointmentDto(app);
 		}
 		return null;
 	}
-	/*
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public AppointmentDto scheduleAppointmentById(final Long appointmentId, final Long userId) throws Exception {
-		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		if (canUserScheduleAppointment(userId, appointment.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
-			donationSurveyService.findByUserId(userId) != null) {
-			appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
-			appointment.setAvailable(false);
-			appointment.setFinished(false);
-			appointmentRepository.save(appointment);
-			return appointmentMapper.appointmentToAppointmentDto(appointment);
-		}
-		return null;
-	}*/
 
 	@Transactional(readOnly = false)
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
@@ -249,6 +243,8 @@ public class AppointmentService {
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 		appointmentRepository.save(appointment);
+		qrCodeService.generateAppointmentQrCode(appointment);
+		mailService.sendEmailWithQrCode(appointment.getUser().getEmail(), appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
