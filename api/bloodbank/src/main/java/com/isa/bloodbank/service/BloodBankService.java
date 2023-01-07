@@ -91,4 +91,9 @@ public class BloodBankService {
 		final WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
 		return workingHours;
 	}
+
+	public void updateAvailability(boolean value, BloodBank bank){
+		bank.setAvailable(value);
+		bloodBankRepository.save(bank);
+	}
 }

@@ -22,9 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class AppointmentService {
@@ -40,6 +44,8 @@ public class AppointmentService {
 	private UserMapper userMapper;
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private BloodBankService bloodBankService;
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
@@ -223,12 +229,26 @@ public class AppointmentService {
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
+	@Transactional
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
+		System.out.println("udara " + appointmentDto.getBloodBank().getId());
+
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
+		System.out.print(current.getId());
+		System.out.println(current.getAvailable());
+		if(!current.getAvailable())
+			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		current.setAvailable(false);
+		bloodBankRepository.save(current);
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setBloodBank(current);
 		appointmentRepository.save(appointment);
+		current.setAvailable(true);
+		bloodBankRepository.save(current);
+
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 

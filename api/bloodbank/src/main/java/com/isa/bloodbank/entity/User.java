@@ -68,7 +68,7 @@ public class User extends BaseEntity {
 	String workplaceName;
 	@Column
 	String jobTitle;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	Address address;
 
