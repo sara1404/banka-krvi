@@ -80,10 +80,9 @@ public class UserController {
 		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
-	@PutMapping("/update/")
+	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('REGISTERED')")
-	private ResponseEntity<User> updateUser(@RequestBody final UserDto userDto) {
-		System.out.println(userDto);
+	public ResponseEntity<User> updateUserProfile(@RequestBody final UserDto userDto) {
 		return ResponseEntity.ok(userService.update(userDto));
 	}
 
