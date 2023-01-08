@@ -35,7 +35,7 @@ export class UserService {
   updateUserProfile(user: any): Observable<IUser> {
     var headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.put<IUser>(
-      `http://localhost:8080/user/update/`,
+      `http://localhost:8080/user/update`,
       JSON.stringify(user),
       { headers: headers }
     );
