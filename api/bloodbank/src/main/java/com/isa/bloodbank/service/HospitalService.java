@@ -19,15 +19,22 @@ public class HospitalService {
 		for (final MonthlyTransfer mt : monthlyTransferRepository.findAll()) {
 			if (mt.DateTime.isEqual(LocalDate.now()) && bloodSupplyService.checkAmountForMonthlyTransfer(mt)) {
 				bloodSupplyService.removeMonthlyBlood(mt);
+				updateMonth(mt);
 				return mt;
 			}
 			if (mt.DateTime.minusDays(2).equals(LocalDate.now())) {
 				if (!bloodSupplyService.checkAmountForMonthlyTransfer(mt)) {
+					updateMonth(mt);
 					return new MonthlyTransfer(mt.getDateTime(), mt.getBloodBank(), 0, 0, 0, 0, 0, 0, 0, 0);
 				}
 			}
 		}
 		return null;
+	}
+
+	public void updateMonth(final MonthlyTransfer mt) {
+		mt.setDateTime(mt.getDateTime().plusMonths(1));
+		monthlyTransferRepository.save(mt);
 	}
 
 }

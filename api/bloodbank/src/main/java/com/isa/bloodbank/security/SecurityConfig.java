@@ -2,6 +2,9 @@ package com.isa.bloodbank.security;
 
 import com.isa.bloodbank.security.userdetail.UserDetailsServiceImpl;
 
+import net.devh.boot.grpc.server.security.authentication.BasicGrpcAuthenticationReader;
+import net.devh.boot.grpc.server.security.authentication.GrpcAuthenticationReader;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,6 +75,15 @@ public class SecurityConfig {
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
+	}
+
+	@Bean
+	GrpcAuthenticationReader authenticationReader() {
+		return new BasicGrpcAuthenticationReader();
+		// final List<GrpcAuthenticationReader> readers = new ArrayList<>();
+		// readers.add(new BasicGrpcAuthenticationReader());
+		// readers.add(new SSLContextGrpcAuthenticationReader());
+		// return new CompositeGrpcAuthenticationReader(readers);
 	}
 
 }

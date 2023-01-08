@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,12 +50,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/rabbitmq_client/amqp-client-5.16.0.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "last_opened_file_path": "D:/normalno/FTN/godina_4/zimski/isa-projekat-2/banka-krvi/api/bloodbank/src/main/java/com/isa/bloodbank/hospitalintegration",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\normalno\FTN\godina_4\zimski\isa-projekat-2\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\hospitalintegration" />
+      <recent name="D:\normalno\FTN\godina_4\zimski\isa-projekat-2\banka-krvi\api\bloodbank\src\main" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.BloodbankApplication">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />

@@ -36,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
 		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
 		authorities.add(new SimpleGrantedAuthority(user.getUserType().toString()));
-		
+
 		return new UserDetailsImpl(
 			user.getId(),
 			user.getEmail(),

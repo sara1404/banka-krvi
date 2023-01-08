@@ -61,8 +61,9 @@ public class BloodSupplyService {
 			} else {
 				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.OMinus);
 			}
-			bloodSupplyRepository.save(bloodSupply);
+			//bloodSupplyRepository.save(bloodSupply);
 		}
+		bloodSupplyRepository.saveAll(bloodSupplies);
 	}
 
 	public boolean checkAmountForMonthlyTransfer(final MonthlyTransfer mt) {
