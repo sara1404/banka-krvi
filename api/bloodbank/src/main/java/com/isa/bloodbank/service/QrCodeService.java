@@ -20,7 +20,9 @@ public class QrCodeService {
     public void generateAppointmentQrCode(Appointment appointment){
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try{
-            BitMatrix bitMatrix = qrCodeWriter.encode(appointment.getId().toString(), BarcodeFormat.QR_CODE, 200, 200);
+            String text = "id:" + appointment.getId() + ", user:" + appointment.getUser().getFirstName() + " " + appointment.getUser().getLastName()
+                        + ", blood bank:" + appointment.getBloodBank().getName() + ", start time:" + appointment.getStartTime() + ", duration: " + appointment.getDuration() + "min";
+            BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 200, 200);
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", FileSystems.getDefault().getPath("../qrcodes/" + appointment.getId() + ".png"));
         }catch(WriterException | IOException e){
             e.printStackTrace();
