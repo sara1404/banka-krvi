@@ -1,9 +1,6 @@
 package com.isa.bloodbank.controller;
 
-import com.isa.bloodbank.dto.AdministratorDto;
-import com.isa.bloodbank.dto.PasswordChangeDto;
-import com.isa.bloodbank.dto.RegisterUserDto;
-import com.isa.bloodbank.dto.UserDto;
+import com.isa.bloodbank.dto.*;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.security.JwtUtils;
@@ -15,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -83,7 +81,11 @@ public class UserController {
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('REGISTERED')")
 	public ResponseEntity<User> updateUserProfile(@RequestBody final UserDto userDto) {
-		return ResponseEntity.ok(userService.update(userDto));
+        try {
+            return ResponseEntity.ok(userService.update(userDto));
+        } catch (Exception e) {
+			return new ResponseEntity<User>(HttpStatus.TOO_MANY_REQUESTS);
+        }
 	}
 
 	@PostMapping("/penal-points")
