@@ -61,9 +61,9 @@ export class UserProfileComponent implements OnInit {
       next: (res) => {
         this.toastService.showSuccess("Successfuly updated")
       },
-      error: (e) => {
+      error: (err) => {
         console.log("error")
-        this.toastService.showError("Error")
+        this.toastService.showError("Error occured while updating profile, status code: " + err.status)
       },
     })
     this.userProfileForm.controls['firstName'].disable();
