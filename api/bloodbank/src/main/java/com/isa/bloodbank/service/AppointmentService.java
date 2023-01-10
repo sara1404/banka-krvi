@@ -27,7 +27,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
-
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -109,9 +108,11 @@ public class AppointmentService {
 		return page;
 	}
 
+	@Transactional(readOnly = false)
 	public List<UserDto> findAvailableMedicalStaff(final Long bloodBankId, final LocalDateTime startTime, final double duration) {
 		final List<User> notAvailableNurses = new ArrayList<>();
 		for (final Appointment a : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
+			//System.out.println("prvi");
 			if (startsAndEndDuringAppointment(a, startTime, duration) || startsBeforeAndEndDuringAppointment(a, startTime, duration) ||
 				startsDuringAndEndAfterAppointment(a, startTime, duration)) {
 				notAvailableNurses.add(a.getNurse());
@@ -119,6 +120,7 @@ public class AppointmentService {
 		}
 		final List<User> availableNurses = new ArrayList<>();
 		for (final User nurse : userRepository.findByBloodBankId(bloodBankId)) {
+			//System.out.println("drugi");
 			boolean isAvailable = true;
 			for (final User notAvailableNurse : notAvailableNurses) {
 				if (nurse.getId() == notAvailableNurse.getId()) {
@@ -159,12 +161,24 @@ public class AppointmentService {
 		return true;
 	}
 
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
-		appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+		try {
+			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+		} catch (final Exception e) {
+			appointment.setBloodBank(bloodBankRepository.getReferenceById(Long.valueOf(16)));
+			//bloodBankRepository.getReferenceById(Long.valueOf(16))
+		}
+
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
-		appointmentRepository.save(appointment);
+		if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
+			appointmentRepository.save(appointment);
+		}
+		/*if (appointment.getBloodBank() != null) {
+			appointmentRepository.save(appointment);
+		}*/
+		//appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
@@ -217,8 +231,9 @@ public class AppointmentService {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) throws Exception {
-		Appointment app = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 && donationSurveyService.findByUserId(userId) != null) {
+		final Appointment app = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
+			donationSurveyService.findByUserId(userId) != null) {
 			app.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 			app.setAvailable(false);
 			app.setAppointmentInfo(appointmentRepository.getById(appointmentDto.getId()).getAppointmentInfo());

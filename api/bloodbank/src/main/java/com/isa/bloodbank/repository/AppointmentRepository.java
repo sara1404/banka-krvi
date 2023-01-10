@@ -5,10 +5,15 @@ import com.isa.bloodbank.entity.Appointment;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
@@ -16,6 +21,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
 	List<Appointment> findAllByUserId(Long userId);
 
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	@QueryHints({ @QueryHint(name = "javax.persistence.lock.timeout", value = "0") })
 	Appointment save(Appointment appointments);
 
 	@Query("select a from Appointment a where month(a.startTime) = ?1 and year(a.startTime) = ?2 and a.bloodBank.id = ?3")
