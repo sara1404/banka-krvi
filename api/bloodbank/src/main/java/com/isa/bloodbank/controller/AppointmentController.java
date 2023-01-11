@@ -163,21 +163,6 @@ public class AppointmentController {
 		return ResponseEntity.ok(appointmentService.getPersonalAppointments(userId, pageSize, pageNum));
 	}
 
-	/*@PreAuthorize("hasAuthority('REGISTERED')")
-	@PutMapping("/schedule/{id}")
-	public ResponseEntity<AppointmentDto> scheduleAppointment (@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @PathVariable("id") final Long id) throws Exception {
-		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		try {
-			final AppointmentDto appointmentDto = appointmentService.scheduleAppointmentById(id, userId);
-			if (appointmentDto != null) {
-				return ResponseEntity.ok().build();
-			}
-			return ResponseEntity.badRequest().build();
-		} catch(Exception e) {
-		return new ResponseEntity<AppointmentDto>(HttpStatus.I_AM_A_TEAPOT); // :)
-		}
-	}*/
-
 	@PreAuthorize("hasAuthority('REGISTERED')")
 	@PutMapping("/cancel/{id}")
 	public ResponseEntity<?> cancelAppointment(
