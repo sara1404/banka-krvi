@@ -15,7 +15,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	List<Appointment> findAllByBloodBankId(Long bloodBankId);
 
 	List<Appointment> findAllByUserId(Long userId);
-
+	
 	Appointment save(Appointment appointments);
 
 	@Query("select a from Appointment a where month(a.startTime) = ?1 and year(a.startTime) = ?2 and a.bloodBank.id = ?3")

@@ -1,6 +1,9 @@
 package com.isa.bloodbank.controller;
 
-import com.isa.bloodbank.dto.*;
+import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
+import com.isa.bloodbank.dto.RegisterUserDto;
+import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.security.JwtUtils;
@@ -67,8 +70,9 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
-	public ResponseEntity<UserDto> findUserById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(userService.findById(id));
+	public ResponseEntity<UserDto> findUserById(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @PathVariable("id") final Long id) {
+		final User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(user.getId()));
 	}
 
 	@GetMapping("/getUserProfile")
@@ -81,11 +85,11 @@ public class UserController {
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('REGISTERED')")
 	public ResponseEntity<User> updateUserProfile(@RequestBody final UserDto userDto) {
-        try {
-            return ResponseEntity.ok(userService.update(userDto));
-        } catch (Exception e) {
+		try {
+			return ResponseEntity.ok(userService.update(userDto));
+		} catch (final Exception e) {
 			return new ResponseEntity<User>(HttpStatus.TOO_MANY_REQUESTS);
-        }
+		}
 	}
 
 	@PostMapping("/penal-points")

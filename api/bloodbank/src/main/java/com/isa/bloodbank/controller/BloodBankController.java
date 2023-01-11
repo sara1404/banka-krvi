@@ -52,7 +52,7 @@ public class BloodBankController {
 
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
-	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
+	public ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBankDto));
 	}
 
@@ -74,7 +74,8 @@ public class BloodBankController {
 		@RequestParam("sortDirection") final String sortDirection,
 		@RequestParam("sortBy") final String sortBy
 	) {
-		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
+		return ResponseEntity.ok(
+			bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
 	}
 
 	@PostMapping("/register")
