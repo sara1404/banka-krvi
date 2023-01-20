@@ -44,11 +44,18 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "D:/normalno/FTN/godina_4/zimski/isa/j2se/jcommander-1.82.jar",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="Application" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.BloodbankApplication">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
       <module name="bloodbank" />
@@ -87,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
         <item itemvalue="Application.BloodbankApplication" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
       </list>
     </recent_temporary>
   </component>
