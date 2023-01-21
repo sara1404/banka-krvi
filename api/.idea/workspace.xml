@@ -46,23 +46,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/normalno/FTN/godina_4/zimski/isa-projekat-2/banka-krvi/api/bloodbank/src/main/java/com/isa/bloodbank/hospitalintegration",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/normalno/FTN/godina_4/zimski/isa/j2se/jcommander-1.82.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\normalno\FTN\godina_4\zimski\isa-projekat-2\banka-krvi\api\bloodbank\src\main\java\com\isa\bloodbank\hospitalintegration" />
-      <recent name="D:\normalno\FTN\godina_4\zimski\isa-projekat-2\banka-krvi\api\bloodbank\src\main" />
-    </key>
+}</component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="Application" />
+      </set>
+    </option>
   </component>
-  <component name="RunManager" selected="Application.BloodbankApplication">
+  <component name="RunManager" selected="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
       <module name="bloodbank" />
@@ -76,6 +77,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.isa.bloodbank" />
+      <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.AppoitntmentAdminsTestTest" />
+      <option name="METHOD_NAME" value="testPessimisticLockingScenarioCreate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="bloodbank" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.isa.bloodbank.BloodbankApplication" />
@@ -85,6 +102,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
         <item itemvalue="Application.BloodbankApplication" />
       </list>
     </recent_temporary>
