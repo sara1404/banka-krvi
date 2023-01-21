@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class HospitalController {
-	String api = "[880DA5360C3DE5960B9168CEFDE5C803]";
 
 	@Autowired
 	private HospitalService hospitalService;
