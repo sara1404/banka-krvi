@@ -12,7 +12,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class BloodbankApplication {
 
 	public static void main(final String[] args) {
+
 		SpringApplication.run(BloodbankApplication.class, args);
+		//final NewThread t = new NewThread();
+		//t.start();
 	}
 
 	@Bean

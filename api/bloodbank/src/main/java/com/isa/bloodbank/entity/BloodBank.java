@@ -8,10 +8,14 @@ import javax.persistence.OneToOne;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
+@Setter
 @Entity
 public class BloodBank extends BaseEntity {
 	@Column(unique = true)
@@ -25,5 +29,5 @@ public class BloodBank extends BaseEntity {
 	double averageGrade;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "working_hours_id", referencedColumnName = "id")
-	WorkingHours  workingHours;
+	WorkingHours workingHours;
 }
