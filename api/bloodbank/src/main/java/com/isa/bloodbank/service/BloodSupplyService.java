@@ -42,7 +42,7 @@ public class BloodSupplyService {
 	}
 
 	public void removeMonthlyBlood(final MonthlyTransfer mt) {
-		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.bloodBank.getId());
+		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.getBloodBankId());
 		for (final BloodSupply bloodSupply : bloodSupplies) {
 			if (bloodSupply.getBloodType() == BloodType.A_POSITIVE) {
 				bloodSupply.setQuantity(bloodSupply.getQuantity() - mt.APlus);
@@ -67,7 +67,7 @@ public class BloodSupplyService {
 	}
 
 	public boolean checkAmountForMonthlyTransfer(final MonthlyTransfer mt) {
-		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.bloodBank.getId());
+		final List<BloodSupply> bloodSupplies = bloodSupplyRepository.findByBloodBankId(mt.getBloodBankId());
 		for (final BloodSupply bloodSupply : bloodSupplies) {
 			if (bloodSupply.getBloodType() == BloodType.A_POSITIVE && bloodSupply.getQuantity() < mt.getAPlus()) {
 				return false;

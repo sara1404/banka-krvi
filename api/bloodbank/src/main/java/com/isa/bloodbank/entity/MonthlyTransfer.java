@@ -1,11 +1,15 @@
 package com.isa.bloodbank.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +23,15 @@ import lombok.Setter;
 @Entity
 public class MonthlyTransfer extends BaseEntity {
 	@Column
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public LocalDate DateTime;
-	@ManyToOne
-	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
-	public BloodBank bloodBank;
+	//@ManyToOne
+	//@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
+	//public BloodBank bloodBank;
+	@Column
+	Long bloodBankId;
 	@Column
 	public int APlus;
 	@Column

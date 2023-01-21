@@ -25,7 +25,7 @@ public class HospitalService {
 			if (mt.DateTime.minusDays(2).equals(LocalDate.now())) {
 				if (!bloodSupplyService.checkAmountForMonthlyTransfer(mt)) {
 					updateMonth(mt);
-					return new MonthlyTransfer(mt.getDateTime(), mt.getBloodBank(), 0, 0, 0, 0, 0, 0, 0, 0);
+					return new MonthlyTransfer(mt.getDateTime(), mt.getBloodBankId(), 0, 0, 0, 0, 0, 0, 0, 0);
 				}
 			}
 		}
@@ -34,6 +34,10 @@ public class HospitalService {
 
 	public void updateMonth(final MonthlyTransfer mt) {
 		mt.setDateTime(mt.getDateTime().plusMonths(1));
+		monthlyTransferRepository.save(mt);
+	}
+
+	public void save(final MonthlyTransfer mt) {
 		monthlyTransferRepository.save(mt);
 	}
 
