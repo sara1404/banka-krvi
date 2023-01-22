@@ -32,6 +32,7 @@ import { PredefinedAppointmentsModule } from './views/predefined-appointments/pr
 import { QrCodeScanModule } from './views/qr/qr-code-scan/qr-code-scan.module';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.service';
+import { UsersBloodModule } from './views/users-blood/users-blood.module';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AuthService } from './services/auth.service';
     CreateAppointmentModule,
     CreateAppointmentUserModule,
     PredefinedAppointmentsModule,
+    UsersBloodModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),

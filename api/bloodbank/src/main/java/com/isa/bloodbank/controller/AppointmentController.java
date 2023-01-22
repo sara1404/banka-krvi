@@ -14,7 +14,6 @@ import com.isa.bloodbank.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -58,7 +57,7 @@ public class AppointmentController {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
-	public ResponseEntity<AppointmentDto> findScheduledById(@PathVariable("id") final Long id){
+	public ResponseEntity<AppointmentDto> findScheduledById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(appointmentMapper.appointmentToAppointmentDto(appointmentService.findById(id)));
 	}
 
@@ -119,15 +118,16 @@ public class AppointmentController {
 
 	@PutMapping("/schedule")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) throws Exception{
+	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
+		@Valid @RequestBody final AppointmentDto appointmentDto) throws Exception {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		try {
-			AppointmentDto dto = appointmentService.scheduleAppointment(appointmentDto, userId);
+			final AppointmentDto dto = appointmentService.scheduleAppointment(appointmentDto, userId);
 			if (dto != null) {
 				return ResponseEntity.ok(dto);
 			}
 			return ResponseEntity.badRequest().build();
-		} catch(Exception e) {
+		} catch (final Exception e) {
 			return new ResponseEntity<AppointmentDto>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}
@@ -190,4 +190,19 @@ public class AppointmentController {
 		@RequestParam("startTime") final String startTime) {
 		return ResponseEntity.ok(appointmentService.canUserScheduleAppointment(jwtUtils.getUserFromToken(authHeader).getId(), LocalDateTime.parse(startTime)));
 	}
+
+	@GetMapping(value = "/bloodSort", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
+	public ResponseEntity<PageDto<AppointmentDto>> sortUsers(
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNumber") final int pageNumber,
+		@RequestParam("sortDirection") final String sortDirection,
+		@RequestParam("sortBy") final String sortBy,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
+		System.out.println("udje ovde");
+		return ResponseEntity.ok(
+			appointmentService.getAllBloodUsers(userService.findById(userId).getBloodBank().getId(), pageSize, pageNumber, sortDirection, sortBy));
+	}
+
 }

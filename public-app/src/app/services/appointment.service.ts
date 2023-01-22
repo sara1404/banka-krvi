@@ -88,4 +88,14 @@ export class AppointmentService {
     var headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
     return this.http.get<IAppointment>(`http://localhost:8080/appointment/${id}`, { headers: headers })
   }
+
+  getUsersBlood(
+    pageNumber: number,
+    sortBy: string = '',
+    sortDirection: string = 'ASC'
+  ) {
+    return this.http.get<IPageAppointment>(
+      `http://localhost:8080/appointment/bloodSort?pageSize=` + 2 + '&pageNumber=' + pageNumber + '&sortDirection=' + sortDirection + '&sortBy=' + sortBy
+    );
+  }
 }

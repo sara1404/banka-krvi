@@ -7,7 +7,6 @@ import { DisplayBloodBanksComponent } from './views/blood-banks-display/blood-ba
 import { AuthGuard } from './services/auth.guard';
 import { Role } from './model/Role';
 import { AuthService } from './services/auth.service';
-
 const routes: Routes = [
   {
     path: '',
