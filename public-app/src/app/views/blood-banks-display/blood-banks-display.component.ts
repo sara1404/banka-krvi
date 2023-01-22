@@ -6,6 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatSortHeader } from '@angular/material/sort';
 import { AddEquipmentModalComponent } from './add-equipment-modal/add-equipment-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class DisplayBloodBanksComponent implements OnInit {
   constructor(
     private bloodBankService: BloodBankService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   bloodBanks = new MatTableDataSource<IBloodBank>();
@@ -40,9 +42,14 @@ export class DisplayBloodBanksComponent implements OnInit {
     })
     this.bloodBankService
       .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, this.pageNumber, this.sortBy, this.sortDirection)
-      .subscribe((data) => {
+      .subscribe({
+        next: (data) => {
         this.bloodBanks = new MatTableDataSource(data.content);
         this.totalElements = data.totalElements;
+        }, error: (err) => {
+          console.log("error " + err.status)
+          this.toastService.showError("Error occured, status code: " + err.status)
+        }
       });
 
   }
@@ -74,9 +81,15 @@ export class DisplayBloodBanksComponent implements OnInit {
     this.pageNumber = e.pageIndex;
     this.bloodBankService
       .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, e.pageIndex, this.sortBy, this.sortDirection)
-      .subscribe((data) => {
-        this.bloodBanks = new MatTableDataSource(data.content);
-        this.totalElements = data.totalElements;
+      .subscribe({
+        next: (data) => {
+          this.bloodBanks = new MatTableDataSource(data.content);
+          this.totalElements = data.totalElements;
+        },
+        error: (err) => {
+          console.log("error " + err.status)
+          this.toastService.showError("Error occured, status code: " + err.status)
+        }
       });
   }
 
@@ -99,9 +112,14 @@ export class DisplayBloodBanksComponent implements OnInit {
     this.distance = parseFloat(e.value);
     this.bloodBankService
       .getBloodBanksFilterAndSearch(this.name, this.city, this.averageGrade, this.lng, this.lat, this.distance, 0, this.sortBy, this.sortDirection)
-      .subscribe((data) => {
-        this.bloodBanks = new MatTableDataSource(data.content);
-        this.totalElements = data.totalElements;
+      .subscribe({
+        next : (data) => {
+          this.bloodBanks = new MatTableDataSource(data.content);
+          this.totalElements = data.totalElements;
+        }, error : (err) => {
+          console.log("error " + err.status)
+          this.toastService.showError("Error occured, status code: " + err.status)
+        }
       });
   }
 }

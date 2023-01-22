@@ -1,6 +1,7 @@
 import { IBloodBank } from './../../../model/BloodBankk';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BloodBankService } from '../../../services/blood-bank.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-search-blood-banks',
@@ -10,6 +11,7 @@ import { BloodBankService } from '../../../services/blood-bank.service';
 export class SearchBloodBanksComponent implements OnInit {
   constructor(
     private bloodBankService: BloodBankService,
+    private toastService: ToastService
   ) {}
 
   @Input() averageGrade = 0;
@@ -30,9 +32,14 @@ export class SearchBloodBanksComponent implements OnInit {
 
   searchBloodBanks(name: string, city: string, e: Event){
     e.preventDefault();
-    this.bloodBankService.getBloodBanksFilterAndSearch(name, city, this.averageGrade, this.lng, this.lat, this.distance , 0).subscribe((data) => {
-    this.bloodBanks.emit(data.content)
-    this.totalElements.emit(data.totalElements);
+    this.bloodBankService.getBloodBanksFilterAndSearch(name, city, this.averageGrade, this.lng, this.lat, this.distance , 0).subscribe({
+      next: (data) => {
+        this.bloodBanks.emit(data.content)
+        this.totalElements.emit(data.totalElements);
+      }, error : (err) => {
+        console.log("error " + err.status)
+        this.toastService.showError("Error occured, status code: " + err.status)
+      }
     });
     this.name.emit(name);
     this.city.emit(city);
