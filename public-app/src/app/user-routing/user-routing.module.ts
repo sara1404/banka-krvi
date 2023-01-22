@@ -14,6 +14,7 @@ import { DisplayBloodBanksComponent } from "../views/blood-banks-display/blood-b
 import { DonationSurveyComponent } from "../views/donation-survey/donation-survey.component";
 import { PersonalAppointmentsComponent } from "../views/personal-appointments/personal-appointments.component";
 import { PredefinedAppointmentsComponent } from "../views/predefined-appointments/predefined-appointments.component";
+import { QrCodeScanComponent } from "../views/qr/qr-code-scan/qr-code-scan.component";
 import { RegisterAdminComponent } from "../views/register-admin/register-admin.component";
 import { RegisterBloodbankComponent } from "../views/register-bloodbank/register-bloodbank.component";
 import { ConfirmRegistrationComponent } from "../views/register-user/confirm-registration/confirm-registration.component";
@@ -46,6 +47,8 @@ const routes: Routes = [
   {path: 'create-appointment-user', component: CreateAppointmentUserComponent, canActivate: [AuthGuard], data:{roles: [Role.Registered]}},
   {path: 'appointments/predefined', component: PredefinedAppointmentsComponent, canActivate: [AuthGuard], data:{roles: [Role.Registered]}},
   {path: 'appointments/personal', component: PersonalAppointmentsComponent},
+  {path: 'appointment/qr', component: QrCodeScanComponent},
+
 ];
 
 @NgModule({

@@ -7,6 +7,7 @@ import com.isa.bloodbank.dto.UserAppointmentDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.AppointmentService;
 import com.isa.bloodbank.service.UserService;
@@ -45,11 +46,20 @@ public class AppointmentController {
 	@Autowired
 	private JwtUtils jwtUtils;
 
+	@Autowired
+	private AppointmentMapper appointmentMapper;
+
 	@GetMapping("/available")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
 	public ResponseEntity<List<FreeAppointmentDto>> findById(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
 		return ResponseEntity.ok(appointmentService.findAvailableAppointments(loggedUser.getBloodBank().getId()));
+	}
+
+	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<AppointmentDto> findScheduledById(@PathVariable("id") final Long id){
+		return ResponseEntity.ok(appointmentMapper.appointmentToAppointmentDto(appointmentService.findById(id)));
 	}
 
 	@GetMapping("/for-user/{id}")

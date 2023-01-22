@@ -21,6 +21,7 @@ export class ExaminationComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ExaminationComponent>, @Inject(MAT_DIALOG_DATA) private _data: any, private toastService: ToastService, private userService: UserService, private appointmentInfoService: AppointmentInfoService) { }
 
   userSurvey: IUserSurvey;
+  
   displayedColumns: string[] = ['start', 'duration', 'startExamination', 'didntShowUp', 'unsuitable'];
   public result: Boolean
   start: boolean= false;
