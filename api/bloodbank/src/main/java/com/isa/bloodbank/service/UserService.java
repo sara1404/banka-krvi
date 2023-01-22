@@ -24,6 +24,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+
 @Service
 public class UserService {
 	@Autowired
@@ -41,8 +44,9 @@ public class UserService {
 
 	public List<AdministratorDto> findByBloodBankId(final Long bloodBankId, final Long administratorId) {
 		final List<User> bloodBanks = new ArrayList<User>();
-		for (final User user : userRepository.findByBloodBankId(bloodBankId)) {
-			if (user.getId() != administratorId) {
+		//findByBloodBankId(bloodBankId)
+		for (final User user : userRepository.findAll()) {
+			if (user.getBloodBank() != null && user.getId() != administratorId && user.getBloodBank().getId() == bloodBankId) {
 				bloodBanks.add(user);
 			}
 		}
@@ -105,6 +109,7 @@ public class UserService {
 		return (userRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new));
 	}
 
+	@RateLimiter(name = "standard", fallbackMethod = "standardFallback")
 	public User update(final UserDto newUserDto) {
 		final User user = userRepository.findById(newUserDto.getId()).get();
 		final User newUser = userMapper.userDtoToUser(newUserDto);
@@ -144,5 +149,12 @@ public class UserService {
 		user.setPoints(user.getPoints() + 1);
 		userRepository.save(user);
 		return true;
+	}
+
+	// Metoda koja ce se pozvati u slucaju RequestNotPermitted exception-a
+	public User standardFallback(final RequestNotPermitted rnp) {
+		System.out.println("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
+		// Samo prosledjujemo izuzetak -> global exception handler koji bi ga obradio :)
+		throw rnp;
 	}
 }

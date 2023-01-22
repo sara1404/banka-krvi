@@ -14,8 +14,26 @@ export class SidebarComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   @Input() isLoggedIn: boolean;
-  user: IUser;
+  user: IUser = {
+    address: null,
+    bloodBank: null,
+    email: null,
+    firstLogged: null,
+    bloodType: null,
+    gender: null,
+    firstName: null,
+    id: null,
+    jmbg: null,
+    jobTitle: null,
+    lastName: null,
+    password: null,
+    phoneNumber: null,
+    points: null,
+    userType: null,
+    workplaceName: null
+  }
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.authService.getCurrentUser().subscribe(data=>{this.user = data});
   }
 }

@@ -9,13 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
 	List<Appointment> findAllByBloodBankId(Long bloodBankId);
 
 	List<Appointment> findAllByUserId(Long userId);
-
+	
 	Appointment save(Appointment appointments);
 
 	@Query("select a from Appointment a where month(a.startTime) = ?1 and year(a.startTime) = ?2 and a.bloodBank.id = ?3")
@@ -28,4 +30,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
 	@Query("select a from Appointment a where a.user.id = ?1")
 	List<Appointment> getPersonal(Long userId, Pageable pageable);
+
+	@Query("select a from Appointment a where a.user.id = ?1")
+	List<Appointment> getPersonal(Long userId);
 }

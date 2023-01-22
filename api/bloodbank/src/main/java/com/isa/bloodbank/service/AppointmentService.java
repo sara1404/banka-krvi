@@ -11,6 +11,7 @@ import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
+import com.isa.bloodbank.mailer.MailService;
 import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.mapping.UserMapper;
 import com.isa.bloodbank.repository.AppointmentRepository;
@@ -24,9 +25,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
@@ -40,11 +45,18 @@ public class AppointmentService {
 	private UserMapper userMapper;
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
+	@Autowired
+	private DonationSurveyService donationSurveyService;
+	@Autowired
+	private QrCodeService qrCodeService;
+	@Autowired
+	MailService mailService;
+
 
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
 		for (final Appointment appointment : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
-			if ((appointment.isAvailable() == true)) {
+			if ((appointment.isAvailable() == true && appointment.getStartTime().compareTo(LocalDateTime.now()) > 0)) {
 				availableAppointments.add(appointment);
 			}
 		}
@@ -102,9 +114,11 @@ public class AppointmentService {
 		return page;
 	}
 
+	@Transactional(readOnly = false)
 	public List<UserDto> findAvailableMedicalStaff(final Long bloodBankId, final LocalDateTime startTime, final double duration) {
 		final List<User> notAvailableNurses = new ArrayList<>();
 		for (final Appointment a : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
+			//System.out.println("prvi");
 			if (startsAndEndDuringAppointment(a, startTime, duration) || startsBeforeAndEndDuringAppointment(a, startTime, duration) ||
 				startsDuringAndEndAfterAppointment(a, startTime, duration)) {
 				notAvailableNurses.add(a.getNurse());
@@ -112,6 +126,7 @@ public class AppointmentService {
 		}
 		final List<User> availableNurses = new ArrayList<>();
 		for (final User nurse : userRepository.findByBloodBankId(bloodBankId)) {
+			//System.out.println("drugi");
 			boolean isAvailable = true;
 			for (final User notAvailableNurse : notAvailableNurses) {
 				if (nurse.getId() == notAvailableNurse.getId()) {
@@ -141,6 +156,7 @@ public class AppointmentService {
 			startTime.plusMinutes((long) duration).isAfter((a.getStartTime().plusMinutes(((long) a.getDuration()))));
 	}
 
+	@Transactional(readOnly = false)
 	public Boolean finishAppointment(final Long id) {
 		final Appointment appointment = appointmentRepository.findById(id).get();
 		if (appointment == null) {
@@ -151,11 +167,24 @@ public class AppointmentService {
 		return true;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
-		appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+		try {
+			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+		} catch (final Exception e) {
+			appointment.setBloodBank(bloodBankRepository.getReferenceById(Long.valueOf(16)));
+			//bloodBankRepository.getReferenceById(Long.valueOf(16))
+		}
+
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
-		appointmentRepository.save(appointment);
+		if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
+			appointmentRepository.save(appointment);
+		}
+		/*if (appointment.getBloodBank() != null) {
+			appointmentRepository.save(appointment);
+		}*/
+		//appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
@@ -163,6 +192,7 @@ public class AppointmentService {
 		return appointmentRepository.findById(id).stream().findFirst().orElseThrow(UserNotFoundException::new);
 	}
 
+	@Transactional(readOnly = false)
 	public Appointment updateAppointmentInfo(final Long id, final AppointmentInfo appointmentInfo) {
 		final Appointment appointment = findById(id);
 		appointment.setAppointmentInfo(appointmentInfo);
@@ -205,41 +235,44 @@ public class AppointmentService {
 		return page;
 	}
 
-	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) {
-		final Appointment appointment = appointmentRepository.findById(appointmentDto.getId()).stream().findFirst()
-			.orElseThrow(UserNotFoundException::new);
-		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
-		appointment.setAvailable(false);
-		appointmentRepository.save(appointment);
-		return appointmentMapper.appointmentToAppointmentDto(appointment);
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) throws Exception {
+		final Appointment app = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
+			donationSurveyService.findByUserId(userId) != null) {
+			app.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+			app.setAvailable(false);
+			app.setAppointmentInfo(appointmentRepository.getById(appointmentDto.getId()).getAppointmentInfo());
+			appointmentRepository.save(app);
+			qrCodeService.generateAppointmentQrCode(app);
+			mailService.sendEmailWithQrCode(app.getUser().getEmail(), app);
+			return appointmentMapper.appointmentToAppointmentDto(app);
+		}
+		return null;
 	}
 
-	public AppointmentDto scheduleAppointmentById(final Long appointmentId, final Long userId) {
-		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
-		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
-		appointment.setAvailable(false);
-		appointment.setFinished(false);
-		appointmentRepository.save(appointment);
-		return appointmentMapper.appointmentToAppointmentDto(appointment);
-	}
-
+	@Transactional(readOnly = false)
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 		appointmentRepository.save(appointment);
+		qrCodeService.generateAppointmentQrCode(appointment);
+		mailService.sendEmailWithQrCode(appointment.getUser().getEmail(), appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
-	public List<Appointment> getPredefined(final int pageSize, final int pageNum) {
-		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize));
+	public List<Appointment> getPredefined(final int pageSize, final int pageNum, final String sortDirection) {
+		final Direction direction = sortDirection.toUpperCase().equals("ASC") ? Direction.ASC : Direction.DESC;
+		return appointmentRepository.getPredefined(LocalDateTime.now(), PageRequest.of(pageNum, pageSize, Sort.by(direction, "startTime")));
 	}
 
 	public List<Appointment> getPersonalAppointments(final Long userId, final int pageSize, final int pageNum) {
 		return appointmentRepository.getPersonal(userId, PageRequest.of(pageNum, pageSize));
 	}
 
+	@Transactional(readOnly = false)
 	public boolean cancelAppointment(final Long appointmentId, final Long userId) {
 		final Appointment appointment = appointmentRepository.findById(appointmentId).stream().findFirst().orElseThrow(UserNotFoundException::new);
 		if (!appointment.isFinished() && appointment.getUser().getId() == userId &&

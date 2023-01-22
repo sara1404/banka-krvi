@@ -14,11 +14,13 @@ import com.isa.bloodbank.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -117,12 +119,17 @@ public class AppointmentController {
 
 	@PutMapping("/schedule")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('REGISTERED')")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(
-		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@Valid
-		@RequestBody final AppointmentDto appointmentDto) {
+	public ResponseEntity<AppointmentDto> scheduleAppointment(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @Valid @RequestBody final AppointmentDto appointmentDto) throws Exception{
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		return ResponseEntity.ok(appointmentService.scheduleAppointment(appointmentDto, userId));
+		try {
+			AppointmentDto dto = appointmentService.scheduleAppointment(appointmentDto, userId);
+			if (dto != null) {
+				return ResponseEntity.ok(dto);
+			}
+			return ResponseEntity.badRequest().build();
+		} catch(Exception e) {
+			return new ResponseEntity<AppointmentDto>(HttpStatus.I_AM_A_TEAPOT);
+		}
 	}
 
 	@GetMapping(value = "/findBloodBanksWithAvailableMedicalStaff", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -150,8 +157,9 @@ public class AppointmentController {
 	@GetMapping("/predefined")
 	public ResponseEntity<List<Appointment>> getPredefinedAppointments(
 		@RequestParam("pageSize") final int pageSize,
-		@RequestParam("pageNum") final int pageNum) {
-		return ResponseEntity.ok(appointmentService.getPredefined(pageSize, pageNum));
+		@RequestParam("pageNum") final int pageNum,
+		@RequestParam("direction") final String direction) {
+		return ResponseEntity.ok(appointmentService.getPredefined(pageSize, pageNum, direction));
 	}
 
 	@PreAuthorize("hasAuthority('REGISTERED')")
@@ -163,15 +171,6 @@ public class AppointmentController {
 	) {
 		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
 		return ResponseEntity.ok(appointmentService.getPersonalAppointments(userId, pageSize, pageNum));
-	}
-
-	@PreAuthorize("hasAuthority('REGISTERED')")
-	@PutMapping("/schedule/{id}")
-	public ResponseEntity<AppointmentDto> scheduleAppointment(
-		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader,
-		@PathVariable("id") final Long id) {
-		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
-		return ResponseEntity.ok(appointmentService.scheduleAppointmentById(id, userId));
 	}
 
 	@PreAuthorize("hasAuthority('REGISTERED')")

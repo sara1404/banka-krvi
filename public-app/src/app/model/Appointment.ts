@@ -9,4 +9,5 @@ export interface IAppointment{
     nurse: IUser,
     user: IUser,
     finished: boolean
+    version: number
 }

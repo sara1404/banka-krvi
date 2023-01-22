@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,8 +52,8 @@ public class BloodBankController {
 	}
 
 	@PutMapping("/update")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
-	private ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<BloodBank> updateBloodBank(@Valid @RequestBody final BloodBankDto bloodBankDto) {
 		return ResponseEntity.ok(bloodBankService.update(bloodBankDto));
 	}
 
@@ -66,12 +67,22 @@ public class BloodBankController {
 		@RequestParam("name") final String name,
 		@RequestParam("city") final String city,
 		@RequestParam("averageGrade") final double averageGrade,
+		@RequestParam("lng") final double lng,
+		@RequestParam("lat") final double lat,
+		@RequestParam("distance") final double distance,
 		@RequestParam("pageSize") final int pageSize,
 		@RequestParam("pageNumber") final int pageNumber,
 		@RequestParam("sortDirection") final String sortDirection,
 		@RequestParam("sortBy") final String sortBy
 	) {
-		return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, pageSize, pageNumber, sortBy, sortDirection));
+
+		try {
+			return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
+		} catch (final Exception e) {
+			return new ResponseEntity<>(HttpStatus.TOO_MANY_REQUESTS);
+		}
+
+
 	}
 
 	@PostMapping("/register")

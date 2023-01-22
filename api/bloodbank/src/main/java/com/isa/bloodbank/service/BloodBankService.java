@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.BloodBankMapper;
@@ -12,6 +13,8 @@ import com.isa.bloodbank.repository.WorkingHoursRepository;
 
 import java.util.List;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,34 +56,13 @@ public class BloodBankService {
 		return bloodBankRepository.save(bloodBank);
 	}
 
-	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final int pageSize, final int pageNumber,
-		String sortBy, final String sortDirection) {
+	@RateLimiter(name = "findAllBloodBanks", fallbackMethod = "findAllBloodBanksFallback")
+	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final double lng, final double lat, final double distance, final int pageSize, final int pageNumber, String sortBy, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
-		if (sortBy == null || sortBy.equals("")) {
-			sortBy = "name";
-		}
-		if (!name.equals("") && !city.equals("") && averageGrade != 0) {
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(name, averageGrade,
-				city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (!name.equals("") && !city.equals("")) {
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAddressId_CityContainingIgnoreCase(name, city,
-				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (!name.equals("") && averageGrade != 0) {
-			return bloodBankRepository.findByNameContainingIgnoreCaseAndAverageGradeGreaterThanEqual(name, averageGrade,
-				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (!city.equals("") && averageGrade != 0) {
-			return bloodBankRepository.findByAverageGradeGreaterThanEqualAndAddressId_CityContainingIgnoreCase(averageGrade, city,
-				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (!name.equals("")) {
-			return bloodBankRepository.findByNameContainingIgnoreCase(name, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (!city.equals("")) {
-			return bloodBankRepository.findByAddressId_CityContainingIgnoreCase(city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else if (averageGrade != 0) {
-			return bloodBankRepository.findByAverageGradeGreaterThanEqual(averageGrade,
-				PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		} else {
-			return bloodBankRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
-		}
+		if (sortBy == null || sortBy.equals("")) sortBy = "name";
+		if (sortBy.equals("averageGrade")) sortBy = "average_grade";
+		if (sortBy.equals("address.city")) sortBy = "a.city";
+		return bloodBankRepository.filterBloodBanks(lat, lng, distance, name, averageGrade, city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 	}
 
 	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
@@ -90,5 +72,12 @@ public class BloodBankService {
 	public WorkingHours getWorkingHours(final Long adminId) {
 		final WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
 		return workingHours;
+	}
+
+	// Metoda koja ce se pozvati u slucaju RequestNotPermitted exception-a
+	public Page<BloodBank> findAllBloodBanksFallback(final RequestNotPermitted rnp) {
+		System.out.println("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
+		// Samo prosledjujemo izuzetak -> global exception handler koji bi ga obradio :)
+		throw rnp;
 	}
 }
