@@ -30,6 +30,7 @@
     "ngx-scanner-qrcode": "^1.1.4",
     "ngx-toastr": "^15.2.1",
     "qrcode-decoder": "^0.3.3",
+    "ol": "^7.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

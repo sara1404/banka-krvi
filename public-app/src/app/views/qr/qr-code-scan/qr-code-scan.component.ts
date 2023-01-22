@@ -36,7 +36,8 @@ export class QrCodeScanComponent implements OnInit {
     } // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   };
 
-  appointment: IAppointment
+  appointment: IAppointment;
+  parsed: string[] = []
 
   public qrCodeResult: ScannerQRCodeResult[] = [];
 
@@ -48,12 +49,13 @@ export class QrCodeScanComponent implements OnInit {
   public onSelects(files: any) {
     this.qrcode.loadFiles(files, Object.assign({isDraw: true, isBeep: true}, this.config)).subscribe((res: ScannerQRCodeResult[]) => {
       this.qrCodeResult = res.filter(f => f.urlQR);
-      this.appointmentService.getById(this.qrCodeResult[0].data).subscribe(data => {
+      this.parsed = this.qrCodeResult[0].data.split(',')
+
+      this.appointmentService.getById(this.parsed[0].split(':')[1].trim()).subscribe(data => {
         this.appointment = data
-        console.log(this.appointment)
         this.click()
       })
-      console.log(this.qrCodeResult[0].data)
+      
     });
   }
 

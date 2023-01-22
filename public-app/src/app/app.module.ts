@@ -30,6 +30,8 @@ import { PredefinedAppointmentsComponent } from './views/predefined-appointments
 import { PersonalAppointmentsComponent } from './views/personal-appointments/personal-appointments.component';
 import { PredefinedAppointmentsModule } from './views/predefined-appointments/predefined-appointments.module';
 import { QrCodeScanModule } from './views/qr/qr-code-scan/qr-code-scan.module';
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { QrCodeScanModule } from './views/qr/qr-code-scan/qr-code-scan.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    AuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ package com.isa.bloodbank.dto;
 import java.time.LocalDateTime;
 
 import javax.persistence.Id;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -28,4 +29,6 @@ public class AppointmentDto {
 	UserDto nurse;
 	UserDto user;
 	boolean finished;
+	@Version
+	Long version;
 }

@@ -1,8 +1,8 @@
 .table {
     position: absolute;
-    top: 25%;
+    top: 35%;
     left: 25%;
-    width: 1300px;
+    width: 1000px;
 }
 
 .add-equip-btn{
@@ -13,6 +13,12 @@
   background-color: green;
   color: #fff;
   margin-left: 40px;
+}
+
+.select{
+  position: absolute;
+  left: 60%;
+  top: 30%;
 }
 
 

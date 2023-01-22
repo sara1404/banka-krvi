@@ -1,5 +1,5 @@
-<div>
-    <form>
+<div class="info">
+    <form class="form">
         <h1 class="title">Informations about center</h1>
         <mat-form-field appearance="fill" class="main-field">
             <mat-label>Name of center</mat-label>
@@ -80,5 +80,6 @@
         zipcode.value, country.value, longitude.value, latitude.value, description.value, averageGrade.value)">Save</button>
     </div>
 </div>
+<div id="ol-map" class="map-container" (click)="getCoord($event)"></div>
 
 
