@@ -143,7 +143,6 @@ export class AdminCalendarComponent implements OnInit {
       this.viewDate = addDays(this.viewDate, 7)
     this.getAppointments()
   }
-
   setView(view: CalendarView) {
     this.view = view;
   }
