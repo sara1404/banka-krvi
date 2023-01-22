@@ -25,6 +25,7 @@ import { ExaminationComponent } from "../views/users/examination/examination.com
 import { UsersComponent } from "../views/users/users.component";
 import { Role } from "../model/Role";
 import { AuthService } from "../services/auth.service";
+import { UsersGivenBloodComponent } from "../views/users-blood/users-given-blood/users-given-blood.component";
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminInfoComponent, canActivate: [AuthGuard], data:{roles: [Role.AdminCenter]}},
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'appointments/predefined', component: PredefinedAppointmentsComponent, canActivate: [AuthGuard], data:{roles: [Role.Registered]}},
   {path: 'appointments/personal', component: PersonalAppointmentsComponent},
   {path: 'appointment/qr', component: QrCodeScanComponent},
+  {path: 'allBloodUsers', component: UsersGivenBloodComponent}
 
 ];
 

@@ -52,7 +52,6 @@ public class AppointmentService {
 	@Autowired
 	MailService mailService;
 
-
 	public List<FreeAppointmentDto> findAvailableAppointments(final Long bloodBankId) {
 		final List<Appointment> availableAppointments = new ArrayList<Appointment>();
 		for (final Appointment appointment : appointmentRepository.findAllByBloodBankId(bloodBankId)) {
@@ -298,6 +297,26 @@ public class AppointmentService {
 			canSchedule = false;
 		}
 		return canSchedule;
+	}
+
+	public PageDto<AppointmentDto> getAllBloodUsers(final Long bloodBankId, final int pageSize, final int pageNumber, final String sortDirection,
+		final String sortBy) {
+		//final List<Appointment> appointments = appointmentRepository.findAllByBloodBankIdAndFinishedTrue(bloodBankId);
+		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
+
+		final List<Appointment> ret = appointmentRepository.findAllByBloodBankIdAndFinishedTrue(bloodBankId, Sort.by(sortingDirection, sortBy));
+		final PageDto<AppointmentDto> page = new PageDto();
+		page.setTotalElements(ret.size());
+		final List<AppointmentDto> retDto = appointmentMapper.appointmentsToAppointmentDtos(ret);
+		if (ret.isEmpty()) {
+			page.setContent(retDto);
+		} else if ((pageNumber + 1) * pageSize > ret.size()) {
+			page.setContent(retDto.subList(pageNumber * pageSize, ret.size()));
+		} else {
+			page.setContent(retDto.subList(pageNumber * pageSize, pageNumber * pageSize + pageSize));
+		}
+		System.out.println(page.getContent());
+		return page;
 	}
 
 }
