@@ -1,6 +1,7 @@
 import { IBloodBank } from '../../../model/BloodBankk';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BloodBankService } from '../../../services/blood-bank.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-filter-blood-banks',
@@ -8,7 +9,7 @@ import { BloodBankService } from '../../../services/blood-bank.service';
   styleUrls: ['./filter-blood-banks.component.scss'],
 })
 export class FilterBloodBanksComponent implements OnInit {
-  constructor(private bloodBankService: BloodBankService) {}
+  constructor(private bloodBankService: BloodBankService, private toastService: ToastService) {}
 
   @Input() name = '';
   @Input() city = '';
@@ -38,9 +39,14 @@ export class FilterBloodBanksComponent implements OnInit {
         this.sortBy,
         this.sortDirection
       )
-      .subscribe((data) => {
+      .subscribe({
+        next : (data) => {
         this.bloodBanks.emit(data.content);
         this.totalElements.emit(data.totalElements);
+        }, error : (err) => {
+          console.log("error " + err.status)
+          this.toastService.showError("Error occured, status code: " + err.status)
+        }
       });
     this.averageGrade.emit(averageGrade);
     this.pageNumber.emit(0);

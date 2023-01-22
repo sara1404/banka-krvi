@@ -2,6 +2,7 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
+import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.BloodBankMapper;
@@ -55,6 +56,7 @@ public class BloodBankService {
 		return bloodBankRepository.save(bloodBank);
 	}
 
+	@RateLimiter(name = "findAllBloodBanks", fallbackMethod = "findAllBloodBanksFallback")
 	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final double lng, final double lat, final double distance, final int pageSize, final int pageNumber, String sortBy, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
 		if (sortBy == null || sortBy.equals("")) sortBy = "name";
@@ -70,5 +72,12 @@ public class BloodBankService {
 	public WorkingHours getWorkingHours(final Long adminId) {
 		final WorkingHours workingHours = workingHoursRepository.getById(userService.findById(adminId).getBloodBank().getId());
 		return workingHours;
+	}
+
+	// Metoda koja ce se pozvati u slucaju RequestNotPermitted exception-a
+	public Page<BloodBank> findAllBloodBanksFallback(final RequestNotPermitted rnp) {
+		System.out.println("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
+		// Samo prosledjujemo izuzetak -> global exception handler koji bi ga obradio :)
+		throw rnp;
 	}
 }

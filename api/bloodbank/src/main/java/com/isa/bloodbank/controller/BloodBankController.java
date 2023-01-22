@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -74,8 +75,14 @@ public class BloodBankController {
 		@RequestParam("sortDirection") final String sortDirection,
 		@RequestParam("sortBy") final String sortBy
 	) {
-		return ResponseEntity.ok(
-			bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
+
+		try {
+			return ResponseEntity.ok(bloodBankService.searchAndFilter(name.trim(), city.trim(), averageGrade, lng, lat, distance, pageSize, pageNumber, sortBy, sortDirection));
+		} catch (final Exception e) {
+			return new ResponseEntity<>(HttpStatus.TOO_MANY_REQUESTS);
+		}
+
+
 	}
 
 	@PostMapping("/register")
