@@ -23,12 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -46,6 +49,7 @@ public class AppointmentService {
 	@Autowired
 	private BloodBankRepository bloodBankRepository;
 	@Autowired
+	private BloodBankService bloodBankService;
 	private DonationSurveyService donationSurveyService;
 	@Autowired
 	private QrCodeService qrCodeService;
@@ -250,13 +254,25 @@ public class AppointmentService {
 		return null;
 	}
 
-	@Transactional(readOnly = false)
+	@Transactional
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
+		System.out.println("udara " + appointmentDto.getBloodBank().getId());
+
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
+		BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
+		System.out.print(current.getId());
+		System.out.println(current.getAvailable());
+		//if(!current.getAvailable())
+			//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		current.setAvailable(false);
+		bloodBankRepository.save(current);
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
+		appointment.setBloodBank(current);
 		appointmentRepository.save(appointment);
+		current.setAvailable(true);
+		bloodBankRepository.save(current);
 		qrCodeService.generateAppointmentQrCode(appointment);
 		mailService.sendEmailWithQrCode(appointment.getUser().getEmail(), appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);

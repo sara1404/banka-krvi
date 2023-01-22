@@ -74,6 +74,12 @@ public class BloodBankService {
 		return workingHours;
 	}
 
+	public void updateAvailability(boolean value, BloodBank bank) {
+		bank.setAvailable(value);
+		bloodBankRepository.save(bank);
+
+	}
+
 	// Metoda koja ce se pozvati u slucaju RequestNotPermitted exception-a
 	public Page<BloodBank> findAllBloodBanksFallback(final RequestNotPermitted rnp) {
 		System.out.println("Prevazidjen broj poziva u ogranicenom vremenskom intervalu");
