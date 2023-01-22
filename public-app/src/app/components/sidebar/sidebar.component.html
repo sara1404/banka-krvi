@@ -16,13 +16,10 @@
   <div *ngIf="isLoggedIn && (this.user.userType=='ADMIN_CENTER')" routerLink='free/appointments' class="sidebar-option">FREE APPOINTMENTS</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='bloodsupplies' class="sidebar-option">BLOOD SUPPLIES</div>
   <div routerLink='bloodBanks' class="sidebar-option">BLOOD BANKS</div>
-<<<<<<< HEAD
   <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
   <div *ngIf="isLoggedIn" routerLink='appointment/qr' class="sidebar-option">SCAN QR CODE</div>
-=======
   <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
->>>>>>> develop
   
 </div>
