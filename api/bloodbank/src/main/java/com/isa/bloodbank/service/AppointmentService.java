@@ -237,8 +237,8 @@ public class AppointmentService {
 		BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
 		System.out.print(current.getId());
 		System.out.println(current.getAvailable());
-		if(!current.getAvailable())
-			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		//if(!current.getAvailable())
+			//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		current.setAvailable(false);
 		bloodBankRepository.save(current);
 		appointment.setAvailable(false);
