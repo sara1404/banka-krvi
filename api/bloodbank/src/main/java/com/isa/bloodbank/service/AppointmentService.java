@@ -23,15 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 @Transactional(readOnly = true)
@@ -170,7 +167,7 @@ public class AppointmentService {
 		return true;
 	}
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
 		try {
 			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
@@ -181,14 +178,19 @@ public class AppointmentService {
 
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
-		if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
+		if (findAvailableMedicalStaff(appointment.getBloodBank().getId(), appointment.getStartTime(), appointment.getDuration()).size() != 0) {
 			appointmentRepository.save(appointment);
 		}
+		/*if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
+			appointmentRepository.save(appointment);
+		}*/
 		/*if (appointment.getBloodBank() != null) {
 			appointmentRepository.save(appointment);
 		}*/
 		//appointmentRepository.save(appointment);
-		return appointmentMapper.appointmentToAppointmentDto(appointment);
+		{
+			return appointmentMapper.appointmentToAppointmentDto(appointment);
+		}
 	}
 
 	public Appointment findById(final Long id) {
@@ -259,11 +261,11 @@ public class AppointmentService {
 		System.out.println("udara " + appointmentDto.getBloodBank().getId());
 
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
+		final BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
 		System.out.print(current.getId());
 		System.out.println(current.getAvailable());
 		//if(!current.getAvailable())
-			//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		current.setAvailable(false);
 		bloodBankRepository.save(current);
 		appointment.setAvailable(false);
