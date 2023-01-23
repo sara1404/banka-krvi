@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -85,7 +86,9 @@ public class UserService {
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
 
+	@Cacheable(key = "#name + '_' +#lastName", unless = "#result == null", cacheNames = "users_searched")
 	public List<UserDto> search(final String name, final String lastName) {
+		System.out.println("triggered");
 		final List<User> users = userRepository.getUsersByFirstNameContainsAndLastNameContains(name, lastName);
 		return userMapper.usersToUserDtos(users);
 	}
