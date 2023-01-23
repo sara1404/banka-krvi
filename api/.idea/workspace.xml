@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/bloodbank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/bloodbank.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,16 +50,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/normalno/FTN/godina_4/zimski/isa/j2se/jcommander-1.82.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/normalno/FTN/godina_4/zimski/isa/j2se/jcommander-1.82.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.saveactions"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -67,7 +68,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BloodbankApplication">
+  <component name="RunManager" selected="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
       <module name="bloodbank" />
@@ -77,6 +78,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppoitntmentAdminsTestTest.testAdminUserConcurrency" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.isa.bloodbank" />
+      <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.AppoitntmentAdminsTestTest" />
+      <option name="METHOD_NAME" value="testAdminUserConcurrency" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -106,8 +123,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BloodbankApplication" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency" />
         <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
+        <item itemvalue="Application.BloodbankApplication" />
       </list>
     </recent_temporary>
   </component>
