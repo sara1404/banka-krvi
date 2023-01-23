@@ -15,6 +15,7 @@ import com.isa.bloodbank.repository.UserRepository;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -83,7 +84,9 @@ public class UserService {
 		return userMapper.userToRegisterUserDto(userRepository.save(userMapper.registerUserDtoToUser(centerAdmin)));
 	}
 
+	@Cacheable(key = "#name + '_' +#lastName", unless = "#result == null", cacheNames = "users_searched")
 	public List<UserDto> search(final String name, final String lastName) {
+		System.out.println("triggered");
 		final List<User> users = userRepository.getUsersByFirstNameContainsAndLastNameContains(name, lastName);
 		return userMapper.usersToUserDtos(users);
 	}
