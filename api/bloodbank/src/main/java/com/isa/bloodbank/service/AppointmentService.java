@@ -171,16 +171,19 @@ public class AppointmentService {
 
 	@Transactional(readOnly = false)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
-		final BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
+
+		BloodBank current;
+		try {
+			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+			current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
+		} catch (final Exception e) {
+			current = bloodBankRepository.getReferenceById(16l);
+			appointment.setBloodBank(current);
+		}
 		if (!appointmentRepository.findAllByBloodBankId(current.getId()).stream().filter(x -> x.getStartTime().compareTo(appointment.getStartTime()) == 0)
 			.toList()
 			.isEmpty()) {
 			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
-		}
-		try {
-			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
-		} catch (final Exception e) {
-			appointment.setBloodBank(bloodBankRepository.getReferenceById(Long.valueOf(16)));
 		}
 		appointment.setAvailable(true);
 		appointment.setFinished(false);

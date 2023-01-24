@@ -19,8 +19,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.PessimisticLockingFailureException;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -81,13 +81,13 @@ public class AppoitntmentAdminsTestTest {
 		executor.shutdown();
 	}
 
-	@Test(expected = ObjectOptimisticLockingFailureException.class)
+	@Test(expected = CannotAcquireLockException.class)
 	public void testAdminUserConcurrency() throws Throwable {
 		final LocalDateTime time = LocalDateTime.now();
 		final Appointment appointment = new Appointment();
 		appointment.setStartTime(time);
 		final BloodBank bb = new BloodBank();
-		bb.setId(1l);
+		bb.setId(16l);
 		appointment.setBloodBank(bb);
 		final Long adminId = 3l;
 		final Long userId = 5l;
@@ -100,7 +100,7 @@ public class AppoitntmentAdminsTestTest {
 				final var appointmentDto = new AppointmentDto();
 				appointmentDto.setStartTime(time);
 				final var bloodBankDto = new BloodBankDto();
-				bloodBankDto.setId(1l);
+				bloodBankDto.setId(16l);
 				appointmentDto.setBloodBank(bloodBankDto);
 				appointmentService.userCreatesAppointment(appointmentDto, userId);
 			}
@@ -122,7 +122,7 @@ public class AppoitntmentAdminsTestTest {
 		try {
 			future2.get();
 		} catch (final ExecutionException e) {
-			System.out.println("Exception from thread " + e.getCause().getClass()); // u pitanju je bas PessimisticLockingFailureException
+			System.out.println("Exception from thread " + e.getCause().getClass());
 			throw e.getCause();
 		} catch (final InterruptedException e) {
 			e.printStackTrace();
