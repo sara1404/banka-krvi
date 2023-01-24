@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -183,7 +184,7 @@ public class AppointmentService {
 		}
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
-		if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
+		if (findAvailableMedicalStaff(appointment.getBloodBank().getId(), appointment.getStartTime(), appointment.getDuration()).size() != 0) {
 			appointmentRepository.save(appointment);
 		}
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
@@ -200,7 +201,9 @@ public class AppointmentService {
 		return appointmentRepository.save(appointment);
 	}
 
+	@Cacheable(key = "#month + '_' + #year + '_' + #adminstatorId", unless = "#result == null", cacheNames = "appointments")
 	public List<AppointmentDto> getAppointments(final int month, final int year, final Long administratorId) {
+		System.out.println("appointments triggered");
 		final User administator = userService.findUserById(administratorId);
 		final List<Appointment> appointments = appointmentRepository.findAllByStartTimeMonthValueAndStartTime_Year(month, year,
 			administator.getBloodBank().getId());
@@ -262,6 +265,8 @@ public class AppointmentService {
 			.isEmpty()) {
 			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		}
+		//if(!current.getAvailable())
+		//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		current.setAvailable(false);
 		bloodBankRepository.save(current);
 
