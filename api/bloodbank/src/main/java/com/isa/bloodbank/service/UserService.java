@@ -14,6 +14,7 @@ import com.isa.bloodbank.repository.BloodBankRepository;
 import com.isa.bloodbank.repository.UserRepository;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -85,6 +86,7 @@ public class UserService {
 	}
 
 	@Cacheable(key = "#name + '_' +#lastName", unless = "#result == null", cacheNames = "users_searched")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	public List<UserDto> search(final String name, final String lastName) {
 		System.out.println("triggered");
 		final List<User> users = userRepository.getUsersByFirstNameContainsAndLastNameContains(name, lastName);

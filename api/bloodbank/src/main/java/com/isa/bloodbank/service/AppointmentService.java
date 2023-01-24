@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -205,6 +206,7 @@ public class AppointmentService {
 	}
 
 	@Cacheable(key = "#month + '_' + #year + '_' + #adminstatorId", unless = "#result == null", cacheNames = "appointments")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	public List<AppointmentDto> getAppointments(final int month, final int year, final Long administratorId) {
 		System.out.println("appointments triggered");
 		final User administator = userService.findUserById(administratorId);
