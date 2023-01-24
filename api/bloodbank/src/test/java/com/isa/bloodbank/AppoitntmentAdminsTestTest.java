@@ -83,9 +83,6 @@ public class AppoitntmentAdminsTestTest {
 
 	@Test(expected = ObjectOptimisticLockingFailureException.class)
 	public void testAdminUserConcurrency() throws Throwable {
-		final BloodBank bloodBank = new BloodBank();
-		final Address address = new Address();
-		final User nurse = new User();
 		final LocalDateTime time = LocalDateTime.now();
 		final Appointment appointment = new Appointment();
 		appointment.setStartTime(time);
@@ -101,6 +98,7 @@ public class AppoitntmentAdminsTestTest {
 			public void run() {
 				System.out.println("Startovan Thread 1");
 				final var appointmentDto = new AppointmentDto();
+				appointmentDto.setStartTime(time);
 				final var bloodBankDto = new BloodBankDto();
 				bloodBankDto.setId(1l);
 				appointmentDto.setBloodBank(bloodBankDto);
@@ -113,7 +111,7 @@ public class AppoitntmentAdminsTestTest {
 			public void run() {
 				System.out.println("Startovan Thread 2");
 				try {
-					Thread.sleep(20);
+					Thread.sleep(1500);
 				} catch (final InterruptedException e) {
 					System.out.println("kad udje u drugi");
 				}

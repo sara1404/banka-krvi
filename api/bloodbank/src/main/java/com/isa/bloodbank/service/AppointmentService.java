@@ -171,29 +171,21 @@ public class AppointmentService {
 	@Transactional(readOnly = false)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
 		final BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
-		if (!current.getAvailable()) {
+		if (!appointmentRepository.findAllByBloodBankId(current.getId()).stream().filter(x -> x.getStartTime().compareTo(appointment.getStartTime()) == 0)
+			.toList()
+			.isEmpty()) {
 			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		}
-		current.setAvailable(false);
-		bloodBankRepository.save(current);
 		try {
 			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
 		} catch (final Exception e) {
 			appointment.setBloodBank(bloodBankRepository.getReferenceById(Long.valueOf(16)));
-			//bloodBankRepository.getReferenceById(Long.valueOf(16))
 		}
-
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
 		if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
 			appointmentRepository.save(appointment);
 		}
-		current.setAvailable(true);
-		bloodBankRepository.save(current);
-		/*if (appointment.getBloodBank() != null) {
-			appointmentRepository.save(appointment);
-		}*/
-		//appointmentRepository.save(appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
@@ -265,7 +257,9 @@ public class AppointmentService {
 		System.out.println("udara " + appointmentDto.getBloodBank().getId());
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		final BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
-		if (!current.getAvailable()) {
+		if (!appointmentRepository.findAllByBloodBankId(current.getId()).stream().filter(x -> x.getStartTime().compareTo(appointment.getStartTime()) == 0)
+			.toList()
+			.isEmpty()) {
 			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		}
 		current.setAvailable(false);
@@ -282,7 +276,7 @@ public class AppointmentService {
 		current.setAvailable(true);
 		bloodBankRepository.save(current);
 		qrCodeService.generateAppointmentQrCode(appointment);
-		//mailService.sendEmailWithQrCode(appointment.getUser().getEmail(), appointment);
+		mailService.sendEmailWithQrCode(appointment.getUser().getEmail(), appointment);
 		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
