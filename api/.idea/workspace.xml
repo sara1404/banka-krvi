@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/LocationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/LocationMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/WebSocketConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/bloodbank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/bloodbank.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/pom.xml" afterDir="false" />
     </list>
