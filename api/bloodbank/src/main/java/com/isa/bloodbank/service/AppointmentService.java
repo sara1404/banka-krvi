@@ -247,8 +247,7 @@ public class AppointmentService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) throws Exception {
 		final Appointment app = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
-			donationSurveyService.findByUserId(userId) != null) {
+		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1) {
 			app.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 			app.setAvailable(false);
 			app.setAppointmentInfo(appointmentRepository.getById(appointmentDto.getId()).getAppointmentInfo());

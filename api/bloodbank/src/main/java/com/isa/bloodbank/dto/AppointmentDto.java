@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.isa.bloodbank.entity.BloodBank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class AppointmentDto {
 	LocalDateTime startTime;
 	@NotNull
 	double duration;
-	BloodBankDto bloodBank;
+	BloodBank bloodBank;
 	UserDto nurse;
 	UserDto user;
 	boolean finished;
