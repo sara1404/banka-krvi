@@ -1,56 +1,100 @@
-form{
-    width: 500px;
-    padding: 10px;
-    position: absolute;
-    left: 45%;
-    top: 15%;
-}
-
-.field{
-    margin: 5px;
-}
-.main-field{
-    margin: 5px;
-    width: 82%;
-}
-
-.title{
-   padding-left: 20%; 
-}
-
-section {
-    display: table;
-  }
+.form-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    padding-left: 200px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
   
-.example-label {
-display: table-cell;
-font-size: 14px;
-margin-left: 8px;
-min-width: 120px;
-}
+    .user-profile-form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30em 5em 10em 10em;
+      width: 90%;
+  
+      .form-field{
+        width: 100%;
 
-.example-button-row {
-display: table-cell;
-width: 490px;
-text-align: right;
-padding-right: 14%;
-position: absolute;
-top: 80%;
-left: 53%;
-}
+      }
+  
+      .title{
+        justify-content: center;
+        margin-top: 170px;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+        user-select: none;
+      }
 
-.example-button-row .mat-button-base {
-margin: 8px 8px 8px 0;
-}
+      .genders{
+        display: flex;
+      }
 
-.example-flex-container {
-display: flex;
-justify-content: space-between;
-flex-wrap: wrap;
-}
+      .male{
+        margin-right: 10px;
+      }
 
-.example-button-container {
-display: flex;
-justify-content: center;
-width: 120px;
-}
+      .female{
+        margin-left: 10px;
+      }
+      .buttons{
+        width: 40%;
+        display: flex;
+        margin-top: 10px;
+      }
+  
+      .submit-btn{
+        height: 30px;
+        width: 100px;
+        border: none;
+        outline: none;
+        background-color: rgb(4, 158, 4);
+        border-radius: .7em;
+        color: #fff;
+        font-size: 1.2rem;
+        margin-left: 5px;
+      }
+
+      .edit-button{
+        width: 200px;
+        border: none;
+        outline: none;
+        background-color: rgb(4, 158, 4);
+        border-radius: .7em;
+        color: #fff;
+        font-size: 1.2rem;
+        margin-right: 5px;
+      }
+  
+      .submit-btn:hover{
+        background-color: rgb(3, 116, 3);
+      }
+      .edit-button:hover{
+        background-color: rgb(3, 116, 3);
+      }
+
+      .address-form {
+        width: 80%;
+      }
+
+      .address-form-field-left {
+        width: 70%;
+        padding-right: 1em;
+      }
+
+      .address-form-field-right {
+        width: 30%;
+      }
+
+      .country-field {
+        width: 100%;
+      }
+      
+      .form-field{
+        width: 80%;
+      }
+
+    }
+  }

@@ -3,18 +3,28 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users.component';
-
+import { ExaminationComponent } from './examination/examination.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AppointmentInfoComponent } from './appointment-info/appointment-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UserComponent
+    UserComponent,
+    ExaminationComponent,
+    AppointmentInfoComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxScannerQrcodeModule,
   ],
-  exports: [UsersComponent]
+  exports: [UsersComponent],
 })
 export class UsersModule { }

@@ -1,6 +1,25 @@
 <div class="sidebar-wrapper">
-  <div routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
-  <div routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
-  <div routerLink='users' class="sidebar-option">USERS</div>
-
+  <!--*ngIf="user.userType == 'REGISTERED' || user.userType == 'ADMIN_CENTER' || user.userType != 'ADMIN_SYSTEM'"-->
+  <div class="nav-icon">
+    <img src="assets/icons/hospital.png" alt="hospital-logo">
+  </div>
+  <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='create-appointment-user' class="sidebar-option">SCHEDULE APPOINTMENT</div>
+   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='create-appointment' class="sidebar-option">NEW APPOINTMENT</div>
+   <div *ngIf="isLoggedIn && (this.user.userType=='REGISTERED')" routerLink='appointments/predefined' class="sidebar-option">PREDEFINED APPOINTMENTS</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADIM_SYSTEM'" routerLink='register/bloodbank' class="sidebar-option">REGISTER BLOODBANK</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_SYSTEM'" routerLink='register/admin' class="sidebar-option">REGISTER ADMIN</div>
+  <div routerLink='register/user' class="sidebar-option">REGISTER USER</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='users' class="sidebar-option">USERS</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='admin/profile' class="sidebar-option">ADMIN PERSONAL INFORMATIONS</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='bloodbank/info' class="sidebar-option">BLOODBANK INFO</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='other/admins' class="sidebar-option">OTHER ADMINS</div>
+  <div *ngIf="isLoggedIn && (this.user.userType=='ADMIN_CENTER')" routerLink='free/appointments' class="sidebar-option">FREE APPOINTMENTS</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='bloodsupplies' class="sidebar-option">BLOOD SUPPLIES</div>
+  <div routerLink='bloodBanks' class="sidebar-option">BLOOD BANKS</div>
+  <div *ngIf="isLoggedIn" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
+  <div *ngIf="isLoggedIn" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
+  <div *ngIf="isLoggedIn" routerLink='appointment/qr' class="sidebar-option">SCAN QR CODE</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='allBloodUsers' class="sidebar-option">USERS WITH BLOOD</div>
 </div>

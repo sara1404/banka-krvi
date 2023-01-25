@@ -1,0 +1,11 @@
+<div class="select">
+    <mat-select (selectionChange)="sortAppointments($event)" placeholder="Sort by" floatLabel="never">
+        <mat-select-trigger>Sort by</mat-select-trigger>
+        <mat-option value="user.firstName ASC">Firstname ascending</mat-option>
+        <mat-option value="user.firstName DESC">First descending</mat-option>
+        <mat-option value="user.lastName ASC">Lastname ascending</mat-option>
+        <mat-option value="user.lastName DESC">Lastname descending</mat-option>
+        <mat-option value="startTime ASC">Starttime ascending</mat-option>
+        <mat-option value="startTime DESC">Starttime grade descending</mat-option>
+    </mat-select>
+</div>

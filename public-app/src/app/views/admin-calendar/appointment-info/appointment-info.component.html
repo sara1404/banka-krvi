@@ -1,0 +1,149 @@
+<p></p>
+<div class="form-wrapper">
+    
+    <form [formGroup]="appInfoForm" class="register-appointment-info-form">
+        <div>
+            <label for="" class="title">APPOINTMENT INFO</label>
+        </div>
+        <div>
+            <label for="" class="title">Analysis</label>
+        </div>
+        <div>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>CuSO4</mat-label>
+                <input type="number" formControlName="cuso4" matInput />
+              </mat-form-field>
+              <div *ngIf="cuso4?.invalid && (cuso4?.dirty || cuso4?.touched)">
+                <mat-error *ngIf="cuso4.errors['required']">
+                  Please enter value!
+                </mat-error>
+              </div>
+        
+              <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Hemoglobinometer</mat-label>
+                <input type="number" formControlName="hemoglobinometer" matInput />
+              </mat-form-field>
+              <div *ngIf="hemoglobinometer?.invalid && (hemoglobinometer?.dirty || hemoglobinometer?.touched)">
+                <mat-error *ngIf="hemoglobinometer.errors['required']">
+                  Please enter value!
+                </mat-error>
+              </div>
+        </div>
+
+      <div>
+        <mat-form-field appearance="fill" class="form-field">
+            <mat-label>TA</mat-label>
+            <input type="number" formControlName="ta" matInput />
+          </mat-form-field>
+          <div *ngIf="ta?.invalid && (ta?.dirty || ta?.touched)">
+            <mat-error *ngIf="ta.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+    
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>TT</mat-label>
+            <input type="number" formControlName="tt" matInput />
+          </mat-form-field>
+          <div *ngIf="tt?.invalid && (tt?.dirty || tt?.touched)">
+            <mat-error *ngIf="tt.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+          
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>TV</mat-label>
+            <input type="number" formControlName="tv" matInput />
+          </mat-form-field>
+          <div *ngIf="tv?.invalid && (tv?.dirty || tv?.touched)">
+            <mat-error *ngIf="tv.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+      </div>
+    <div>
+      <label for="" class="title">Acceptance</label>
+      <!--formControlName="accepted"-->
+      <mat-radio-group [(ngModel)]="acceptedClick" [ngModelOptions]="{standalone: true}"  class="radio" aria-label="Accepted">
+        <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="true">Yes</mat-radio-button>
+        <mat-radio-button (click)="changeSelectedAcceptance()"  [value]="false">No</mat-radio-button>
+      </mat-radio-group>
+    
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Reason</mat-label>
+          <input formControlName="reason" matInput />
+      </mat-form-field>
+    </div>
+
+
+      <div>
+        <label for="" class="title">Blood</label>
+      </div>
+      <div>
+          
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Hand</mat-label>
+            <mat-select (selectionChange)="changeHand($event)" formControlName="hand">
+              <mat-option value="LEFT">Left</mat-option>
+              <mat-option value="RIGHT">Right</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Quantity</mat-label>
+            <input type="number" formControlName="quantity" matInput />
+          </mat-form-field>
+          <div *ngIf="quantity?.invalid && (quantity?.dirty || quantity?.touched)">
+            <mat-error *ngIf="quantity.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Needle</mat-label>
+            <input type="number" formControlName="needle" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Bandages</mat-label>
+          <input type="number" formControlName="bandage" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Bags</mat-label>
+          <input type="number" formControlName="bag" matInput />
+        </mat-form-field>
+      </div>
+
+      <!--
+      <div>
+        <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Start</mat-label>
+            <input formControlName="startBlood" matInput />
+          </mat-form-field>
+          <div *ngIf="startBlood?.invalid && (startBlood?.dirty || startBlood?.touched)">
+            <mat-error *ngIf="startBlood.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+    
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>End</mat-label>
+            <input formControlName="endBlood" matInput />
+          </mat-form-field>
+          <div *ngIf="endBlood?.invalid && (endBlood?.dirty || endBlood?.touched)">
+            <mat-error *ngIf="endBlood.errors['required']">
+              Please enter value!
+            </mat-error>
+          </div>
+      </div>
+      -->
+      
+      <input
+      type="submit"
+      (click)="finish()"
+      value="FINISH"
+      class="form-field submit-btn"
+    />
+
+    </form>
+  </div>

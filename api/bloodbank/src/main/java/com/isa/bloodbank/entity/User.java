@@ -1,14 +1,20 @@
 package com.isa.bloodbank.entity;
 
 import com.isa.bloodbank.entity.enums.BloodType;
+import com.isa.bloodbank.entity.enums.Gender;
 import com.isa.bloodbank.entity.enums.UserType;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -52,8 +58,25 @@ public class User extends BaseEntity {
 	String password;
 	@Column
 	boolean firstLogged;
-	@ManyToOne()
+
+	@Column
+	String phoneNumber;
+	@Column
+	Gender gender;
+	@Column
+	String workplaceName;
+	@Column
+	String jobTitle;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	Address address;
+
+	@ManyToOne
 	@JoinColumn(name = "bloodbank_id", referencedColumnName = "id")
 	BloodBank bloodBank;
+	@ManyToMany()
+	List<Appointment> appointments;
+	@Column
+	int points;
 
 }

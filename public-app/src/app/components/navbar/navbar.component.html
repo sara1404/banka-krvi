@@ -1,3 +1,6 @@
 <div class="navbar">
-  <div class="user">sindzeri</div>
+  <div *ngIf="isLoggedIn" routerLink="userProfile" class="user">{{user?.firstName}} {{user?.lastName}}</div>
+  <div *ngIf="isLoggedIn" routerLink="changePassword" class="user">Change password</div>
+  <div *ngIf="!isLoggedIn" routerLink="login" class="user">Login</div>
+  <div *ngIf="isLoggedIn" class="user" (click)="logout()">Logout</div>
 </div>

@@ -1,0 +1,71 @@
+<mat-dialog-content class="content">
+  <button class="close" mat-button mat-dialog-close="canceled">X</button>
+  <h2 mat-dialog-title class="title">Create appointment</h2>
+  <mat-stepper>
+    <mat-step>
+      <form [formGroup]="durationForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Start time</mat-label>
+          <input matInput value="{{startTime}}" type="datetime-local" disabled="true"/>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Duration</mat-label>
+          <mat-select formControlName="duration">
+            <mat-option value="30">30</mat-option>
+            <mat-option value="60">60</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext (click)="recommendBloodBanks()" [disabled]="!durationForm.valid">
+            Next
+          </button>
+      </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <div class="select">
+        <mat-select (selectionChange)="sort($event)" placeholder="Sort by" floatLabel="never" class="sort">
+            <mat-select-trigger>Sort by</mat-select-trigger>
+            <mat-option value="ASC">Grade ascending</mat-option>
+            <mat-option value="DESC">Grade descending</mat-option>
+        </mat-select>
+      </div>
+      <div class="table-content">
+        <mat-table #table [dataSource]="bloodBanks">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.bloodBank.name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.bloodBank.address.city }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="averageGrade">
+            <mat-header-cell *matHeaderCellDef>Average grade</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.bloodBank.averageGrade }}</mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"
+          (click)="selection.toggle(row)"
+          [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+          (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+          ></mat-row>
+        </mat-table>
+        <mat-spinner *ngIf="showSpinner"></mat-spinner>
+        <mat-paginator
+        [pageSize]="2"
+        [length]="totalElements"
+        (page)="onPageChanged($event)"
+        [pageIndex]="pageNumber"
+        >
+      </mat-paginator>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious (click)="deleteBloodBanks()">Back</button>
+        <button mat-button matStepperNext [disabled]="!isSelected()" (click)="onClose()">
+          Create
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

@@ -1,0 +1,22 @@
+<form [formGroup]="yearViewForm" class="year-view-form">
+    <!-- <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Month</mat-label>
+      <mat-select formControlName="month">
+        <mat-option value="NEEDLE">NEEDLE</mat-option>
+        <mat-option value="BAG">BAG</mat-option>
+        <mat-option value="BANDAGE">BANDAGE</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Equipment quantity</mat-label>
+      <input matInput formControlName="quantity" type="number" min="1"/>
+    </mat-form-field> -->
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="dp2" [min]="sixMonthsAgo" [max]="today" placeholder="Select a Date" (click)="openDatePicker(dp2)">
+        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+        <mat-datepicker #dp2 startView="multi-year" (monthSelected)="closeDatePicker($event, dp2)"></mat-datepicker>
+      </mat-form-field>
+  </form>
+  

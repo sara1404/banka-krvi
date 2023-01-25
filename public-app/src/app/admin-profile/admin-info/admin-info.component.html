@@ -1,0 +1,105 @@
+<form>
+    <h1 class="title">Personal informations</h1>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>Name</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.firstName}}" #firstName>
+    </mat-form-field>
+    <div class="error" *ngIf="!okName">
+        Name must start with uppercase
+    </div>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>Surname</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.lastName}}" #lastName>
+    </mat-form-field>
+    <div class="error" *ngIf="!okSurname">
+        Surname must start with uppercase
+    </div>
+    <div>
+        <label>
+            <input type="radio"
+                   value="FEMALE"
+                   [(ngModel)]="this.user.gender"
+                   id="point1"
+                   (change)="onGenderChange('FEMALE')"
+                   [disabled]="isDisabled"
+                   name="ProfitCode"><small>FEMALE</small>
+        </label>
+        <label>
+            <input type="radio"
+                   value="MALE"
+                   [(ngModel)]="this.user.gender"
+                   id="point1"
+                   (change)="onGenderChange('MALE')"
+                   [disabled]="isDisabled"
+                   name="ProfitCode"><small>MALE</small>
+        </label>
+    </div>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>JMBG</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.jmbg}}" #jmbg>
+    </mat-form-field>
+    <div class="error" *ngIf="!okJMBG">
+        You must enter correct jmbg format
+    </div>
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>Phone number</mat-label>
+        <input class="input" required matInput [disabled]="isDisabled" value="{{this.user?.phoneNumber}}" #phoneNumber>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="main-field">
+        <mat-label>email</mat-label>
+        <input class="input" required matInput [disabled]="true" value="{{this.user?.email}}" #email>
+    </mat-form-field>
+    <div class="error" *ngIf="!okEmail">
+        You must enter valid email
+    </div>
+    <div class="address">
+        <mat-form-field appearance="fill" class="address-field">
+            <mat-label>Street</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.street}}" #street>
+        </mat-form-field>
+        <div class="error" *ngIf="!okStreet">
+            Street must start with uppercase
+        </div>
+        <mat-form-field appearance="fill" class="address-field">
+            <mat-label>Number</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.number}}" #number>
+        </mat-form-field>
+        <div class="error" *ngIf="!okNumber">
+            Must be number
+        </div>
+        <mat-form-field appearance="fill" class="address-field">
+            <mat-label>City</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.city}}" #city>
+        </mat-form-field>
+        <div class="error" *ngIf="!okCity">
+            City must start with uppercase
+        </div>
+        <mat-form-field appearance="fill" class="address-field">
+            <mat-label>Zip code</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.zipcode}}" #zipcode>
+        </mat-form-field>
+        <div class="error" *ngIf="!okZipcode">
+            zipcode must be number at least 5 characters long
+        </div>
+        <mat-form-field appearance="fill" class="address-field">
+            <mat-label>Country</mat-label>
+            <input class="input" matInput [disabled]="isDisabled" value="{{this.user?.address.country}}" #country>
+        </mat-form-field>
+        <div class="error" *ngIf="!okCountry">
+            Country must start with uppercase
+        </div>
+    </div>
+    <div class="error" *ngIf="!complete">
+        You must fill all fields
+    </div>
+    <div *ngIf="updated" class="ok">
+        Updated
+    </div>
+</form>
+<div class="example-button-row">
+    <button *ngIf="showEdit" mat-raised-button (click)="editClick()">Edit</button>
+    <button *ngIf="showSave" mat-raised-button (click)="okClick(firstName.value, lastName.value, jmbg.value, 
+    email.value, phoneNumber.value, street.value, number.value, city.value,
+    zipcode.value, country.value)">Save</button>
+</div>

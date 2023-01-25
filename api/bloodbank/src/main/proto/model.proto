@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpcService;
+
+enum BloodType {
+	APlus = 0;
+	AMinus = 1;
+	BPlus = 2;
+	BMinus = 3;
+	ABPlus = 4;
+	ABMinus = 5;
+	OPlus = 6;
+	OMinus = 7;
+}
+
+message UrgentBloodTransferRequest {
+	BloodType bloodType = 1;
+	uint32 amount = 2;
+}
+
+message UrgentBloodTransferResponse {
+	// string apiKey = 1;
+	bool hasBlood = 1;
+}

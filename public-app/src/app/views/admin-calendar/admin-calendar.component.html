@@ -1,0 +1,86 @@
+<div class="calendar-info-wrapper">
+  <div class="calendar-info">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+
+        (click)="previousWeek()"
+
+      >
+        Previous
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+
+
+      >
+        Today
+      </div>
+      <div
+        class="btn btn-primary"
+
+        (click)="nextWeek()"
+      >
+        Next
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="displayYearView()"
+          [class.active]="view === CalendarView.Month"
+        >
+          Year
+        </div>
+      </div>
+    </div>
+
+    <div class="date">
+      <h1>{{ viewDate | date: "M/y"}}</h1>
+    </div>
+  </div>
+
+
+
+
+  <div class="calendar" [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="click($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [daysInWeek]="daysInWeek"
+      [dayStartHour]="dayStartHour"
+      [dayEndHour]="dayEndHour"
+      [hourSegmentHeight]="hourSegmentHeight"
+      [events]="events"
+      (eventClicked)="click($event)">
+    </mwl-calendar-week-view>
+  </div>
+
+</div>
+
+
+

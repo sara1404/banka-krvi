@@ -1,8 +1,12 @@
 package com.isa.bloodbank.controller;
 
+import com.isa.bloodbank.dto.AdministratorDto;
+import com.isa.bloodbank.dto.PasswordChangeDto;
 import com.isa.bloodbank.dto.RegisterUserDto;
 import com.isa.bloodbank.dto.UserDto;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.UserMapper;
+import com.isa.bloodbank.security.JwtUtils;
 import com.isa.bloodbank.service.UserService;
 
 import java.util.List;
@@ -10,13 +14,18 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,44 +35,103 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	private JwtUtils jwtUtils;
+	@Autowired
+	private UserMapper userMapper;
 
-    @GetMapping("/bloodBankId/") //bilo i /{bloodBankId}/ @PathVariable("bloodBankId") final Long bloodBankId
-    public ResponseEntity<List<User>> findByAdministratorId() {
-        final Long administratorId = (long) (3);
-        final Long bloodBankId = (long) 5;
-        return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, administratorId));
-    }
+	@GetMapping("/bloodBankId")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
+	public ResponseEntity<List<AdministratorDto>> findByAdministratorId(
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader
+	) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		final Long bloodBankId = loggedUser.getBloodBank().getId();
+		return ResponseEntity.ok(userService.findByBloodBankId(bloodBankId, loggedUser.getId()));
+	}
 
-    @PostMapping("/register/admin")
-    public ResponseEntity<RegisterUserDto> registerCenterAdmin(@RequestBody final RegisterUserDto centerAdmin) {
-        System.out.println(centerAdmin + "e");
-        return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
-    }
+	@PostMapping("/register/admin")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<RegisterUserDto> registerCenterAdmin(@Valid @RequestBody final RegisterUserDto centerAdmin) {
+		System.out.println(centerAdmin.getBloodBank() + "e");
+		centerAdmin.setPassword(centerAdmin.getPassword());
+		return ResponseEntity.ok(userService.registerCenterAdmin(centerAdmin));
+	}
 
-    @GetMapping("/search")
-    public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
-        return ResponseEntity.ok(userService.search(name, lastName));
-    }
+	@GetMapping("/search")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
+	public ResponseEntity<List<UserDto>> search(@RequestParam("name") final String name, @RequestParam("surname") final String lastName) {
+		return ResponseEntity.ok(userService.search(name, lastName));
+	}
 
-    @GetMapping("/{id}/")
-    public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
-        return ResponseEntity.ok(userService.findById(id));
-    }
+	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
+	public ResponseEntity<UserDto> findUserById(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @PathVariable("id") final Long id) {
+		final User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(user.getId()));
+	}
 
-    @PutMapping("/update/")
-    private ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
-        return ResponseEntity.ok(userService.update(user));
-    }
+	@GetMapping("/getUserProfile")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
+	public ResponseEntity<UserDto> getUserProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(user.getId()));
+	}
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getAll() {
-        return ResponseEntity.ok(userService.getAll());
-    }
+	@PutMapping("/update")
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	public ResponseEntity<User> updateUserProfile(@RequestBody final UserDto userDto) {
+		try {
+			return ResponseEntity.ok(userService.update(userDto));
+		} catch (final Exception e) {
+			return new ResponseEntity<User>(HttpStatus.TOO_MANY_REQUESTS);
+		}
+	}
 
-    @GetMapping("/center-admins")
-    public ResponseEntity<List<UserDto>> getAvailableCenterAdmins(){
-        return ResponseEntity.ok(userService.getAvailableCenterAdmins());
-    }
+	@PostMapping("/penal-points")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<Boolean> addPenalPoints(@RequestBody final Long id,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		return ResponseEntity.ok(userService.addPenalPoints(id));
+	}
+
+	@GetMapping("/users/{pageNo}")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM')")
+	public ResponseEntity<List<UserDto>> getAll(@PathVariable final int pageNo) {
+		return ResponseEntity.ok(userService.getAll(pageNo));
+	}
+
+	@GetMapping("/users/count")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<Integer> getAllCount() {
+		return ResponseEntity.ok(userService.getUserCount());
+	}
+
+	@GetMapping("/center-admins")
+	@PreAuthorize("hasAuthority('ADMIN_SYSTEM') or hasAuthority('ADMIN_CENTER')")
+	public ResponseEntity<List<UserDto>> getAvailableCenterAdmins() {
+		return ResponseEntity.ok(userService.getAvailableCenterAdmins());
+	}
+
+	@PostMapping("/activate/{email}")
+	public ResponseEntity<?> confirmUserRegistration(@PathVariable("email") final String email) {
+		if (userService.confirmUserRegistration(email) != null) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
+	}
+
+	@PutMapping("/change-password")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
+	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
+		final User loggedUser = jwtUtils.getUserFromToken(authHeader);
+		//final Long administratorId = (long) (3);
+		//final User user = userService.findUserById(administratorId);
+		return ResponseEntity.ok(userService.changePassword(loggedUser, passwordChangeDto));
+	}
 }

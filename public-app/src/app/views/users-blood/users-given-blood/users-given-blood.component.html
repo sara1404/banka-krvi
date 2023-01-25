@@ -1,0 +1,46 @@
+<!--
+  <app-sort-users-blood>
+    (totalElements)="saveTotalElements($event)"
+    (pageNumber)="savePageNumber($event)"
+    (sortBy)="saveSortBy($event)"
+    (sortDirection)="saveSortDirection($event)"
+</app-sort-users-blood>
+-->
+
+<mat-select (selectionChange)="sortAppointments($event)" placeholder="Sort by" floatLabel="never">
+  <mat-select-trigger>Sort by</mat-select-trigger>
+  <mat-option value="user.firstName ASC">Firstname ascending</mat-option>
+  <mat-option value="user.firstName DESC">First descending</mat-option>
+  <mat-option value="user.lastName ASC">Lastname ascending</mat-option>
+  <mat-option value="user.lastName DESC">Lastname descending</mat-option>
+  <mat-option value="startTime ASC">Starttime ascending</mat-option>
+  <mat-option value="startTime DESC">Starttime grade descending</mat-option>
+</mat-select>
+<table class="table" mat-table [dataSource]="appointments" >
+  <!-- class="mat-elevation-z8" -->
+  <ng-container matColumnDef="firstname">
+    <th mat-header-cell *matHeaderCellDef> Firstname </th>
+    <td mat-cell *matCellDef="let element"> {{element.user.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastname">
+    <th mat-header-cell *matHeaderCellDef> Lastname </th>
+    <td mat-cell *matCellDef="let element"> {{element.user.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="startTime">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.startTime |date: 'dd-MM-yyyy hh:mm'}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator
+[pageSize]="2"
+[length]="totalElements"
+(page)="onPageChanged($event)"
+[pageIndex]="pageNumber"
+>
+</mat-paginator>

@@ -9,8 +9,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatStepperModule} from '@angular/material/stepper'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatListModule } from '@angular/material/list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -25,7 +33,16 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSortModule,
+    MatRadioModule,
+    MatPaginatorModule,
+    MatStepperModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +55,16 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatExpansionModule
-  ],
+    MatExpansionModule,
+    MatRadioModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatStepperModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule
+  ]
 })
 export class MaterialModule {}

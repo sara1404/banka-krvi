@@ -1,0 +1,77 @@
+form{
+    margin-left: 20%;
+    margin-top: -5%;
+    width: 500px;
+    //padding: 10px;
+    color: black;
+}
+
+.field{
+    //margin: 5px;
+    color: black;
+}
+.main-field{
+    //margin: 5px;
+    width: 82%;
+    color: black;
+}
+
+.address-field{
+  width:35%;
+}
+
+.title{
+   padding-left: 20%; 
+}
+
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    width: 490px;
+    text-align: right;
+    padding-right: 14%;
+  }
+  
+  .example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+mat-label{
+  color: black;
+}
+.input{
+  color: black;
+}
+
+.error{
+  color: red;
+}
+
+.email{
+  color: black;
+}
+
+.ok{
+  color: green;
+}

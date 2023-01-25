@@ -1,7 +1,7 @@
 form{
   position: absolute;
   left: 45%;
-  top: 10%;
+  top: 20%;
 }
 
 .fields{
@@ -9,7 +9,15 @@ form{
 }
 
 .searchButton{
-  height: 35px;
-  margin: 5px;
+  height: 50px;
   cursor: pointer;
+  height: 30px;
+  border: none;
+  outline: none;
+  background-color: rgb(4, 158, 4);
+  border-radius: .5em;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-left: 5px;
+  margin-top: 10px;
 }

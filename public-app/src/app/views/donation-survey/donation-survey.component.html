@@ -1,0 +1,84 @@
+<div class="form-wrapper">
+  <form [formGroup]="surveyForm" class="survey-form">
+    <label for="" class="title">DONATION SURVEY</label>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Weight[kg]</mat-label>
+      <input formControlName="weight" type="number" min="0" max="250" matInput />
+    </mat-form-field>
+
+    <table>
+      <tr>
+        <td>
+          Have you experienced any flu or virus infections in the last month?
+        </td>
+        <td>
+          <mat-radio-group formControlName="fluSymptoms">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Do you have any skin irritations?</td>
+        <td>
+          <mat-radio-group formControlName="skinIrritations">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Do you have high/low blood pressure?</td>
+        <td>
+          <mat-radio-group formControlName="abnormalBloodPressure">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Were you on antibiotics therapy in the last 7 days?</td>
+        <td>
+          <mat-radio-group formControlName="tookAntibiotics">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Are you on your period?</td>
+        <td>
+          <mat-radio-group formControlName="onPeriod">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Did you have any major/minor dentist interventions?</td>
+        <td>
+          <mat-radio-group formControlName="dentistIntervention">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Have you had tattoos/piercings in the last 6 months?</td>
+        <td>
+          <mat-radio-group formControlName="piercingOrTattoo">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+    </table>
+    <input type="submit" (click)="sendSurvey()" value="Send survey" class="form-field submit-btn" />
+  </form>
+</div>

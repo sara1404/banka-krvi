@@ -1,0 +1,157 @@
+<div class="form-wrapper">
+  <form [formGroup]="signUpForm" class="register-user-form">
+
+    <label for="" class="title">SIGN UP</label>
+    
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>First Name</mat-label>
+      <input formControlName="firstName" matInput />
+    </mat-form-field>
+    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+      <mat-error *ngIf="firstName.errors['required']">
+        Please enter first name!
+      </mat-error>
+    </div>
+    
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Last Name</mat-label>
+      <input formControlName="lastName" matInput required />
+    </mat-form-field>
+    <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+      <mat-error *ngIf="lastName.errors['required']">
+        Please enter last name!
+      </mat-error>
+    </div>
+    
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>JMBG</mat-label>
+      <input formControlName="jmbg" matInput required />
+    </mat-form-field>
+    <div *ngIf="jmbg?.invalid && (jmbg?.dirty || jmbg?.touched)">
+      <mat-error *ngIf="jmbg.errors['required']">
+        Please enter JMBG!
+      </mat-error>
+      <mat-error *ngIf="jmbg.errors['minLength'] || jmbg.errors['maxLength']">
+        JMBG must contain exactly 13 characters!
+      </mat-error>
+    </div>
+    
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        matInput
+        placeholder="pat@example.com"
+        required
+      />
+    </mat-form-field>
+    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+      <mat-error *ngIf="email.errors['email']">
+        Please enter a valid email address!
+      </mat-error>
+      <mat-error *ngIf="email.errors['required']">
+        Email is required!
+      </mat-error>
+    </div>
+
+    <!-- ADDRESS -->
+    <div formGroupName="address" class="address-form">
+      <mat-form-field appearance="fill" class="address-form-field-left">
+        <mat-label>Street</mat-label>
+        <input formControlName="street" matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="address-form-field-right">
+        <mat-label>Street number</mat-label>
+        <input formControlName="number" matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="address-form-field-left">
+        <mat-label>City</mat-label>
+        <input formControlName="city" matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="address-form-field-right">
+        <mat-label>ZIP code</mat-label>
+        <input formControlName="zipcode" matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="country-field">
+        <mat-label>Country</mat-label>
+        <input formControlName="country" matInput />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Phone number</mat-label>
+      <input formControlName="phoneNumber" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="MALE">Male</mat-option>
+        <mat-option value="FEMALE">Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Bloodtype</mat-label>
+      <mat-select formControlName="bloodType">
+        <mat-option value="0">A+</mat-option>
+        <mat-option value="1">A-</mat-option>
+        <mat-option value="2">B+</mat-option>
+        <mat-option value="3">B-</mat-option>
+        <mat-option value="4">AB+</mat-option>
+        <mat-option value="5">AB-</mat-option>
+        <mat-option value="6">O+</mat-option>
+        <mat-option value="7">O-</mat-option>
+        <mat-option value="8">HH+</mat-option>
+        <mat-option value="9">HH-</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="bloodType?.invalid && (bloodType?.dirty || bloodType?.touched)">
+      <mat-error *ngIf="bloodType.errors['required']">
+        Please choose bloodtype!
+      </mat-error>
+    </div>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" type="password" matInput required />
+    </mat-form-field>
+    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+      <mat-error *ngIf="password.errors['minLength']">
+        Password must be minimum 8 characters!
+      </mat-error>
+      <mat-error *ngIf="password.errors['required']">
+        Please enter password!
+      </mat-error>
+    </div>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Re-enter password</mat-label>
+      <input formControlName="confirmPassword" type="password" matInput required />
+    </mat-form-field>
+    <div
+      *ngIf="
+        confirmPassword?.invalid &&
+        (confirmPassword?.dirty || confirmPassword?.touched)
+      "
+    >
+      <mat-error *ngIf="confirmPassword.errors['required']">
+        Please enter password!
+      </mat-error>
+      <mat-error *ngIf="!signUpForm.hasError('createCompareValidator')">
+        Passwords do not match!
+      </mat-error>
+    </div>
+
+    <input
+      type="submit"
+      (click)="registerUser()"
+      value="SIGN UP"
+      class="form-field submit-btn"
+    />
+  </form>
+</div>
