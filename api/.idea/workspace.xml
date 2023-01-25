@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/cache-example/cache/.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +26,7 @@
     </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="RunManager" selected="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency">
+  <component name="RunManager">
     <configuration name="AppoitntmentAdminsTestTest.testAdminUserConcurrency" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bloodbank" />
       <extension name="coverage">
@@ -66,8 +61,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency" />
         <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency" />
       </list>
     </recent_temporary>
   </component>

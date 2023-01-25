@@ -191,6 +191,7 @@ export class BloodbankInfoComponent implements OnInit {
     this.showEdit = true;
     this.showSave = false;
     this.updated = true;
+    console.log(this.bloodBank.id)
   }
 
   getCoord(event: any){

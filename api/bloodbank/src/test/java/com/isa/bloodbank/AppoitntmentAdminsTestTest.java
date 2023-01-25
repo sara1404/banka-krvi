@@ -1,7 +1,6 @@
 package com.isa.bloodbank;
 
 import com.isa.bloodbank.dto.AppointmentDto;
-import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.Address;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.BloodBank;
@@ -99,9 +98,9 @@ public class AppoitntmentAdminsTestTest {
 				System.out.println("Startovan Thread 1");
 				final var appointmentDto = new AppointmentDto();
 				appointmentDto.setStartTime(time);
-				final var bloodBankDto = new BloodBankDto();
-				bloodBankDto.setId(16l);
-				appointmentDto.setBloodBank(bloodBankDto);
+				final var bloodBank = new BloodBank();
+				bloodBank.setId(16l);
+				appointmentDto.setBloodBank(bloodBank);
 				appointmentService.userCreatesAppointment(appointmentDto, userId);
 			}
 		});
