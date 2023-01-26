@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/LocationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/LocationMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/WebSocketConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/LocationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/MessageDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/bloodbank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/bloodbank.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/cache-example/cache/.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/LocationMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/WebSocketConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/socket/WebSocketConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/app/user-routing/user-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/user-routing/user-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public-app/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/polyfills.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +30,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -47,7 +56,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2JHgKTQu63RAqJ8QXoTQ9cYMbU8" />
+  <component name="ProjectId" id="2KoELfyc10HRrlLQnIeBsYPAlJE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -56,21 +65,10 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/normalno/FTN/godina_4/zimski/isa/j2se/jcommander-1.82.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="Application" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate">
+  <component name="RunManager" selected="Application.BloodbankApplication">
     <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
       <module name="bloodbank" />
@@ -80,6 +78,37 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppoitntmentAdminsTestTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.isa.bloodbank" />
+      <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.AppoitntmentAdminsTestTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppoitntmentAdminsTestTest.testAdminUserConcurrency" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.isa.bloodbank" />
+      <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.AppoitntmentAdminsTestTest" />
+      <option name="METHOD_NAME" value="testAdminUserConcurrency" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -100,17 +129,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="bloodbank" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.isa.bloodbank.BloodbankApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
         <item itemvalue="Application.BloodbankApplication" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testAdminUserConcurrency" />
+        <item itemvalue="JUnit.AppoitntmentAdminsTestTest.testPessimisticLockingScenarioCreate" />
       </list>
     </recent_temporary>
   </component>
@@ -118,15 +142,12 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="" />
-      <created>1671740361307</created>
+      <created>1674632509192</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1671740361307</updated>
+      <updated>1674632509192</updated>
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -138,5 +159,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java</url>
+          <line>247</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

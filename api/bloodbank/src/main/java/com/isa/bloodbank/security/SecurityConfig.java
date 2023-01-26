@@ -69,6 +69,8 @@ public class SecurityConfig {
 			.permitAll().and().authorizeRequests().antMatchers("/api/bloodBanks")
 			.permitAll().and().authorizeRequests().antMatchers("/api/login")
 			.permitAll()
+			.antMatchers("/delivery/").permitAll()
+			.antMatchers("/socket/").permitAll()
 			.anyRequest().authenticated();
 
 		http.authenticationProvider(authenticationProvider());

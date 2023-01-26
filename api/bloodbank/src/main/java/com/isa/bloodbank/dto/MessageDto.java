@@ -1,11 +1,10 @@
-package com.isa.bloodbank.socket;
+package com.isa.bloodbank.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class LocationMessage {
-	private String from;
+public class MessageDto {
 	private String message;
 }
