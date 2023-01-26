@@ -26,6 +26,7 @@ public class QrCodeService {
 			final File file = new File(classLoader.getResource(".").getFile() + "/" + appointment.getId() + ".png");
 			//FileSystems.getDefault().getPath("../qrcodes/" + appointment.getId() + ".png")
 			MatrixToImageWriter.writeToPath(bitMatrix, "PNG", file.toPath());
+			System.out.println(file.toPath());
 		} catch (final WriterException | IOException e) {
 			e.printStackTrace();
 		}

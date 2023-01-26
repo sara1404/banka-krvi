@@ -33,7 +33,10 @@ public class DonationSurveyService {
 	}
 
 	public UserSurveyDto findByUserId(Long userId){
+		System.out.println("id " + userId);
+
 		List<DonationSurvey> surveys = surveyRepository.findByUserId(userId);
+		System.out.println("duzina " + surveys.size());
 		DonationSurvey last = surveys.get(0);
 		for(DonationSurvey survey : surveys){
 			if(survey.getDateCreated().compareTo(last.getDateCreated()) > 0){

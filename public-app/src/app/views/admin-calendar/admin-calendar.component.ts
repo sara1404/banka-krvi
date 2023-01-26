@@ -48,7 +48,7 @@ export class AdminCalendarComponent implements OnInit {
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
   //appointments: IAppointment[] = []
-  events: CalendarEvent<{ appointment: IUserAppointment}>[] = []
+  events: CalendarEvent<{ appointment: IUserAppointment }>[] = []
   user: IUser
 
   displayAppointment: IUserAppointment
@@ -67,9 +67,9 @@ export class AdminCalendarComponent implements OnInit {
 
   constructor(private appointmentService: AppointmentService, private userService: UserService, public dialog: MatDialog, public yearViewDialog: MatDialog) {
     this.viewDate = new Date(Date.now())
-   }
+  }
 
- 
+
 
   ngOnInit(): void {
     this.viewDate = new Date('2022-12-05');
@@ -77,45 +77,45 @@ export class AdminCalendarComponent implements OnInit {
     this.getAppointments()
   }
 
-  chooseColor(appointment: IUserAppointment){
-    if(appointment.user == null){
+  chooseColor(appointment: IUserAppointment) {
+    if (appointment.user == null) {
       return colors['green']
     }
     return colors['blue']
   }
 
-  getAppointments(){
+  getAppointments() {
     console.log(this.viewDate.getMonth(), this.viewDate.getFullYear())
     this.appointmentService.getAppointmentsForChosenMonth(this.viewDate.getMonth() + 1, this.viewDate.getFullYear())
-    .pipe(
-      map((results: IUserAppointment[]) => {
-      return results.map((appointment: IUserAppointment) => {
-        return {
-          title: this.createTitle(appointment),
-          start: new Date(appointment.startTime),
-          color: { ...this.chooseColor(appointment) },
-          end: addMinutes(new Date(appointment.startTime), appointment.duration),
-          meta: {
-            appointment,
-          },
-        };
-      });
-    }))
+      .pipe(
+        map((results: IUserAppointment[]) => {
+          return results.map((appointment: IUserAppointment) => {
+            return {
+              title: this.createTitle(appointment),
+              start: new Date(appointment.startTime),
+              color: { ...this.chooseColor(appointment) },
+              end: addMinutes(new Date(appointment.startTime), appointment.duration),
+              meta: {
+                appointment,
+              },
+            };
+          });
+        }))
 
 
-    .subscribe(
-      (response: CalendarEvent<{ appointment: IUserAppointment }>[]) => {
-        this.events = response;
-        console.log(this.events)
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      }
-    );
+      .subscribe(
+        (response: CalendarEvent<{ appointment: IUserAppointment }>[]) => {
+          this.events = response;
+          console.log(this.events)
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error.message);
+        }
+      );
   }
 
-  displayUserForAppointment(appointment: IUserAppointment){
-    if(appointment.user == null)
+  displayUserForAppointment(appointment: IUserAppointment) {
+    if (appointment.user == null)
       return 'Free appointment'
     return appointment?.user?.firstName + " " + appointment?.user?.lastName
   }
@@ -128,16 +128,16 @@ export class AdminCalendarComponent implements OnInit {
     );
   }
 
-  previousWeek(){
-    if(this.view === CalendarView.Month)
+  previousWeek() {
+    if (this.view === CalendarView.Month)
       this.viewDate = subMonths(this.viewDate, 1)
     else
       this.viewDate = subDays(this.viewDate, 7)
     this.getAppointments()
   }
 
-  nextWeek(){
-    if(this.view === CalendarView.Month)
+  nextWeek() {
+    if (this.view === CalendarView.Month)
       this.viewDate = addMonths(this.viewDate, 1)
     else
       this.viewDate = addDays(this.viewDate, 7)
@@ -147,31 +147,32 @@ export class AdminCalendarComponent implements OnInit {
     this.view = view;
   }
 
-  click({ event }: { event: CalendarEvent }){
+  click({ event }: { event: CalendarEvent }) {
     console.log('kliknuo');
-    console.log(event.meta.appointment)
+    console.log(event.meta.appointment.user.id)
     this.userService.getUser(event.meta.appointment.user.id).subscribe(data => {
       this.user = data
+      console.log('ja sam user ', this.user)
       this.dialog.open(ClickedAppointmentComponent,
         {
-          data: {appointment: event.meta.appointment, user:this.user}
+          data: { appointment: event.meta.appointment, user: this.user }
         });
     });
   }
 
 
-  displayYearView(){
+  displayYearView() {
     let dialogRef = this.yearViewDialog.open(YearViewComponent, {
-      data: {selected: this.selectedDate}
+      data: { selected: this.selectedDate }
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result === undefined) return 
+      if (result === undefined) return
       this.viewDate = result
       this.view = CalendarView.Month
       this.getAppointments()
     });
   }
 
- 
+
 }

@@ -71,8 +71,8 @@ public class UserController {
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
 	public ResponseEntity<UserDto> findUserById(@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader, @PathVariable("id") final Long id) {
-		final User user = jwtUtils.getUserFromToken(authHeader);
-		return ResponseEntity.ok(userService.findById(user.getId()));
+		//final User user = jwtUtils.getUserFromToken(authHeader);
+		return ResponseEntity.ok(userService.findById(id));
 	}
 
 	@GetMapping("/getUserProfile")

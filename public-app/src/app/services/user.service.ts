@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getUsers(pageNo: number): Observable<IUser[]> {
     return this.http.get<IUser[]>(`http://localhost:8080/user/users/${pageNo}`);
@@ -25,7 +25,7 @@ export class UserService {
   getLoggedInUserProfile(): Observable<IUser> {
     var header = {
       headers: new HttpHeaders()
-        .set('Authorization',  `Bearer ${localStorage.getItem('token')}`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
     }
     return this.http.get<IUser>(
       'http://localhost:8080/user/getUserProfile', header
@@ -58,7 +58,7 @@ export class UserService {
 
   registerAdmin(user: any): Observable<IUser> {
     console.log(user)
-    var headers = new HttpHeaders().set('Authorization',  `Bearer ${localStorage.getItem('token')}`);
+    var headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<IUser>(
       `http://localhost:8080/user/register/admin`,
       user,
@@ -87,22 +87,23 @@ export class UserService {
     return this.http.get<IUser[]>(`http://localhost:8080/user/center-admins`);
   }
 
-  getSurveyForUser(userId: number):Observable<IUserSurvey>{
+  getSurveyForUser(userId: number): Observable<IUserSurvey> {
     return this.http.get<IUserSurvey>(`http://localhost:8080/survey/for-user/${userId}`);
   }
 
-  getAppointmentsForUser(userId: number):Observable<IUserAppointment[]>{
+  getAppointmentsForUser(userId: number): Observable<IUserAppointment[]> {
     return this.http.get<IUserAppointment[]>(`http://localhost:8080/appointment/for-user/${userId}`);
   }
 
-  addPenalPoints(userId: number):Observable<Boolean>{
+  addPenalPoints(userId: number): Observable<Boolean> {
     return this.http.post<Boolean>('http://localhost:8080/user/penal-points', userId);
   }
 
-  finishAppointment(appointmentId: number):Observable<Boolean>{
+  finishAppointment(appointmentId: number): Observable<Boolean> {
     return this.http.post<Boolean>('http://localhost:8080/appointment/finish', appointmentId);
   }
-  getUser(userId: number): Observable<IUser>{
+  getUser(userId: number): Observable<IUser> {
+    console.log('ja sam servis ', userId)
     return this.http.get<IUser>(`http://localhost:8080/user/${userId}`);
   }
 
