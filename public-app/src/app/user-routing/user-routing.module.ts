@@ -25,6 +25,7 @@ import { UsersComponent } from "../views/users/users.component";
 import { Role } from "../model/Role";
 import { UsersGivenBloodComponent } from "../views/users-blood/users-given-blood/users-given-blood.component";
 import { DeliveryMapComponent } from "../views/delivery-map/delivery-map.component";
+import { AppointmentHistoryComponent } from "../views/predefined-appointments/appointment-history/appointment-history.component";
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminInfoComponent, canActivate: [AuthGuard], data:{roles: [Role.AdminCenter]}},
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'appointment/qr', component: QrCodeScanComponent},
   {path: 'allBloodUsers', component: UsersGivenBloodComponent},
   {path: 'delivery-map', component: DeliveryMapComponent},
+  {path: 'appointments/history', component: AppointmentHistoryComponent},
 
 ];
 
