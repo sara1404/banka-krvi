@@ -2,11 +2,7 @@ package com.isa.bloodbank.dto;
 
 import com.isa.bloodbank.entity.Address;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -22,4 +18,5 @@ public class BloodBankDto {
 	@NotNull
 	String description;
 	double averageGrade;
+	Integer version;
 }

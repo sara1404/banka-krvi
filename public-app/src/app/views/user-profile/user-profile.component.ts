@@ -21,6 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class UserProfileComponent implements OnInit {
 
+  penaltyPoints = 0;
   constructor(private userService: UserService, private toastService: ToastService) { }
 
   userProfileForm = new FormGroup({
@@ -50,8 +51,10 @@ export class UserProfileComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    this.userService.getLoggedInUserProfile().subscribe((data) => 
-      this.userProfileForm.patchValue(data)
+    this.userService.getLoggedInUserProfile().subscribe((data) => {
+      this.userProfileForm.patchValue(data);
+      this.penaltyPoints = data.points;
+    }
     );
   }
 

@@ -1,0 +1,38 @@
+<div class="wrapper">
+    <br>
+    <mat-select (selectionChange)="sortHistory($event)" placeholder="Sort by" floatLabel="never">
+        <mat-select-trigger>Sort by</mat-select-trigger>
+        <mat-option value="startTime ASC">Start time ascending</mat-option>
+        <mat-option value="startTime DESC">Start time descending</mat-option>
+        <mat-option value="duration ASC">Duration ascending</mat-option>
+        <mat-option value="duration DESC">Duration descending</mat-option>
+        <mat-option value="bloodBank.name ASC">Blood bank name ascending</mat-option>
+        <mat-option value="bloodBank.name DESC">Blood bank name descending</mat-option>
+    </mat-select>
+    <br>
+    <div class="appointments-wrapper">
+        <mat-table #table [dataSource]="appointments">
+            <ng-container matColumnDef="startTime">
+                <mat-header-cell *matHeaderCellDef>Start time</mat-header-cell>
+                <mat-cell *matCellDef="let appointment">{{ appointment.startTime | date:'dd.MM.yyyy hh:mm' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+                <mat-cell *matCellDef="let appointment">{{ appointment.duration }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="bloodBank">
+                <mat-header-cell *matHeaderCellDef>Blood bank</mat-header-cell>
+                <mat-cell *matCellDef="let appointment">{{ appointment.bloodBank.name }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="false">
+        </mat-paginator>
+    </div>
+
+
+</div>

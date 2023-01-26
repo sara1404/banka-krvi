@@ -346,4 +346,9 @@ public class AppointmentService {
 		return page;
 	}
 
+	public List<Appointment> getHistory(final Long userId, final int pageSize, final int pageNum, final String sortDirection, final String sortBy) {
+		final Direction direction = sortDirection.toUpperCase().equals("ASC") ? Direction.ASC : Direction.DESC;
+		return appointmentRepository.getHistory(LocalDateTime.now(), userId, PageRequest.of(pageNum, pageSize, Sort.by(direction, sortBy)));
+	}
+
 }

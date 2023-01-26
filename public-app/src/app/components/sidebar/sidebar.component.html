@@ -22,4 +22,6 @@
   <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='donation-survey' class="sidebar-option">FILL DONATION SURVEY</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='admin-calendar' class="sidebar-option">CALENDAR</div>
   <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='allBloodUsers' class="sidebar-option">USERS WITH BLOOD</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='ADMIN_CENTER'" routerLink='delivery-map' class="sidebar-option">DELIVERY MAP</div>
+  <div *ngIf="isLoggedIn && this.user.userType=='REGISTERED'" routerLink='appointments/history' class="sidebar-option">APPOINTMENT HISTORY</div>
 </div>
