@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cache-example/cache/.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/743.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/744.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/811.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/819.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/820.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/841.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qrcodes/842.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/bloodbank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/bloodbank.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/AppointmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/AppointmentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mailer/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mailer/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/AppointmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/repository/AppointmentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/BloodBankService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/QrCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/QrCodeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/thread/NewThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/thread/NewThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/test/java/com/isa/bloodbank/AppoitntmentAdminsTestTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../public-app/src/app/admin-profile/bloodbank-info/bloodbank-info.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,11 +21,15 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
     <option name="myId2Visible">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
@@ -64,12 +50,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="BloodbankApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.isa.bloodbank.BloodbankApplication" />
+      <module name="bloodbank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.isa.bloodbank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BloodbankApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSortModule } from '@angular/material/sort';
+import { AppointmentHistoryComponent } from './appointment-history/appointment-history.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AppointmentHistoryComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,

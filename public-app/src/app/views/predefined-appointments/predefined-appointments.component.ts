@@ -19,6 +19,7 @@ export class PredefinedAppointmentsComponent implements OnInit {
   pageSize = 20;
   pageNumber = 0;
   sortDirection = "ASC";
+  sortBy = 'startTime';
   
   length: number;
   currentPage: number;

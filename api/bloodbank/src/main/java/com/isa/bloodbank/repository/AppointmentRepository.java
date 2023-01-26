@@ -37,6 +37,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	@Query("select a from Appointment a where a.startTime > ?1 and a.nurse is not null and a.user is null")
 	List<Appointment> getPredefined(LocalDateTime currentTime, Pageable pageable);
 
+	@Query("select a from Appointment a where a.startTime < ?1 and a.finished = TRUE and a.user.id = ?2")
+	List<Appointment> getHistory(LocalDateTime currentTime, Long userId, Pageable pageable);
+
 	@Query("select a from Appointment a where a.user.id = ?1")
 	List<Appointment> getPersonal(Long userId, Pageable pageable);
 
