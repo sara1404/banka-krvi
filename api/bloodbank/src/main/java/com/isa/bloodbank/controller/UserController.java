@@ -126,7 +126,7 @@ public class UserController {
 	}
 
 	@PutMapping("/change-password")
-	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED')")
+	@PreAuthorize("hasAuthority('ADMIN_CENTER') or hasAuthority('ADMIN_SYSTEM') or hasAuthority('REGISTERED') or hasAuthority('UNAUTENTIFICATED')")
 	public ResponseEntity<Boolean> changePassword(@RequestBody final PasswordChangeDto passwordChangeDto,
 		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader) {
 		final User loggedUser = jwtUtils.getUserFromToken(authHeader);

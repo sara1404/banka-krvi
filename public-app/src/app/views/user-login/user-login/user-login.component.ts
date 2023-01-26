@@ -31,15 +31,15 @@ export class UserLoginComponent implements OnInit {
     return this.form.get('password');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   login() {
     if (this.form.valid) {
       this.authService.loginUser(this.form.value).subscribe(
         (res) => {
           this.authService.setSession(res.token);
           this.authService.getCurrentUser().subscribe(data => {
-            //console.log(data)
-            if(data.firstLogged === false){
+            console.log(data)
+            if (data.firstLogged === false) {
               this.router.navigate(['/app/changePassword']).then(() => {
                 window.location.reload();
               })
@@ -58,7 +58,7 @@ export class UserLoginComponent implements OnInit {
       );
     }
   }
-  continue(){
+  continue() {
     this.router.navigate(['']).then(() => {
       window.location.reload();
     });
