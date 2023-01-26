@@ -16,6 +16,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/bloodbank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/bloodbank.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/controller/HospitalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/AppointmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/dto/AppointmentDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mailer/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/mailer/MailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bloodbank/src/main/java/com/isa/bloodbank/service/AppointmentService.java" afterDir="false" />
@@ -47,6 +48,9 @@
       </map>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -54,8 +58,27 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectId" id="2KrYdk5xPbwUfvyevoybkYClMgN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="16b85e70-f448-4efe-b4f4-4e5a4be7242f" name="Changes" comment="" />
+      <created>1674734263569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674734263569</updated>
+    </task>
     <servers />
   </component>
 </project>

@@ -34,7 +34,7 @@ public class HospitalController {
 
 	@PostMapping(value = "/monthlyTransfer", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String monthlyTransfer() throws IOException, TimeoutException {
-		//System.out.println("Monhtly Transfer Service worked.");
+		System.out.println("Monhtly Transfer Service worked.");
 		final MonthlyTransfer mt = hospitalService.monthlyTransfer();
 		if (mt != null) {
 			final var factory = new ConnectionFactory();
@@ -50,7 +50,7 @@ public class HospitalController {
 			final byte[] body = message.getBytes(StandardCharsets.UTF_8);
 
 			channel.basicPublish("", "monthly", null, body);
-			//System.out.println(mt);
+			System.out.println(mt);
 		}
 
 		return "BLA";
