@@ -33,6 +33,7 @@ import { QrCodeScanModule } from './views/qr/qr-code-scan/qr-code-scan.module';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.service';
 import { UsersBloodModule } from './views/users-blood/users-blood.module';
+import { DeliveryMapModule } from './views/delivery-map/delivery-map.module';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { UsersBloodModule } from './views/users-blood/users-blood.module';
       positionClass: "toast-bottom-right"
     }),
     CreateAppointmentModule,
-    QrCodeScanModule
+    QrCodeScanModule,
+    DeliveryMapModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

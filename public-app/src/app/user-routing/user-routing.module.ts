@@ -19,13 +19,13 @@ import { RegisterAdminComponent } from "../views/register-admin/register-admin.c
 import { RegisterBloodbankComponent } from "../views/register-bloodbank/register-bloodbank.component";
 import { ConfirmRegistrationComponent } from "../views/register-user/confirm-registration/confirm-registration.component";
 import { RegisterUserComponent } from "../views/register-user/register-user/register-user.component";
-import { UserLoginComponent } from "../views/user-login/user-login/user-login.component";
 import { UserProfileComponent } from "../views/user-profile/user-profile.component";
 import { ExaminationComponent } from "../views/users/examination/examination.component";
 import { UsersComponent } from "../views/users/users.component";
 import { Role } from "../model/Role";
-import { AuthService } from "../services/auth.service";
 import { UsersGivenBloodComponent } from "../views/users-blood/users-given-blood/users-given-blood.component";
+import { DeliveryMapComponent } from "../views/delivery-map/delivery-map.component";
+import { AppointmentHistoryComponent } from "../views/predefined-appointments/appointment-history/appointment-history.component";
 
 const routes: Routes = [
   {path: 'admin/profile', component:AdminInfoComponent, canActivate: [AuthGuard], data:{roles: [Role.AdminCenter]}},
@@ -49,7 +49,9 @@ const routes: Routes = [
   {path: 'appointments/predefined', component: PredefinedAppointmentsComponent, canActivate: [AuthGuard], data:{roles: [Role.Registered]}},
   {path: 'appointments/personal', component: PersonalAppointmentsComponent},
   {path: 'appointment/qr', component: QrCodeScanComponent},
-  {path: 'allBloodUsers', component: UsersGivenBloodComponent}
+  {path: 'allBloodUsers', component: UsersGivenBloodComponent},
+  {path: 'delivery-map', component: DeliveryMapComponent},
+  {path: 'appointments/history', component: AppointmentHistoryComponent},
 
 ];
 

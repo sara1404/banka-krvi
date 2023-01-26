@@ -98,4 +98,14 @@ export class AppointmentService {
       `http://localhost:8080/appointment/bloodSort?pageSize=` + 2 + '&pageNumber=' + pageNumber + '&sortDirection=' + sortDirection + '&sortBy=' + sortBy
     );
   }
+
+  getHistory(
+    pageSize: number,
+    pageNumber: number,
+    sortBy: string = '',
+    sortDirection: string = 'ASC',
+
+  ) {
+    return this.http.get<IAppointment[]>(`http://localhost:8080/appointment/history?pageSize=${pageSize}&pageNumber=${pageNumber}&sortDirection=${sortDirection}&sortBy=${sortBy}`);
+  }
 }

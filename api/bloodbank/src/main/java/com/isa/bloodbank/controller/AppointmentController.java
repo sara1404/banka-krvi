@@ -205,4 +205,17 @@ public class AppointmentController {
 			appointmentService.getAllBloodUsers(userService.findById(userId).getBloodBank().getId(), pageSize, pageNumber, sortDirection, sortBy));
 	}
 
+	@PreAuthorize("hasAuthority('REGISTERED')")
+	@GetMapping("/history")
+	public ResponseEntity<?> appointmentHistory(
+		@RequestParam("pageSize") final int pageSize,
+		@RequestParam("pageNumber") final int pageNumber,
+		@RequestParam("sortDirection") final String sortDirection,
+		@RequestParam("sortBy") final String sortBy,
+		@RequestHeader(HttpHeaders.AUTHORIZATION) final String authHeader
+	) {
+		final Long userId = jwtUtils.getUserFromToken(authHeader).getId();
+		return ResponseEntity.ok(appointmentService.getHistory(userId, pageSize, pageNumber, sortDirection, sortBy));
+	}
+
 }
