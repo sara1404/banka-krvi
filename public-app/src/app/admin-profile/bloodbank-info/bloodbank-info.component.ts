@@ -180,6 +180,7 @@ export class BloodbankInfoComponent implements OnInit {
       latitude: Number(latitude)
     }
     const updatedBloodBank: IBloodBank = {
+      version: this.bloodBank.version,
       id: this.bloodBank.id,
       name: name,
       address: updatedAddress,
