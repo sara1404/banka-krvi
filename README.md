@@ -14,3 +14,4 @@ app using `python app.py`. Your location service is now hosted on `localhost:808
 **Important warning** - To enable communication with hospital and location service RabbitMQ server must be up and running, please follow the official RabbitMQ 
 documentation to do so.
 
+**Monitoring** - start Prometheus server on 9090, Grafana on 80, with grafana you can access dashboar Projekat where ypu will see some statistics for project or add enw ones
