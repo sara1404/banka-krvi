@@ -1,9 +1,11 @@
 package com.isa.bloodbank;
 
+import com.isa.bloodbank.dto.AppointmentDto;
 import com.isa.bloodbank.entity.Address;
 import com.isa.bloodbank.entity.Appointment;
 import com.isa.bloodbank.entity.BloodBank;
 import com.isa.bloodbank.entity.User;
+import com.isa.bloodbank.mapping.AppointmentMapper;
 import com.isa.bloodbank.service.AppointmentService;
 
 import java.time.LocalDateTime;
@@ -16,15 +18,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AppoitntmentAdminsTestTest {
-
 	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
+	private AppointmentMapper mapper;
 
 	@Test(expected = PessimisticLockingFailureException.class)
 	public void testPessimisticLockingScenarioCreate() throws Throwable {
@@ -69,6 +73,55 @@ public class AppoitntmentAdminsTestTest {
 			future2.get(); // podize ExecutionException za bilo koji izuzetak iz drugog child threada
 		} catch (final ExecutionException e) {
 			System.out.println("Exception from thread " + e.getCause().getClass()); // u pitanju je bas PessimisticLockingFailureException
+			throw e.getCause();
+		} catch (final InterruptedException e) {
+			e.printStackTrace();
+		}
+		executor.shutdown();
+	}
+
+	@Test(expected = CannotAcquireLockException.class)
+	public void testAdminUserConcurrency() throws Throwable {
+		final LocalDateTime time = LocalDateTime.now();
+		final Appointment appointment = new Appointment();
+		appointment.setStartTime(time);
+		final BloodBank bb = new BloodBank();
+		bb.setId(16l);
+		appointment.setBloodBank(bb);
+		final Long adminId = 3l;
+		final Long userId = 5l;
+		final ExecutorService executor = Executors.newFixedThreadPool(2);
+		executor.submit(new Runnable() {
+
+			@Override
+			public void run() {
+				System.out.println("Startovan Thread 1");
+				final var appointmentDto = new AppointmentDto();
+				appointmentDto.setStartTime(time);
+				final var bloodBank = new BloodBank();
+				bloodBank.setId(16l);
+				appointmentDto.setBloodBank(bloodBank);
+				appointmentService.userCreatesAppointment(appointmentDto, userId);
+			}
+		});
+		final Future<?> future2 = executor.submit(new Runnable() {
+
+			@Override
+			public void run() {
+				System.out.println("Startovan Thread 2");
+				try {
+					Thread.sleep(1500);
+				} catch (final InterruptedException e) {
+					System.out.println("kad udje u drugi");
+				}
+				appointmentService.createAppointment(appointment, adminId);
+				;
+			}
+		});
+		try {
+			future2.get();
+		} catch (final ExecutionException e) {
+			System.out.println("Exception from thread " + e.getCause().getClass());
 			throw e.getCause();
 		} catch (final InterruptedException e) {
 			e.printStackTrace();

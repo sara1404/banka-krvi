@@ -2,7 +2,6 @@ package com.isa.bloodbank.service;
 
 import com.isa.bloodbank.dto.BloodBankDto;
 import com.isa.bloodbank.entity.BloodBank;
-import com.isa.bloodbank.entity.User;
 import com.isa.bloodbank.entity.WorkingHours;
 import com.isa.bloodbank.exception.UserNotFoundException;
 import com.isa.bloodbank.mapping.BloodBankMapper;
@@ -13,14 +12,15 @@ import com.isa.bloodbank.repository.WorkingHoursRepository;
 
 import java.util.List;
 
-import io.github.resilience4j.ratelimiter.RequestNotPermitted;
-import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 
 @Service
 public class BloodBankService {
@@ -52,17 +52,26 @@ public class BloodBankService {
 	*/
 	public BloodBank update(final BloodBankDto bloodBankDto) {
 		final BloodBank bloodBank = bloodBankMapper.bloodBankDtoToBloodBank(bloodBankDto);
-		findById(bloodBank.getId());
+		bloodBank.setWorkingHours(findById(bloodBank.getId()).getWorkingHours());
+		System.out.println(bloodBankDto.getId());
 		return bloodBankRepository.save(bloodBank);
 	}
 
 	@RateLimiter(name = "findAllBloodBanks", fallbackMethod = "findAllBloodBanksFallback")
-	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final double lng, final double lat, final double distance, final int pageSize, final int pageNumber, String sortBy, final String sortDirection) {
+	public Page<BloodBank> searchAndFilter(final String name, final String city, final double averageGrade, final double lng, final double lat,
+		final double distance, final int pageSize, final int pageNumber, String sortBy, final String sortDirection) {
 		final Sort.Direction sortingDirection = sortDirection.equals("ASC") ? Direction.ASC : Direction.DESC;
-		if (sortBy == null || sortBy.equals("")) sortBy = "name";
-		if (sortBy.equals("averageGrade")) sortBy = "average_grade";
-		if (sortBy.equals("address.city")) sortBy = "a.city";
-		return bloodBankRepository.filterBloodBanks(lat, lng, distance, name, averageGrade, city, PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
+		if (sortBy == null || sortBy.equals("")) {
+			sortBy = "name";
+		}
+		if (sortBy.equals("averageGrade")) {
+			sortBy = "average_grade";
+		}
+		if (sortBy.equals("address.city")) {
+			sortBy = "a.city";
+		}
+		return bloodBankRepository.filterBloodBanks(lat, lng, distance, name, averageGrade, city,
+			PageRequest.of(pageNumber, pageSize, Sort.by(sortingDirection, sortBy)));
 	}
 
 	public BloodBankDto registerBloodBank(final BloodBankDto bloodBank) {
@@ -74,7 +83,7 @@ public class BloodBankService {
 		return workingHours;
 	}
 
-	public void updateAvailability(boolean value, BloodBank bank) {
+	public void updateAvailability(final boolean value, final BloodBank bank) {
 		bank.setAvailable(value);
 		bloodBankRepository.save(bank);
 

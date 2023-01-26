@@ -21,7 +21,7 @@ public class NewThread extends Thread {
 			try {
 				hospitalController.monthlyTransfer();
 				//Wait for one sec so it doesn't print too fast
-				Thread.sleep(1000); //86 400 000
+				Thread.sleep(100000); //86 400 000
 			} catch (final IOException | InterruptedException | TimeoutException e) {
 				e.printStackTrace();
 			}

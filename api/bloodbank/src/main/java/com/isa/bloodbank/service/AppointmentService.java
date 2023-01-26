@@ -22,11 +22,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -170,28 +172,26 @@ public class AppointmentService {
 
 	@Transactional(readOnly = false)
 	public AppointmentDto createAppointment(final Appointment appointment, final Long adminId) {
+
+		BloodBank current;
 		try {
 			appointment.setBloodBank(userService.findById(adminId).getBloodBank());
+			current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
 		} catch (final Exception e) {
-			appointment.setBloodBank(bloodBankRepository.getReferenceById(Long.valueOf(16)));
-			//bloodBankRepository.getReferenceById(Long.valueOf(16))
+			current = bloodBankRepository.getReferenceById(16l);
+			appointment.setBloodBank(current);
 		}
-
+		if (!appointmentRepository.findAllByBloodBankId(current.getId()).stream().filter(x -> x.getStartTime().compareTo(appointment.getStartTime()) == 0)
+			.toList()
+			.isEmpty()) {
+			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		}
 		appointment.setAvailable(true);
 		appointment.setFinished(false);
 		if (findAvailableMedicalStaff(appointment.getBloodBank().getId(), appointment.getStartTime(), appointment.getDuration()).size() != 0) {
 			appointmentRepository.save(appointment);
 		}
-		/*if (userRepository.findByBloodBankId(appointment.getBloodBank().getId()) != null) {
-			appointmentRepository.save(appointment);
-		}*/
-		/*if (appointment.getBloodBank() != null) {
-			appointmentRepository.save(appointment);
-		}*/
-		//appointmentRepository.save(appointment);
-		{
-			return appointmentMapper.appointmentToAppointmentDto(appointment);
-		}
+		return appointmentMapper.appointmentToAppointmentDto(appointment);
 	}
 
 	public Appointment findById(final Long id) {
@@ -206,6 +206,7 @@ public class AppointmentService {
 	}
 
 	@Cacheable(key = "#month + '_' + #year + '_' + #adminstatorId", unless = "#result == null", cacheNames = "appointments")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	public List<AppointmentDto> getAppointments(final int month, final int year, final Long administratorId) {
 		System.out.println("appointments triggered");
 		final User administator = userService.findUserById(administratorId);
@@ -246,8 +247,7 @@ public class AppointmentService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public AppointmentDto scheduleAppointment(final AppointmentDto appointmentDto, final Long userId) throws Exception {
 		final Appointment app = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
-		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1 &&
-			donationSurveyService.findByUserId(userId) != null) {
+		if (canUserScheduleAppointment(userId, app.getStartTime()) && appointmentRepository.getPersonal(userId).size() <= 1) {
 			app.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
 			app.setAvailable(false);
 			app.setAppointmentInfo(appointmentRepository.getById(appointmentDto.getId()).getAppointmentInfo());
@@ -262,15 +262,21 @@ public class AppointmentService {
 	@Transactional
 	public AppointmentDto userCreatesAppointment(final AppointmentDto appointmentDto, final Long userId) {
 		System.out.println("udara " + appointmentDto.getBloodBank().getId());
-
 		final Appointment appointment = appointmentMapper.appointmentDtoToAppointment(appointmentDto);
 		final BloodBank current = bloodBankRepository.findById(appointment.getBloodBank().getId()).get();
-		System.out.print(current.getId());
-		System.out.println(current.getAvailable());
+		if (!appointmentRepository.findAllByBloodBankId(current.getId()).stream().filter(x -> x.getStartTime().compareTo(appointment.getStartTime()) == 0)
+			.toList()
+			.isEmpty()) {
+			throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
+		}
 		//if(!current.getAvailable())
 		//throw new ObjectOptimisticLockingFailureException(BloodBank.class, appointment.getBloodBank());
 		current.setAvailable(false);
 		bloodBankRepository.save(current);
+
+		System.out.print(current.getId());
+		System.out.println(current.getAvailable());
+
 		appointment.setAvailable(false);
 		appointment.setFinished(false);
 		appointment.setUser(userRepository.findById(userId).stream().findFirst().orElseThrow(UserNotFoundException::new));
