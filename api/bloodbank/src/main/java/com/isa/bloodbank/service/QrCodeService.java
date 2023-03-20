@@ -9,6 +9,8 @@ import com.isa.bloodbank.entity.Appointment;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class QrCodeService {
 			final ClassLoader classLoader = getClass().getClassLoader();
 			final File file = new File(classLoader.getResource(".").getFile() + "/" + appointment.getId() + ".png");
 			//FileSystems.getDefault().getPath("../qrcodes/" + appointment.getId() + ".png")
-			MatrixToImageWriter.writeToPath(bitMatrix, "PNG", file.toPath());
+			MatrixToImageWriter.writeToPath(bitMatrix, "PNG", FileSystems.getDefault().getPath(appointment.getId() + ".png"));
 			System.out.println(file.toPath());
 		} catch (final WriterException | IOException e) {
 			e.printStackTrace();
