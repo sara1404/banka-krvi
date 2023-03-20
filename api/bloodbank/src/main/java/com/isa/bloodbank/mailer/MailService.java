@@ -54,7 +54,7 @@ public class MailService {
 			final ClassLoader classLoader = getClass().getClassLoader();
 			final File file = new File(classLoader.getResource(".").getFile() + "/" + appointment.getId() + ".png");
 			//"../qrcodes/" +appointment.getId() + ".png"
-			attachPart.attachFile(file);
+			attachPart.attachFile(appointment.getId() + ".png");
 			final MimeMultipart multiPart = new MimeMultipart();
 			multiPart.addBodyPart(msgPart);
 			multiPart.addBodyPart(attachPart);
